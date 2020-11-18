@@ -1,0 +1,11 @@
+for %%a in ("*.mkv") do "C:/Program Files/MKVToolNix\mkvmerge.exe" --output "BR_%%a" --default-track 1:yes --default-track 4:yes "%%a"
+
+(deixa a legenda br padrão, id 4)
+
+for %%a in ("*.mkv") do "C:/Program Files/MKVToolNix\mkvmerge.exe" --output "BR_%%a" -s !2,3 --default-track 1:yes --default-track 4:yes "%%a"
+
+(deixa a legenda br padrão [id 4] e remove as legendas ingles e espanhol [id2,3])
+
+*ID's variam de acordo com os arquivos, salvar como .bat
+
+https://www.fosshub.com/MKVToolNix.html

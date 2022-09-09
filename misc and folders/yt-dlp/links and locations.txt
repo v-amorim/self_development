@@ -1,0 +1,4 @@
+C:\Users\Amorim\AppData\Roaming\yt-dlp -Settings-
+
+
+https://github.com/yt-dlp/yt-dlp

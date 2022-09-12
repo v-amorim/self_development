@@ -1,25 +1,29 @@
 ﻿; #IfWinActive, ahk_exe Warframe.x64.exe
 #Include Gdip.ahk
+#Include Saveclipboard.ahk
 env := A_ScriptDir "\env.ini"
-IniRead, email_va, %env%, Login, email_va
-IniRead, email_vd, %env%, Login, email_vd
-IniRead, email_tg, %env%, Login, email_tg
-IniRead, password_wf_tg, %env%, Login, password_wf_tg
-IniRead, password_wf_vd, %env%, Login, password_wf_vd
-IniRead, password_wf_gcc, %env%, Login, password_wf_gcc
-IniRead, username_px_riot, %env%, Login, username_px_riot
-IniRead, password_px_riot, %env%, Login, password_px_riot
-IniRead, username_mz_riot, %env%, Login, username_mz_riot
-IniRead, password_mz_riot, %env%, Login, password_mz_riot
+; Path envs
 IniRead, wt_path, %env%, Path, wt_path
+IniRead, user, %env%, Path, user
+; Info envs
 IniRead, name, %env%, Info, name
 IniRead, ra, %env%, Info, ra
-IniRead, email, %env%, Info, email
 IniRead, course, %env%, Info, course
 IniRead, period, %env%, Info, period
 IniRead, campus, %env%, Info, campus
 IniRead, university, %env%, Info, university
 IniRead, telephone, %env%, Info, telephone
+; Credential envs
+IniRead, email_va, %env%, Credentials, email_va
+IniRead, email_vd, %env%, Credentials, email_vd
+IniRead, email_tg, %env%, Credentials, email_tg
+IniRead, password_wf_tg, %env%, Credentials, password_wf_tg
+IniRead, password_wf_vd, %env%, Credentials, password_wf_vd
+IniRead, password_wf_gcc, %env%, Credentials, password_wf_gcc
+IniRead, username_px_riot, %env%, Credentials, username_px_riot
+IniRead, password_px_riot, %env%, Credentials, password_px_riot
+IniRead, username_mz_riot, %env%, Credentials, username_mz_riot
+IniRead, password_mz_riot, %env%, Credentials, password_mz_riot
 
 _auto := true
 F12::
@@ -201,7 +205,6 @@ MButton::
 ^Printscreen::
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
-
     Screenshot("C:\Users\Amorim\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
 Return
 

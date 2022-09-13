@@ -1,6 +1,6 @@
-﻿; #IfWinActive, ahk_exe Warframe.x64.exe
-#Include Gdip.ahk
-#Include Saveclipboard.ahk
+﻿#Include Gdip.ahk
+; #Include Saveclipboard.ahk
+
 env := A_ScriptDir "\env.ini"
 ; Path envs
 IniRead, wt_path, %env%, Path, wt_path
@@ -311,3 +311,4 @@ Return
     LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%telephone%
 Return
+

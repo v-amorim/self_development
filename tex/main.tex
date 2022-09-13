@@ -1,0 +1,86 @@
+% Based on https://www.overleaf.com/articles/jemai-hassens-cv/ckbrbjdmjpgc
+
+\documentclass[10pt,a4paper]{cv}
+
+\geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1cm,bottom=1cm}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+\usepackage[implicit=false, bookmarks=false]{hyperref}
+
+
+\definecolor{Accent}{HTML}{2079c7}
+    \colorlet{accent}{Accent}
+    
+\definecolor{Body}{HTML}{666666}
+    \colorlet{body}{Body}
+    
+\definecolor{Emphasis}{HTML}{2E2E2E}
+    \colorlet{emphasis}{Emphasis}
+    
+\definecolor{HeadingRule}{HTML}{B1BCE6}
+    \colorlet{headingrule}{HeadingRule}
+    
+\definecolor{Heading}{HTML}{1c6cb1}
+    \colorlet{heading}{Heading}
+
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+\newcommand\isenglish{true}
+
+\begin{document}
+    \name{\isenglish}{Vinícius Amorim}{Vinicius Amorim}
+      \tagline{}
+    
+    \personalinfo{
+      \email{vamorim.dev@gmail.com}
+      \linkedin{https://www.linkedin.com/in/vinicius-amorim/}{vinicius-amorim}
+      \github{https://github.com/viniam}{viniam} 
+      \linebreak
+      \linebreak
+      \phone{\isenglish}{(12) 92000-7703}{+55 12920007703}
+      \location{\isenglish}{Jacareí, São Paulo}{Brazil}
+    }
+    
+    \begin{adjustwidth}{}{-8cm}\makecvheader \end{adjustwidth}
+    
+    \cvsection[page1sidebar]{\isenglish}{Objetivo}{Objective}
+        \cvtext{\isenglish}
+         {Atuar na área de Tecnologia da Informação}{Work in the field of Information Technology}
+
+
+    \cvsection{\isenglish}{Experiência Profissional}{Professional Experience}
+        \cvevent{Estágio em Web Operations}{Quero Educação}{JUL 2021 -- PRESENTE}{São José dos Campos}
+        % \cvevent{Internship in Web Operations}{Quero Educação}{JUL 2021 -- ONGOING}{Brazil}
+             \cvtext{\isenglish}
+             {Tratamento, padronização e manipulação de dados utilizando Excel, Pandas e Python; Desenvolvimento de querys e scripts para utilização em banco de dados usando Ruby on Rails; Sistemas em Python; Produção e manutenção de APIs; Frontend em Typescript, Javascript e Python; Backend em Ruby e Python}
+             {Treatment, standardization and manipulation of data using Excel, Pandas and Python; Development of queries and scripts for use in databases using Ruby on Rails; Python applications; Production and maintenance of APIs; Frontend in Typescript, Javascript and Python; Backend in Ruby and Python}
+         
+    
+        \divider
+        
+        \cvevent{Diagramador}{Freelance}{JAN 2016 -- PRESENTE}{Jacareí}
+        % \cvevent{Diagrammer}{Freelance}{JAN 2016 -- ONGOING}{Brazil}
+            \cvtext{\isenglish}
+            {Criação de macros e scripts na linguagem Java/Extendscript; Planejamento e organização de elementos gráficos em revistas utilizando Adobe Photoshop, Indesign, Illustrator}
+            {Development of macros and scripts in the Java/Extendscript language; Planning and organization of graphic elements in magazines using Adobe Photoshop, Indesign, Illustrator}
+    
+    \begin{adjustwidth}{}{-8cm}\end{adjustwidth}\cvsection{\isenglish}{Formações acadêmicas}{Education}
+        \cvevent{Ciência da Computação}{Bacharelado}{JAN 2020 -- DEZ 2023}{UNIP -- Universidade Paulista}
+        % \cvevent{Computer Science}{Bachelor degree}{JAN 2020 -- DEC 2023}{UNIP}
+            \cvtext{\isenglish}{Atualmente no 6º semestre}{Currently in the 6th semester}
+    
+    \begin{adjustwidth}{}{-8cm} \end{adjustwidth}\cvsection{\isenglish}{Projetos}{Projects}
+        \cvevent{Software ETL em Python}{Interface em PyQt5}{}{}
+        % \cvevent{ETL software in Python}{Interface in PyQt5}{}{}
+            \cvtext{\isenglish}{Utilizado para a manipulação, padronização e transformação de dados. Conta com uma interface gráfica responsiva e alterável, feita para aumentar a produtividade do setor ao executar tarefas repetitivas diariamente}{Used for data manipulation, standardization and transformation. It has a responsive and changeable graphical interface, designed to increase industry productivity when performing repetitive tasks daily}
+        
+        \divider
+        
+        \cvevent{Website com integração de Banco de dados}{Hackathon}{}{}
+        % \cvevent{Website with Database Integration}{Hackathon}{}{}
+            \cvtext{\isenglish}{Com frontend em React e Typescript e backend utilizando Ruby on Rails, o tema desenvolvido foi "Como medir a evolução de um engenheiro de software"}{With frontend in React and Typescript and backend using Ruby on Rails, the theme was "How to measure the evolution of a software engineer"}
+
+\end{document}

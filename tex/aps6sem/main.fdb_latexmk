@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1663121044 "c:/Users/Amorim/Documents/GitHub/self-development/tex/aps6sem/main.tex" "main.pdf" "main" 1663121044
+["pdflatex"] 1663121140 "c:/Users/Amorim/Documents/GitHub/self-development/tex/aps6sem/main.tex" "main.pdf" "main" 1663121140
   "0-setup.tex" 1663120674 3888 671b2ab4ba473595e65c7b01b2e68cf1 ""
   "C:/Users/Amorim/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1663118416 10785733 893a8220efec8a479f7cac8efe7f7fa5 ""
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1200.tfm" 993062126 3152 4850ff0163852b7fab34bd55e1197f28 ""
@@ -202,9 +202,9 @@
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656236890 56148 51a9a8571c07b9921892ae11063ae853 ""
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/tex/latex/xfor/xfor.sty" 1233849756 2689 44855b72da58344b1c1d9b3087bce6ca ""
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/Amorim/Documents/GitHub/self-development/tex/aps6sem/main.tex" 1663120882 25888 f9777f847f448a61eb444be0a6463255 ""
-  "main.aux" 1663121044 34 3985256e7290058c681f74d7a3565a19 ""
-  "main.tex" 1663120882 25888 f9777f847f448a61eb444be0a6463255 ""
+  "c:/Users/Amorim/Documents/GitHub/self-development/tex/aps6sem/main.tex" 1663121137 25888 f9777f847f448a61eb444be0a6463255 ""
+  "main.aux" 1663121140 34 3985256e7290058c681f74d7a3565a19 ""
+  "main.tex" 1663121137 25888 f9777f847f448a61eb444be0a6463255 ""
   (generated)
   "main.log"
   "main.pdf"

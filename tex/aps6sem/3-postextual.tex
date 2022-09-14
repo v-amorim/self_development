@@ -1,0 +1,44 @@
+% ==============================================
+% ELEMENTOS PÓS-TEXTUAIS
+% ==============================================
+\postextual
+
+% ||||||||||||||||||||||||||||||||||||||||||||||
+% REFERÊNCIAS BIBLIOGRÁFICAS
+% ||||||||||||||||||||||||||||||||||||||||||||||
+\nocite{{ref01}, {ref02}, {ref03}, {ref04}, {ref05}, {ref06}, {ref07}, {ref08}}
+\nocite{{ref09}, {ref10}, {ref11}, {ref12}, {ref13},{ref14},{ref15}}
+
+\bibliography{references}
+
+% ==============================================
+% INDICE REMISSIVO
+% ==============================================
+\phantompart
+\printindex
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+
+% ---
+% Define nome e preâmbulo do glossário
+% ---
+\phantompart
+\renewcommand{\glossaryname}{GLOSSÁRIO}
+% ---
+% Estilo de glossário
+% ---
+% \glossarystyle{tree}
+% \glossarystyle{altlisthypergroup}
+ \setglossarystyle{index}
+ \glsaddall
+
+% ---
+% Imprime o glossário
+% ---
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\glossaryname}
+% \printglossaries
+% ---

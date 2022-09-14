@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1663118659 "c:/Users/Amorim/Documents/GitHub/self-development/tex/main.tex" "main.pdf" "main" 1663118661
+["pdflatex"] 1663120034 "c:/Users/Amorim/Documents/GitHub/self-development/tex/cv/main.tex" "main.pdf" "main" 1663120036
   "C:/Users/Amorim/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1663118600 156267 d608e2da752f9c36e18a4d3160286aa0 ""
   "C:/Users/Amorim/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1663118416 10785733 893a8220efec8a479f7cac8efe7f7fa5 ""
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/fontawesome5/fa5brands0.enc" 1651500229 2920 d63721872b8c77041b88e51b8f7c291d ""
@@ -181,11 +181,11 @@
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656236890 56148 51a9a8571c07b9921892ae11063ae853 ""
   "C:/Users/Amorim/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "c:/Users/Amorim/Documents/GitHub/self-development/tex/main.tex" 1663118659 4746 41e9c0d3cb777cc928527a24e41fe808 ""
-  "cv.cls" 1663043822 6225 99aa5efd7adae3d910f6d14ec6d3de06 ""
-  "main.aux" 1663118661 554 e6f85c6f44bbe194532b4fa1fd8ca02c "pdflatex"
-  "main.tex" 1663118659 4746 41e9c0d3cb777cc928527a24e41fe808 ""
-  "page1sidebar.tex" 1663043967 2516 cf94a1c049e11b568f0d7e0c9621402f ""
+  "c:/Users/Amorim/Documents/GitHub/self-development/tex/cv/main.tex" 1663120017 4541 2b6d2433c2027a51d6405288e489247e ""
+  "cv.cls" 1663119183 6013 96a83916357a6da7d973f4c7fa04f0ab ""
+  "main.aux" 1663120035 554 e6f85c6f44bbe194532b4fa1fd8ca02c "pdflatex"
+  "main.tex" 1663120017 4541 2b6d2433c2027a51d6405288e489247e ""
+  "page1sidebar.tex" 1663120034 2568 7e08e446bef9afb452e257db9c223550 ""
   (generated)
   "main.aux"
   "main.log"

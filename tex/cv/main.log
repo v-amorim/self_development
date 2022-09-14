@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.9.13)  13 SEP 2022 22:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.9.13)  13 SEP 2022 22:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/Amorim/Documents/GitHub/self-development/tex/main.tex
-(c:/Users/Amorim/Documents/GitHub/self-development/tex/main.tex
+**c:/Users/Amorim/Documents/GitHub/self-development/tex/cv/main.tex
+(c:/Users/Amorim/Documents/GitHub/self-development/tex/cv/main.tex
 LaTeX2e <2022-06-01> patch level 5
 L3 programming layer <2022-08-30> (cv.cls
 Document Class: cv 2018/07/27 AltaCV v1.1.4, yet another alternative class for a résumé/curriculum vitae.
@@ -1066,14 +1066,14 @@ LaTeX Font Info:    Font shape `T1/lato-TLF/m/it' will be
 {C:/Users/Amorim/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.aux) ) 
 Here is how much of TeX's memory you used:
  27473 strings out of 475389
- 570018 string characters out of 2776528
- 938092 words of memory out of 3000000
+ 570045 string characters out of 2776528
+ 937979 words of memory out of 3000000
  48407 multiletter control sequences out of 15000+600000
  738553 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 115i,9n,118p,541b,807s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 115i,9n,118p,532b,807s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lato/a_cl4kdn.enc}{C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lato/a_rt66h3.enc}{C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/fontawesome5/fa5free2.enc}{C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/fontawesome5/fa5brands0.enc}{C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/fontawesome5/fa5free0.enc}<C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/type1/public/fontawesome5/FontAwesome5Brands-Regular.pfb><C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb><C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/type1/typoland/lato/Lato-Bold.pfb><C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/type1/typoland/lato/Lato-Italic.pfb><C:/Users/Amorim/AppData/Local/Programs/MiKTeX/fonts/type1/typoland/lato/Lato-Regular.pfb>
-Output written on main.pdf (1 page, 140758 bytes).
+Output written on main.pdf (1 page, 135841 bytes).
 PDF statistics:
  51 PDF objects out of 1000 (max. 8388607)
  1 named destinations out of 1000 (max. 500000)

@@ -1,6 +1,6 @@
-PWD c:\Users\Amorim\Documents\GitHub\self-development\tex
+PWD c:\Users\Amorim\Documents\GitHub\self-development\tex\cv
 INPUT C:\Users\Amorim\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\Amorim\Documents\GitHub\self-development\tex\main.tex
+INPUT c:\Users\Amorim\Documents\GitHub\self-development\tex\cv\main.tex
 OUTPUT main.log
 INPUT .\cv.cls
 INPUT .\cv.cls

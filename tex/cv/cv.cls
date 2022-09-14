@@ -16,11 +16,11 @@
 \RequirePackage{fontawesome5}
 
 \if@academicons
-    \ExplSyntaxOn
-    \msg_redirect_name:nnn { fontspec } { font-not-found } { none }
-    \ExplSyntaxOff
-    \RequirePackage{academicons}
-    \newfontfamily{\AI}{academicons.ttf}
+	\ExplSyntaxOn
+	\msg_redirect_name:nnn { fontspec } { font-not-found } { none }
+	\ExplSyntaxOff
+	\RequirePackage{academicons}
+	\newfontfamily{\AI}{academicons.ttf}
 \fi
 
 \RequirePackage{xcolor}
@@ -48,8 +48,8 @@
 \newcommand{\divider}{\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\medskip}
 
 \newenvironment{fullwidth}{%
-    \begin{adjustwidth}{}{\dimexpr-\marginparwidth-\marginparsep\relax}}
-    {\end{adjustwidth}}
+	\begin{adjustwidth}{}{\dimexpr-\marginparwidth-\marginparsep\relax}}
+		{\end{adjustwidth}}
 
 \newcommand{\emailsymbol}{\faAt}
 \newcommand{\githubsymbol}{\faGithub}
@@ -79,24 +79,24 @@
 \newcommand{\personalinfo}[1]{\def\@personalinfo{#1}}
 
 \newcommand{\makecvheader}{%
-    \begingroup
-        \ifdef{\@photodiameter}{\begin{minipage}{\dimexpr\linewidth-\@photodiameter-2em}}{}%
-            \raggedright\color{emphasis}%
-            {\Huge\bfseries\MakeUppercase{\@name}\par}
-            \medskip
-            {\large\bfseries\color{accent}\@tagline\par}
-            \medskip
-            {\footnotesize\bfseries\@personalinfo\par}
-            \ifdef{\@photodiameter}{%
-        \end{minipage}\hfill%
-        \begin{minipage}{\@photodiameter}
-            \if@normalphoto
-              \includegraphics[width=\linewidth]{\@photo}
-            \else
-              \tikz\path[fill overzoom image={\@photo}]circle[radius=0.5\linewidth];
-            \fi%
-        \end{minipage}\par}{}%
-    \endgroup\medskip
+	\begingroup
+	\ifdef{\@photodiameter}{\begin{minipage}{\dimexpr\linewidth-\@photodiameter-2em}}{}%
+			\raggedright\color{emphasis}%
+			{\Huge\bfseries\MakeUppercase{\@name}\par}
+			\medskip
+			{\large\bfseries\color{accent}\@tagline\par}
+			\medskip
+			{\footnotesize\bfseries\@personalinfo\par}
+			\ifdef{\@photodiameter}{%
+		\end{minipage}\hfill%
+		\begin{minipage}{\@photodiameter}
+			\if@normalphoto
+				\includegraphics[width=\linewidth]{\@photo}
+			\else
+				\tikz\path[fill overzoom image={\@photo}]circle[radius=0.5\linewidth];
+			\fi%
+		\end{minipage}\par}{}%
+	\endgroup\medskip
 }
 
 \renewenvironment{quote}{\color{accent}\itshape\large}{\par}
@@ -104,54 +104,54 @@
 \newcommand{\cvtext}[3]{\ifdefstring{#1}{true}{#3}{#2}} % \ifdefstring{#1}{true}{#3}{#2} para ingles/br
 
 \newcommand{\cvsection}[4][]{%
-    \bigskip%
-    \ifstrequal{#1}{}{}{\marginpar{\vspace*{\dimexpr1pt-\baselineskip}\raggedright\input{#1}}}%
-    \ifdefstring{#2}{true}{{\color{heading}\LARGE\bfseries\MakeUppercase{#4}}\\[-1ex]}{{\color{heading}\LARGE\bfseries\MakeUppercase{#3}}\\[-1ex]}
-    {\color{headingrule}\rule{\linewidth}{2pt}\par}\medskip
+	\bigskip%
+	\ifstrequal{#1}{}{}{\marginpar{\vspace*{\dimexpr1pt-\baselineskip}\raggedright\input{#1}}}%
+	\ifdefstring{#2}{true}{{\color{heading}\LARGE\bfseries\MakeUppercase{#4}}\\[-1ex]}{{\color{heading}\LARGE\bfseries\MakeUppercase{#3}}\\[-1ex]}
+	{\color{headingrule}\rule{\linewidth}{2pt}\par}\medskip
 }
 
 \newcommand{\cvsubsection}[3]{%
-    \smallskip%
-    {\color{emphasis}\large\bfseries{{\ifdefstring{#1}{true}{#3}{#2}}}\par}\medskip
+	\smallskip%
+	{\color{emphasis}\large\bfseries{{\ifdefstring{#1}{true}{#3}{#2}}}\par}\medskip
 }
 
 \newcommand{\cvevent}[4]{%need to fix english version
-    {\large\color{emphasis}\textbf{#1}\par}
-    \smallskip\normalsize
-    \ifstrequal{#2}{}{}{
-    \textbf{\color{accent}#2}\par
-    \smallskip}
-    \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\faCalendar\hspace{0.5em}#3}}}%
-    \ifstrequal{#4}{}{}{{\small\makebox[0.5\linewidth][l]{\faMapMarker\hspace{0.5em}#4}}}\par
-    \medskip
+	{\large\color{emphasis}\textbf{#1}\par}
+	\smallskip\normalsize
+	\ifstrequal{#2}{}{}{
+		\textbf{\color{accent}#2}\par
+		\smallskip}
+	\ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\faCalendar\hspace{0.5em}#3}}}%
+	\ifstrequal{#4}{}{}{{\small\makebox[0.5\linewidth][l]{\faMapMarker\hspace{0.5em}#4}}}\par
+	\medskip
 }
 
 
 \newcommand{\cvachievement}[3]{%
-    \begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
-    \multirow{2}{*}{\Large\color{accent}#1} & \bfseries\textcolor{emphasis}{#2}\\
-    & #3
-    \end{tabularx}%
-    \smallskip
+	\begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
+		\multirow{2}{*}{\Large\color{accent}#1} & \bfseries\textcolor{emphasis}{#2} \\
+		                                        & #3
+	\end{tabularx}%
+	\smallskip
 }
 
 \newcommand{\cvtag}[3]{%
-    \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{\ifdefstring{#1}{true}{#3}{#2}};
+	\tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{\ifdefstring{#1}{true}{#3}{#2}};
 }
 
 \newcommand{\cvskill}[4]{%
-    \textcolor{emphasis}{\textbf{\ifdefstring{#1}{true}{#3}{#2}}}\hfill
-    \foreach \x in {1,...,5}{%
-    \space{\ifnumgreater{\x}{#4}{\color{body!30}}{\color{accent}}\ratingmarker}}\par%
+	\textcolor{emphasis}{\textbf{\ifdefstring{#1}{true}{#3}{#2}}}\hfill
+	\foreach \x in {1,...,5}{%
+			\space{\ifnumgreater{\x}{#4}{\color{body!30}}{\color{accent}}\ratingmarker}}\par%
 }
 
 \newcommand{\cvref}[3]{%
-    \smallskip
-    \textcolor{emphasis}{\textbf{#1}}\par
-    \begin{description}[font=\color{accent},style=multiline,leftmargin=1.25em]
-    \item[\normalfont\emailsymbol] #2
-    \item[\small\normalfont\mailsymbol] #3
-    \end{description}
+	\smallskip
+	\textcolor{emphasis}{\textbf{#1}}\par
+	\begin{description}[font=\color{accent},style=multiline,leftmargin=1.25em]
+		\item[\normalfont\emailsymbol] #2
+		\item[\small\normalfont\mailsymbol] #3
+	\end{description}
 }
 
 \newenvironment{cvcolumn}[1]{\begin{minipage}[t]{#1}\raggedright}{\end{minipage}}
@@ -159,13 +159,13 @@
 
 \RequirePackage{afterpage}
 \newcommand{\addsidebar}[2][]{\marginpar{%
-    \ifstrequal{#1}{}{}{\vspace*{#1}}%
-    \input{#2}}%
+		\ifstrequal{#1}{}{}{\vspace*{#1}}%
+		\input{#2}}%
 }
 \newcommand{\addnextpagesidebar}[2][]{\afterpage{\addsidebar[#1]{#2}}}
 
 \AtBeginDocument{%
-    \pagestyle{empty}
-    \color{body}
-    \raggedright
+	\pagestyle{empty}
+	\color{body}
+	\raggedright
 }

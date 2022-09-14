@@ -1,3 +1,7 @@
 *.ini
 *.log
 *.fdb_latexmk
+*.fls
+*.ilg
+*.ist
+*.aux

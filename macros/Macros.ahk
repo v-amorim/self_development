@@ -191,6 +191,35 @@ WheelDown::
         Return
     }
 
+If WinActive("ahk_exe Diablo III64.exe"){
+^!LButton::
+    Send, {LButton}{Enter}
+Return
+
+^!XButton1::
+    MouseMove, 250, 290
+    Send, {LButton}
+    Sleep, 50
+    Send, {Enter}
+    MouseMove, 315, 290
+    Send, {LButton}
+    Sleep, 50
+    Send, {Enter}
+    MouseMove, 390, 290
+    Send, {LButton}
+    Sleep, 50
+    Send, {Enter}
+Return
+
+^WheelDown::
+    Send, {RButton}
+Return
+^WheelUp::
+    Send, {RButton}
+Return
+}
+
+
 MButton::
     If WinActive("ahk_exe Photoshop.exe"){
         Send, ^{0}

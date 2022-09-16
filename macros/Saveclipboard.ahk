@@ -3,7 +3,7 @@
 
 Return 
 
-#+a::
+#Printscreen::
     Critical, OnA
     hBM := 0
     HotKey, %A_ThisHotKey%, Off

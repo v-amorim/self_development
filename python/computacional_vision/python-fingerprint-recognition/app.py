@@ -92,15 +92,17 @@ def main():
     # Plot matches
     img3 = cv2.drawMatches(img1, kp1, img2, kp2, matches, flags=2, outImg=None)
     plt.imshow(img3)
-    plt.show()
 
     # Calculate score
     score = sum(match.distance for match in matches)
     score_threshold = 33
     if score / len(matches) < score_threshold:
-        print("Fingerprint matches.")
+        plt.title("Acesso liberado\nDigitais batem")
+        print("Acesso liberado\nDigitais batem")
     else:
-        print("Fingerprint does not match.")
+        plt.title("Acesso negado\nDigitais não batem")
+        print("Acesso negado\nDigitais não batem")
+    plt.show()
 
 
 if __name__ == "__main__":

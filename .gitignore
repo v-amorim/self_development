@@ -38,3 +38,11 @@ C:\\nppdf32Log\\debuglog.txt
 # Sublime Text Project Files (usually contain absolute paths)
 *.sublime-project
 *.sublime-workspace
+
+# Images
+*.png
+*.tif
+
+# Pycache
+__pycache__/
+*.pyc

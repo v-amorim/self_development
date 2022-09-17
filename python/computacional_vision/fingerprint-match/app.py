@@ -1,4 +1,5 @@
 import cv2
+import itertools
 import os
 import sys
 import numpy
@@ -21,21 +22,20 @@ def removedot(invertThin):
     W, H = temp0.shape[:2]
     filtersize = 6
 
-    for i in range(W - filtersize):
-        for j in range(H - filtersize):
-            filter0 = temp1[i:i + filtersize, j:j + filtersize]
+    for i, j in itertools.product(range(W - filtersize), range(H - filtersize)):
+        filter0 = temp1[i:i + filtersize, j:j + filtersize]
 
-            flag = 0
-            if sum(filter0[:, 0]) == 0:
-                flag += 1
-            if sum(filter0[:, filtersize - 1]) == 0:
-                flag += 1
-            if sum(filter0[0, :]) == 0:
-                flag += 1
-            if sum(filter0[filtersize - 1, :]) == 0:
-                flag += 1
-            if flag > 3:
-                temp2[i:i + filtersize, j:j + filtersize] = numpy.zeros((filtersize, filtersize))
+        flag = 0
+        if sum(filter0[:, 0]) == 0:
+            flag += 1
+        if sum(filter0[:, filtersize - 1]) == 0:
+            flag += 1
+        if sum(filter0[0, :]) == 0:
+            flag += 1
+        if sum(filter0[filtersize - 1, :]) == 0:
+            flag += 1
+        if flag > 3:
+            temp2[i:i + filtersize, j:j + filtersize] = numpy.zeros((filtersize, filtersize))
 
     return temp2
 
@@ -60,10 +60,9 @@ def get_descriptors(img):
     threshold_harris = 125
     # Extract keypoints
     keypoints = []
-    for x in range(0, harris_normalized.shape[0]):
-        for y in range(0, harris_normalized.shape[1]):
-            if harris_normalized[x][y] > threshold_harris:
-                keypoints.append(cv2.KeyPoint(y, x, 1))
+    for x in range(harris_normalized.shape[0]):
+        keypoints.extend(cv2.KeyPoint(y, x, 1) for y in range(harris_normalized.shape[1]) if harris_normalized[x][y] > threshold_harris)
+
     # Define descriptor
     orb = cv2.ORB_create()
     # Compute descriptors
@@ -73,11 +72,11 @@ def get_descriptors(img):
 
 def main():
     image_name = sys.argv[1]
-    img1 = cv2.imread("database/" + image_name, cv2.IMREAD_GRAYSCALE)
+    img1 = cv2.imread(f"database/{image_name}", cv2.IMREAD_GRAYSCALE)
     kp1, des1 = get_descriptors(img1)
 
     image_name = sys.argv[2]
-    img2 = cv2.imread("database/" + image_name, cv2.IMREAD_GRAYSCALE)
+    img2 = cv2.imread(f"database/{image_name}", cv2.IMREAD_GRAYSCALE)
     kp2, des2 = get_descriptors(img2)
 
     # Matching between descriptors

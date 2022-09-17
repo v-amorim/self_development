@@ -6,6 +6,7 @@ Created on Fri Apr 22 03:15:03 2016
 """
 
 
+import itertools
 # RIDGEFILTER - enhances fingerprint image via oriented filters
 #
 # Function to enhance fingerprint image via oriented filters
@@ -86,9 +87,9 @@ def ridge_filter(im, orient, freq, kx, ky):
 
     filt_rows, filt_cols = reffilter.shape
 
-    gabor_filter = np.array(np.zeros((int(180 / angleInc), int(filt_rows), int(filt_cols))))
+    gabor_filter = np.array(np.zeros((180 // angleInc, int(filt_rows), int(filt_cols))))
 
-    for o in range(0, int(180 / angleInc)):
+    for o in range(180 // angleInc):
 
         # Generate rotated versions of the filter.  Note orientation
         # image provides orientation *along* the ridges, hence +90
@@ -123,15 +124,14 @@ def ridge_filter(im, orient, freq, kx, ky):
 
     # do the filtering
 
-    for i in range(0, rows):
-        for j in range(0, cols):
-            if(orientindex[i][j] < 1):
-                orientindex[i][j] = orientindex[i][j] + maxorientindex
-            if(orientindex[i][j] > maxorientindex):
-                orientindex[i][j] = orientindex[i][j] - maxorientindex
+    for i, j in itertools.product(range(rows), range(cols)):
+        if(orientindex[i][j] < 1):
+            orientindex[i][j] = orientindex[i][j] + maxorientindex
+        if(orientindex[i][j] > maxorientindex):
+            orientindex[i][j] = orientindex[i][j] - maxorientindex
     finalind_rows, finalind_cols = np.shape(finalind)
     sze = int(sze)
-    for k in range(0, finalind_cols):
+    for k in range(finalind_cols):
         r = validr[finalind[0][k]]
         c = validc[finalind[0][k]]
 

@@ -68,7 +68,7 @@ def ridge_segment(im, blksze, thresh):
     padded_img = np.zeros((new_rows, new_cols))
     stddevim = np.zeros((new_rows, new_cols))
 
-    padded_img[0:rows][:, 0:cols] = im
+    padded_img[:rows][:, 0:cols] = im
 
     for i in range(0, new_rows, blksze):
         for j in range(0, new_cols, blksze):
@@ -76,7 +76,7 @@ def ridge_segment(im, blksze, thresh):
 
             stddevim[i:i + blksze][:, j:j + blksze] = np.std(block) * np.ones(block.shape)
 
-    stddevim = stddevim[0:rows][:, 0:cols]
+    stddevim = stddevim[:rows][:, 0:cols]
 
     mask = stddevim > thresh
 

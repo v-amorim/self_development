@@ -3,6 +3,7 @@
 #Include WinActive.ahk
 #Include WindowsTerminal.ahk
 #Include Saveclipboard.ahk
+#Include BlockKBnM.ahk
 
 _auto := true
 F12::

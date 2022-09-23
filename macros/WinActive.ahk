@@ -22,6 +22,13 @@
         SendInput !{PGDN}
         BlockInput, Off
     Return
+
+    !+WheelDown::
+        Send, {LButton}
+
+    Return
+    !+WheelUp::
+        Send, {LButton}
 #IfWinActive
 
 #IfWinActive ahk_exe Photoshop.exe
@@ -146,6 +153,7 @@
     ^WheelDown::
         Send, {RButton}
     Return
+
     ^WheelUp::
         Send, {RButton}
     Return

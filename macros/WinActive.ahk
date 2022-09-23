@@ -150,3 +150,9 @@
         Send, {RButton}
     Return
 #IfWinActive
+
+#IfWinActive ahk_exe PathOfExile.exe
+    ^Numpad1::
+        Sendinput, {Text}%password_poe%
+    Return
+#IfWinActive

@@ -26,6 +26,7 @@ IniRead, password_wf_tg, %env%, Credentials, password_wf_tg
 IniRead, password_wf_vd, %env%, Credentials, password_wf_vd
 IniRead, username_mz_riot, %env%, Credentials, username_mz_riot
 IniRead, username_px_riot, %env%, Credentials, username_px_riot
+IniRead, password_poe, %env%, Credentials, password_poe
 
 ; Hotstring
 :*:>bot:: 

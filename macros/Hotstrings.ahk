@@ -29,6 +29,11 @@ IniRead, username_px_riot, %env%, Credentials, username_px_riot
 IniRead, password_poe, %env%, Credentials, password_poe
 
 ; Hotstring
+:*:...:: 
+    LTrim(A_ThisHotkey,":oc?*") 
+    SendInput,{raw}…
+Return
+
 :*:>bot:: 
     LTrim(A_ThisHotkey,":oc?*") 
     SendInput,{raw}bot com %nickname%

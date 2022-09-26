@@ -163,4 +163,17 @@
     ^Numpad1::
         Sendinput, {Text}%password_poe%
     Return
+
+    ^WheelDown::
+        Send, {Ctrl Down}{LButton}{Ctrl Up}
+        ; Send, {LButton}
+    Return
+
+    ^WheelUp::
+        Send, {Ctrl Down}{LButton}{Ctrl Up}
 #IfWinActive
+
+; ^ Ctrl
+; ! Alt
+; + Shift
+; # Win

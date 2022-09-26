@@ -158,7 +158,7 @@
     Return
 
     ; $!S::POTSpam() ; Alt+S for 5 times will press 1,2,3,4,4 in fast seqvence 
-    $XButton1::POTSpam() ; Alt+S for 5 times will press 1,2,3,4,4 in fast seqvence 
+    $XButton1::POTSpam() ; Xbutton1 for 5 times will press 1,2,3,4,4 in fast seqvence 
 
     !WheelUp::Send {Left} ; ALT+WheelUp: Stash scroll
     ^WheelUp::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK

@@ -159,6 +159,7 @@
 
     !WheelUp::Send {Left} ; ALT+WheelUp: Stash scroll
     ^WheelUp::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK
+    +WheelUp::AutoLeftClicks() ; SHIFT+WheelDown -> Spam SHIFT+CLICK   
 
     !WheelDown::Send {Right} ; ALT+WheelDown: Stash scroll
     ^WheelDown::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK

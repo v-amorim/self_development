@@ -23,12 +23,9 @@
         BlockInput, Off
     Return
 
-    !+WheelDown::
-        Send, {LButton}
+    !+WheelDown::AutoLeftClicks()
 
-    Return
-    !+WheelUp::
-        Send, {LButton}
+    !+WheelUp::AutoLeftClicks()
 #IfWinActive
 
 #IfWinActive ahk_exe Photoshop.exe
@@ -150,13 +147,9 @@
         Send, {Enter}
     Return
 
-    ^WheelDown::
-        Send, {RButton}
-    Return
+    ^WheelDown::AutoRightClicks()
 
-    ^WheelUp::
-        Send, {RButton}
-    Return
+    ^WheelUp::AutoRightClicks()
 #IfWinActive
 
 #IfWinActive ahk_exe PathOfExile.exe
@@ -164,15 +157,25 @@
         Sendinput, {Text}%password_poe%
     Return
 
-    ^WheelDown::
-        Send, {Ctrl Down}{LButton}{Ctrl Up}
-        ; Send, {LButton}
-    Return
+    !WheelUp::Send {Left} ; ALT+WheelUp: Stash scroll
+    ^WheelUp::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK
 
-    ^WheelUp::
-        Send, {Ctrl Down}{LButton}{Ctrl Up}
+    !WheelDown::Send {Right} ; ALT+WheelDown: Stash scroll
+    ^WheelDown::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK
+    +WheelDown::AutoLeftClicks() ; SHIFT+WheelDown -> Spam SHIFT+CLICK   
 #IfWinActive
 
+AutoLeftClicks(){
+    BlockInput On 
+    Send {blind}{Lbutton down}{Lbutton up} 
+    BlockInput Off
+}
+
+AutoRightClicks(){
+    BlockInput On 
+    Send {blind}{Rbutton down}{Rbutton up} 
+    BlockInput Off
+}
 ; ^ Ctrl
 ; ! Alt
 ; + Shift

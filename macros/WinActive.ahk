@@ -157,6 +157,9 @@
         Sendinput, {Text}%password_poe%
     Return
 
+    ; $!S::POTSpam() ; Alt+S for 5 times will press 1,2,3,4,4 in fast seqvence 
+    $XButton1::POTSpam() ; Alt+S for 5 times will press 1,2,3,4,4 in fast seqvence 
+
     !WheelUp::Send {Left} ; ALT+WheelUp: Stash scroll
     ^WheelUp::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK
     +WheelUp::AutoLeftClicks() ; SHIFT+WheelDown -> Spam SHIFT+CLICK   
@@ -177,6 +180,18 @@ AutoRightClicks(){
     Send {blind}{Rbutton down}{Rbutton up} 
     BlockInput Off
 }
+
+POTSpam(){
+    BlockInput On
+    global Flask
+    Send %Flask%
+    Flask += 1
+    BlockInput Off
+    If Flask > 5
+        Flask = 1
+    return
+}
+
 ; ^ Ctrl
 ; ! Alt
 ; + Shift

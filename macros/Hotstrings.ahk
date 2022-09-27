@@ -1,9 +1,5 @@
 ﻿env := A_ScriptDir "\env.ini"
 
-; Path envs
-IniRead, user, %env%, Path, user
-IniRead, wt_path, %env%, Path, wt_path
-
 ; Info envs
 IniRead, campus, %env%, Info, campus
 IniRead, course, %env%, Info, course

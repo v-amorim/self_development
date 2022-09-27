@@ -132,21 +132,6 @@
         Send, {LButton}{Enter}
     Return
 
-    ^!XButton1::
-        MouseMove, 250, 290
-        Send, {LButton}
-        Sleep, 50
-        Send, {Enter}
-        MouseMove, 315, 290
-        Send, {LButton}
-        Sleep, 50
-        Send, {Enter}
-        MouseMove, 390, 290
-        Send, {LButton}
-        Sleep, 50
-        Send, {Enter}
-    Return
-
     ^WheelDown::AutoRightClicks()
 
     ^WheelUp::AutoRightClicks()
@@ -171,13 +156,13 @@
 
 AutoLeftClicks(){
     BlockInput On 
-    Send {blind}{Lbutton down}{Lbutton up} 
+    Send {Blind}{LButton down}{LButton up} 
     BlockInput Off
 }
 
 AutoRightClicks(){
     BlockInput On 
-    Send {blind}{Rbutton down}{Rbutton up} 
+    Send {Blind}{RButton down}{RButton up} 
     BlockInput Off
 }
 

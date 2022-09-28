@@ -184,17 +184,17 @@ SpamPots(){
 
 GoHome(){
     BlockInput On
-    RandomSleep(100, 140)
+    RandomSleep(110, 220)
 
     MouseGetPos xx, yy
     Send {'}
     RandomSleep(50, 70)
 
     MouseMove, 1871, 820, 0
-    RandomSleep(50, 70)
+    RandomSleep(50, 150)
 
     Click Right
-    RandomSleep(50, 70)
+    RandomSleep(50, 150)
 
     Send {'}
     MouseMove, xx, yy, 0

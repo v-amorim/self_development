@@ -33,14 +33,13 @@ def jogar():
             continue
 
         acertou = chute == numero_secreto
-        maior = chute > numero_secreto
-        menor = chute < numero_secreto
-
         if acertou:
             print(f"Você acertou! e fez {pontos} pontos!")
-
             break
         else:
+            maior = chute > numero_secreto
+            menor = chute < numero_secreto
+
             if maior:
                 print("Você errou! O seu chute foi maior do que o número secreto.")
                 if (rodada == total_de_tentativas):

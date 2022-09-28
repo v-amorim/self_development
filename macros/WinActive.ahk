@@ -146,16 +146,17 @@
         Send, {LButton}{Enter}
     Return
 
-    ; $!S::POTSpam() ; Alt+S for 5 times will press 3,4,5 in fast seqvence 
-    $XButton1::POTSpam() ; Xbutton1 for 5 times will press 3,4,5 in fast seqvence 
+    $+F11::GoHome()
 
-    !WheelUp::Send {Left} ; ALT+WheelUp: Stash scroll
-    ^WheelUp::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK
-    +WheelUp::AutoLeftClicks() ; SHIFT+WheelDown -> Spam SHIFT+CLICK   
+    $XButton1::SpamPots()
 
-    !WheelDown::Send {Right} ; ALT+WheelDown: Stash scroll
-    ^WheelDown::AutoLeftClicks() ; CTRL+WheelDown -> Spam CTRL+CLICK
-    +WheelDown::AutoLeftClicks() ; SHIFT+WheelDown -> Spam SHIFT+CLICK   
+    !WheelUp::Send {Left}
+    ^WheelUp::AutoLeftClicks()
+    +WheelUp::AutoLeftClicks()
+
+    !WheelDown::Send {Right}
+    ^WheelDown::AutoLeftClicks()
+    +WheelDown::AutoLeftClicks()
 #IfWinActive
 
 AutoLeftClicks(){
@@ -170,7 +171,7 @@ AutoRightClicks(){
     BlockInput Off
 }
 
-POTSpam(){
+SpamPots(){
     BlockInput On
     global Flask
     Send %Flask%
@@ -181,6 +182,32 @@ POTSpam(){
     return
 }
 
+GoHome(){
+    BlockInput On
+    RandomSleep(100, 140)
+
+    MouseGetPos xx, yy
+    Send {'}
+    RandomSleep(50, 70)
+
+    MouseMove, 1871, 820, 0
+    RandomSleep(50, 70)
+
+    Click Right
+    RandomSleep(50, 70)
+
+    Send {'}
+    MouseMove, xx, yy, 0
+    BlockInput Off
+    return
+}
+
+RandomSleep(min, max){
+    Random, r, %min%, %max%
+    r:=floor(r/Speed)
+    Sleep %r%
+    return
+}
 ; ^ Ctrl
 ; ! Alt
 ; + Shift

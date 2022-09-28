@@ -23,6 +23,8 @@ Return
     Run C:\Users\Amorim\AppData\Roaming\Path of Building Community\Path of Building.exe
 Return
 
+$!O::GetMousePosition()
+
 Screenshot(OutFile)
 {
     pToken := Gdip_Startup()
@@ -35,3 +37,9 @@ Screenshot(OutFile)
     Gdip_Shutdown(pToken)
 }
 
+GetMousePosition(){
+    MouseGetPos, xpos, ypos
+    PixelGetColor, xycolor , xpos, ypos
+    msgbox, X=%xpos% Y=%ypos% XYColor=%xycolor%
+return
+}

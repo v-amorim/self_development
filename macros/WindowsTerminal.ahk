@@ -1,5 +1,4 @@
 #T::
-#Enter::
     ToggleTerminal()
 Return
 

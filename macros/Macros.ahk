@@ -17,6 +17,12 @@ Return
     Screenshot("C:\Users\Amorim\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
 Return
 
+^+!P::
+    Run C:\Users\Amorim\AppData\Local\Programs\Awakened PoE Trade\Awakened PoE Trade.exe
+    Run C:\Users\Amorim\AppData\Local\PoeLurker\PoeLurker.exe
+    Run C:\Users\Amorim\AppData\Roaming\Path of Building Community\Path of Building.exe
+Return
+
 Screenshot(OutFile)
 {
     pToken := Gdip_Startup()

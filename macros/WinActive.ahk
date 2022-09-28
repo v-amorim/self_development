@@ -142,6 +142,10 @@
         Sendinput, {Text}%password_poe%
     Return
 
+    MButton::
+        Send, {LButton}{Enter}
+    Return
+
     ; $!S::POTSpam() ; Alt+S for 5 times will press 3,4,5 in fast seqvence 
     $XButton1::POTSpam() ; Xbutton1 for 5 times will press 3,4,5 in fast seqvence 
 

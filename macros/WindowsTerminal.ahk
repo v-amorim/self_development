@@ -22,7 +22,7 @@ ToggleTerminal() {
 }
 
 OpenNewTerminal() {
-    Run C:\Users\Vinicius Amorim\AppData\Local\Microsoft\WindowsApps\wt.exe
+    Run C:\Users\%A_UserName%\AppData\Local\Microsoft\WindowsApps\wt.exe
     Sleep, 500
     ShowTerminal()
 Return

@@ -33,4 +33,5 @@ ShowTerminal() {
 
 HideTerminal() {
     WinHide ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+    Send, {LButton}
 }

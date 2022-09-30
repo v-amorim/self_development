@@ -13,6 +13,7 @@ ToggleTerminal() {
             ShowTerminal()
         } else if WinExist(matcher) {
             HideTerminal()
+            Send, {LButton}
         }
 
     } else {
@@ -21,17 +22,19 @@ ToggleTerminal() {
 }
 
 OpenNewTerminal() {
-    Run C:\Users\%A_UserName%\AppData\Local\Microsoft\WindowsApps\wt.exe
+    Run C:\Users\Vinicius Amorim\AppData\Local\Microsoft\WindowsApps\wt.exe
     Sleep, 500
     ShowTerminal()
+Return
 }
 
 ShowTerminal() {
     WinShow ahk_class CASCADIA_HOSTING_WINDOW_CLASS
     WinActivate ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+Return
 }
 
 HideTerminal() {
     WinHide ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-    Send, {LButton}
+Return
 }

@@ -14,13 +14,13 @@ Return
 ^Printscreen::
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
-    Screenshot("C:\Users\Amorim\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
+    Screenshot("C:\Users\%A_UserName%\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
 Return
 
 ^+!P::
-    Run C:\Users\Amorim\AppData\Local\Programs\Awakened PoE Trade\Awakened PoE Trade.exe
-    Run C:\Users\Amorim\AppData\Local\PoeLurker\PoeLurker.exe
-    Run C:\Users\Amorim\AppData\Roaming\Path of Building Community\Path of Building.exe
+    Run C:\Users\%A_UserName%\AppData\Local\Programs\Awakened PoE Trade\Awakened PoE Trade.exe
+    Run C:\Users\%A_UserName%\AppData\Local\PoeLurker\PoeLurker.exe
+    Run C:\Users\%A_UserName%\AppData\Roaming\Path of Building Community\Path of Building.exe
 Return
 
 $!O::GetMousePosition()

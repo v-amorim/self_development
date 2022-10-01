@@ -14,7 +14,7 @@ Return
     {
         CurrentDate := A_YYYY "-" A_MM "-" A_DD
         CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
-        sFile := "C:\Users\Amorim\Pictures\AHK Screenshots\Clipboard\" CurrentDate "_" CurrentTime ".png"
+        sFile := "C:\Users\%A_UserName%\Pictures\AHK Screenshots\Clipboard\" CurrentDate "_" CurrentTime ".png"
         GDIP("Startup")
         SavePicture(hBM, sFile) 
         GDIP("Shutdown")

@@ -5,7 +5,7 @@ $#T::
 Return
 
 $#V::
-    Run C:\Users\Amorim\AppData\Local\Programs\Microsoft VS Code\Code.exe
+    Run C:\Users\%A_UserName%\AppData\Local\Programs\Microsoft VS Code\Code.exe
 Return
 
 ToggleTerminal() {
@@ -29,7 +29,7 @@ Return
 }
 
 OpenNewTerminal() {
-    Run C:\Users\%A_UserName%\AppData\Local\Microsoft\WindowsApps\wt.exe
+    Run wt.exe
     Sleep, 500
     ShowTerminal()
 Return

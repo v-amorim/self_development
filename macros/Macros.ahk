@@ -11,7 +11,7 @@ $#F12::
     SoundBeep, 750, 500
 Return
 
-$^Printscreen::
+$^Printscreen:: ;https://www.autohotkey.com/boards/viewtopic.php?t=63872
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
     Screenshot("C:\Users\%A_UserName%\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")

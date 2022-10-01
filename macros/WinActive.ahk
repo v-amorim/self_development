@@ -137,7 +137,7 @@
     $^WheelUp::AutoRightClicks()
 #IfWinActive
 
-#IfWinActive ahk_exe PathOfExile.exe
+#IfWinActive ahk_exe PathOfExile.exe ; https://github.com/nidark/Poe-Companion/blob/master/PoeCompanion.ahk
     $^Numpad1::
         Sendinput, {Text}%password_poe%
     Return

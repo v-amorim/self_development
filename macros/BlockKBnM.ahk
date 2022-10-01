@@ -10,7 +10,7 @@
 ;hideScreen_arg ...... Hide or show everything [true/false]
 ;screenColor_arg ..... RGB Hex background color for the hiding GUI 
 
-#XButton2::
+!XButton2::
 !F1::
     lockKeyboard:= true
     hideScreen:= false
@@ -20,7 +20,7 @@
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable all keyboard keys and mouse buttons
 Return
 
-#XButton1::
+!XButton1::
 !F2::
     lockKeyboard:= false
     hideScreen:= false

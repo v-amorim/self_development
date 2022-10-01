@@ -3,11 +3,13 @@ global AllKeys := get_AllKeys()
 global Message := "Keyboard and mouse are locked!`nPress !XButton1 to unlock."
 Return ; end of auto-execute section
 
-!F1::
-    !XButton2:: Disable_Keys(True) ; disable keys
+$!F1::
+$!XButton2:: 
+    Disable_Keys(True) ; disable keys
 Return
-!F2::
-    !XButton1:: Disable_Keys(False) ; enable keys
+$!F2::
+$!XButton1:: 
+    Disable_Keys(False) ; enable keys
 Return
 ;-------------------------------------------------------------------------------
 get_AllKeys() { ; return a pipe delimited list of all keys

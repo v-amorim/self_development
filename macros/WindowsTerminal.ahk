@@ -1,4 +1,4 @@
-#T::
+$#T::
     ToggleTerminal()
 Return
 
@@ -19,6 +19,7 @@ ToggleTerminal() {
     } else {
         OpenNewTerminal()
     }
+Return
 }
 
 OpenNewTerminal() {

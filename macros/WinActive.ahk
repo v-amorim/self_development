@@ -1,9 +1,9 @@
 #IfWinActive ahk_exe Illustrator.exe
-    XButton1::
+    $XButton1::
         Send, {F3}
     Return
 
-    XButton2::
+    $XButton2::
         Send, !^{Numpad0}
         Sleep, 100
         Send, ^{Tab}
@@ -11,33 +11,33 @@
 #IfWinActive
 
 #IfWinActive ahk_exe inDesign.exe
-    WheelUp::
+    $WheelUp::
         BlockInput, On
         SendInput !{PGUP}
         BlockInput, Off
     Return
 
-    WheelDown::
+    $WheelDown::
         BlockInput, On
         SendInput !{PGDN}
         BlockInput, Off
     Return
 
-    !+WheelDown::AutoLeftClicks()
+    $!+WheelDown::AutoLeftClicks()
 
-    !+WheelUp::AutoLeftClicks()
+    $!+WheelUp::AutoLeftClicks()
 #IfWinActive
 
 #IfWinActive ahk_exe Photoshop.exe
-    XButton1::
+    $XButton1::
         Send, {F10}
     Return
 
-    XButton2::
+    $XButton2::
         Send, {u}
     Return
 
-    MButton::
+    $MButton::
         Send, ^{0}
         Sleep, 333
         Send, ^{Tab}
@@ -45,7 +45,7 @@
 #IfWinActive
 
 #IfWinActive ahk_exe Warframe.x64.exe
-    ^Numpad1::
+    $^Numpad1::
         Sendinput, {Text}%email_tg%
         Sleep, 100
         Send {Tab}
@@ -53,7 +53,7 @@
         Sendinput, {Text}%password_wf_tg%
     Return
 
-    ^Numpad2::
+    $^Numpad2::
         Sendinput, {Text}%email_vd%
         Sleep, 100
         Send {Tab}
@@ -61,7 +61,7 @@
         Send, {Text}%password_wf_vd%
     Return
 
-    ^Numpad3::
+    $^Numpad3::
         Sendinput, {Text}%email_gcc%
         Sleep, 100
         Send {Tab}
@@ -69,7 +69,7 @@
         Sendinput, {Text}%password_wf_gcc%
     Return
 
-    XButton1::
+    $XButton1::
         Send, {Ctrl down}
         Sleep, 1
         Send, {Space down}
@@ -87,7 +87,7 @@
         Sleep 400
     Return
 
-    !XButton1::
+    $!XButton1::
         Send, {Ctrl down}
         Sleep, 1
         Send, {Wheelup down}
@@ -96,7 +96,7 @@
         Sleep 300
     Return
 
-    !XButton2::
+    $!XButton2::
         Send, 5
         Sleep, 200
         Send, {Ctrl Down}
@@ -110,7 +110,7 @@
 #IfWinActive
 
 #IfWinActive ahk_exe RiotClientUx.exe
-    ^Numpad1::
+    $^Numpad1::
         Sendinput, {Text}%username_px_riot%
         Sleep, 100
         Send {Tab}
@@ -118,7 +118,7 @@
         Send, {Text}%password_px_riot%
     Return
 
-    ^Numpad2::
+    $^Numpad2::
         Sendinput, {Text}%username_mz_riot%
         Sleep, 100
         Send {Tab}
@@ -128,17 +128,17 @@
 #IfWinActive
 
 #IfWinActive ahk_exe Diablo III64.exe
-    ^!LButton::
+    $^!LButton::
         Send, {LButton}{Enter}
     Return
 
-    ^WheelDown::AutoRightClicks()
+    $^WheelDown::AutoRightClicks()
 
-    ^WheelUp::AutoRightClicks()
+    $^WheelUp::AutoRightClicks()
 #IfWinActive
 
 #IfWinActive ahk_exe PathOfExile.exe
-    ^Numpad1::
+    $^Numpad1::
         Sendinput, {Text}%password_poe%
     Return
 
@@ -150,13 +150,13 @@
 
     $XButton1::SpamPots()
 
-    !WheelUp::Send {Left}
-    ^WheelUp::AutoLeftClicks()
-    +WheelUp::AutoLeftClicks()
+    $!WheelUp::Send {Left}
+    $^WheelUp::AutoLeftClicks()
+    $+WheelUp::AutoLeftClicks()
 
-    !WheelDown::Send {Right}
-    ^WheelDown::AutoLeftClicks()
-    +WheelDown::AutoLeftClicks()
+    $!WheelDown::Send {Right}
+    $^WheelDown::AutoLeftClicks()
+    $+WheelDown::AutoLeftClicks()
 #IfWinActive
 
 AutoLeftClicks(){

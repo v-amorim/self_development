@@ -6,18 +6,18 @@
 #Include BlockKBnM.ahk
 
 _auto := true
-F12::
+$F12::
     Suspend
     SoundBeep, 750, 500
 Return
 
-^Printscreen::
+$^Printscreen::
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
     Screenshot("C:\Users\%A_UserName%\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
 Return
 
-^+!P::
+$^+!P::
     Run C:\Users\%A_UserName%\AppData\Local\Programs\Awakened PoE Trade\Awakened PoE Trade.exe
     Run C:\Users\%A_UserName%\AppData\Local\PoeLurker\PoeLurker.exe
     Run C:\Users\%A_UserName%\AppData\Roaming\Path of Building Community\Path of Building.exe

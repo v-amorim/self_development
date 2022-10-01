@@ -1,9 +1,7 @@
 ﻿#NoEnv 
 #SingleInstance, Force 
 
-Return 
-
-#Printscreen::
+$#Printscreen::
     Critical, OnA
     hBM := 0
     HotKey, %A_ThisHotKey%, Off

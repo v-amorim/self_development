@@ -142,11 +142,11 @@
         Sendinput, {Text}%password_poe%
     Return
 
-    MButton::
+    $+F11::
         Send, {LButton}{Enter}
     Return
 
-    $+F11::GoHome()
+    $MButton::GoHome()
 
     $XButton1::SpamPots()
 

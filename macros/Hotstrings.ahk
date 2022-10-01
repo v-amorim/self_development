@@ -15,6 +15,7 @@ IniRead, university, %env%, Info, university
 IniRead, email_tg, %env%, Credentials, email_tg
 IniRead, email_va, %env%, Credentials, email_va
 IniRead, email_vd, %env%, Credentials, email_vd
+IniRead, email_gcc, %env%, Credentials, email_gcc
 IniRead, password_mz_riot, %env%, Credentials, password_mz_riot
 IniRead, password_px_riot, %env%, Credentials, password_px_riot
 IniRead, password_wf_gcc, %env%, Credentials, password_wf_gcc
@@ -48,6 +49,11 @@ Return
 :*:>email:: 
     LTrim(A_ThisHotkey,":oc?*") 
     SendInput,{raw}%email%
+Return
+
+:*:>gcc:: 
+    LTrim(A_ThisHotkey,":oc?*") 
+    SendInput,{raw}%email_gcc%
 Return
 
 :*:>name:: 

@@ -2,6 +2,10 @@ $#T::
     ToggleTerminal()
 Return
 
+$#V::
+    Run C:\Users\Amorim\AppData\Local\Programs\Microsoft VS Code\Code.exe
+Return
+
 ToggleTerminal() {
     matcher := "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"
     DetectHiddenWindows, On

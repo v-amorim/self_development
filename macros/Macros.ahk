@@ -6,7 +6,7 @@
 #Include BlockKBnM.ahk
 
 _auto := true
-$F12::
+$#F12::
     Suspend
     SoundBeep, 750, 500
 Return

@@ -23,7 +23,9 @@ $^+!P::
     Run C:\Users\%A_UserName%\AppData\Roaming\Path of Building Community\Path of Building.exe
 Return
 
-$!O::GetMousePosition()
+$!O::
+    GetMousePosition()
+Return
 
 Screenshot(OutFile)
 {
@@ -35,11 +37,12 @@ Screenshot(OutFile)
     Gdip_SaveBitmapToFile(pBitmap, OutFile, 100)
     Gdip_DisposeImage(pBitmap)
     Gdip_Shutdown(pToken)
+Return
 }
 
 GetMousePosition(){
     MouseGetPos, xpos, ypos
     PixelGetColor, xycolor , xpos, ypos
     msgbox, X=%xpos% Y=%ypos% XYColor=%xycolor%
-return
+Return
 }

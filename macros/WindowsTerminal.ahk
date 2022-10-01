@@ -1,3 +1,5 @@
+; https://gist.github.com/andrewgodwin/89920ee02501ab12d09b02500897066c
+
 $#T::
     ToggleTerminal()
 Return

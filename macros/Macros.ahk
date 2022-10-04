@@ -11,10 +11,10 @@ $#F12::
     SoundBeep, 750, 500
 Return
 
-$^Printscreen:: ;https://www.autohotkey.com/boards/viewtopic.php?t=63872
+^Printscreen:: ;https://www.autohotkey.com/boards/viewtopic.php?t=63872
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
-    Screenshot("C:\Users\%A_UserName%\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
+    Screenshot("C:\Users\Amorim\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
 Return
 
 $^+!P::
@@ -37,12 +37,11 @@ Screenshot(OutFile)
     Gdip_SaveBitmapToFile(pBitmap, OutFile, 100)
     Gdip_DisposeImage(pBitmap)
     Gdip_Shutdown(pToken)
-Return
 }
 
 GetMousePosition(){
     MouseGetPos, xpos, ypos
     PixelGetColor, xycolor , xpos, ypos
     msgbox, X=%xpos% Y=%ypos% XYColor=%xycolor%
-Return
+    Return
 }

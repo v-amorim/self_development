@@ -50,7 +50,8 @@ def jogar():
                     print(f"O número secreto era {numero_secreto}. Você fez {pontos} pontos.")
             pontos -= abs(numero_secreto - chute)
 
+    print("Fim do jogo")
+
 
 if __name__ == "__main__":
     jogar()
-    print("Fim do jogo")

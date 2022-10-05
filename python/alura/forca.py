@@ -6,18 +6,28 @@ def jogar():
     palavra_secreta = "banana".upper()
     letras_acertadas = ["_", "_", "_", "_", "_", "_"]
     print(letras_acertadas)
+
     enforcou = False
     acertou = False
+    erros = 0
+
     while (not enforcou and not acertou):
         chute = input("Qual letra? ").strip().upper()
-        index = 0
-        for letra in palavra_secreta:
-            if (chute == letra):
-                letras_acertadas[index] = letra
-            index = index + 1
+        if chute in palavra_secreta:
+            for index, letra in enumerate(palavra_secreta):
+                if (chute == letra):
+                    letras_acertadas[index] = letra
+        else:
+            erros += 1
+
+        enforcou = erros == 6
+        acertou = "_" not in letras_acertadas
         print(letras_acertadas)
-        letras_faltando = str(letras_acertadas.count('_'))
-        print(f'Ainda faltam acertar {letras_faltando} letras')
+
+    if (acertou):
+        print("Você ganhou!")
+    else:
+        print("Você perdeu!")
 
     print("Fim do jogo")
 

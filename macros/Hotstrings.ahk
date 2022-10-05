@@ -26,77 +26,77 @@ IniRead, username_px_riot, %env%, Credentials, username_px_riot
 IniRead, password_poe, %env%, Credentials, password_poe
 
 ; Hotstring
-:*:...:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:...::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}…
 Return
 
-:*:>bot:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>bot::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}bot com %nickname%
 Return
 
-:*:>campus:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>campus::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%campus%
 Return
 
-:*:>course:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>course::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%course%
 Return
 
-:*:>email:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>email::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%email%
 Return
 
-:*:>gcc:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>gcc::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%email_gcc%
 Return
 
-:*:>name:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>name::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%name%
 Return
 
-:*:>period:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>period::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%period%
 Return
 
-:*:>ra:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>ra::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%ra%
 Return
 
-:*:>tel:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>tel::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%telephone%
 Return
 
-:*:>tg:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>tg::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%email_tg%
 Return
 
-:*:>top:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>top::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}top com %nickname%
 Return
 
-:*:>uni:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>uni::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%university%
 Return
 
-:*:>va:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>va::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%email_va%
 Return
 
-:*:>vd:: 
-    LTrim(A_ThisHotkey,":oc?*") 
+:*:>vd::
+    LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%email_vd%
 Return

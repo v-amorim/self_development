@@ -160,14 +160,14 @@
 #IfWinActive
 
 AutoLeftClicks(){
-    BlockInput On 
-    Send {Blind}{LButton down}{LButton up} 
+    BlockInput On
+    Send {Blind}{LButton down}{LButton up}
     BlockInput Off
 }
 
 AutoRightClicks(){
-    BlockInput On 
-    Send {Blind}{RButton down}{RButton up} 
+    BlockInput On
+    Send {Blind}{RButton down}{RButton up}
     BlockInput Off
 }
 

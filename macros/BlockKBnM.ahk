@@ -12,36 +12,49 @@
 
 !XButton2::
 !F1::
+    LockKeyAndMouse()
+Return
+
+!XButton1::
+!F2::
+    UnlockKeyAndMouse()
+Return
+
+!F3::
+    LockKeyMouseAndScreen()
+Return
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+LockKeyAndMouse(){
     lockKeyboard:= true
     hideScreen:= false
     displayOnce:= false
     lockMouseMode:= 1
     message:= "Keyboard & Mouse`nLocked"
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable all keyboard keys and mouse buttons
-Return
+}
 
-!XButton1::
-!F2::
-    lockKeyboard:= false
-    hideScreen:= false
-    displayOnce:= false
-    lockMouseMode:= 0
-    message:= "Keyboard & Mouse`nUnlocked"
-    Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Enable all keyboard keys and mouse buttons
-Return
-
-!F3::
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+LockKeyMouseAndScreen(){
     lockKeyboard:= true
     hideScreen:= true
     displayOnce:= false
     lockMouseMode:= 1
     message:= "Keyboard, Mouse & Screen`nLocked`n!F1 to Unlock"
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable keyboard mouse and screen
-Return
+}
 
-idletime = 1 * 60 * 1000 ; 1 minute
-; IfGreater, A_TimeIdle, %idletime%, Send, {!F1}
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+UnlockKeyAndMouse(){
+    lockKeyboard:= false
+    hideScreen:= false
+    displayOnce:= false
+    lockMouseMode:= 0
+    message:= "Keyboard & Mouse`nUnlocked"
+    Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Enable all keyboard keys and mouse buttons
+}
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mouse:=0, message_arg:="", timeout_arg:=0.5, screenColor_arg:="black") {
     static AllKeys, message_var, displayOnce_var, lockKeyboard_var, lockMouse_var, hideScreen_var
     message_var:= message_arg

@@ -4,13 +4,15 @@ global Message := "Keyboard and mouse are locked!`nPress !XButton1 to unlock."
 Return ; end of auto-execute section
 
 $!F1::
-$!XButton2:: 
+$!XButton2::
     Disable_Keys(True) ; disable keys
 Return
+
 $!F2::
-$!XButton1:: 
+$!XButton1::
     Disable_Keys(False) ; enable keys
 Return
+
 ;-------------------------------------------------------------------------------
 get_AllKeys() { ; return a pipe delimited list of all keys
     ;-------------------------------------------------------------------------------
@@ -23,7 +25,7 @@ get_AllKeys() { ; return a pipe delimited list of all keys
     For key, val in {Control: "Ctrl", Escape: "Esc"}
         Keys := StrReplace(Keys, key, val)
 
-Return, Keys
+    Return, Keys
 }
 
 ;-------------------------------------------------------------------------------
@@ -34,11 +36,11 @@ Disable_Keys(BOOL := False) { ; (en/dis) -able all keys
     For each, KeyName in StrSplit(AllKeys, "|")
         Hotkey, *%KeyName%, Block_Input, %Block% UseErrorLevel
 
-Block_Input:
-    If (Block = "On") {
-        Progress, B1 ZH0, %Message%
-        Sleep, 2000
-        Progress, Off
-    }
-Return
+    Block_Input:
+        If (Block = "On") {
+            Progress, B1 ZH0, %Message%
+            Sleep, 2000
+            Progress, Off
+        }
+    Return
 }

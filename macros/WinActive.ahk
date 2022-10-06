@@ -159,6 +159,7 @@
     $+WheelDown::AutoLeftClicks()
 #IfWinActive
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 AutoLeftClicks(){
     BlockInput On
 
@@ -167,6 +168,7 @@ AutoLeftClicks(){
     BlockInput Off
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 AutoRightClicks(){
     BlockInput On
 
@@ -175,6 +177,7 @@ AutoRightClicks(){
     BlockInput Off
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 SpamPots(){
     BlockInput On
 
@@ -189,6 +192,7 @@ SpamPots(){
     Return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GoHome(){
     BlockInput On
 
@@ -211,6 +215,7 @@ GoHome(){
     Return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 RandomSleep(min, max){
     Random, r, %min%, %max%
     r:=floor(r/Speed)

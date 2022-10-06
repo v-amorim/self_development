@@ -19,6 +19,7 @@ RunPoEDependencies(){
     Run C:\Users\%A_UserName%\AppData\Roaming\Path of Building Community\Path of Building.exe
     Return
 }
+
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GetMousePosition(){
     MouseGetPos, xpos, ypos

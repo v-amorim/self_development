@@ -159,31 +159,43 @@
     $+WheelDown::AutoLeftClicks()
 #IfWinActive
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 AutoLeftClicks(){
-    BlockInput On 
-    Send {Blind}{LButton down}{LButton up} 
+    BlockInput On
+
+    Send {Blind}{LButton down}{LButton up}
+
     BlockInput Off
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 AutoRightClicks(){
-    BlockInput On 
-    Send {Blind}{RButton down}{RButton up} 
+    BlockInput On
+
+    Send {Blind}{RButton down}{RButton up}
+
     BlockInput Off
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 SpamPots(){
     BlockInput On
+
     global Flask
     Send %Flask%
     Flask += 1
+
     BlockInput Off
+
     If Flask > 5
         Flask = 3
-    return
+    Return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GoHome(){
     BlockInput On
+
     RandomSleep(110, 220)
 
     MouseGetPos xx, yy
@@ -198,15 +210,17 @@ GoHome(){
 
     Send {'}
     MouseMove, xx, yy, 0
+
     BlockInput Off
-    return
+    Return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 RandomSleep(min, max){
     Random, r, %min%, %max%
     r:=floor(r/Speed)
     Sleep %r%
-    return
+    Return
 }
 ; ^ Ctrl
 ; ! Alt

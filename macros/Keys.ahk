@@ -1,4 +1,4 @@
-; modified from: 
+; modified from:
 ; http://www.autohotkey.com/board/topic/30294-simple-key-stroke-recorder/
 ;
 
@@ -8,18 +8,21 @@ FileCreateDir, %logdir%
 
 doublequote = `"
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 getlog(logdir) {
     FormatTime, time, , yyyy-MM-dd-HH-mm-ss
     newlog = %logdir%\%time%.txt
     return %newlog%
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 keyevent(key) {
     global log
     FileAppend, %key%`n, *%log%
     ;previousnewline = 0
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 mouseevent(message) {
     global log
     WinGetActiveTitle, Title
@@ -30,6 +33,7 @@ mouseevent(message) {
     FileAppend, %A_Tab%{%message%}%A_Tab%%x%%A_Tab%%y%%A_Tab%%ProcessName%%A_Tab%%Title%%A_Tab%%controln%`n, *%log%
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 getwin() {
     global log
     FormatTime, time, , yyyy-MM-dd-HH-mm-ss
@@ -41,6 +45,7 @@ getwin() {
         FileAppend, %A_Tab%%time%%A_Tab%%uniq_id%%A_Tab%%win_proc%%A_Tab%%Title%`n, *%log%
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 make_menu() {
     Menu, TRAY, NoStandard
     Menu, TRAY, add, YOU ARE BEING LOGGED - help, help_handler
@@ -756,12 +761,12 @@ newlog_handler:
 return
 
 about_handler:
-    aboutmsg = 
+    aboutmsg =
     (
         keylogger Copyright 2013 Noah Birnel (nbirnel at gmail dot com)
         This program is not intended for spying.
-            You are licensed to use it for capturing your own keystrokes.
-        )
+        You are licensed to use it for capturing your own keystrokes.
+    )
     MsgBox %aboutmsg%
 return
 
@@ -770,7 +775,7 @@ ExitApp
 return
 
 help_handler:
-    helpmsg = 
+    helpmsg =
     (
         All of your mouse clicks and key presses are being logged to %log%
     )

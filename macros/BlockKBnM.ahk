@@ -8,38 +8,54 @@
 ;timeout_arg ......... How long to display the message in sec
 ;displayOnce_arg ..... Display a message only once or always [true/false]
 ;hideScreen_arg ...... Hide or show everything [true/false]
-;screenColor_arg ..... RGB Hex background color for the hiding GUI 
+;screenColor_arg ..... RGB Hex background color for the hiding GUI
 
 !XButton2::
 !F1::
+    LockKeyAndMouse()
+Return
+
+!XButton1::
+!F2::
+    UnlockKeyAndMouse()
+Return
+
+!F3::
+    LockKeyMouseAndScreen()
+Return
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+LockKeyAndMouse(){
     lockKeyboard:= true
     hideScreen:= false
     displayOnce:= false
     lockMouseMode:= 1
     message:= "Keyboard & Mouse`nLocked"
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable all keyboard keys and mouse buttons
-Return
+}
 
-!XButton1::
-!F2::
-    lockKeyboard:= false
-    hideScreen:= false
-    displayOnce:= false
-    lockMouseMode:= 0
-    message:= "Keyboard & Mouse`nUnlocked"
-    Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Enable all keyboard keys and mouse buttons
-Return
-
-!F3::
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+LockKeyMouseAndScreen(){
     lockKeyboard:= true
     hideScreen:= true
     displayOnce:= false
     lockMouseMode:= 1
     message:= "Keyboard, Mouse & Screen`nLocked`n!F1 to Unlock"
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable keyboard mouse and screen
-Return
+}
 
-Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mouse:=0, message_arg:="", timeout_arg:=0.5, screenColor_arg:="black") { 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+UnlockKeyAndMouse(){
+    lockKeyboard:= false
+    hideScreen:= false
+    displayOnce:= false
+    lockMouseMode:= 0
+    message:= "Keyboard & Mouse`nUnlocked"
+    Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Enable all keyboard keys and mouse buttons
+}
+
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mouse:=0, message_arg:="", timeout_arg:=0.5, screenColor_arg:="black") {
     static AllKeys, message_var, displayOnce_var, lockKeyboard_var, lockMouse_var, hideScreen_var
     message_var:= message_arg
     displayOnce_var:= displayOnce_arg
@@ -69,7 +85,7 @@ Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mou
         }
     }
     if (mouse = 2) ;disable right mouse button only
-    { 
+    {
         ExcludeKeys:= "LButton"
         For key, value in AllKeys {
             IsMouseButton := Instr(value, "Wheel") || Instr(value, "Button")
@@ -87,31 +103,31 @@ Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mou
         else
             Progress, Off
     }
-Block_Input:
-    if (displayOnce_var != 1)
-    {
-        if (message_var != "") {
-            if (lockKeyboard_var || lockMouse_var)
-                Progress, b1 zh0 fm14,, %message_var%
+    Block_Input:
+        if (displayOnce_var != 1)
+        {
+            if (message_var != "") {
+                if (lockKeyboard_var || lockMouse_var)
+                    Progress, b1 zh0 fm14,, %message_var%
+                else
+                    Progress, b1 zh0 fm14,, %message_var%
+                SetTimer, TimeoutTimer, % -timeout_arg*1000
+            }
             else
-                Progress, b1 zh0 fm14,, %message_var%
-            SetTimer, TimeoutTimer, % -timeout_arg*1000
+                Progress, Off
+        }
+        ;------------------
+        if (hideScreen_var = 1)
+        {
+            Gui screen: -Caption
+            Gui screen: Color, % screenColor_arg
+            Gui screen: Show, x0 y0 h74 w%a_screenwidth% h%a_screenheight%, New GUI Window
         }
         else
-            Progress, Off
-    }
-    ;------------------
-    if (hideScreen_var = 1)
-    { 
-        Gui screen: -Caption
-        Gui screen: Color, % screenColor_arg
-        Gui screen: Show, x0 y0 h74 w%a_screenwidth% h%a_screenheight%, New GUI Window
-    }
-    else
-        gui screen: Hide
+            gui screen: Hide
 
-Return
-TimeoutTimer:
-    Progress, Off
-Return
+    Return
+    TimeoutTimer:
+        Progress, Off
+    Return
 }

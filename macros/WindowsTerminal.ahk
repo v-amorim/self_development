@@ -1,13 +1,14 @@
 ; https://gist.github.com/andrewgodwin/89920ee02501ab12d09b02500897066c
 
-$#T::
-    ToggleTerminal()
-Return
+$#T:: ToggleTerminal()
+$#V:: RunVSCode()
 
-$#V::
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+RunVSCode(){
     Run C:\Users\%A_UserName%\AppData\Local\Programs\Microsoft VS Code\Code.exe
-Return
+}
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ToggleTerminal() {
     matcher := "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"
     DetectHiddenWindows, On
@@ -25,23 +26,22 @@ ToggleTerminal() {
     } else {
         OpenNewTerminal()
     }
-Return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 OpenNewTerminal() {
     Run wt.exe
     Sleep, 500
     ShowTerminal()
-Return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ShowTerminal() {
     WinShow ahk_class CASCADIA_HOSTING_WINDOW_CLASS
     WinActivate ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-Return
 }
 
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 HideTerminal() {
     WinHide ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-Return
 }

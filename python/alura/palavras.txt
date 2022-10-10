@@ -1,6 +1,8 @@
-banana
-maçã
-melancia
-uva
-laranja
-morango
+Banana
+Jamelão
+Laranja
+Maçã
+Melancia
+Morango
+Pera
+Uva

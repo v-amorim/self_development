@@ -33,11 +33,11 @@ def imprime_mensagem_abertura():
     print("\n")
 
 
-def carrega_palavra_secreta():
+def carrega_palavra_secreta(nome_arquivo="palavras.txt"):
     import random
     palavras = []
 
-    with open("palavras.txt", "r") as arquivo:
+    with open(nome_arquivo, "r") as arquivo:
         for linha in arquivo:
             linha = linha.strip()
             palavras.append(linha)

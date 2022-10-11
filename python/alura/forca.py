@@ -8,25 +8,22 @@ def jogar():
     erros = 0
 
     while (not enforcou and not acertou):
-        chute = input("Qual letra? ").strip().upper()
+        chute = input_chute()
+
         if chute in palavra_secreta:
-            for index, letra in enumerate(palavra_secreta):
-                if (chute == letra):
-                    letras_acertadas[index] = letra
+            verifica_chute(chute, palavra_secreta, letras_acertadas)
         else:
             erros += 1
-            print(f"Faltam {6 - erros} tentativas.")
+            desenha_forca(erros)
 
-        enforcou = erros == 6
+        enforcou = erros == 7
         acertou = "_" not in letras_acertadas
         print(letras_acertadas)
 
     if (acertou):
-        print("Você ganhou!")
+        mensagem_vencedor()
     else:
-        print("Você perdeu!")
-
-    print("Fim do jogo")
+        mensagem_perdedor(palavra_secreta)
 
 
 def imprime_mensagem_abertura():
@@ -53,6 +50,77 @@ def inicializa_letras_acertadas(palavra_secreta):
     letras_acertadas = ["_" for _ in palavra_secreta]
     print(letras_acertadas)
     return letras_acertadas
+
+
+def input_chute():
+    return input("Qual letra? ").strip().upper()
+
+
+def verifica_chute(chute, palavra_secreta, letras_acertadas):
+    for index, letra in enumerate(palavra_secreta):
+        if (chute == letra):
+            letras_acertadas[index] = letra
+
+
+def mensagem_vencedor():
+    print("Você ganhou!")
+
+
+def mensagem_perdedor(palavra_secreta):
+    print("Você perdeu!")
+    print(f"A palavra era {palavra_secreta}.")
+
+
+def desenha_forca(erros):
+    print(f"Faltam {6 - erros} tentativas.")
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if(erros == 1):
+        print(" |     (-_-)  ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 2):
+        print(" |     (-_-)  ")
+        print(" |       |    ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 3):
+        print(" |     (-_o)  ")
+        print(" |      /|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 4):
+        print(" |     (o_o)  ")
+        print(" |      /|\   ")
+        print(" |            ")
+        print(" |            ")
+
+    if(erros == 5):
+        print(" |     (o_o)  ")
+        print(" |      /|\   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if(erros == 6):
+        print(" |     (oOo)  ")
+        print(" |      /|\   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if (erros == 7):
+        print(" |     (x_x)  ")
+        print(" |      /|\   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
 
 
 if __name__ == "__main__":

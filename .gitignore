@@ -42,6 +42,7 @@ C:\\nppdf32Log\\debuglog.txt
 # Images
 *.png
 *.tif
+*.jpg
 
 # Pycache
 __pycache__/

@@ -9,9 +9,9 @@ import matplotlib_inline
 matplotlib_inline.backend_inline.set_matplotlib_formats('svg')
 
 # %%
-img_inicial_path = './Codigos/Letra Branca/Cod (18).jpg'
+img_inicial_path = './Codigos/Letra Preta/Cod (13).jpg'
 img_inicial = cv2.imread(img_inicial_path)
-VALOR_T = 195  # Quanto mais clara a imagem, maior deve ser esse valor (Max - 255)
+VALOR_T = 170  # Quanto mais clara a imagem, maior deve ser esse valor (Max - 255)
 
 # %%
 
@@ -78,9 +78,7 @@ display(img_invert, "Invertida")
 
 
 # %% -------------------------Binarização da imagem-------------------------------------
-valorThresh = VALOR_T
-cv2.waitKey(0)
-thresh = valorThresh
+thresh = VALOR_T
 img_binarizada = cv2.threshold(img_gray, thresh, 255, cv2.THRESH_BINARY)[1] # Usada para imagens com letra branca
 #img_binarizada = cv2.threshold(img_invert, thresh, 255, cv2.THRESH_BINARY)[1] # Usada para imagens de letra preta
 

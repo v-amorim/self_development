@@ -1,12 +1,11 @@
 import pytesseract
+import re
 
 
 def error_check(formatted_code):
     fixed_code = list(formatted_code)
     n = len(fixed_code)
-    if n < 11 or n > 12:
-        print("Código cortado ou não lido corretamente (de acordo com o padrão BIC de containers)")  # https://en.wikipedia.org/wiki/ISO_6346
-    else:
+    if n >= 11:
         for i in range(4):  # Os primeiros 4 characteres são sempre letras
             if fixed_code[i] == '1':
                 fixed_code[i] = 'I'
@@ -28,9 +27,13 @@ def error_check(formatted_code):
                 fixed_code[i] = '8'
             if fixed_code[i] == 'U':
                 fixed_code[i] = '0'
+            if fixed_code[i] == 'S':
+                fixed_code[i] = '5'
+            if fixed_code[i] == 'O':
+                fixed_code[i] = '0'
     fixed_code = "".join(fixed_code)
-    if n > 11:
-        fixed_code = fixed_code[:-1]  # Remove o último caractere se > 11
+    # if n > 11:
+    #     fixed_code = fixed_code[:-1]  # Remove o último caractere se > 11
 
     return fixed_code
 
@@ -60,8 +63,14 @@ def find_code_in_image(img):
     result = pytesseract.image_to_string(img, config=options)
     result = reformat_code(result)
     result = error_check(result)
-    result = insert_space(result, 4)  # Coloca um espaço após 4 caracteres
-    result = insert_space(result, 11)  # Coloca um espaço antes do digito verificador
+    if len(result) == 11:
+        result = insert_space(result, 4)  # Coloca um espaço após 4 caracteres
+        result = insert_space(result, 11)  # Coloca um espaço antes do digito verificador
+    if len(result) == 12:
+        result = insert_space(result, 4)
+        result = insert_space(result, 6)
+        result = insert_space(result, 13)
+
     return result
 
 

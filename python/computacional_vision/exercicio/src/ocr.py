@@ -3,10 +3,15 @@ import re
 
 
 def error_check(formatted_code):
+    # De acordo com o padrão BIC de containers
+    # # https://en.wikipedia.org/wiki/ISO_6346
+
     fixed_code = list(formatted_code)
     n = len(fixed_code)
+
     if n >= 11:
-        for i in range(4):  # Os primeiros 4 characteres são sempre letras
+        # Os primeiros 4 characteres são sempre letras
+        for i in range(4):
             if fixed_code[i] == '1':
                 fixed_code[i] = 'I'
             if fixed_code[i] == '4':
@@ -16,7 +21,8 @@ def error_check(formatted_code):
             if fixed_code[i] == '8':
                 fixed_code[i] = 'B'
 
-        for i in range(4, 11):  # Os próximos 7 characteres são sempre dígitos
+        # Os próximos 7 characteres são sempre dígitos
+        for i in range(4, 11):
             if fixed_code[i] == 'I':
                 fixed_code[i] = '1'
             if fixed_code[i] == 'A':
@@ -33,7 +39,8 @@ def error_check(formatted_code):
                 fixed_code[i] = '0'
     fixed_code = "".join(fixed_code)
     # if n > 11:
-    #     fixed_code = fixed_code[:-1]  # Remove o último caractere se > 11
+    #     # Remove o último caractere se > 11
+    #     fixed_code = fixed_code[:-1]
 
     return fixed_code
 
@@ -43,14 +50,17 @@ def reformat_code(original_code):
     n = len(original_code)
     if n <= 20:
         formatted_code = original_code[:n - 1]
-        formatted_code = formatted_code.replace(" ", "")  # Remove espaços
-        formatted_code = formatted_code.replace("\n", "")  # Remove espaços
+        # Remove espaços
+        formatted_code = formatted_code.replace(" ", "")
+        # Remove espaços
+        formatted_code = formatted_code.replace("\n", "")
 
     return formatted_code
 
 
 def build_tesseract_options():
-    alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"  # Tesseract fazer OCR apenas em caracteres alphanumericos
+    # Tesseract fazer OCR apenas em caracteres alphanumericos
+    alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     options = "--psm 6" + " --oem 3"
     options += f" -c tessedit_char_whitelist={alphanumeric}"
     options += " load_freq_dawg=false load_system_dawg=false"
@@ -64,8 +74,10 @@ def find_code_in_image(img):
     result = reformat_code(result)
     result = error_check(result)
     if len(result) == 11:
-        result = insert_space(result, 4)  # Coloca um espaço após 4 caracteres
-        result = insert_space(result, 11)  # Coloca um espaço antes do digito verificador
+        # Coloca um espaço após 4 caracteres
+        result = insert_space(result, 4)
+        # Coloca um espaço antes do digito verificador
+        result = insert_space(result, 11)
     if len(result) == 12:
         result = insert_space(result, 4)
         result = insert_space(result, 6)

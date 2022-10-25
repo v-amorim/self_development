@@ -9,7 +9,7 @@ import matplotlib_inline
 matplotlib_inline.backend_inline.set_matplotlib_formats('svg')
 
 # %%
-img_number = 33
+img_number = 32
 img_name = f'Cod ({img_number})'
 img_inicial_path = f'./Codigos/{img_name}.jpg'
 img_inicial = cv2.imread(img_inicial_path)

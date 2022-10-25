@@ -15,8 +15,8 @@ Confusão de dígito com letra
 Das 33 imagens:
 
 - 12 imagens foram identificadas corretamente pelo modelo OCR
-- 10 imagens foram identificadas contendo apenas um erro
-- 03 imagens foram identificadas contendo dois erros
+- 09 imagens foram identificadas contendo apenas um erro
+- 04 imagens foram identificadas contendo dois erros
 - 02 imagens foram identificadas contendo três erros
 - 02 imagens foram identificadas contendo quatro ou mais erros
 - 04 imagens praticamente não foram identificadas

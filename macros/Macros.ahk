@@ -4,6 +4,7 @@
 #Include WindowsTerminal.ahk
 #Include Screenshot.ahk
 #Include BlockKBnM.ahk
+#Include VolumeControl.ahk
 
 $^+!P:: RunPoEDependencies()
 $!O:: GetMousePosition()
@@ -12,11 +13,6 @@ $#F12::
     Suspend
     SoundBeep, 750, 500
 Return
-
-#WheelUp::SoundSet, +2
-+#WheelUp::SoundSet, +10
-#WheelDown::SoundSet, -2
-+#WheelDown::SoundSet, -10
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 RunPoEDependencies(){

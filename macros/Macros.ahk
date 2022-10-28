@@ -12,6 +12,12 @@ $#F12::
     Suspend
     SoundBeep, 750, 500
 Return
+
+#WheelUp::SoundSet, +2
++#WheelUp::SoundSet, +10
+#WheelDown::SoundSet, -2
++#WheelDown::SoundSet, -10
+
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 RunPoEDependencies(){
     Run C:\Users\%A_UserName%\AppData\Local\Programs\Awakened PoE Trade\Awakened PoE Trade.exe

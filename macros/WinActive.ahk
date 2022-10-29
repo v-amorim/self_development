@@ -43,13 +43,13 @@
         Send, ^{Tab}
     Return
 
-    $!WheelUp::
+    $+WheelUp::
         BlockInput On
         Send, {LControl down}{Tab}{LControl up}
         BlockInput Off
     Return
 
-    $!WheelDown::
+    $+WheelDown::
         BlockInput On
         Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput Off

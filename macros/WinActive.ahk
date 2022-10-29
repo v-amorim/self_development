@@ -42,6 +42,18 @@
         Sleep, 333
         Send, ^{Tab}
     Return
+
+    $!WheelUp::
+        BlockInput On
+        Send, {LControl down}{Tab}{LControl up}
+        BlockInput Off
+    Return
+
+    $!WheelDown::
+        BlockInput On
+        Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
+        BlockInput Off
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe Warframe.x64.exe

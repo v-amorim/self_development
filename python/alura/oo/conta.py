@@ -1,4 +1,3 @@
-
 class Conta:
     def __init__(self, numero, titular, saldo, limite=1000.0):
         self.__numero = numero
@@ -20,5 +19,17 @@ class Conta:
         origem.saca(valor)
         destino.deposita(valor)
 
-        origem.extrato()
-        destino.extrato()
+    def get_numero(self):
+        return self.__numero
+
+    def get_titular(self):
+        return self.__titular
+
+    def get_saldo(self):
+        return self.__saldo
+
+    def get_limite(self):
+        return self.__limite
+
+    def set_limite(self, limite):
+        self.__limite = limite

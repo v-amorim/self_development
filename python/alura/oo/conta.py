@@ -5,6 +5,10 @@ class Conta:
         self.__saldo = saldo
         self.__limite = limite
 
+    @staticmethod
+    def codigo_banco():
+        return "001"
+
     def extrato(self):
         print(f'Saldo de {self.__titular} é {self.__saldo}')
 

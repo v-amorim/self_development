@@ -4,22 +4,41 @@
         "slang": "forced"
     },
     {
-        "alang": ["jpn", "ja"],
+        "alang": [
+            "jpn",
+            "ja"
+        ],
         "slang": "eng?",
-        "blacklist": [ "sign" ]
+        "blacklist": [
+            "sign"
+        ]
     },
     {
-        "alang": ["jpn", "ja"],
+        "alang": [
+            "jpn",
+            "ja"
+        ],
         "slang": "und",
-        "blacklist": [ "sign" ]
+        "blacklist": [
+            "sign"
+        ]
     },
     {
         "alang": "eng?",
-        "slang": ["eng?", "und"],
-        "whitelist": [ "sign", "song" ]
+        "slang": [
+            "eng?",
+            "und"
+        ],
+        "whitelist": [
+            "sign",
+            "song"
+        ]
     },
     {
-        "alang": ["eng?", "no"],
+        "alang": [
+            "eng?",
+            "no"
+        ],
         "slang": "no"
     },
     {
@@ -29,5 +48,9 @@
     {
         "alang": "*",
         "slang": "und"
+    },
+    {
+        "alang": "*",
+        "slang": "unk?"
     }
 ]

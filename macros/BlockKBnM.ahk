@@ -10,12 +10,10 @@
 ;hideScreen_arg ...... Hide or show everything [true/false]
 ;screenColor_arg ..... RGB Hex background color for the hiding GUI
 
-!XButton2::
 !F1::
     LockKeyAndMouse()
 Return
 
-!XButton1::
 !F2::
     UnlockKeyAndMouse()
 Return
@@ -71,7 +69,7 @@ Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mou
         functionKeys := "||NumpadEnter|Home|End|PgUp|PgDn|Left|Right|Up|Down|Del|Ins|"
         Loop, %numberOfKeys%
             key := GetKeyName(Format("VK{:0X}", A_Index))
-        , functionKeys .= InStr(functionKeys, "|" key "|") ? "" : key "|"
+                , functionKeys .= InStr(functionKeys, "|" key "|") ? "" : key "|"
         For key, value in {Control:"Ctrl", Escape:"Esc"}
             AllKeys := StrReplace(functionKeys, key, value)
         AllKeys := StrSplit(Trim(AllKeys, "|"), "|")

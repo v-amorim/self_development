@@ -174,13 +174,13 @@
 #IfWinActive ahk_exe opera.exe ; Kinda buggy but works
     $!WheelUp::
         BlockInput On
-        Send, {LControl down}{Tab}{LControl up}
+        Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput Off
     Return
 
     $!WheelDown::
         BlockInput On
-        Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
+        Send, {LControl down}{Tab}{LControl up}
         BlockInput Off
     Return
 

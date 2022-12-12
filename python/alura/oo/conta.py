@@ -7,7 +7,9 @@ class Conta:
 
     @staticmethod
     def codigo_banco():
-        return "001"
+        return {'BB': '001',
+                'Caixa': '104',
+                'Bradesco': '237'}
 
     def extrato(self):
         print(f'Saldo de {self.__titular} é {self.__saldo}')

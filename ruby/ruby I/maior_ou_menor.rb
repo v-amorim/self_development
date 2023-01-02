@@ -6,18 +6,19 @@ end
 
 def sorteia_numero_secreto
   puts 'Escolhendo um número secreto entre 0 e 200...'
-  sorteado = 175
+  sorteado = rand(0..200)
   puts 'Escolhido... que tal adivinhar hoje nosso número secreto?'
   sorteado
 end
 
-def pede_um_numero(tentativa, limite_de_tentativas)
+def pede_um_numero(chutes, tentativa, limite_de_tentativas)
   puts "Tentativa #{tentativa + 1} de #{limite_de_tentativas}"
+  puts "Chutes anteriores: #{chutes}" if tentativa.positive?
   print 'Entre com o número: '
   gets.to_i
 end
 
-def checa_se_acertou(numero_secreto, chute)
+def acertou?(numero_secreto, chute)
   if numero_secreto.eql? chute
     puts 'Acertou!'
     return true
@@ -31,9 +32,15 @@ end
 
 boas_vindas
 numero_secreto = sorteia_numero_secreto
-limite_de_tentativas = 3
+pontos = 1000
+limite_de_tentativas = 10
+chutes = []
 
 limite_de_tentativas.times do |tentativa|
-  chute = pede_um_numero(tentativa, limite_de_tentativas)
-  break if checa_se_acertou(numero_secreto, chute)
+  chutes << pede_um_numero(chutes, tentativa, limite_de_tentativas)
+  pontos -= (chutes.last - numero_secreto).abs / 2.0
+  break if acertou?(numero_secreto, chutes.last)
 end
+
+puts "Você obteve #{pontos} pontos."
+puts "O número secreto era #{numero_secreto}" unless acertou?(numero_secreto, chutes.last)

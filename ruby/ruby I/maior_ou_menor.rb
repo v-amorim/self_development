@@ -55,6 +55,11 @@ def quer_jogar?
   gets.strip.upcase.eql? 'S'
 end
 
+def mensagem(pontos, numero_secreto)
+  puts "Você obteve #{pontos} pontos."
+  puts "O número secreto era #{numero_secreto}" unless numero_secreto.eql? chutes.last
+end
+
 def jogar(dificuldade)
   numero_secreto = sorteia_numero_secreto(dificuldade)
   pontos = 1000
@@ -67,8 +72,7 @@ def jogar(dificuldade)
     break if acertou?(numero_secreto, chutes.last)
   end
 
-  puts "Você obteve #{pontos} pontos."
-  puts "O número secreto era #{numero_secreto}" unless numero_secreto.eql? chutes.last
+  mensagem(pontos, numero_secreto)
 end
 
 boas_vindas

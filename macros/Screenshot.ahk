@@ -26,8 +26,10 @@ SnipPrintScreen(){
         CurrentDate := A_YYYY "-" A_MM "-" A_DD
         CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
         sFile := "C:\Users\Amorim\Pictures\AHK Screenshots\Clipboard\" CurrentDate "_" CurrentTime ".png"
+        dFile := "C:\Users\Amorim\Desktop\" CurrentDate "_" CurrentTime ".png"
         GDIP("Startup")
         SavePicture(hBM, sFile)
+        SavePicture(hBM, dFile)
         GDIP("Shutdown")
         DllCall( "DeleteObject", "Ptr",hBM )
         ; If FileExist(sFile)
@@ -61,7 +63,7 @@ CB_hBMP_Get() { ; By SKAN on D297 @ bit.ly/2L81pmP
     OK.3 := OK.2 ? DllCall( "GetClipboardData", "UInt", 2, "Ptr" ) : 0
     OK.4 := OK.1 ? DllCall( "CloseClipboard" ) : 0
     Return OK.3 ? DllCall( "CopyImage", "Ptr",OK.3, "Int",0, "Int",0, "Int",0, "UInt",0x200C, "Ptr" )
-    + ( ErrorLevel := 0 ) : ( ErrorLevel := !OK.2 ? 1 : 2 ) >> 2
+        + ( ErrorLevel := 0 ) : ( ErrorLevel := !OK.2 ? 1 : 2 ) >> 2
 }
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -86,6 +88,6 @@ GDIP(C:="Startup") { ; By SKAN on D293 @ bit.ly/2L81pmP
         } Else {
             Res := DllCall("gdiplus\GdiplusShutdown", "Ptr",pToken )
             DllCall("FreeLibrary", "Ptr",hMod), hMod:=0, pToken:=0
-        }}
-        Return (AOK ? !Res : Res:=0)
-    }
+    }}
+    Return (AOK ? !Res : Res:=0)
+}

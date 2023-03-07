@@ -67,7 +67,8 @@ function selectionChanged() {
         if (sel.contents == '' && master_frame.contents != '') {
 
             app.select(master_frame.paragraphs[0], SelectionOptions.REPLACE_WITH);
-            textEdit.text = master_frame.paragraphs[0].contents;
+            nextText = master_frame.paragraphs[1] ? master_frame.paragraphs[1].contents : "";
+            textEdit.text = nextText;
             app.cut();
             app.selection = null;
             sel.texts.everyItem().select();

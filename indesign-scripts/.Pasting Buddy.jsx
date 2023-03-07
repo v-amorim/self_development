@@ -24,7 +24,6 @@ actionsPanel.orientation = "row";
 actionsPanel.alignChildren = ["center", "top"];
 actionsPanel.spacing = 10;
 actionsPanel.margins = 10;
-actionsPanel.preferredSize.width = windowDimensions.width - 30;
 
 var pauseState = false;
 var pauseButton = actionsPanel.add("button", undefined, undefined, {

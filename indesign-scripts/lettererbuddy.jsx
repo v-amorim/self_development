@@ -1,3 +1,4 @@
+// @ts-nocheck
 #targetengine session;
 
 var doc = app.activeDocument;

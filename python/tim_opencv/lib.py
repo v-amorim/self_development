@@ -24,7 +24,7 @@ def add_image_to_plot(ax, img, is_grayscale=False, title=None):
 
 
 def show_single_image(image, figsize=(10, 10)):
-    plt.rcParams["figure.figsize"] = figsize
+    plt.figure(figsize=figsize)
 
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) if len(image.shape) == 3 else image
     plt.imshow(image, cmap='gray') if len(image.shape) == 2 else plt.imshow(image)

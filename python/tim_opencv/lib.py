@@ -23,7 +23,24 @@ def add_image_to_plot(ax, img, is_grayscale=False, title=None):
     ax.axis('off')
 
 
+def show_single_image(image, figsize=(10, 10)):
+    plt.rcParams["figure.figsize"] = figsize
+
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) if len(image.shape) == 3 else image
+    plt.imshow(image, cmap='gray') if len(image.shape) == 2 else plt.imshow(image)
+    plt.title(f'{image.shape}')
+
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.show()
+
+
 def show_images(images, figsize=None):
+    if len(images) > 100:
+        show_single_image(images, figsize)
+        return
+
     fig, axes = create_plot(len(images), figsize)
     for i, image in enumerate(images):
         _2param = len(image) > 2

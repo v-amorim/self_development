@@ -37,7 +37,7 @@ def show_single_image(image, figsize=(10, 10)):
 
 
 def show_images(images, figsize=None):
-    if len(images) > 100:
+    if type(images) == np.ndarray:
         show_single_image(images, figsize)
         return
 

@@ -47,3 +47,10 @@ C:\\nppdf32Log\\debuglog.txt
 # Pycache
 __pycache__/
 *.pyc
+
+
+# Text files
+*.xml
+
+# Video files
+*.mp4

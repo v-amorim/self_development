@@ -26,11 +26,6 @@ IniRead, username_mz_riot, %env%, Credentials, username_mz_riot
 IniRead, username_px_riot, %env%, Credentials, username_px_riot
 
 ; Hotstring
-:*:...::
-    LTrim(A_ThisHotkey,":oc?*")
-    SendInput,{raw}…
-Return
-
 :*:>bot::
     LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}bot com %nickname%

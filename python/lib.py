@@ -1,13 +1,15 @@
+import time
+from typing import List, Optional, Tuple, Union
+
 import cv2
 import matplotlib.pyplot as plt
-import time
 import numpy as np
 
 COLOR_BGR2GRAY = cv2.COLOR_BGR2GRAY
 FILLER_IMG = [np.ones((3, 3, 3), dtype=np.uint8) * 255]
 
 
-def create_plot(num_images, figsize):
+def create_plot(num_images: int, figsize: Optional[Tuple[int, int]]) -> Tuple[plt.Figure, np.ndarray]:
     num_cols = min(3, num_images)
     num_rows = (num_images + num_cols - 1) // num_cols
     figsize = figsize or (num_cols * 5, num_rows * 5)
@@ -16,7 +18,7 @@ def create_plot(num_images, figsize):
     return fig, axes
 
 
-def add_image_to_plot(ax, img, is_grayscale=False, title=None):
+def add_image_to_plot(ax: plt.Axes, img: np.ndarray, is_grayscale: bool = False, title: Optional[str] = None) -> None:
     cmap = 'gray' if is_grayscale else None
     ax.imshow(img.astype('uint8'), cmap=cmap)
     if title:
@@ -24,7 +26,7 @@ def add_image_to_plot(ax, img, is_grayscale=False, title=None):
     ax.axis('off')
 
 
-def show_single_image(image, figsize=(10, 10)):
+def show_single_image(image: np.ndarray, figsize: Tuple[int, int] = (10, 10)) -> None:
     plt.figure(figsize=figsize)
 
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) if len(image.shape) == 3 else image
@@ -37,7 +39,8 @@ def show_single_image(image, figsize=(10, 10)):
     plt.show()
 
 
-def show_images(images, figsize=None):
+def show_images(images: Union[np.ndarray, List[Union[np.ndarray, List[Union[str, int]]]]],
+                figsize: Union[None, Tuple[int, int]] = None) -> None:
     if type(images) == np.ndarray:
         show_single_image(images, figsize)
         return
@@ -67,7 +70,9 @@ def show_images(images, figsize=None):
     plt.show()
 
 
-def show_video(video=None, frame_width=None, frame_height=None):
+def show_video(video: Optional[Union[Tuple[str, str], List[str]]] = None,
+               frame_width: Optional[int] = None,
+               frame_height: Optional[int] = None) -> None:
     if video is not None:
         video_path = video[0]
         video_title = video[1]

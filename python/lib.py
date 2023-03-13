@@ -9,6 +9,10 @@ import numpy as np
 COLOR_BGR2GRAY = cv2.COLOR_BGR2GRAY
 
 
+def filler_image(img: np.ndarray, fill_value: int) -> np.ndarray:
+    return np.full_like(img, fill_value)
+
+
 def create_plot(num_images: int,
                 figsize: Optional[Tuple[int, int]] = None) -> Tuple[plt.Figure, np.ndarray]:
     num_cols = min(3, num_images)
@@ -50,7 +54,7 @@ def show_images(images: Union[np.ndarray, List[Union[np.ndarray, List[Union[str,
     no_strings = all(isinstance(element, np.ndarray) for row in images for element in row)
 
     if no_strings:
-        show_images_stacked(images)
+        show_images_stacked(images, figsize)
         return
 
     if isinstance(images, np.ndarray):
@@ -81,14 +85,14 @@ def show_images(images: Union[np.ndarray, List[Union[np.ndarray, List[Union[str,
     plt.show()
 
 
-def show_images_stacked(imgArray):
+def show_images_stacked(imgArray, figsize):
     rows = len(imgArray)
     rowsAvailable = isinstance(imgArray[0], list)
     try:
         if rowsAvailable:
-            show_single_image(stack_rows(imgArray, rows))
+            show_single_image(stack_rows(imgArray, rows), figsize)
         else:
-            show_single_image(stack_columns(imgArray, rows))
+            show_single_image(stack_columns(imgArray, rows), figsize)
     except (ValueError, IndexError):
         print('Need the same number of images in each row')
 

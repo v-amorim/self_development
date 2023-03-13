@@ -1,3 +1,4 @@
+import itertools
 import time
 from typing import List, Optional, Tuple, Union
 
@@ -37,7 +38,6 @@ def show_single_image(image: np.ndarray,
 
     cmap = 'gray' if len(image.shape) == 2 else None
     plt.imshow(image, cmap=cmap)
-    plt.title(f'{image.shape}')
 
     plt.xticks([])
     plt.yticks([])
@@ -47,6 +47,12 @@ def show_single_image(image: np.ndarray,
 
 def show_images(images: Union[np.ndarray, List[Union[np.ndarray, List[Union[str, int]]]]],
                 figsize: Optional[Tuple[int, int]] = None) -> None:
+    no_strings = all(isinstance(element, np.ndarray) for row in images for element in row)
+
+    if no_strings:
+        show_images_stacked(images)
+        return
+
     if isinstance(images, np.ndarray):
         show_single_image(images, figsize)
         return
@@ -73,6 +79,43 @@ def show_images(images: Union[np.ndarray, List[Union[np.ndarray, List[Union[str,
 
     plt.tight_layout()
     plt.show()
+
+
+def show_images_stacked(imgArray):
+    rows = len(imgArray)
+    rowsAvailable = isinstance(imgArray[0], list)
+    try:
+        if rowsAvailable:
+            show_single_image(stack_rows(imgArray, rows))
+        else:
+            show_single_image(stack_columns(imgArray, rows))
+    except (ValueError, IndexError):
+        print('Need the same number of images in each row')
+
+
+def stack_columns(imgArray, rows: int):
+    for x in range(rows):
+        if len(imgArray[x].shape) == 2:
+            imgArray[x] = cv2.cvtColor(imgArray[x], cv2.COLOR_GRAY2BGR)
+
+    return np.hstack(imgArray)
+
+
+def stack_rows(imgArray, rows: int):
+    columns = len(imgArray[0])
+    width = imgArray[0][0].shape[1]
+    height = imgArray[0][0].shape[0]
+    imageBlank = np.zeros((height, width, 3), np.uint8)
+    horizontal = [imageBlank] * rows
+
+    for x, y in itertools.product(range(rows), range(columns)):
+        if len(imgArray[x][y].shape) == 2:
+            imgArray[x][y] = cv2.cvtColor(imgArray[x][y], cv2.COLOR_GRAY2BGR)
+
+    for x in range(rows):
+        horizontal[x] = np.hstack(imgArray[x])
+
+    return np.vstack(horizontal)
 
 
 def show_video(video: Optional[Union[Tuple[str, str], List[str]]] = None,

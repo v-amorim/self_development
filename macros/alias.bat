@@ -3,6 +3,9 @@
 :: List all used aliases.
 DOSKEY h=DOSKEY /HISTORY
 
+:: List all available aliases.
+DOSKEY alias=DOSKEY /macros
+
 
 :: General shortcuts
 :: List files and folders in the current directory.
@@ -17,12 +20,14 @@ DOSKEY grep=find /i "$*"
 :: Open File Explorer in the current directory.
 DOSKEY s=start .
 
-:: Go up one directory.
+:: Go up N directories.
 DOSKEY ..=cd ..
-
-:: Go up two directories.
 DOSKEY ...=cd ..\..
+DOSKEY ....=cd ..\..\..
+DOSKEY .....=cd ..\..\..\..
 
+:: Go to / directory
+DOSKEY /=cd /
 
 :: Python shortcuts
 :: Run Python modules with the -m option.

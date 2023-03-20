@@ -30,8 +30,12 @@ DOSKEY .....=cd ..\..\..\..
 DOSKEY /=cd /
 
 :: Python shortcuts
-:: Run Python modules with the -m option.
+DOSKEY p=python $*
+DOSKEY pe=pyenv $*
+DOSKEY pe311=pyenv shell 3.11.2
+DOSKEY pe38=pyenv shell 3.8.10
 DOSKEY pm=python -m $*
+DOSKEY pp=python -m pip install $*
 
 :: Activate the virtual environment.
 DOSKEY a=.venv\Scripts\activate.bat
@@ -41,6 +45,9 @@ DOSKEY d=deactivate
 
 
 :: Git shortcuts
+:: Clone a repository.
+DOSKEY gcl=git clone $*
+
 :: Stage changes for commit.
 DOSKEY ga=git add $*
 

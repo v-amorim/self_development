@@ -75,5 +75,14 @@ DOSKEY gr=git remote $*
 :: Open the Git repository visualizer in a separate window.
 DOSKEY gitk=gitk --all&
 
+:: Fetch changes from the remote repository.
+DOSKEY gf=git fetch
+
+:: Reset the current branch to the origin/main branch.
+DOSKEY greset=git reset --hard origin/main
+
+:: Force push to the current branch.
+DOSKEY gforce=git push -f
+
 :: Clear the screen.
 cls

@@ -72,5 +72,14 @@ function gr { git remote $args }
 # Open the Git repository visualizer in a separate window.
 function gitk { Start-Process gitk -ArgumentList "--all" }
 
+# Fetch changes from the remote repository.
+function gf {git fetch}
+
+# Reset the current branch to the origin/main branch.
+function greset {git reset --hard origin/main}
+
+# Force push to the current branch.
+function gforce {git push -f}
+
 # Clear the screen.
 function cls { Clear-Host }

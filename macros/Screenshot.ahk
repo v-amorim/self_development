@@ -4,6 +4,11 @@
 
 ^Printscreen:: ScreenPrintScreen()
 #Printscreen:: SnipPrintScreen()
+!+F11::
+    BlockInput, On
+    SnipPrintScreen()
+    BlockInput, Off
+Return
 
 ScreenPrintScreen(){
     CurrentDate := A_YYYY "-" A_MM "-" A_DD

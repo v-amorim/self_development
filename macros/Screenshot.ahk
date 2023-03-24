@@ -10,6 +10,12 @@
     BlockInput, Off
 Return
 
+~$Alt:: ; Disable Alt
+    BlockInput, On
+    KeyWait, Alt
+    BlockInput, Off
+Return
+
 ScreenPrintScreen(){
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec

@@ -26,9 +26,9 @@
     function d  { deactivate }                      ; function -d      { "Deactivate the virtual environment [deactivate]" }
 
 ##--- Pre-commit shortcuts
-    function pc     { pre-commit $* }               ; DOSKEY -pc       { "Run pre-commit hooks [pre-commit <command>]" }
-    function pci    { pre-commit install }          ; DOSKEY -pci      { "Install pre-commit hooks [pre-commit install]" }
-    function pcall  { pre-commit run --all-files }  ; DOSKEY -pcall    { "Run pre-commit hooks on all files [pre-commit run --all-files]" }
+    function pc     { pre-commit $* }               ; function -pc     { "Run pre-commit hooks [pre-commit <command>]" }
+    function pci    { pre-commit install }          ; function -pci    { "Install pre-commit hooks [pre-commit install]" }
+    function pcall  { pre-commit run --all-files }  ; function -pcall  { "Run pre-commit hooks on all files [pre-commit run --all-files]" }
 
 ##--- Git shortcuts
     function ga     { git add $args }               ; function -ga     { "Stage changes for commit [git add <file>]" }

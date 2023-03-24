@@ -9,6 +9,11 @@
 $^+!P:: RunPoEDependencies()
 $!O:: GetMousePosition()
 
++#F12::
+    Reload
+    SoundBeep, 100, 500
+Return
+
 $#F12::
     Suspend
     SoundBeep, 750, 500
@@ -27,3 +32,8 @@ GetMousePosition(){
     msgbox, X=%xpos% Y=%ypos% XYColor=%xycolor%
     Return
 }
+
+; ^ Ctrl
+; ! Alt
+; + Shift
+; # Win

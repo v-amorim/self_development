@@ -1,5 +1,8 @@
 ; Adapted from https://www.autohotkey.com/board/topic/10240-very-nice-simple-but-good-looking-volume-control/
-
+#NoEnv
+#SingleInstance force
+#Persistent
+#UseHook
 #WheelUp::
     BlockInput On
     Send {Volume_Up}

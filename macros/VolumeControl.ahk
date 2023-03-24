@@ -1,55 +1,44 @@
 ; Adapted from https://www.autohotkey.com/board/topic/10240-very-nice-simple-but-good-looking-volume-control/
 
-WheelUp::
-    BlockInput, MouseMoveWin
-    KeyWait, LWin
-    BlockInput, On
-    Send, {Volume_Up}
+#WheelUp::
+    BlockInput On
+    Send {Volume_Up}
     toggle_icon = 0
     Gosub, vmeter
-    BlockInput, Off
+    BlockInput Off
 Return
 
-+WheelUp::
-    BlockInput, MouseMoveWin
-    KeyWait, LWin
-    BlockInput, On
-    Send, {Volume_Up}{Volume_Down}
++#WheelUp::
+    BlockInput On
+    Send {Volume_Up}{Volume_Down}
     SoundSet, +10
     toggle_icon = 0
     Gosub, vmeter
-    BlockInput, Off
+    BlockInput Off
 Return
 
-WheelDown::
-    BlockInput, MouseMoveWin
-    KeyWait, LWin
-    BlockInput, On
-    Send, {Volume_Down}
+#WheelDown::
+    BlockInput On
+    Send {Volume_Down}
     toggle_icon = 0
     Gosub, vmeter
-    BlockInput, Off
+    BlockInput Off
 Return
 
-+WheelDown::
-    BlockInput, MouseMoveWin
-    KeyWait, LWin
-    BlockInput, On
-    Send, {Volume_Down}{Volume_Up}
++#WheelDown::
+    BlockInput On
+    Send {Volume_Down}{Volume_Up}
     SoundSet, -10
     toggle_icon = 0
     Gosub, vmeter
-    BlockInput, Off
+    BlockInput Off
 Return
 
 #MButton::
-    BlockInput, MouseMoveWin
-    KeyWait, LWin
-    BlockInput, On
-    Send, {Volume_Mute}
+    BlockInput On
+    Send {Volume_Mute}
     toggle_icon = 1
     Gosub, vmeter
-    BlockInput, Off
 Return
 
 ; show volume meter

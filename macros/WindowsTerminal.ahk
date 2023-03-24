@@ -20,7 +20,6 @@ ToggleTerminal() {
             ShowTerminal()
         } else if WinExist(matcher) {
             HideTerminal()
-            Send, {LButton}
         }
 
     } else {
@@ -44,4 +43,6 @@ ShowTerminal() {
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 HideTerminal() {
     WinHide ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+    ; change active window
+    WinActivate ahk_class Shell_TrayWnd
 }

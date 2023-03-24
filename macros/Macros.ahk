@@ -14,7 +14,6 @@ $#F12::
     SoundBeep, 750, 500
 Return
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 RunPoEDependencies(){
     Run C:\Users\%A_UserName%\AppData\Local\Programs\Awakened PoE Trade\Awakened PoE Trade.exe
     Run C:\Users\%A_UserName%\AppData\Local\PoeLurker\PoeLurker.exe
@@ -22,7 +21,6 @@ RunPoEDependencies(){
     Return
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GetMousePosition(){
     MouseGetPos, xpos, ypos
     PixelGetColor, xycolor , xpos, ypos

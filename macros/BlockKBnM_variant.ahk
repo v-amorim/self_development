@@ -13,14 +13,12 @@ $!XButton1::
     Disable_Keys(False) ; enable keys
 Return
 
-;-------------------------------------------------------------------------------
 get_AllKeys() { ; return a pipe delimited list of all keys
-    ;-------------------------------------------------------------------------------
     Keys := "NumpadEnter|Home|End|PgUp|PgDn|Left|Right|Up|Down|Del|Ins"
 
     Loop, 254
         If KeyName := GetKeyName(Format("VK{:X}", A_Index))
-        Keys .= "|" KeyName
+            Keys .= "|" KeyName
 
     For key, val in {Control: "Ctrl", Escape: "Esc"}
         Keys := StrReplace(Keys, key, val)
@@ -28,9 +26,7 @@ get_AllKeys() { ; return a pipe delimited list of all keys
     Return, Keys
 }
 
-;-------------------------------------------------------------------------------
 Disable_Keys(BOOL := False) { ; (en/dis) -able all keys
-    ;-------------------------------------------------------------------------------
     global Block := BOOL ? "On" : "Off"
 
     For each, KeyName in StrSplit(AllKeys, "|")

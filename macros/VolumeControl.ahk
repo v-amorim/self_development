@@ -44,8 +44,7 @@ Return
     Gosub, vmeter
 Return
 
-; show volume meter
-vmeter:
+vmeter: ; show volume meter
     SoundGet, master_volume
     SoundGet, volume_mute, master, mute
     IfWinExist, ahkvolume

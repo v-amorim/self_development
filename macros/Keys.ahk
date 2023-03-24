@@ -8,21 +8,18 @@ FileCreateDir, %logdir%
 
 doublequote = `"
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 getlog(logdir) {
     FormatTime, time, , yyyy-MM-dd-HH-mm-ss
     newlog = %logdir%\%time%.txt
     return %newlog%
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 keyevent(key) {
     global log
     FileAppend, %key%`n, *%log%
     ;previousnewline = 0
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 mouseevent(message) {
     global log
     WinGetActiveTitle, Title
@@ -33,7 +30,6 @@ mouseevent(message) {
     FileAppend, %A_Tab%{%message%}%A_Tab%%x%%A_Tab%%y%%A_Tab%%ProcessName%%A_Tab%%Title%%A_Tab%%controln%`n, *%log%
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 getwin() {
     global log
     FormatTime, time, , yyyy-MM-dd-HH-mm-ss
@@ -45,7 +41,6 @@ getwin() {
         FileAppend, %A_Tab%%time%%A_Tab%%uniq_id%%A_Tab%%win_proc%%A_Tab%%Title%`n, *%log%
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 make_menu() {
     Menu, TRAY, NoStandard
     Menu, TRAY, add, YOU ARE BEING LOGGED - help, help_handler
@@ -301,12 +296,12 @@ Loop {
 ~!*::keyevent("*")
 ~^*::keyevent("*")
 ~(::keyevent("(")
-    ~#(::keyevent("(")
-        ~!(::keyevent("(")
-            ~^(::keyevent("(")
-            ~)::keyevent(")")
-        ~#)::keyevent(")")
-    ~!)::keyevent(")")
+~#(::keyevent("(")
+~!(::keyevent("(")
+~^(::keyevent("(")
+~)::keyevent(")")
+~#)::keyevent(")")
+~!)::keyevent(")")
 ~^)::keyevent(")")
 ~-::keyevent("-")
 ~#-::keyevent("-")

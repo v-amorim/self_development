@@ -22,7 +22,6 @@ Return
     LockKeyMouseAndScreen()
 Return
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 LockKeyAndMouse(){
     lockKeyboard:= true
     hideScreen:= false
@@ -32,7 +31,6 @@ LockKeyAndMouse(){
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable all keyboard keys and mouse buttons
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 LockKeyMouseAndScreen(){
     lockKeyboard:= true
     hideScreen:= true
@@ -42,7 +40,6 @@ LockKeyMouseAndScreen(){
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable keyboard mouse and screen
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 UnlockKeyAndMouse(){
     lockKeyboard:= false
     hideScreen:= false
@@ -52,7 +49,6 @@ UnlockKeyAndMouse(){
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Enable all keyboard keys and mouse buttons
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mouse:=0, message_arg:="", timeout_arg:=0.5, screenColor_arg:="black") {
     static AllKeys, message_var, displayOnce_var, lockKeyboard_var, lockMouse_var, hideScreen_var
     message_var:= message_arg

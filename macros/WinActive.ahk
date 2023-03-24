@@ -213,25 +213,18 @@
     Return
 #IfWinActive
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 AutoLeftClicks(){
     BlockInput On
-
     Send {Blind}{LButton down}{LButton up}
-
     BlockInput Off
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 AutoRightClicks(){
     BlockInput On
-
     Send {Blind}{RButton down}{RButton up}
-
     BlockInput Off
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 SpamPots(){
     BlockInput On
 
@@ -246,7 +239,6 @@ SpamPots(){
     Return
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GoHome(){
     BlockInput On
 
@@ -269,7 +261,6 @@ GoHome(){
     Return
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 RandomSleep(min, max){
     Random, r, %min%, %max%
     r:=floor(r/Speed)

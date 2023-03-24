@@ -5,7 +5,6 @@
 ^Printscreen:: ScreenPrintScreen()
 #Printscreen:: SnipPrintScreen()
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ScreenPrintScreen(){
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
@@ -13,7 +12,6 @@ ScreenPrintScreen(){
     Return
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 SnipPrintScreen(){
     Critical, OnA
     hBM := 0
@@ -42,7 +40,6 @@ SnipPrintScreen(){
     Return
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Screenshot(OutFile)
 {
     pToken := Gdip_Startup()
@@ -55,7 +52,6 @@ Screenshot(OutFile)
     Gdip_Shutdown(pToken)
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 CB_hBMP_Get() { ; By SKAN on D297 @ bit.ly/2L81pmP
     Local OK := [0,0,0,0]
     OK.1 := DllCall( "OpenClipboard", "Ptr",0 )
@@ -66,7 +62,6 @@ CB_hBMP_Get() { ; By SKAN on D297 @ bit.ly/2L81pmP
         + ( ErrorLevel := 0 ) : ( ErrorLevel := !OK.2 ? 1 : 2 ) >> 2
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 SavePicture(hBM, sFile) { ; By SKAN on D293 @ bit.ly/2L81pmP
     Local V, pBM := VarSetCapacity(V,16,0)>>8, Ext := LTrim(SubStr(sFile,-3),"."), E := [0,0,0,0]
     Local Enc := 0x557CF400 | Round({"bmp":0, "jpg":1,"jpeg":1,"gif":2,"tif":5,"tiff":5,"png":6}[Ext])
@@ -78,7 +73,6 @@ SavePicture(hBM, sFile) { ; By SKAN on D293 @ bit.ly/2L81pmP
     Return E[1] ? 0 : E[2] ? -1 : E[3] ? -2 : E[4] ? -3 : 1
 }
 
-; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 GDIP(C:="Startup") { ; By SKAN on D293 @ bit.ly/2L81pmP
     Static SI:=Chr(!(VarSetCapacity(Si,24,0)>>16)), pToken:=0, hMod:=0, Res:=0, AOK:=0
     If (AOK := (C="Startup" and pToken=0) Or (C<>"Startup" and pToken<>0)) {

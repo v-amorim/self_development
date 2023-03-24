@@ -11,8 +11,7 @@ ToggleTerminal() {
     matcher := "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"
     DetectHiddenWindows, On
     if WinExist(matcher) {
-        if !WinActive(matcher) { ; Hide it first to alow raising it later on a different workspace
-            HideTerminal()
+        if !WinActive(matcher) {
             ShowTerminal()
         } else if WinExist(matcher) {
             HideTerminal()
@@ -34,6 +33,7 @@ ShowTerminal() {
 }
 
 HideTerminal() {
+    WinActivateBottom, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+    Send, !{Tab}
     WinHide ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-    WinActivate ahk_class Shell_TrayWnd ; change active window
 }

@@ -171,19 +171,46 @@
     $+WheelDown::AutoLeftClicks()
 #IfWinActive
 
-#IfWinActive ahk_exe opera.exe ; Kinda buggy but works
-    $!WheelUp::
-        BlockInput On
+#IfWinActive ahk_exe opera.exe
+    SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
+    $!WheelUp:: ; Cicle Up a tab
+        BlockInput, On
         Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
-        BlockInput Off
+        BlockInput, Off
     Return
 
-    $!WheelDown::
-        BlockInput On
+    $!WheelDown:: ; Cicle Down a tab
+        BlockInput, On
         Send, {LControl down}{Tab}{LControl up}
-        BlockInput Off
+        BlockInput, Off
     Return
 
+    ~$Alt:: ; Disable Alt
+        BlockInput, On
+        KeyWait, Alt
+        BlockInput, Off
+    Return
+#IfWinActive
+
+#IfWinActive ahk_exe Code.exe
+    SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
+    $!WheelUp:: ; Cicle Up a tab
+        BlockInput, On
+        Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
+        BlockInput, Off
+    Return
+
+    $!WheelDown:: ; Cicle Down a tab
+        BlockInput, On
+        Send, {LControl down}{Tab}{LControl up}
+        BlockInput, Off
+    Return
+
+    ~$Alt:: ; Disable Alt
+        BlockInput, On
+        KeyWait, Alt
+        BlockInput, Off
+    Return
 #IfWinActive
 
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

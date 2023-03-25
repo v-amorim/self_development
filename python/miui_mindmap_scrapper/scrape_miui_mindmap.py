@@ -20,14 +20,9 @@ for i in range(len(divs)):
     parent_match = re.search(r'data-parent="(.*?)"', divs[i])
     id_match = re.search(r'id="(.*?)"', divs[i])
     if parent_match and id_match:
-        parent = parent_match.group(1)
-        child_id = id_match.group(1)
-        # Find the index of the parent div
-        parent_index = None
-        for j in range(len(divs)):
-            if re.search(f'id="{parent}"', divs[j]):
-                parent_index = j
-                break
+        parent = parent_match[1]
+        child_id = id_match[1]
+        parent_index = next((j for j in range(len(divs))if re.search(f'id="{parent}"', divs[j])), None,)
         if parent_index is not None:
             # Add tabs before the child div based on the depth of the hierarchy
             depth = 1
@@ -35,21 +30,21 @@ for i in range(len(divs)):
             while True:
                 for k in range(len(divs)):
                     id_match = re.search(r'id="(.*?)"', divs[k])
-                    if id_match and id_match.group(1) == curr_id:
-                        parent_match = re.search(r'data-parent="(.*?)"', divs[k])
-                        if parent_match:
-                            curr_id = parent_match.group(1)
+                    if id_match and id_match[1] == curr_id:
+                        if parent_match := re.search(
+                            r'data-parent="(.*?)"', divs[k]
+                        ):
+                            curr_id = parent_match[1]
                             depth += 1
                             break
                 else:
                     break
-            divs[i] = '\t' * depth + divs[i]
+            divs[i] = '  ' * (depth - 1) + '- ' + divs[i]
 
-# add # tag to the root parent
-for i in range(len(divs)):
-    parent_match = re.search(r'data-parent="(.*?)"', divs[i])
-    if not parent_match:
-        divs[i] = '# ' + divs[i]
+        else:
+            # Add # tag to the root parent
+            divs[i] = f'# {divs[i]}'
+
 
 # delete div tags, keeping only the text
 for i in range(len(divs)):

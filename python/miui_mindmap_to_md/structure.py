@@ -33,9 +33,9 @@ def add_node(node_id, parent_id, text):
 
 # Add nodes to the graph
 for div in divs:
-    node_id = re.search(r'id="(.*?)"', div).group(1)
+    node_id = re.search(r'id="(.*?)"', div)[1]
     parent_id = re.search(r'data-parent="(.*?)"', div)
-    parent_id = parent_id.group(1) if parent_id else None
+    parent_id = parent_id[1] if parent_id else None
     text = re.sub(r'<[^>]*>', '', div)
     add_node(node_id, parent_id, text)
 

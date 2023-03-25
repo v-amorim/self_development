@@ -22,7 +22,7 @@ for i in range(len(divs)):
     if parent_match and id_match:
         parent = parent_match[1]
         child_id = id_match[1]
-        parent_index = next((j for j in range(len(divs))if re.search(f'id="{parent}"', divs[j])), None,)
+        parent_index = next((j for j in range(len(divs))if re.search(f'id="{parent}"', divs[j])), None)
         if parent_index is not None:
             # Add tabs before the child div based on the depth of the hierarchy
             depth = 1
@@ -31,19 +31,18 @@ for i in range(len(divs)):
                 for k in range(len(divs)):
                     id_match = re.search(r'id="(.*?)"', divs[k])
                     if id_match and id_match[1] == curr_id:
-                        if parent_match := re.search(
-                            r'data-parent="(.*?)"', divs[k]
-                        ):
+                        if parent_match := re.search(r'data-parent="(.*?)"', divs[k]):
                             curr_id = parent_match[1]
                             depth += 1
                             break
                 else:
                     break
-            divs[i] = '  ' * (depth - 1) + '- ' + divs[i]
+            space_size = '' if depth == 2 else '  '
+            divs[i] = space_size * (depth - 1) + '- ' + divs[i]
 
         else:
-            # Add # tag to the root parent
-            divs[i] = f'# {divs[i]}'
+            # Add ## tag to the root parent
+            divs[i] = f'# {divs[i]}\n' if i == 0 else f'\n## {divs[i]}\n'
 
 
 # delete div tags, keeping only the text

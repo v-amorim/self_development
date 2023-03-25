@@ -38,11 +38,11 @@ for i in range(len(divs)):
                 else:
                     break
             space_size = '' if depth == 2 else '  '
-            divs[i] = space_size * (depth - 1) + '- ' + divs[i]
+            divs[i] = space_size * (depth - 2) + '- ' + divs[i]
 
         else:
             # Add ## tag to the root parent
-            divs[i] = f'# {divs[i]}\n' if i == 0 else f'\n## {divs[i]}\n'
+            divs[i] = f'# {divs[i]}\n' if i == 0 else f'## {divs[i]}\n'
 
 
 # delete div tags, keeping only the text
@@ -52,6 +52,6 @@ for i in range(len(divs)):
 
 # Join the divs into a single string and write to a markdown file
 markdown = "\n\n".join(divs)
-markdown = re.sub(r'\n+', '\n', markdown)  # add this line to remove empty lines in between
+markdown = re.sub(r'\n(?!(#|\n))', '', markdown)  # add this line to remove empty lines in between
 with open("output.md", "w", encoding='utf-8') as f:
     f.write(markdown)

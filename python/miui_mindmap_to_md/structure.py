@@ -19,10 +19,9 @@ for i in range(len(divs)):
 # Create a dictionary to store the graph
 graph = {}
 
-# Create a function to add nodes to the graph
-
 
 def add_node(node_id, parent_id, text):
+    # Create a function to add nodes to the graph
     if node_id not in graph:
         graph[node_id] = {'text': text, 'children': []}
     if parent_id is not None:
@@ -41,4 +40,4 @@ for div in divs:
 
 # Print the graph
 for index, (key, value) in enumerate(graph.items()):
-    print(index, key, ' : ', value)
+    print(index, '\t', key, ' : ', value)

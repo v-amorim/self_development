@@ -39,9 +39,9 @@ def add_tabs_to_children(divs):
             parent = parent_match[1]
             parent_index = next((j for j in range(len(divs)) if re.search(f'id="{parent}"', divs[j])), None)
             if parent_index is not None:
-                depth = get_depth(divs, parent)
-                space_size = '' if depth == 2 else '  '
-                divs[i] = space_size * (depth - 2) + '- ' + divs[i]
+                depth = get_depth(divs, parent) - 2
+                space_size = '\t' * depth
+                divs[i] = f'{space_size}- {divs[i]}' + f' [{depth}]'
             else:
                 divs[i] = get_header(i, divs[i])
 

@@ -40,5 +40,5 @@ for div in divs:
     add_node(node_id, parent_id, text)
 
 # Print the graph
-for key, value in graph.items():
-    print(key, ' : ', value)
+for index, (key, value) in enumerate(graph.items()):
+    print(index, key, ' : ', value)

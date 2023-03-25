@@ -55,5 +55,6 @@ __pycache__/
 # Video files
 *.mp4
 
-# MIUI input.html
+# MIUI Mindmap to MD files
 input.html
+output.md

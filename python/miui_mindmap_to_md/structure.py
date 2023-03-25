@@ -28,11 +28,6 @@ def add_node(node_id, parent_id, text):
         if parent_id not in graph:
             graph[parent_id] = {'text': '', 'children': []}
         graph[parent_id]['children'].append(node_id)
-    else:
-        # Create root node if it doesn't already exist
-        if 'root' not in graph:
-            graph['root'] = {'text': '', 'children': []}
-        graph['root']['children'].append(node_id)
 
 
 def dfs(node_id, depth=0):
@@ -58,6 +53,8 @@ for div in divs:
     text = re.sub(r'<[^>]*>', '', div)
     text = text.strip()
     add_node(node_id, parent_id, text)
+
+[print(key, ':', value) for key, value in graph.items()]
 
 # Traverse the graph with DFS and output the bullet points to a markdown file
 dfs('root')

@@ -39,22 +39,31 @@ def add_tabs_to_children(divs):
             parent = parent_match[1]
             parent_index = next((j for j in range(len(divs)) if re.search(f'id="{parent}"', divs[j])), None)
             if parent_index is not None:
-                depth = 1
-                curr_id = parent
-                while True:
-                    for k in range(len(divs)):
-                        id_match = re.search(r'id="(.*?)"', divs[k])
-                        if id_match and id_match[1] == curr_id:
-                            if parent_match := re.search(r'data-parent="(.*?)"', divs[k]):
-                                curr_id = parent_match[1]
-                                depth += 1
-                                break
-                    else:
-                        break
+                depth = get_depth(divs, parent)
                 space_size = '' if depth == 2 else '  '
                 divs[i] = space_size * (depth - 2) + '- ' + divs[i]
             else:
-                divs[i] = f'# {divs[i]}\n' if i == 0 else f'## {divs[i]}\n'
+                divs[i] = get_header(i, divs[i])
+
+
+def get_depth(divs, parent_id):
+    depth = 1
+    curr_id = parent_id
+    while True:
+        for k in range(len(divs)):
+            id_match = re.search(r'id="(.*?)"', divs[k])
+            if id_match and id_match[1] == curr_id:
+                if parent_match := re.search(r'data-parent="(.*?)"', divs[k]):
+                    curr_id = parent_match[1]
+                    depth += 1
+                    break
+        else:
+            break
+    return depth
+
+
+def get_header(i, div):
+    return f'# {div}\n' if i == 0 else f'## {div}\n'
 
 
 def remove_tags(divs):

@@ -1,6 +1,6 @@
 import re
 
-FILENAME = "structure3"
+FILENAME = "aa"
 
 # Read the contents of the HTML file
 with open(f"{FILENAME}.html", "r", encoding='utf-8') as f:
@@ -24,7 +24,7 @@ def add_node(node_id, parent_id, text):
     # Create a function to add nodes to the graph
     if node_id not in graph:
         graph[node_id] = {'text': text, 'children': []}
-    if parent_id is not None:
+    if parent_id is not None and parent_id != 'root':
         if parent_id not in graph:
             graph[parent_id] = {'text': '', 'children': []}
         graph[parent_id]['children'].append(node_id)
@@ -40,4 +40,4 @@ for div in divs:
 
 # Print the graph
 for index, (key, value) in enumerate(graph.items()):
-    print(index, '\t', key, ' : ', value)
+    print(index + 1, '\t', key, ' : ', value)

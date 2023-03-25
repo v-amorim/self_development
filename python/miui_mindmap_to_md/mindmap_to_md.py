@@ -1,17 +1,16 @@
 import re
 
-INPUT_FILE = "input.html"
-OUTPUT_FILE = "output.md"
+FILENAME = "aa"
 
 
 def main():
-    html = read_file(INPUT_FILE)
+    html = read_file(f"{FILENAME}.html")
     divs = find_divs(html)
     remove_attributes_and_whitespace(divs)
     add_tabs_to_children(divs)
     remove_tags(divs)
     markdown = join_divs(divs)
-    write_file(OUTPUT_FILE, markdown)
+    write_file(f"{FILENAME}.md", markdown)
 
 
 def read_file(filename):

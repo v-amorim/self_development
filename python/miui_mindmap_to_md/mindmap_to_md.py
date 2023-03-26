@@ -1,85 +1,68 @@
 import re
-
-FILENAME = "aa"
-
-
-def main():
-    html = read_file(f"{FILENAME}.html")
-    divs = find_divs(html)
-    remove_attributes_and_whitespace(divs)
-    add_tabs_to_children(divs)
-    remove_tags(divs)
-    markdown = join_divs(divs)
-    write_file(f"{FILENAME}.md", markdown)
+import tempfile
+import shutil
 
 
-def read_file(filename):
-    with open(filename, "r", encoding="utf-8") as f:
-        return f.read()
+class HTMLMindmaptoMDConverter:
+    def __init__(self, filename):
+        self.filename = filename
+        self.html = self.read_file()
+        self.divs = self.get_divs()
+        self.graph = {}
+        self.temp_file = self.create_temp_file()
 
+    def read_file(self):
+        with open(f"{self.filename}.html", "r", encoding='utf-8') as f:
+            return f.read()
 
-def find_divs(html):
-    pattern = r'<div[^>]+?contenteditable="false"[^>]*?>.*?<\/div>'
-    return re.findall(pattern, html, re.DOTALL)
+    def get_divs(self):
+        pattern = r'<div[^>]+?contenteditable="false"[^>]*?>.*?<\/div>'
+        return re.findall(pattern, self.html, re.DOTALL)
 
-
-def remove_attributes_and_whitespace(divs):
-    for i in range(len(divs)):
-        div = re.sub(r'\s+contenteditable="false"', '', divs[i])
+    def clean_div(self, div):
+        div = re.sub(r'\s+contenteditable="false"', '', div)
         div = re.sub(r'\n\s*', ' ', div)
-        divs[i] = div
+        return div
+
+    def add_node(self, node_id, parent_id, text):
+        if node_id not in self.graph:
+            self.graph[node_id] = {'text': text, 'children': []}
+        if parent_id is not None:
+            if parent_id not in self.graph:
+                self.graph[parent_id] = {'text': '', 'children': []}
+            self.graph[parent_id]['children'].append(node_id)
+
+    def dfs(self, node_id, depth=0, is_root=False):
+        node = self.graph[node_id]
+        text = node['text']
+        with open(self.temp_file, "a", encoding='utf-8') as f:
+            if is_root:
+                if node_id == self.graph['root']['children'][0]:
+                    f.write(f"# {text}\n\n")
+                if node_id in self.graph['root']['children'][1:]:
+                    f.write(f"\n# {text}\n\n")
+            elif text != '':
+                indent = "  " * (depth - 2)
+                f.write(f"{indent}- {text}\n")
+        for child_id in node['children']:
+            self.dfs(child_id, depth + 1, is_root=(node_id == 'root'))
+
+    def create_temp_file(self):
+        return tempfile.NamedTemporaryFile(mode='w', delete=False).name
+
+    def convert(self):
+        for div in self.divs:
+            node_id = re.search(r'id="(.*?)"', div)[1]
+            parent_id = re.search(r'data-parent="(.*?)"', div)
+            parent_id = parent_id[1] if parent_id else None
+            text = re.sub(r'<[^>]*>', '', self.clean_div(div))
+            text = text.strip()
+            self.add_node(node_id, parent_id, text)
+
+        self.dfs('root')
+        shutil.move(self.temp_file, f"{self.filename}.md")
 
 
-def add_tabs_to_children(divs):
-    for i in range(len(divs)):
-        parent_match = re.search(r'data-parent="(.*?)"', divs[i])
-        id_match = re.search(r'id="(.*?)"', divs[i])
-        if parent_match and id_match:
-            parent = parent_match[1]
-            parent_index = next((j for j in range(len(divs)) if re.search(f'id="{parent}"', divs[j])), None)
-            if parent_index is not None:
-                depth = get_depth(divs, parent) - 2
-                space_size = '\t' * depth
-                divs[i] = f'{space_size}- {divs[i]}' + f' [{depth}]'
-            else:
-                divs[i] = get_header(i, divs[i])
-
-
-def get_depth(divs, parent_id):
-    depth = 1
-    curr_id = parent_id
-    while True:
-        for k in range(len(divs)):
-            id_match = re.search(r'id="(.*?)"', divs[k])
-            if id_match and id_match[1] == curr_id:
-                if parent_match := re.search(r'data-parent="(.*?)"', divs[k]):
-                    curr_id = parent_match[1]
-                    depth += 1
-                    break
-        else:
-            break
-    return depth
-
-
-def get_header(i, div):
-    return f'# {div}\n' if i == 0 else f'## {div}\n'
-
-
-def remove_tags(divs):
-    for i in range(len(divs)):
-        divs[i] = re.sub(r'<div[^>]+?>', '', divs[i])
-        divs[i] = re.sub(r'<\/div>', '', divs[i])
-
-
-def join_divs(divs):
-    markdown = "\n\n".join(divs)
-    return re.sub(r'\n(?!(#|\n))', '', markdown)
-
-
-def write_file(filename, content):
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(content)
-
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    converter = HTMLMindmaptoMDConverter('aa')
+    converter.convert()

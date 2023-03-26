@@ -1,4 +1,7 @@
 import re
+import tempfile
+import shutil
+import os
 
 FILENAME = "rvra2"
 
@@ -34,7 +37,7 @@ def dfs(node_id, depth=0, is_root=False):
     # Depth-first search to traverse the tree and create bullet points
     node = graph[node_id]
     text = node['text']
-    with open(f"{FILENAME}.md", "a", encoding='utf-8') as f:
+    with open(temp_file, "a", encoding='utf-8') as f:
         if is_root and node_id == graph['root']['children'][0]:
             f.write(f"# {text}\n\n")
         if is_root and node_id in graph['root']['children'][1:]:
@@ -46,6 +49,9 @@ def dfs(node_id, depth=0, is_root=False):
         dfs(child_id, depth + 1, is_root=(node_id == 'root'))
 
 
+# Create a temporary file to write to
+temp_file = tempfile.NamedTemporaryFile(mode='w', delete=False).name
+
 # Add nodes to the graph
 for div in divs:
     node_id = re.search(r'id="(.*?)"', div)[1]
@@ -55,7 +61,10 @@ for div in divs:
     text = text.strip()
     add_node(node_id, parent_id, text)
 
+# Traverse the graph with DFS and output the bullet points to the temporary file
+dfs('root')
+
 # [print(key, ':', value) for key, value in graph.items()]
 
-# Traverse the graph with DFS and output the bullet points to a markdown file
-dfs('root')
+# Replace the original file with the temporary file
+shutil.move(temp_file, f"{FILENAME}.md")

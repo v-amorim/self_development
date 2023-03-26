@@ -35,8 +35,10 @@ def dfs(node_id, depth=0, is_root=False):
     node = graph[node_id]
     text = node['text']
     with open(f"{FILENAME}.md", "a", encoding='utf-8') as f:
-        if is_root:
+        if is_root and node_id == graph['root']['children'][0]:
             f.write(f"# {text}\n\n")
+        if is_root and node_id in graph['root']['children'][1:]:
+            f.write(f"\n# {text}\n\n")
         elif text != '':
             indent = "  " * (depth - 2)
             f.write(f"{indent}- {text}\n")
@@ -53,7 +55,7 @@ for div in divs:
     text = text.strip()
     add_node(node_id, parent_id, text)
 
-[print(key, ':', value) for key, value in graph.items()]
+# [print(key, ':', value) for key, value in graph.items()]
 
 # Traverse the graph with DFS and output the bullet points to a markdown file
 dfs('root')

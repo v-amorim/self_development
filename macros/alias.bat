@@ -1,3 +1,4 @@
+@echo off
 ::  DOSKEY shortcuts, https://stackoverflow.com/questions/20530996/aliases-in-windows-command-prompt
 ::  To add to Windows Terminal, add a `/k path/to/alias.bat` to the end of the `commandline` property on the [Settings>Profiles>Command Prompt] (Ctrl+,) page.
 

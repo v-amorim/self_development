@@ -1,6 +1,6 @@
 import re
 
-FILENAME = "structure"
+FILENAME = "rvra2"
 
 # Read the contents of the HTML file
 with open(f"{FILENAME}.html", "r", encoding='utf-8') as f:
@@ -30,19 +30,18 @@ def add_node(node_id, parent_id, text):
         graph[parent_id]['children'].append(node_id)
 
 
-def dfs(node_id, depth=0):
+def dfs(node_id, depth=0, is_root=False):
     # Depth-first search to traverse the tree and create bullet points
     node = graph[node_id]
     text = node['text']
-    if depth == 1:
-        with open(f"{FILENAME}.md", "w", encoding='utf-8') as f:
-            f.write(f"# {text}\n")
-    else:
-        with open(f"{FILENAME}.md", "a", encoding='utf-8') as f:
-            indent = "  " * (depth - 1)
+    with open(f"{FILENAME}.md", "a", encoding='utf-8') as f:
+        if is_root:
+            f.write(f"# {text}\n\n")
+        elif text != '':
+            indent = "  " * (depth - 2)
             f.write(f"{indent}- {text}\n")
     for child_id in node['children']:
-        dfs(child_id, depth + 1)
+        dfs(child_id, depth + 1, is_root=(node_id == 'root'))
 
 
 # Add nodes to the graph

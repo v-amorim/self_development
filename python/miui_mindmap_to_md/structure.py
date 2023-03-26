@@ -1,9 +1,8 @@
 import re
 import tempfile
 import shutil
-import os
 
-FILENAME = "rvra2"
+FILENAME = "structure3"
 
 # Read the contents of the HTML file
 with open(f"{FILENAME}.html", "r", encoding='utf-8') as f:
@@ -38,10 +37,11 @@ def dfs(node_id, depth=0, is_root=False):
     node = graph[node_id]
     text = node['text']
     with open(temp_file, "a", encoding='utf-8') as f:
-        if is_root and node_id == graph['root']['children'][0]:
-            f.write(f"# {text}\n\n")
-        if is_root and node_id in graph['root']['children'][1:]:
-            f.write(f"\n# {text}\n\n")
+        if is_root:
+            if node_id == graph['root']['children'][0]:
+                f.write(f"# {text}\n\n")
+            if node_id in graph['root']['children'][1:]:
+                f.write(f"\n# {text}\n\n")
         elif text != '':
             indent = "  " * (depth - 2)
             f.write(f"{indent}- {text}\n")

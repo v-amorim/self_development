@@ -14,8 +14,7 @@ class HtmlParser:
             title_text = title_div.text.strip()
             self.div_dict['title'] = {'text': title_text, 'children': []}
 
-        editable_divs = self.soup.find_all(
-            'div', {'id': True, 'data-parent': True, 'class': True, 'contenteditable': True})
+        editable_divs = self.soup.find_all('div', {'id': True, 'data-parent': True, 'class': True})
         for editable_div in editable_divs:
             text = " ".join(editable_div.text.split())
             div_id = editable_div['id']

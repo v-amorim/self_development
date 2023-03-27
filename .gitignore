@@ -56,5 +56,6 @@ __pycache__/
 *.mp4
 
 # MIUI Mindmap to MD files
-input.html
-output.md
+/python/miui_mindmap_to_md/*.html
+/python/miui_mindmap_to_md/*.md
+/python/miui_mindmap_to_md/DOM extractor

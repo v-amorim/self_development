@@ -78,7 +78,8 @@ class MindmapConverter:
 
     def convert(self):
         self.dfs('root')
-        shutil.move(self.temp_file, f"{self.title}.md")
+        title_formatted = self.title.replace('/', '.')
+        shutil.move(self.temp_file, f"{title_formatted}.md")
 
 
 if __name__ == '__main__':

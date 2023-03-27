@@ -10,25 +10,40 @@ class HtmlParser:
         self.div_dict = {}
 
     def parse(self):
+        self._parse_title_div()
+        self._parse_editable_divs()
+
+        return self.div_dict
+
+    def _parse_title_div(self):
         if title_div := self.soup.find('div', {'id': 'title'}):
             title_text = title_div.text.strip()
-            self.div_dict['title'] = {'text': title_text, 'children': []}
+            self.div_dict['title'] = {
+                'text': title_text,
+                'children': []
+            }
 
+    def _parse_editable_divs(self):
         editable_divs = self.soup.find_all('div', {'id': True, 'data-parent': True, 'class': True})
+
         for editable_div in editable_divs:
-            text = " ".join(editable_div.text.split())
             div_id = editable_div['id']
-            div_text = text
-            div_children = []
-            self.div_dict[div_id] = {'text': div_text, 'children': div_children}
+
+            if div_id not in self.div_dict:
+                div_text = " ".join(editable_div.text.split())
+                self.div_dict[div_id] = {
+                    'text': div_text,
+                    'children': []
+                }
 
             parent_id = editable_div['data-parent']
             if parent_id in self.div_dict:
                 self.div_dict[parent_id]['children'].append(div_id)
             else:
-                self.div_dict[parent_id] = {'text': '', 'children': [div_id]}
-
-        return self.div_dict
+                self.div_dict[parent_id] = {
+                    'text': '',
+                    'children': [div_id]
+                }
 
 
 class MindmapConverter:

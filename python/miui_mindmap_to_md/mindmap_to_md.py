@@ -1,11 +1,26 @@
 import tempfile
 import shutil
+import pyperclip
 from bs4 import BeautifulSoup
 
 
 class HtmlParser:
     def __init__(self, filename):
-        with open(f'{filename}.html', encoding='utf-8') as f:
+        self.temp_file = None
+        filename = self._get_filename(filename)
+        self._parse_html(filename)
+
+    def _get_filename(self, filename):
+        filename = f"{filename}.html"
+        if pyperclip.paste().count('<div') > 0:
+            self.temp_file = tempfile.NamedTemporaryFile(mode='w', delete=False).name
+            with open(self.temp_file, "w", encoding='utf-8') as f:
+                f.write(pyperclip.paste())
+            filename = self.temp_file
+        return filename
+
+    def _parse_html(self, filename):
+        with open(filename, encoding='utf-8') as f:
             self.soup = BeautifulSoup(f, 'html.parser')
         self.div_dict = {}
 

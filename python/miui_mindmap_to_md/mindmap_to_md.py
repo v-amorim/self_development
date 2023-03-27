@@ -1,5 +1,7 @@
-import tempfile
+import os
 import shutil
+import tempfile
+
 import pyperclip
 from bs4 import BeautifulSoup
 
@@ -65,7 +67,10 @@ class MindmapConverter:
     def __init__(self, graph):
         self.graph = graph
         self.temp_file = self.create_temp_file()
-        self.title = self.graph['title']['text']
+        if 'title' in self.graph:
+            self.title = self.graph['title']['text']
+        else:
+            raise KeyError("Invalid mindmap.")
 
     def dfs(self, node_id, depth=0, is_root=False):
         node = self.graph[node_id]
@@ -94,11 +99,13 @@ class MindmapConverter:
     def convert(self):
         self.dfs('root')
         title_formatted = self.title.replace('/', '.')
-        shutil.move(self.temp_file, f"{title_formatted}.md")
+        if not os.path.exists('output'):
+            os.makedirs('output')
+        shutil.move(self.temp_file, f"output/{title_formatted}.md")
 
 
 if __name__ == '__main__':
-    html_parser = HtmlParser('page')
+    html_parser = HtmlParser('input')
     div_dict = html_parser.parse()
     converter = MindmapConverter(div_dict)
     converter.convert()

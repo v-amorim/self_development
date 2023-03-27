@@ -66,7 +66,7 @@ class HTMLMindmaptoMDConverter:
 
 class HtmlParser:
     def __init__(self, filename):
-        with open(filename, encoding='utf-8') as f:
+        with open(f'{filename}.html', encoding='utf-8') as f:
             self.soup = BeautifulSoup(f, 'html.parser')
         self.div_dict = {}
 
@@ -93,10 +93,10 @@ class HtmlParser:
 
 
 if __name__ == '__main__':
+    parser = HtmlParser('page')
+    parser.parse()
     converter = HTMLMindmaptoMDConverter('page')
     converter.convert()
-    parser = HtmlParser('page.html')
-    parser.parse()
 
     # Print the adjacency list
-    # [print(key, ':', value) for key, value in parser.div_dict.items()]
+    [print(key, ':', value) for key, value in parser.div_dict.items()]

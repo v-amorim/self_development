@@ -37,22 +37,26 @@ class MindmapConverter:
         self.temp_file = self.create_temp_file()
         self.title = self.graph['title']['text']
 
-    def dfs(self, node_id, depth=0, is_root=False, is_title=True):
+    def dfs(self, node_id, depth=0, is_root=False):
         node = self.graph[node_id]
         text = node['text']
+        is_tile = (depth == 0)
+
         with open(self.temp_file, "a", encoding='utf-8') as f:
-            if is_title:
+            if is_tile:
                 f.write(f"# {self.title}\n\n")
+
             if is_root:
                 if node_id == self.graph['root']['children'][0]:
                     f.write(f"## {text}\n\n")
-                if node_id in self.graph['root']['children'][1:]:
+                else:
                     f.write(f"\n## {text}\n\n")
             elif text != '':
                 indent = "  " * (depth - 2)
                 f.write(f"{indent}- {text}\n")
+
         for child_id in node['children']:
-            self.dfs(child_id, depth + 1, is_root=(node_id == 'root'), is_title=False)
+            self.dfs(child_id, depth + 1, is_root=(node_id == 'root'))
 
     def create_temp_file(self):
         return tempfile.NamedTemporaryFile(mode='w', delete=False).name

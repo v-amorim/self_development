@@ -14,9 +14,9 @@
 
 ##--- Python shortcuts
     function p      { python $args }                ; function -p      { "Run a Python script [python <script.py>]" }
-    function pe     { pyenv $args }                 ; function -pe     { "Activate Python 3.11.2 on the current shell [pyenv shell 3.11.2]" }
-    function pe311  { pyenv shell 3.11.2 }          ; function -pe311  { "Activate Python 3.8.10 on the current shell [pyenv shell 3.8.10]" }
-    function pe38   { pyenv shell 3.8.10 }          ; function -pe38   { "Manage Python versions [pyenv <command>]" }
+    function pe     { pyenv $args }                 ; function -pe     { "Manage Python versions [pyenv <command>]" }
+    function pe311  { pyenv shell 3.11.2 }          ; function -pe311  { "Activate Python 3.11.2 on the current shell [pyenv shell 3.11.2]" }
+    function pe38   { pyenv shell 3.8.10 }          ; function -pe38   { "Activate Python 3.8.10 on the current shell [pyenv shell 3.8.10]" }
     function pf     { python -m pip freeze }        ; function -pf     { "List all installed packages [python -m pip freeze]" }
     function pm     { python -m $args }             ; function -pm     { "Run a Python module [python -m <module>]" }
     function pp     { python -m pip install $args } ; function -pp     { "Install a Python package [python -m pip install <package>]" }

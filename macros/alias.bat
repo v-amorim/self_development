@@ -17,9 +17,9 @@
 
 :: Python shortcuts
     DOSKEY p=python $*                          & DOSKEY -p=        echo "Run a Python script [python <script.py>]"
+    DOSKEY pe=pyenv $*                          & DOSKEY -pe=       echo "Manage Python versions [pyenv <command>]"
     DOSKEY pe311=pyenv shell 3.11.2             & DOSKEY -pe311=    echo "Activate Python 3.11.2 on the current shell [pyenv shell 3.11.2]"
     DOSKEY pe38=pyenv shell 3.8.10              & DOSKEY -pe38=     echo "Activate Python 3.8.10 on the current shell [pyenv shell 3.8.10]"
-    DOSKEY pe=pyenv $*                          & DOSKEY -pe=       echo "Manage Python versions [pyenv <command>]"
     DOSKEY pf=python -m pip freeze              & DOSKEY -pf=       echo "List all installed packages [python -m pip freeze]"
     DOSKEY pm=python -m $*                      & DOSKEY -pm=       echo "Run a Python module [python -m <module>]"
     DOSKEY pp=python -m pip install $*          & DOSKEY -pp=       echo "Install a Python package [python -m pip install <package>]"

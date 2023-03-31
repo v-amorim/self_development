@@ -13,7 +13,6 @@
     DOSKEY ...=cd ..\..                         & DOSKEY -...=      echo "Go up two directories [cd ..\..]"
     DOSKEY ....=cd ..\..\..                     & DOSKEY -....=     echo "Go up three directories [cd ..\..\..]"
     DOSKEY .....=cd ..\..\..\..                 & DOSKEY -.....=    echo "Go up four directories [cd ..\..\..\..]"
-    DOSKEY mkdir=mkdir $* && cd $*              & DOSKEY -mkdir=    echo "Create a new directory and navigate to it [mkdir <directory> && cd <directory>]"
 
 :: Python shortcuts
     DOSKEY p=python $*                          & DOSKEY -p=        echo "Run a Python script [python <script.py>]"

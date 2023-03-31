@@ -35,6 +35,7 @@
 
 :: Git shortcuts
     DOSKEY ga=git add $*                        & DOSKEY -ga=       echo "Stage changes for commit [git add <file>]"
+    DOSKEY gma=git merge --abort                & DOSKEY -gma=      echo "Abort a merge [git merge --abort]"
     DOSKEY gc=git commit -m "$*"                & DOSKEY -gc=       echo "Commit changes with a message [git commit -m '<message>']"
     DOSKEY gcl=git clone $*                     & DOSKEY -gcl=      echo "Clone a repository [git clone <url>]"
     DOSKEY gco=git checkout $*                  & DOSKEY -gco=      echo "Switch to a different branch or commit [git checkout <branch>]"

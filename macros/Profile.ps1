@@ -32,6 +32,7 @@
 
 ##--- Git shortcuts
     function ga     { git add $args }               ; function -ga     { "Stage changes for commit [git add <file>]" }
+    function gma    { git merge --abort }           ; function -gma    { "Abort a merge [git merge --abort]" }
     function gc     { git commit -m "$args" }       ; function -gc     { "Commit changes with a message [git commit -m '<message>']" }
     function gcl    { git clone $args }             ; function -gcl    { "Clone a repository [git clone <url>]" }
     function gco    { git checkout $args }          ; function -gco    { "Switch to a different branch or commit [git checkout <branch>]" }

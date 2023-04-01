@@ -62,3 +62,10 @@ __pycache__/
 
 # Fonts
 *.ttf
+
+# Audio
+*.wav
+*.ogg
+
+# Excel
+*.csv

@@ -1,8 +1,14 @@
+import os
+
 # game setup
+GAME_TITLE = "Game"
 WIDTH = 1280
 HEIGTH = 720
 FPS = 60
 TILE_SIZE = 64
+ASSETS_PATH = os.path.join(".", "assets", "test")
+OBSTABLE_TILES = ['x']
+PLAYER_TILE = 'p'
 
 WORLD_MAP = [
     ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],

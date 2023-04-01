@@ -1,6 +1,6 @@
 import pygame
 import sys
-from settings import WIDTH, HEIGTH, FPS
+import settings as s
 from level import Level
 # from debug import debug
 
@@ -10,7 +10,7 @@ class Game:
 
         # general setup
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH, HEIGTH))
+        self.screen = pygame.display.set_mode((s.WIDTH, s.HEIGTH))
         pygame.display.set_caption("Game")
         self.clock = pygame.time.Clock()
         self.level = Level()
@@ -25,7 +25,7 @@ class Game:
             self.screen.fill("black")
             self.level.run()
             pygame.display.update()
-            self.clock.tick(FPS)
+            self.clock.tick(s.FPS)
 
 
 if __name__ == "__main__":

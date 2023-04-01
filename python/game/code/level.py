@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+import settings as s
 from tile import Tile
 from player import Player
 from debug import debug
@@ -15,10 +15,10 @@ class Level():
         self.create_map()
 
     def create_map(self):
-        for row_index, row in enumerate(WORLD_MAP):
+        for row_index, row in enumerate(s.WORLD_MAP):
             for column_index, col in enumerate(row):
-                x = column_index * TILE_SIZE
-                y = row_index * TILE_SIZE
+                x = column_index * s.TILE_SIZE
+                y = row_index * s.TILE_SIZE
                 if col == 'x':
                     Tile((x, y), [self.visible_sprites, self.obstable_sprites])
                 elif col == 'p':

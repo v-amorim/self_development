@@ -5,11 +5,15 @@ import os
 import pygame
 import settings as s
 from player import Player
+from support import import_csv_layout
 from tile import Tile
 # from debug import debug
 
 GROUND = 'ground.png'
 GROUND_ASSET = os.path.join(s.TILEMAP_PATH, GROUND)
+
+BOUNDARY_MAP = 'map_FloorBlocks.csv'
+BOUNDARY_MAP_ASSET = os.path.join(s.MAP_PATH, BOUNDARY_MAP)
 
 
 class Level():
@@ -22,10 +26,21 @@ class Level():
         self.create_map()
 
     def create_map(self):
-        # for row_index, row in enumerate(s.WORLD_MAP):
-        #     for column_index, col in enumerate(row):
-        #         x = column_index * s.TILE_SIZE
-        #         y = row_index * s.TILE_SIZE
+        layouts = {
+            'boundary': import_csv_layout(BOUNDARY_MAP_ASSET),
+        }
+        for style, layout in layouts.items():
+            for row_index, row in enumerate(layout):
+                for column_index, col in enumerate(row):
+                    if col != '-1':
+                        x = column_index * s.TILE_SIZE
+                        y = row_index * s.TILE_SIZE
+
+                        if style == 'boundary':
+                            Tile(pos=(x, y),
+                                 groups=[self.obstable_sprites],
+                                 sprite_type='invisible')
+
         #         if col in s.OBSTABLE_TILES:
         #             Tile((x, y), [self.visible_sprites, self.obstable_sprites])
         #         elif col == s.PLAYER_TILE:

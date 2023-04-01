@@ -5,7 +5,7 @@ pygame.init()
 font = pygame.font.Font(None, 30)
 
 
-def debug(info, y=10, x=10):
+def debug(info, y: int = 10, x: int = 10):
     """
     Display debug info on the screen.
 

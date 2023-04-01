@@ -3,16 +3,16 @@ from __future__ import annotations
 import os
 
 # game setup
-GAME_TITLE = 'Game'
-WIDTH = 1280
-HEIGTH = 720
-FPS = 60
-TILE_SIZE = 64
-ASSETS_PATH = os.path.join('.', 'assets', 'test')
-OBSTABLE_TILES = ['x']
-PLAYER_TILE = 'p'
+GAME_TITLE: str = 'Game'
+WIDTH: int = 1280
+HEIGTH: int = 720
+FPS: int = 60
+TILE_SIZE: int = 64
+ASSETS_PATH: str = os.path.join('.', 'assets', 'test')
+OBSTABLE_TILES: list[str] = ['x']
+PLAYER_TILE: str = 'p'
 
-WORLD_MAP = [
+WORLD_MAP: list[list[str]] = [
     ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
     ['x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x'],
     ['x', ' ', 'p', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x'],

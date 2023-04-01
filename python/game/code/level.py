@@ -19,9 +19,9 @@ class Level():
             for column_index, col in enumerate(row):
                 x = column_index * s.TILE_SIZE
                 y = row_index * s.TILE_SIZE
-                if col == 'x':
+                if col in s.OBSTABLE_TILES:
                     Tile((x, y), [self.visible_sprites, self.obstable_sprites])
-                elif col == 'p':
+                elif col == s.PLAYER_TILE:
                     self.player = Player((x, y), [self.visible_sprites], self.obstable_sprites)
 
     def run(self):

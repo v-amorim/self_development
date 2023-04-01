@@ -1,11 +1,16 @@
+import os
+
 import pygame
-# import settings as s
+import settings as s
+
+PLAYER = "Player.png"
+PLAYER_ASSET = os.path.join(s.ASSETS_PATH, PLAYER)
 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstable_sprites):
         super().__init__(groups)
-        self.image = pygame.image.load("./assets/test/Player.png").convert_alpha()
+        self.image = pygame.image.load(PLAYER_ASSET).convert_alpha()
         self.rect = self.image.get_rect(topleft=pos)
 
         self.direction = pygame.math.Vector2(0, 0)

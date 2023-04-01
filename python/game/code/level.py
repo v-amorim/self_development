@@ -37,9 +37,11 @@ class Level():
                         y = row_index * s.TILE_SIZE
 
                         if style == 'boundary':
-                            Tile(pos=(x, y),
-                                 groups=[self.obstable_sprites],
-                                 sprite_type='invisible')
+                            Tile(
+                                pos=(x, y),
+                                groups=[self.obstable_sprites],
+                                sprite_type='invisible'
+                            )
 
         #         if col in s.OBSTABLE_TILES:
         #             Tile((x, y), [self.visible_sprites, self.obstable_sprites])

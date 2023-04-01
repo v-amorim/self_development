@@ -5,8 +5,8 @@ import os
 import pygame
 import settings as s
 
-PLAYER = 'Player.png'
-PLAYER_ASSET = os.path.join(s.ASSETS_PATH, PLAYER)
+PLAYER = 'player.png'
+PLAYER_ASSET = os.path.join(s.TEST_PATH, PLAYER)
 
 
 class Player(pygame.sprite.Sprite):

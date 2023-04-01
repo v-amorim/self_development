@@ -8,7 +8,9 @@ WIDTH: int = 1280
 HEIGTH: int = 720
 FPS: int = 60
 TILE_SIZE: int = 64
-ASSETS_PATH: str = os.path.join('.', 'assets', 'test')
+GRAPHICS_PATH: str = os.path.join('.', 'graphics')
+TILEMAP_PATH: str = os.path.join(GRAPHICS_PATH, 'tilemap')
+TEST_PATH: str = os.path.join(GRAPHICS_PATH, 'test')
 OBSTABLE_TILES: list[str] = ['x']
 PLAYER_TILE: str = 'p'
 

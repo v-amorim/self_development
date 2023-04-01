@@ -5,8 +5,8 @@ import os
 import pygame
 import settings as s
 
-ROCK = 'Rock.png'
-ROCK_ASSET = os.path.join(s.ASSETS_PATH, ROCK)
+ROCK = 'rock.png'
+ROCK_ASSET = os.path.join(s.TEST_PATH, ROCK)
 
 
 class Tile(pygame.sprite.Sprite):

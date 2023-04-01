@@ -59,3 +59,6 @@ __pycache__/
 /python/miui_mindmap_to_md/*.html
 /python/miui_mindmap_to_md/output/*.md
 /python/miui_mindmap_to_md/DOM extractor
+
+# Fonts
+*.ttf

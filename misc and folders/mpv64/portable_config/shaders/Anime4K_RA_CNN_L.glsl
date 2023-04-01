@@ -866,6 +866,6 @@ vec4 hook() {
 	float alpha = clamp(abs(RESID_tex(HOOKED_pos).x) * 20 * STRENGTH, 0, 1);
 	float u = HOOKED_tex(HOOKED_pos).x + RESID_tex(HOOKED_pos).x;
 	float o = BACKUP_tex(HOOKED_pos).x;
-	
+
 	return vec4(u * alpha + o * (1 - alpha), BACKUP_tex(HOOKED_pos).yz, 0);
 }

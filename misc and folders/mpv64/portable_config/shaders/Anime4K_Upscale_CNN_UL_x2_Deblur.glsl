@@ -3998,7 +3998,7 @@ vec2 minmax3(vec2 pos, vec2 d) {
 	float a = L_tex(pos - d).x;
 	float b = L_tex(pos).x;
 	float c = L_tex(pos + d).x;
-	
+
 	return vec2(min3v(a, b, c), max3v(a, b, c));
 }
 
@@ -4027,11 +4027,11 @@ vec2 minmax3(vec2 pos, vec2 d) {
 	float a0 = L_tex(pos - d).x;
 	float b0 = L_tex(pos).x;
 	float c0 = L_tex(pos + d).x;
-	
+
 	float a1 = L_tex(pos - d).y;
 	float b1 = L_tex(pos).y;
 	float c1 = L_tex(pos + d).y;
-	
+
 	return vec2(min3v(a0, b0, c0), max3v(a1, b1, c1));
 }
 
@@ -4058,11 +4058,11 @@ vec4 hook() {
 	ivec2 i = ivec2(f * vec2(2));
 	float c0 = LUMAN0_tex((vec2(0.5) - f) * LUMAN0_pt + LUMAN0_pos)[i.y * 2 + i.x];
 	float c = c0 * STRENGTH;
-	
+
 	vec2 mm = MMKERNEL_tex((vec2(0.5) - f) * MMKERNEL_pt + MMKERNEL_pos).xy;
-	
+
 	float t_range = BLUR_THRESHOLD - NOISE_THRESHOLD;
-	
+
 	float c_t = abs(c);
 	if (c_t > NOISE_THRESHOLD && c_t < BLUR_THRESHOLD) {
 		c_t = (c_t - NOISE_THRESHOLD) / t_range;
@@ -4073,5 +4073,5 @@ vec4 hook() {
 	} else {
 		return vec4(c + HOOKED_tex(HOOKED_pos).x, HOOKED_tex(HOOKED_pos).yz, 0);
 	}
-	
+
 }

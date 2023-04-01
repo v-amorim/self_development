@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 import os
 
 import pygame
 import settings as s
 
-PLAYER = "Player.png"
+PLAYER = 'Player.png'
 PLAYER_ASSET = os.path.join(s.ASSETS_PATH, PLAYER)
 
 

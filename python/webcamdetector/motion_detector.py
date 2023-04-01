@@ -1,7 +1,10 @@
-import cv2
-import pyautogui
+from __future__ import annotations
+
 from datetime import datetime
 from winsound import Beep
+
+import cv2
+import pyautogui
 
 first_frame = None
 status_list = [None, None]
@@ -47,7 +50,7 @@ while True:
     # cv2.imshow("Gray Frame", gray_frame)
     # cv2.imshow("Delta Frame", delta_frame)
     # cv2.imshow("Threshold Frame", threshold_frame)
-    cv2.imshow("Color Frame", frame)
+    cv2.imshow('Color Frame', frame)
 
     key = cv2.waitKey(1)
 

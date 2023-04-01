@@ -55,7 +55,7 @@ vec2 minmax3(vec2 pos, vec2 d) {
 	float a = L_tex(pos - d).x;
 	float b = L_tex(pos).x;
 	float c = L_tex(pos + d).x;
-	
+
 	return vec2(min3v(a, b, c), max3v(a, b, c));
 }
 
@@ -63,7 +63,7 @@ float lumGaussian7(vec2 pos, vec2 d) {
 	float g = (L_tex(pos - (d + d)).x + L_tex(pos + (d + d)).x) * 0.06136;
 	g = g + (L_tex(pos - d).x + L_tex(pos + d).x) * 0.24477;
 	g = g + (L_tex(pos).x) * 0.38774;
-	
+
 	return g;
 }
 
@@ -93,11 +93,11 @@ vec2 minmax3(vec2 pos, vec2 d) {
 	float a0 = L_tex(pos - d).y;
 	float b0 = L_tex(pos).y;
 	float c0 = L_tex(pos + d).y;
-	
+
 	float a1 = L_tex(pos - d).z;
 	float b1 = L_tex(pos).z;
 	float c1 = L_tex(pos + d).z;
-	
+
 	return vec2(min3v(a0, b0, c0), max3v(a1, b1, c1));
 }
 
@@ -105,7 +105,7 @@ float lumGaussian7(vec2 pos, vec2 d) {
 	float g = (L_tex(pos - (d + d)).x + L_tex(pos + (d + d)).x) * 0.06136;
 	g = g + (L_tex(pos - d).x + L_tex(pos + d).x) * 0.24477;
 	g = g + (L_tex(pos).x) * 0.38774;
-	
+
 	return g;
 }
 
@@ -129,9 +129,9 @@ vec4 hook() {
 
 vec4 hook() {
 	float c = (L_tex(HOOKED_pos).x - MMKERNEL_tex(HOOKED_pos).x) * STRENGTH;
-	
+
 	float t_range = BLUR_THRESHOLD - NOISE_THRESHOLD;
-	
+
 	float c_t = abs(c);
 	if (c_t > NOISE_THRESHOLD) {
 		c_t = (c_t - NOISE_THRESHOLD) / t_range;
@@ -141,13 +141,10 @@ vec4 hook() {
 	} else {
 		c_t = c;
 	}
-	
+
 	float cc = clamp(c_t + L_tex(HOOKED_pos).x, MMKERNEL_tex(HOOKED_pos).y, MMKERNEL_tex(HOOKED_pos).z) - L_tex(HOOKED_pos).x;
-	
+
 	//This trick is only possible if the inverse Y->RGB matrix has 1 for every row... (which is the case for BT.709)
 	//Otherwise we would need to convert RGB to YUV, modify Y then convert back to RGB.
 	return HOOKED_tex(HOOKED_pos) + cc;
 }
-
-
-

@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
 """
 Created on Fri Apr 22 03:02:23 2016
 
 @author: utkarsh
 """
+from __future__ import annotations
 
 import numpy as np
-#import math
-#import scipy.ndimage
 from frequest import frequest
+# import math
+# import scipy.ndimage
 
 
 def rifdge_freq(im, mask, orient, blksze, windsze, minWaveLength, maxWaveLength):

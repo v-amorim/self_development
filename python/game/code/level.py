@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 import pygame
 import settings as s
-from tile import Tile
-from player import Player
 from debug import debug
+from player import Player
+from tile import Tile
 
 
 class Level():

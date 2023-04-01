@@ -1,20 +1,30 @@
+from __future__ import annotations
+
 import sys
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import QLabel, QVBoxLayout, QWidget, QPushButton, QApplication
-from PyQt5.QtCore import pyqtSignal, QThread, Qt
+
 import cv2
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QThread
+from PyQt5.QtGui import QImage
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QVBoxLayout
+from PyQt5.QtWidgets import QWidget
 
 
 class MainWindow(QWidget):
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super().__init__()
 
         self.VBL = QVBoxLayout()
 
         self.FeedLabel = QLabel()
         self.VBL.addWidget(self.FeedLabel)
 
-        self.CancelBTN = QPushButton("Cancel")
+        self.CancelBTN = QPushButton('Cancel')
         self.CancelBTN.clicked.connect(self.CancelFeed)
         self.VBL.addWidget(self.CancelBTN)
 
@@ -54,7 +64,7 @@ class Worker1(QThread):
         self.quit()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     App = QApplication(sys.argv)
     Root = MainWindow()
     Root.show()

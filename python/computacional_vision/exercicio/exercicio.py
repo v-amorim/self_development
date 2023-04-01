@@ -1,11 +1,14 @@
 # %%
-import cv2
+from __future__ import annotations
+
 import os
-import pytesseract
-import numpy as np
-from src import ocr
-from matplotlib import pyplot as plt
+
+import cv2
 import matplotlib_inline
+import numpy as np
+import pytesseract
+from matplotlib import pyplot as plt
+from src import ocr
 matplotlib_inline.backend_inline.set_matplotlib_formats('svg')
 
 # %%
@@ -47,11 +50,11 @@ def display(img, img_name):
 
     cv2.imwrite(img_path, img)
 
-    show(img_path, f"Imagem {img_name}")
+    show(img_path, f'Imagem {img_name}')
 
 
 # %%
-display(img_inicial, "RGB")
+display(img_inicial, 'RGB')
 
 # %%
 scale_percent = 220  # percent of original size
@@ -62,26 +65,25 @@ dim = (width, height)
 # resize image
 img_resized = cv2.resize(img_inicial, dim, interpolation=cv2.INTER_LINEAR)
 
-display(img_resized, "Resized")
+display(img_resized, 'Resized')
 
 
 # %% -------------------------Trasforma imagem em escala de cinza-----------------------
 img_gray = cv2.cvtColor(img_resized, cv2.COLOR_BGR2GRAY)
 
-display(img_gray, "Grey")
+display(img_gray, 'Grey')
 
 
 # %% ----------------------------------Inverte imagem-----------------------------------
 img_invert = cv2.bitwise_not(img_gray)
 
-display(img_invert, "Invertida")
+display(img_invert, 'Invertida')
 
 
 # %% -------------------------Binarização da imagem-------------------------------------
 thresh = VALOR_T
-img_binarizada = cv2.threshold(img_gray, thresh, 255, cv2.THRESH_BINARY)[1] # Usada para imagens com letra branca
-#img_binarizada = cv2.threshold(img_invert, thresh, 255, cv2.THRESH_BINARY)[1] # Usada para imagens de letra preta
-
+img_binarizada = cv2.threshold(img_gray, thresh, 255, cv2.THRESH_BINARY)[1]  # Usada para imagens com letra branca
+# img_binarizada = cv2.threshold(img_invert, thresh, 255, cv2.THRESH_BINARY)[1] # Usada para imagens de letra preta
 
 
 # # %% -----------------Dilatação e Erosão(Para tirar borda do dígito)--------------------
@@ -100,8 +102,8 @@ img_binarizada = cv2.threshold(img_gray, thresh, 255, cv2.THRESH_BINARY)[1] # Us
 
 # %% -------------------------Imegem Final------------------------
 img_final = img_binarizada
-display(img_inicial, "Inicial")
-display(img_final, "Final")
+display(img_inicial, 'Inicial')
+display(img_final, 'Final')
 
 
 # %% -----------------------------------Ativa o OCR na imagem---------------------------

@@ -45,5 +45,3 @@
     function gr     { git remote $args }            ; function -gr     { "Manage the remote repositories [git remote <command>]" }
     function greset {git reset --hard origin/main}  ; function -greset { "See the current status of the repository [git status]" }
     function gs     { git status }                  ; function -gs     { "Reset the current branch to the origin/main branch [git reset --hard origin/main]" }
-
-

@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
 """
 Created on Tue Apr 19 12:14:49 2016
 
 @author: utkarsh
 """
-
-
 # RIDGEFREQ - Calculates a ridge frequency image
 #
 # Function to estimate the fingerprint ridge frequency across a
@@ -39,27 +36,24 @@ Created on Tue Apr 19 12:14:49 2016
 # Suggested parameters for a 500dpi fingerprint image
 #   [freqim, medianfreq] = ridgefreq(im,orientim, 32, 5, 5, 15);
 #
-
 # See also: RIDGEORIENT, FREQEST, RIDGESEGMENT
-
 # Reference:
 # Hong, L., Wan, Y., and Jain, A. K. Fingerprint image enhancement:
 # Algorithm and performance evaluation. IEEE Transactions on Pattern
 # Analysis and Machine Intelligence 20, 8 (1998), 777 789.
-
 # REFERENCES
-
 # Peter Kovesi
 # School of Computer Science & Software Engineering
 # The University of Western Australia
 # pk at csse uwa edu au
 # http://www.csse.uwa.edu.au/~pk
-
+from __future__ import annotations
 
 import numpy as np
-#import math
-#import scipy.ndimage
+
 from .frequest import frequest
+# import math
+# import scipy.ndimage
 
 
 def ridge_freq(im, mask, orient, blksze, windsze, minWaveLength, maxWaveLength):
@@ -84,4 +78,4 @@ def ridge_freq(im, mask, orient, blksze, windsze, minWaveLength, maxWaveLength):
 
     meanfreq = np.mean(non_zero_elems_in_freq)
     medianfreq = np.median(non_zero_elems_in_freq)         # does not work properly
-    return(freq, meanfreq)
+    return (freq, meanfreq)

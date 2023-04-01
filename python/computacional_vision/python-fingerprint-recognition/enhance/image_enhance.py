@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 """
 Created on Mon Apr 18 22:50:30 2016
 
 @author: utkarsh
 """
-from .ridge_segment import ridge_segment
-from .ridge_orient import ridge_orient
-from .ridge_freq import ridge_freq
+from __future__ import annotations
+
 from .ridge_filter import ridge_filter
+from .ridge_freq import ridge_freq
+from .ridge_orient import ridge_orient
+from .ridge_segment import ridge_segment
 
 
 def image_enhance(img):
@@ -18,18 +19,20 @@ def image_enhance(img):
     gradientsigma = 1
     blocksigma = 7
     orientsmoothsigma = 7
-    orientim = ridge_orient(normim, gradientsigma, blocksigma, orientsmoothsigma)              # find orientation of every pixel
+    # find orientation of every pixel
+    orientim = ridge_orient(normim, gradientsigma, blocksigma, orientsmoothsigma)
 
     blksze = 38
     windsze = 5
     minWaveLength = 5
     maxWaveLength = 15
-    freq, medfreq = ridge_freq(normim, mask, orientim, blksze, windsze, minWaveLength, maxWaveLength)  # find the overall frequency of ridges
+    freq, medfreq = ridge_freq(normim, mask, orientim, blksze, windsze, minWaveLength,
+                               maxWaveLength)  # find the overall frequency of ridges
 
     freq = medfreq * mask
     kx = 0.65
     ky = 0.65
     newim = ridge_filter(normim, orientim, freq, kx, ky)       # create gabor filter and do the actual filtering
 
-    #th, bin_im = cv2.threshold(np.uint8(newim),0,255,cv2.THRESH_BINARY);
-    return(newim < -3)
+    # th, bin_im = cv2.threshold(np.uint8(newim),0,255,cv2.THRESH_BINARY);
+    return (newim < -3)

@@ -1,13 +1,16 @@
+from __future__ import annotations
+
+import socket
+import threading
 from concurrent.futures import thread
 from email import message
 from pickle import TRUE
-import socket
-import threading
 
-apelido =input("Defina seu Nick: ")
+apelido = input('Defina seu Nick: ')
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(('127.0.0.1', 24546))
+
 
 def receber():
     while True:
@@ -18,9 +21,10 @@ def receber():
             else:
                 print(message)
         except:
-            print("Ocorreu um erro!")
+            print('Ocorreu um erro!')
             client.close()
             break
+
 
 def escrever():
     while True:

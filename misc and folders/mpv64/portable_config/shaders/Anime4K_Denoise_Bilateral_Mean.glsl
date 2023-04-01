@@ -49,12 +49,12 @@ float gaussian(float x, float s, float m) {
 vec4 hook() {
 	vec4 sum = vec4(0.0);
 	vec4 n = vec4(0.0);
-	
+
 	vec4 vc = HOOKED_tex(HOOKED_pos);
-	
+
 	vec4 is = pow(vc + 0.0001, vec4(INTENSITY_POWER_CURVE)) * INTENSITY_SIGMA;
 	float ss = SPATIAL_SIGMA;
-	
+
 	for (int i=0; i<KERNELLEN; i++) {
 		vec2 ipos = GETOFFSET(i);
 		vec4 v = HOOKED_texOff(ipos);
@@ -62,6 +62,6 @@ vec4 hook() {
 		sum += d * v;
 		n += d;
 	}
-	
+
 	return sum / n;
 }

@@ -59,16 +59,16 @@ float comp_gaussian_x() {
 
 	float g = 0.0;
 	float gn = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float di = float(i - KERNELHALFSIZE);
 		float gf = gaussian(di, SPATIAL_SIGMA, 0.0);
-		
+
 		g = g + LINELUMA_texOff(vec2(di, 0.0)).x * gf;
 		gn = gn + gf;
-		
+
 	}
-	
+
 	return g / gn;
 }
 
@@ -101,16 +101,16 @@ float comp_gaussian_y() {
 
 	float g = 0.0;
 	float gn = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float di = float(i - KERNELHALFSIZE);
 		float gf = gaussian(di, SPATIAL_SIGMA, 0.0);
-		
+
 		g = g + LINEKERNEL_texOff(vec2(0.0, di)).x * gf;
 		gn = gn + gf;
-		
+
 	}
-	
+
 	return g / gn;
 }
 
@@ -142,16 +142,16 @@ float comp_gaussian_x() {
 
 	float g = 0.0;
 	float gn = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float di = float(i - KERNELHALFSIZE);
 		float gf = gaussian(di, SPATIAL_SIGMA, 0.0);
-		
+
 		g = g + LINEKERNEL_texOff(vec2(di, 0.0)).x * gf;
 		gn = gn + gf;
-		
+
 	}
-	
+
 	return g / gn;
 }
 
@@ -183,16 +183,16 @@ float comp_gaussian_y() {
 
 	float g = 0.0;
 	float gn = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float di = float(i - KERNELHALFSIZE);
 		float gf = gaussian(di, SPATIAL_SIGMA, 0.0);
-		
+
 		g = g + LINEKERNEL_texOff(vec2(0.0, di)).x * gf;
 		gn = gn + gf;
-		
+
 	}
-	
+
 	return g / gn;
 }
 
@@ -213,4 +213,3 @@ vec4 hook() {
 	//Otherwise we would need to convert RGB to YUV, modify Y then convert back to RGB.
     return HOOKED_tex(HOOKED_pos) + (LINEKERNEL_tex(HOOKED_pos).x * STRENGTH);
 }
-

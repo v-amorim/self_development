@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 import shutil
 import tempfile
@@ -13,10 +15,10 @@ class HtmlParser:
         self._parse_html(filename)
 
     def _get_filename(self, filename):
-        filename = f"{filename}.html"
+        filename = f'{filename}.html'
         if pyperclip.paste().count('<div') > 0:
             self.temp_file = tempfile.NamedTemporaryFile(mode='w', delete=False).name
-            with open(self.temp_file, "w", encoding='utf-8') as f:
+            with open(self.temp_file, 'w', encoding='utf-8') as f:
                 f.write(pyperclip.paste())
             filename = self.temp_file
         return filename
@@ -47,7 +49,7 @@ class HtmlParser:
             div_id = editable_div['id']
 
             if div_id not in self.div_dict:
-                div_text = " ".join(editable_div.text.split())
+                div_text = ' '.join(editable_div.text.split())
                 self.div_dict[div_id] = {
                     'text': div_text,
                     'children': []
@@ -70,25 +72,25 @@ class MindmapConverter:
         if 'title' in self.graph:
             self.title = self.graph['title']['text']
         else:
-            raise KeyError("Invalid mindmap.")
+            raise KeyError('Invalid mindmap.')
 
     def dfs(self, node_id, depth=0, is_root=False):
         node = self.graph[node_id]
         text = node['text']
         is_tile = (depth == 0)
 
-        with open(self.temp_file, "a", encoding='utf-8') as f:
+        with open(self.temp_file, 'a', encoding='utf-8') as f:
             if is_tile:
-                f.write(f"# {self.title}\n\n")
+                f.write(f'# {self.title}\n\n')
 
             if is_root:
                 if node_id == self.graph['root']['children'][0]:
-                    f.write(f"## {text}\n\n")
+                    f.write(f'## {text}\n\n')
                 else:
-                    f.write(f"\n## {text}\n\n")
+                    f.write(f'\n## {text}\n\n')
             elif text != '':
-                indent = "  " * (depth - 2)
-                f.write(f"{indent}- {text}\n")
+                indent = '  ' * (depth - 2)
+                f.write(f'{indent}- {text}\n')
 
         for child_id in node['children']:
             self.dfs(child_id, depth + 1, is_root=(node_id == 'root'))
@@ -101,7 +103,7 @@ class MindmapConverter:
         title_formatted = self.title.replace('/', '.')
         if not os.path.exists('output'):
             os.makedirs('output')
-        shutil.move(self.temp_file, f"output/{title_formatted}.md")
+        shutil.move(self.temp_file, f'output/{title_formatted}.md')
 
 
 if __name__ == '__main__':

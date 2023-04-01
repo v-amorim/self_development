@@ -1,8 +1,11 @@
+from __future__ import annotations
+
 import glob
+import os
+
+import cv2
 import face_recognition
 import numpy as np
-import cv2
-import os
 
 
 cap = cv2.VideoCapture(0)
@@ -10,7 +13,7 @@ FONT = cv2.FONT_HERSHEY_COMPLEX
 images = []
 names = []
 
-path = "./*.*"
+path = './*.*'
 for file in glob.glob(path):
     image = cv2.imread(file)
     a = os.path.basename(file)
@@ -44,7 +47,7 @@ while True:
         cv2.rectangle(frame, (y1, x1), (y2, x2), (0, 0, 255), 3)
         cv2.putText(frame, name, (y2 + 6, x2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 255), 2)
 
-    cv2.imshow("FRAME", frame)
+    cv2.imshow('FRAME', frame)
     if cv2.waitKey(1) & 0xFF == 27:
         break
 

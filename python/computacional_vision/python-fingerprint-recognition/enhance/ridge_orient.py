@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
 """
 Created on Tue Apr 19 11:31:54 2016
 
 @author: utkarsh
 """
-
-
 # RIDGEORIENT - Estimates the local orientation of ridges in a fingerprint
 #
 # Usage:  [orientim, reliability, coherence] = ridgeorientation(im, gradientsigma,...
@@ -40,9 +37,7 @@ Created on Tue Apr 19 11:31:54 2016
 #    [orientim, reliability] = ridgeorient(im, 1, 3, 3);
 #
 # See also: RIDGESEGMENT, RIDGEFREQ, RIDGEFILTER
-
 # REFERENCES
-
 # May 2003      Original version by Raymond Thai,
 # January 2005  Reworked by Peter Kovesi
 # October 2011  Added coherence computation and orientsmoothsigma made optional
@@ -51,10 +46,10 @@ Created on Tue Apr 19 11:31:54 2016
 # The University of Western Australia
 # pk at csse uwa edu au
 # http://www.csse.uwa.edu.au/~pk
+from __future__ import annotations
 
-
-import numpy as np
 import cv2
+import numpy as np
 from scipy import ndimage
 from scipy import signal
 
@@ -71,8 +66,8 @@ def ridge_orient(im, gradientsigma, blocksigma, orientsmoothsigma):
 
     fy, fx = np.gradient(f)  # Gradient of Gaussian
 
-    #Gx = ndimage.convolve(np.double(im),fx);
-    #Gy = ndimage.convolve(np.double(im),fy);
+    # Gx = ndimage.convolve(np.double(im),fx);
+    # Gy = ndimage.convolve(np.double(im),fy);
 
     Gx = signal.convolve2d(im, fx, mode='same')
     Gy = signal.convolve2d(im, fy, mode='same')

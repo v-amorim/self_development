@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import cv2
 img = cv2.imread('./content/logo.png', cv2.IMREAD_UNCHANGED)
 cv2.imshow('image', img)

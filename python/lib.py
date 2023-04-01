@@ -1,6 +1,11 @@
+from __future__ import annotations
+
 import itertools
 import time
-from typing import List, Optional, Tuple, Union
+from typing import List
+from typing import Optional
+from typing import Tuple
+from typing import Union
 
 import cv2
 import matplotlib.pyplot as plt
@@ -14,7 +19,7 @@ def filler_image(img: np.ndarray, fill_value: int) -> np.ndarray:
 
 
 def create_plot(num_images: int,
-                figsize: Optional[Tuple[int, int]] = None) -> Tuple[plt.Figure, np.ndarray]:
+                figsize: tuple[int, int] | None = None) -> tuple[plt.Figure, np.ndarray]:
     num_cols = min(3, num_images)
     num_rows = (num_images + num_cols - 1) // num_cols
     figsize = figsize or (num_cols * 5, num_rows * 5)
@@ -26,7 +31,7 @@ def create_plot(num_images: int,
 def add_image_to_plot(ax: plt.Axes,
                       img: np.ndarray,
                       is_grayscale: bool = False,
-                      title: Optional[str] = None) -> None:
+                      title: str | None = None) -> None:
     cmap = 'gray' if is_grayscale else None
     ax.imshow(img.astype('uint8'), cmap=cmap)
     if title:
@@ -35,7 +40,7 @@ def add_image_to_plot(ax: plt.Axes,
 
 
 def show_single_image(image: np.ndarray,
-                      figsize: Tuple[int, int] = (10, 10)) -> None:
+                      figsize: tuple[int, int] = (10, 10)) -> None:
     plt.figure(figsize=figsize)
     if len(image.shape) == 3:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -49,8 +54,8 @@ def show_single_image(image: np.ndarray,
     plt.show()
 
 
-def show_images(images: Union[np.ndarray, List[Union[np.ndarray, List[Union[str, int]]]]],
-                figsize: Optional[Tuple[int, int]] = None) -> None:
+def show_images(images: np.ndarray | list[np.ndarray | list[str | int]],
+                figsize: tuple[int, int] | None = None) -> None:
     no_strings = all(isinstance(element, np.ndarray) for row in images for element in row)
 
     if no_strings:
@@ -122,9 +127,9 @@ def stack_rows(imgArray, rows: int):
     return np.vstack(horizontal)
 
 
-def show_video(video: Optional[Union[Tuple[str, str], List[str]]] = None,
-               frame_width: Optional[int] = None,
-               frame_height: Optional[int] = None) -> None:
+def show_video(video: tuple[str, str] | list[str] | None = None,
+               frame_width: int | None = None,
+               frame_height: int | None = None) -> None:
     video_path, video_title = video if video is not None else (0, 'Video')
 
     cap = cv2.VideoCapture(video_path)

@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
 """
 Created on Mon Apr 18 23:04:30 2016
 
 @author: utkarsh
 """
-
-
 # RIDGESEGMENT - Normalises fingerprint image and segments ridge region
 #
 # Function identifies ridge regions of a fingerprint image and returns a
@@ -39,15 +36,13 @@ Created on Mon Apr 18 23:04:30 2016
 #   [normim, mask, maskind] = ridgesegment(im, 16, 0.1)
 #
 # See also: RIDGEORIENT, RIDGEFREQ, RIDGEFILTER
-
 # REFERENCES
-
 # Peter Kovesi
 # School of Computer Science & Software Engineering
 # The University of Western Australia
 # pk at csse uwa edu au
 # http://www.csse.uwa.edu.au/~pk
-
+from __future__ import annotations
 
 import numpy as np
 
@@ -86,4 +81,4 @@ def ridge_segment(im, blksze, thresh):
 
     normim = (im - mean_val) / (std_val)
 
-    return(normim, mask)
+    return (normim, mask)

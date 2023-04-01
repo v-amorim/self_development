@@ -1,5 +1,8 @@
-import pytesseract
+from __future__ import annotations
+
 import re
+
+import pytesseract
 
 
 def error_check(formatted_code):
@@ -37,7 +40,7 @@ def error_check(formatted_code):
                 fixed_code[i] = '5'
             if fixed_code[i] == 'O':
                 fixed_code[i] = '0'
-    fixed_code = "".join(fixed_code)
+    fixed_code = ''.join(fixed_code)
     # if n > 11:
     #     # Remove o último caractere se > 11
     #     fixed_code = fixed_code[:-1]
@@ -51,19 +54,19 @@ def reformat_code(original_code):
     if n <= 20:
         formatted_code = original_code[:n - 1]
         # Remove espaços
-        formatted_code = formatted_code.replace(" ", "")
+        formatted_code = formatted_code.replace(' ', '')
         # Remove espaços
-        formatted_code = formatted_code.replace("\n", "")
+        formatted_code = formatted_code.replace('\n', '')
 
     return formatted_code
 
 
 def build_tesseract_options():
     # Tesseract fazer OCR apenas em caracteres alphanumericos
-    alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    options = "--psm 6" + " --oem 3"
-    options += f" -c tessedit_char_whitelist={alphanumeric}"
-    options += " load_freq_dawg=false load_system_dawg=false"
+    alphanumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    options = '--psm 6' + ' --oem 3'
+    options += f' -c tessedit_char_whitelist={alphanumeric}'
+    options += ' load_freq_dawg=false load_system_dawg=false'
 
     return options
 

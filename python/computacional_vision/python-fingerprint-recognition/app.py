@@ -1,11 +1,15 @@
-import cv2
+from __future__ import annotations
+
 import itertools
 import os
 import sys
-import numpy
+
+import cv2
 import matplotlib.pyplot as plt
+import numpy
 from enhance import image_enhance
-from skimage.morphology import skeletonize, thin
+from skimage.morphology import skeletonize
+from skimage.morphology import thin
 
 # os.chdir("../app/")
 
@@ -61,7 +65,8 @@ def get_descriptors(img):
     # Extract keypoints
     keypoints = []
     for x in range(harris_normalized.shape[0]):
-        keypoints.extend(cv2.KeyPoint(y, x, 1) for y in range(harris_normalized.shape[1]) if harris_normalized[x][y] > threshold_harris)
+        keypoints.extend(cv2.KeyPoint(y, x, 1)
+                         for y in range(harris_normalized.shape[1]) if harris_normalized[x][y] > threshold_harris)
 
     # Define descriptor
     orb = cv2.ORB_create()
@@ -72,11 +77,11 @@ def get_descriptors(img):
 
 def main():
     image_name = sys.argv[1]
-    img1 = cv2.imread(f"database/{image_name}", cv2.IMREAD_GRAYSCALE)
+    img1 = cv2.imread(f'database/{image_name}', cv2.IMREAD_GRAYSCALE)
     kp1, des1 = get_descriptors(img1)
 
     image_name = sys.argv[2]
-    img2 = cv2.imread(f"database/{image_name}", cv2.IMREAD_GRAYSCALE)
+    img2 = cv2.imread(f'database/{image_name}', cv2.IMREAD_GRAYSCALE)
     kp2, des2 = get_descriptors(img2)
 
     # Matching between descriptors
@@ -97,15 +102,15 @@ def main():
     score = sum(match.distance for match in matches)
     score_threshold = 33
     if score / len(matches) < score_threshold:
-        plt.title("Acesso liberado\nDigitais batem")
-        print("Acesso liberado\nDigitais batem")
+        plt.title('Acesso liberado\nDigitais batem')
+        print('Acesso liberado\nDigitais batem')
     else:
-        plt.title("Acesso negado\nDigitais não batem")
-        print("Acesso negado\nDigitais não batem")
+        plt.title('Acesso negado\nDigitais não batem')
+        print('Acesso negado\nDigitais não batem')
     plt.show()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     try:
         main()
     except:

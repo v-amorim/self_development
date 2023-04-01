@@ -77,7 +77,7 @@ vec4 hook() {
 	vec4 g = L_tex(HOOKED_pos + vec2(dp.x, -dp.y));
 	vec4 h = L_tex(HOOKED_pos + vec2(dp.x, 0));
 	vec4 i = L_tex(HOOKED_pos + vec2(dp.x, dp.y));
-	
+
 	vec4 na = -min(a, 0);
 	vec4 nb = -min(b, 0);
 	vec4 nc = -min(c, 0);
@@ -87,7 +87,7 @@ vec4 hook() {
 	vec4 ng = -min(g, 0);
 	vec4 nh = -min(h, 0);
 	vec4 ni = -min(i, 0);
-	
+
 	a = max(a, 0);
 	b = max(b, 0);
 	c = max(c, 0);
@@ -97,7 +97,7 @@ vec4 hook() {
 	g = max(g, 0);
 	h = max(h, 0);
 	i = max(i, 0);
-	
+
 	float s = -0.015687061*a.x + -0.005086804*b.x + -0.08009774*c.x + 0.4036132*d.x + -0.55772984*e.x + -0.2755099*f.x + -0.1277555*g.x + 0.48264486*h.x + -0.039350368*i.x;
 	float t = -0.1956287*a.y + 0.24631155*b.y + -0.1362055*c.y + -0.017237768*d.y + -0.31328484*e.y + 0.32078618*f.y + 0.17252642*g.y + 1.288781*h.y + 0.6368975*i.y;
 	float u = 0.02843324*a.z + -0.18332094*b.z + 0.049802452*c.z + -0.010743182*d.z + 0.17832276*e.z + -0.2522149*f.z + -0.099589445*g.z + 0.37256712*h.z + -0.28898144*i.z;
@@ -159,7 +159,7 @@ vec4 hook() {
 	vec4 g = L_tex(HOOKED_pos + vec2(dp.x, -dp.y));
 	vec4 h = L_tex(HOOKED_pos + vec2(dp.x, 0));
 	vec4 i = L_tex(HOOKED_pos + vec2(dp.x, dp.y));
-	
+
 	vec4 na = -min(a, 0);
 	vec4 nb = -min(b, 0);
 	vec4 nc = -min(c, 0);
@@ -169,7 +169,7 @@ vec4 hook() {
 	vec4 ng = -min(g, 0);
 	vec4 nh = -min(h, 0);
 	vec4 ni = -min(i, 0);
-	
+
 	a = max(a, 0);
 	b = max(b, 0);
 	c = max(c, 0);
@@ -216,7 +216,7 @@ vec4 hook() {
 	y = 0.012663191*na.z + -0.116386354*nb.z + -0.09403862*nc.z + 0.3583474*nd.z + -0.67109364*ne.z + 1.4337319*nf.z + -0.04739808*ng.z + 0.053359438*nh.z + -0.24203655*ni.z;
 	z = -0.24584045*na.w + 0.21607958*nb.w + 0.61612964*nc.w + 0.15417401*nd.w + 0.39434698*ne.w + 0.91960156*nf.w + -0.32311833*ng.w + -0.040789135*nh.w + 0.25973907*ni.w;
 	float r = s+t+u+v+w+x+y+z+-0.08489115;
-		
+
 	return vec4(o, p, q, r);
 }
 
@@ -241,7 +241,7 @@ vec4 hook() {
 	vec4 g = L_tex(HOOKED_pos + vec2(dp.x, -dp.y));
 	vec4 h = L_tex(HOOKED_pos + vec2(dp.x, 0));
 	vec4 i = L_tex(HOOKED_pos + vec2(dp.x, dp.y));
-	
+
 	vec4 na = -min(a, 0);
 	vec4 nb = -min(b, 0);
 	vec4 nc = -min(c, 0);
@@ -251,7 +251,7 @@ vec4 hook() {
 	vec4 ng = -min(g, 0);
 	vec4 nh = -min(h, 0);
 	vec4 ni = -min(i, 0);
-	
+
 	a = max(a, 0);
 	b = max(b, 0);
 	c = max(c, 0);
@@ -298,7 +298,7 @@ vec4 hook() {
 	y = 0.18448246*na.z + 0.23644273*nb.z + 0.1740395*nc.z + 0.056280363*nd.z + 0.321761*ne.z + 0.3599845*nf.z + 0.049847838*ng.z + 0.12761155*nh.z + 0.25527006*ni.z;
 	z = -0.40113544*na.w + -0.5755716*nb.w + -0.45964563*nc.w + -0.47008777*nd.w + -0.5389698*ne.w + 0.04141921*nf.w + -0.35219887*ng.w + -0.5849454*nh.w + -0.5195555*ni.w;
 	float r = s+t+u+v+w+x+y+z+0.04324416;
-		
+
 	return vec4(o, p, q, r);
 }
 
@@ -323,7 +323,7 @@ vec4 hook() {
 	vec4 g = L_tex(HOOKED_pos + vec2(dp.x, -dp.y));
 	vec4 h = L_tex(HOOKED_pos + vec2(dp.x, 0));
 	vec4 i = L_tex(HOOKED_pos + vec2(dp.x, dp.y));
-	
+
 	vec4 na = -min(a, 0);
 	vec4 nb = -min(b, 0);
 	vec4 nc = -min(c, 0);
@@ -333,7 +333,7 @@ vec4 hook() {
 	vec4 ng = -min(g, 0);
 	vec4 nh = -min(h, 0);
 	vec4 ni = -min(i, 0);
-	
+
 	a = max(a, 0);
 	b = max(b, 0);
 	c = max(c, 0);
@@ -343,7 +343,7 @@ vec4 hook() {
 	g = max(g, 0);
 	h = max(h, 0);
 	i = max(i, 0);
-	
+
 	float s = -0.11336011*a.x + -0.5546093*b.x + -0.1980563*c.x + -0.09243965*d.x + -0.30328315*e.x + 0.002288521*f.x + -0.1719883*g.x + -0.25393653*h.x + -0.106638394*i.x;
 	float t = 0.060408574*a.y + -0.4343821*b.y + -0.09417895*c.y + 0.04474836*d.y + 0.66423136*e.y + -0.16684487*f.y + -0.046044365*g.y + 0.1707526*h.y + 0.13041699*i.y;
 	float u = -0.062083997*a.z + 0.036378354*b.z + -0.053244796*c.z + -0.07462912*d.z + 0.009707783*e.z + -0.007606468*f.z + -0.14536221*g.z + 0.12193374*h.z + 0.08321257*i.z;
@@ -380,7 +380,7 @@ vec4 hook() {
 	y = 0.006600475*na.z + -0.00840068*nb.z + 0.0028671592*nc.z + -0.14595534*nd.z + 0.20311914*ne.z + -0.023778193*nf.z + -0.05664581*ng.z + 0.09111506*nh.z + -0.051484156*ni.z;
 	z = 0.07922705*na.w + -0.011248128*nb.w + 0.011819444*nc.w + -0.11729043*nd.w + -0.28706518*ne.w + 0.07792864*nf.w + -0.013736298*ng.w + -0.15252969*nh.w + 0.0014625692*ni.w;
 	float r = s+t+u+v+w+x+y+z+-0.017528493;
-		
+
 	return vec4(o, p, q, r);
 }
 //!DESC Anime4K-v3.1-Upscale(x2)+Denoise-CNN(M)-Conv-4x3x3x8
@@ -404,7 +404,7 @@ vec4 hook() {
 	vec4 g = L_tex(HOOKED_pos + vec2(dp.x, -dp.y));
 	vec4 h = L_tex(HOOKED_pos + vec2(dp.x, 0));
 	vec4 i = L_tex(HOOKED_pos + vec2(dp.x, dp.y));
-	
+
 	vec4 na = -min(a, 0);
 	vec4 nb = -min(b, 0);
 	vec4 nc = -min(c, 0);
@@ -414,7 +414,7 @@ vec4 hook() {
 	vec4 ng = -min(g, 0);
 	vec4 nh = -min(h, 0);
 	vec4 ni = -min(i, 0);
-	
+
 	a = max(a, 0);
 	b = max(b, 0);
 	c = max(c, 0);
@@ -424,7 +424,7 @@ vec4 hook() {
 	g = max(g, 0);
 	h = max(h, 0);
 	i = max(i, 0);
-	
+
 	float s = 0.038567036*a.x + 0.0705653*b.x + -0.08456429*c.x + 0.17830919*d.x + 0.15700413*e.x + -0.48310483*f.x + -0.13568404*g.x + 0.38844487*h.x + -0.24666616*i.x;
 	float t = -0.022864863*a.y + -0.09708212*b.y + 0.080999635*c.y + 0.10234689*d.y + -0.9441054*e.y + 0.37205943*f.y + 0.023142772*g.y + -0.30508518*h.y + 0.23074047*i.y;
 	float u = 0.026479473*a.z + -0.21789004*b.z + 0.16894147*c.z + 0.24001078*d.z + -0.5764876*e.z + 0.37745288*f.z + -0.08588339*g.z + 0.09972613*h.z + 0.09875314*i.z;
@@ -461,7 +461,7 @@ vec4 hook() {
 	y = -0.016964613*na.z + -0.0066489074*nb.z + 0.13551117*nc.z + 0.12154996*nd.z + -0.104811326*ne.z + -0.18939951*nf.z + -0.08372982*ng.z + 0.055679534*nh.z + -0.0070043216*ni.z;
 	z = 0.3667913*na.w + -0.73069835*nb.w + 0.06653495*nc.w + -0.045829143*nd.w + 0.84753215*ne.w + -0.011205747*nf.w + 0.062056217*ng.w + -0.083614476*nh.w + -0.05290749*ni.w;
 	float r = s+t+u+v+w+x+y+z+-0.066139325;
-		
+
 	return vec4(o, p, q, r);
 }
 
@@ -485,13 +485,13 @@ vec4 hook() {
 	vec4 c = LUMAN3_tex(HOOKED_pos);
 	vec4 d = LUMAN4_tex(HOOKED_pos);
 	vec4 e = LUMAN5_tex(HOOKED_pos);
-	
+
 	vec4 na = -min(a, 0);
 	vec4 nb = -min(b, 0);
 	vec4 nc = -min(c, 0);
 	vec4 nd = -min(d, 0);
 	vec4 ne = -min(e, 0);
-	
+
 	a = max(a, 0);
 	b = max(b, 0);
 	c = max(c, 0);

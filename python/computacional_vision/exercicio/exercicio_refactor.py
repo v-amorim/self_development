@@ -1,11 +1,13 @@
 # %%
+from __future__ import annotations
+
+import cv2
+import matplotlib_inline
+import numpy as np
 import pandas as pd
 from IPython.core.interactiveshell import re
-import cv2
-import numpy as np
-from src import ocr
 from matplotlib import pyplot as plt
-import matplotlib_inline
+from src import ocr
 matplotlib_inline.backend_inline.set_matplotlib_formats('svg')
 
 # %%
@@ -44,7 +46,7 @@ def show(img_path, title):
 def display(img, img_name):
     img_path = f'./Resultado/img_{img_name}.png'
     cv2.imwrite(img_path, img)
-    show(img_path, f"Imagem {img_name}")
+    show(img_path, f'Imagem {img_name}')
 
 
 def save_results(img, img_name, img_number):
@@ -53,7 +55,7 @@ def save_results(img, img_name, img_number):
 
 
 # %%
-display(img_inicial, "Inicial")
+display(img_inicial, 'Inicial')
 
 # %%
 scale_percent = 220  # percent of original size
@@ -63,7 +65,7 @@ dim = (width, height)
 
 # resize image
 img_resized = cv2.resize(img_inicial, dim, interpolation=cv2.INTER_LINEAR)
-display(img_resized, "Resized")
+display(img_resized, 'Resized')
 
 # %%
 
@@ -78,7 +80,7 @@ def otsu_threshold(src_img):
 
 # %%
 thresh = otsu_threshold(img_resized)
-display(thresh, "Otsu")
+display(thresh, 'Otsu')
 
 # %%
 
@@ -104,13 +106,13 @@ make_sure_it_bbwt(thresh)
 
 
 def remove_noise(thresh):
-    mask = np.ones(thresh.shape[:2], dtype="uint8") * 255
+    mask = np.ones(thresh.shape[:2], dtype='uint8') * 255
     return cv2.bitwise_and(thresh, thresh, mask=mask)
 
 
 # %%
 img_clean = remove_noise(thresh)
-display(img_clean, "Clean")
+display(img_clean, 'Clean')
 
 
 # %%
@@ -118,32 +120,33 @@ kernel = np.ones((3, 3), np.uint8)
 kernel2 = np.ones((3, 2), np.uint8)
 
 img_erode = cv2.erode(img_clean, kernel, iterations=1)
-display(img_erode, "Erode")
+display(img_erode, 'Erode')
 
 img_dilate = cv2.dilate(img_clean, kernel, iterations=1)
-display(img_dilate, "Dilate")
+display(img_dilate, 'Dilate')
 
 img_opening = cv2.morphologyEx(img_erode, cv2.MORPH_OPEN, kernel2)
-display(img_opening, "Opening")
+display(img_opening, 'Opening')
 
 img_closing = cv2.morphologyEx(img_erode, cv2.MORPH_CLOSE, kernel2)
-display(img_closing, "Closing")
+display(img_closing, 'Closing')
 
 
 # %%
-display(img_resized, "Inicial")
+display(img_resized, 'Inicial')
 img_final = img_opening
-name = "Opening"
+name = 'Opening'
 result = ocr.find_code_in_image(img_final)
 
 if len(result) < 11:
     img_final = img_erode
-    name = "Erode"
+    name = 'Erode'
     result = ocr.find_code_in_image(img_final)
 
-display(img_final, f"Final - {name}")
+display(img_final, f'Final - {name}')
 if len(result) < 13 or len(result) > 12:
-    print("Código cortado ou não lido corretamente (de acordo com o padrão BIC de containers)")  # https://en.wikipedia.org/wiki/ISO_6346
+    # https://en.wikipedia.org/wiki/ISO_6346
+    print('Código cortado ou não lido corretamente (de acordo com o padrão BIC de containers)')
 
 print(result)
 
@@ -155,7 +158,7 @@ df.to_csv('data.csv')
 df
 
 # %%
-save_results(img_resized, "Inicial", img_number)
-save_results(img_final, f"Final - {name}", img_number)
+save_results(img_resized, 'Inicial', img_number)
+save_results(img_final, f'Final - {name}', img_number)
 
 # %%

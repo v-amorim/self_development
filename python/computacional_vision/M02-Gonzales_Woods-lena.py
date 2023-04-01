@@ -1,4 +1,6 @@
 # Importação das bibliotecas
+from __future__ import annotations
+
 import cv2
 from matplotlib import pyplot as plt
 
@@ -18,9 +20,9 @@ x1_plt = fig.add_subplot(1, 3, 1)
 x2_plt = fig.add_subplot(1, 3, 2)
 
 
-x1_plt.set_title("Formato JPG 512x512")
+x1_plt.set_title('Formato JPG 512x512')
 x1_plt.imshow(RGB_im_lena_jpg)
-x2_plt.set_title("Formato PNG")
+x2_plt.set_title('Formato PNG')
 x2_plt.imshow(RGB_im_lena_png)
 
 plt.show()

@@ -35,27 +35,27 @@
 
 vec4 hook() {
 	vec2 d = HOOKED_pt;
-	
+
 	//[tl  t tr]
 	//[ l  c  r]
 	//[bl  b br]
 	float l = L_tex(HOOKED_pos + vec2(-d.x, 0)).x;
 	float c = L_tex(HOOKED_pos).x;
 	float r = L_tex(HOOKED_pos + vec2(d.x, 0)).x;
-	
-	
+
+
 	//Horizontal Gradient
 	//[-1  0  1]
 	//[-2  0  2]
 	//[-1  0  1]
 	float xgrad = (-l + r);
-	
+
 	//Vertical Gradient
 	//[-1 -2 -1]
 	//[ 0  0  0]
 	//[ 1  2  1]
 	float ygrad = (l + c + c + r);
-	
+
 	//Computes the luminance's gradient
 	return vec4(xgrad, ygrad, 0, 0);
 }
@@ -72,32 +72,32 @@ vec4 hook() {
 
 vec4 hook() {
 	vec2 d = HOOKED_pt;
-	
+
 	//[tl  t tr]
 	//[ l cc  r]
 	//[bl  b br]
 	float tx = LUMAD_tex(HOOKED_pos + vec2(0, -d.y)).x;
 	float cx = LUMAD_tex(HOOKED_pos).x;
 	float bx = LUMAD_tex(HOOKED_pos + vec2(0, d.y)).x;
-	
-	
+
+
 	float ty = LUMAD_tex(HOOKED_pos + vec2(0, -d.y)).y;
 	//float cy = LUMAD_tex(HOOKED_pos).y;
 	float by = LUMAD_tex(HOOKED_pos + vec2(0, d.y)).y;
-	
-	
+
+
 	//Horizontal Gradient
 	//[-1  0  1]
 	//[-2  0  2]
 	//[-1  0  1]
 	float xgrad = (tx + cx + cx + bx) / 8;
-	
+
 	//Vertical Gradient
 	//[-1 -2 -1]
 	//[ 0  0  0]
 	//[ 1  2  1]
 	float ygrad = (-ty + by) / 8;
-	
+
 	//Computes the luminance's gradient
 	float norm = sqrt(xgrad * xgrad + ygrad * ygrad);
 	return vec4(pow(norm, 0.7));
@@ -128,7 +128,7 @@ float lumGaussian(vec2 pos, vec2 d) {
 	for (int i=2; i<KERNELSIZE; i++) {
 		g = g + (L_tex(pos - (d * i)).x + L_tex(pos + (d * i)).x) * gaussian(i, SIGMA, 0);
 	}
-	
+
 	return g;
 }
 
@@ -162,7 +162,7 @@ float lumGaussian(vec2 pos, vec2 d) {
 	for (int i=2; i<KERNELSIZE; i++) {
 		g = g + (L_tex(pos - (d * i)).x + L_tex(pos + (d * i)).x) * gaussian(i, SIGMA, 0);
 	}
-	
+
 	return g;
 }
 
@@ -183,27 +183,27 @@ vec4 hook() {
 
 vec4 hook() {
 	vec2 d = HOOKED_pt;
-	
+
 	//[tl  t tr]
 	//[ l  c  r]
 	//[bl  b br]
 	float l = LUMAD_tex(HOOKED_pos + vec2(-d.x, 0)).z;
 	float c = LUMAD_tex(HOOKED_pos).z;
 	float r = LUMAD_tex(HOOKED_pos + vec2(d.x, 0)).z;
-	
-	
+
+
 	//Horizontal Gradient
 	//[-1  0  1]
 	//[-2  0  2]
 	//[-1  0  1]
 	float xgrad = (-l + r);
-	
+
 	//Vertical Gradient
 	//[-1 -2 -1]
 	//[ 0  0  0]
 	//[ 1  2  1]
 	float ygrad = (l + c + c + r);
-	
+
 	//Computes the luminance's gradient
 	return vec4(xgrad, ygrad, 0, 0);
 }
@@ -218,32 +218,32 @@ vec4 hook() {
 
 vec4 hook() {
 	vec2 d = HOOKED_pt;
-	
+
 	//[tl  t tr]
 	//[ l cc  r]
 	//[bl  b br]
 	float tx = LUMAD2_tex(HOOKED_pos + vec2(0, -d.y)).x;
 	float cx = LUMAD2_tex(HOOKED_pos).x;
 	float bx = LUMAD2_tex(HOOKED_pos + vec2(0, d.y)).x;
-	
-	
+
+
 	float ty = LUMAD2_tex(HOOKED_pos + vec2(0, -d.y)).y;
 	//float cy = LUMAD2_tex(HOOKED_pos).y;
 	float by = LUMAD2_tex(HOOKED_pos + vec2(0, d.y)).y;
-	
-	
+
+
 	//Horizontal Gradient
 	//[-1  0  1]
 	//[-2  0  2]
 	//[-1  0  1]
 	float xgrad = (tx + cx + cx + bx) / 8;
-	
+
 	//Vertical Gradient
 	//[-1 -2 -1]
 	//[ 0  0  0]
 	//[ 1  2  1]
 	float ygrad = (-ty + by) / 8;
-	
+
 	//Computes the luminance's gradient
 	return vec4(xgrad, ygrad, 0, 0);
 }
@@ -261,16 +261,16 @@ vec4 hook() {
 
 vec4 hook() {
 	vec2 d = HOOKED_pt;
-	
+
 	float relstr = HOOKED_size.y / 1080 * STRENGTH;
-	
+
 	vec2 pos = HOOKED_pos;
 	for (int i=0; i<ITERATIONS; i++) {
 		vec2 dn = LUMAD2_tex(pos).xy;
 		vec2 dd = (dn / (length(dn) + 0.01)) * d * relstr; //Quasi-normalization for large vectors, avoids divide by zero
 		pos -= dd;
 	}
-	
+
 	return HOOKED_tex(pos);
-	
+
 }

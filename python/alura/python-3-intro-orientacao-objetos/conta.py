@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class Conta:
     def __init__(self, numero, titular, saldo, limite=1000.0):
         self.__numero = numero

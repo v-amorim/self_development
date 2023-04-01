@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class Cliente():
     def __init__(self, nome):
         self.__nome = nome

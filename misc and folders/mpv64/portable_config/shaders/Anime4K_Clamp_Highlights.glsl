@@ -37,13 +37,13 @@ float get_luma(vec4 rgba) {
 vec4 hook() {
 
 	float gmax = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float g = get_luma(MAIN_texOff(vec2(i - KERNELHALFSIZE, 0)));
-		
+
 		gmax = max(g, gmax);
 	}
-	
+
 	return vec4(gmax, 0.0, 0.0, 0.0);
 }
 
@@ -60,13 +60,13 @@ vec4 hook() {
 vec4 hook() {
 
 	float gmax = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float g = STATSMAX_texOff(vec2(0, i - KERNELHALFSIZE)).x;
-		
+
 		gmax = max(g, gmax);
 	}
-	
+
 	return vec4(gmax, 0.0, 0.0, 0.0);
 }
 
@@ -83,8 +83,8 @@ vec4 hook() {
 
 	float current_luma = get_luma(HOOKED_tex(HOOKED_pos));
 	float new_luma = min(current_luma, STATSMAX_tex(HOOKED_pos).x);
-	
+
 	//This trick is only possible if the inverse Y->RGB matrix has 1 for every row... (which is the case for BT.709)
 	//Otherwise we would need to convert RGB to YUV, modify Y then convert back to RGB.
-    return HOOKED_tex(HOOKED_pos) - (current_luma - new_luma); 
+    return HOOKED_tex(HOOKED_pos) - (current_luma - new_luma);
 }

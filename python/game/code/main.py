@@ -1,5 +1,8 @@
-import pygame
+from __future__ import annotations
+
 import sys
+
+import pygame
 import settings as s
 from level import Level
 # from debug import debug
@@ -22,12 +25,12 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-            self.screen.fill("black")
+            self.screen.fill('black')
             self.level.run()
             pygame.display.update()
             self.clock.tick(s.FPS)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     game = Game()
     game.run()

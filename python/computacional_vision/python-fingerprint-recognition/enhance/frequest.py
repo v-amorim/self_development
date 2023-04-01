@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
 """
 Created on Fri Apr 22 02:51:53 2016
 
 @author: utkarsh
 """
-
-
 # FREQEST - Estimate fingerprint ridge frequency within image block
 #
 # Function to estimate the fingerprint ridge frequency within a small block
@@ -33,20 +30,19 @@ Created on Fri Apr 22 02:51:53 2016
 #   freqim = freqest(im,orientim, 5, 5, 15);
 #
 # See also:  RIDGEFREQ, RIDGEORIENT, RIDGESEGMENT
-
 # REFERENCES
-
 # Peter Kovesi
 # School of Computer Science & Software Engineering
 # The University of Western Australia
 # pk at csse uwa edu au
 # http://www.csse.uwa.edu.au/~pk
+from __future__ import annotations
 
+import math
 
 import numpy as np
-import math
 import scipy.ndimage
-#import cv2
+# import cv2
 
 
 def frequest(im, orientim, windsze, minWaveLength, maxWaveLength):
@@ -62,8 +58,8 @@ def frequest(im, orientim, windsze, minWaveLength, maxWaveLength):
 
     # Rotate the image block so that the ridges are vertical
 
-    #ROT_mat = cv2.getRotationMatrix2D((cols/2,rows/2),orient/np.pi*180 + 90,1)
-    #rotim = cv2.warpAffine(im,ROT_mat,(cols,rows))
+    # ROT_mat = cv2.getRotationMatrix2D((cols/2,rows/2),orient/np.pi*180 + 90,1)
+    # rotim = cv2.warpAffine(im,ROT_mat,(cols,rows))
     rotim = scipy.ndimage.rotate(im, orient / np.pi * 180 + 90, axes=(1, 0), reshape=False, order=3, mode='nearest')
 
     # Now crop the image so that the rotated image does not contain any

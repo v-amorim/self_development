@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 
 class Data:
     def __init__(self, dia, mes, ano):

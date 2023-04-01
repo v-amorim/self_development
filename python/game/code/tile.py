@@ -1,8 +1,11 @@
-import pygame
+from __future__ import annotations
+
 import os
+
+import pygame
 import settings as s
 
-ROCK = "Rock.png"
+ROCK = 'Rock.png'
 ROCK_ASSET = os.path.join(s.ASSETS_PATH, ROCK)
 
 

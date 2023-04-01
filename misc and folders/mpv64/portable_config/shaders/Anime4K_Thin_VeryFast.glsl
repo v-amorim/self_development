@@ -49,10 +49,10 @@ vec4 hook() {
 	float l = LINELUMA_texOff(vec2(-0.5, 0.0)).x;
 	float c = LINELUMA_tex(LINELUMA_pos).x;
 	float r = LINELUMA_texOff(vec2(0.5, 0.0)).x;
-	
+
 	float xgrad = (-l + r);
 	float ygrad = (l + c + c + r);
-	
+
 	return vec4(xgrad, ygrad, 0.0, 0.0);
 }
 
@@ -69,14 +69,14 @@ vec4 hook() {
 	float tx = LINESOBEL_texOff(vec2(0.0, -0.25)).x;
 	float cx = LINESOBEL_tex(LINESOBEL_pos).x;
 	float bx = LINESOBEL_texOff(vec2(0.0, 0.25)).x;
-	
+
 	float ty = LINESOBEL_texOff(vec2(0.0, -0.25)).y;
 	float by = LINESOBEL_texOff(vec2(0.0, 0.25)).y;
-	
+
 	float xgrad = (tx + cx + cx + bx) / 8.0;
-	
+
 	float ygrad = (-ty + by) / 8.0;
-	
+
 	//Computes the luminance's gradient
 	float norm = sqrt(xgrad * xgrad + ygrad * ygrad);
 	return vec4(pow(norm, 0.7));
@@ -107,16 +107,16 @@ float comp_gaussian_x() {
 
 	float g = 0.0;
 	float gn = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float di = float(i - KERNELHALFSIZE);
 		float gf = gaussian(di, SPATIAL_SIGMA, 0.0);
-		
+
 		g = g + LINESOBEL_texOff(vec2(di, 0.0)).x * gf;
 		gn = gn + gf;
-		
+
 	}
-	
+
 	return g / gn;
 }
 
@@ -149,16 +149,16 @@ float comp_gaussian_y() {
 
 	float g = 0.0;
 	float gn = 0.0;
-	
+
 	for (int i=0; i<KERNELSIZE; i++) {
 		float di = float(i - KERNELHALFSIZE);
 		float gf = gaussian(di, SPATIAL_SIGMA, 0.0);
-		
+
 		g = g + LINESOBEL_texOff(vec2(0.0, di)).x * gf;
 		gn = gn + gf;
-		
+
 	}
-	
+
 	return g / gn;
 }
 
@@ -178,10 +178,10 @@ vec4 hook() {
 	float l = LINESOBEL_texOff(vec2(-0.25, 0.0)).x;
 	float c = LINESOBEL_tex(LINESOBEL_pos).x;
 	float r = LINESOBEL_texOff(vec2(0.25, 0.0)).x;
-	
+
 	float xgrad = (-l + r);
 	float ygrad = (l + c + c + r);
-	
+
 	return vec4(xgrad, ygrad, 0.0, 0.0);
 }
 
@@ -198,14 +198,14 @@ vec4 hook() {
 	float tx = LINESOBEL_texOff(vec2(0.0, -0.25)).x;
 	float cx = LINESOBEL_tex(LINESOBEL_pos).x;
 	float bx = LINESOBEL_texOff(vec2(0.0, 0.25)).x;
-	
+
 	float ty = LINESOBEL_texOff(vec2(0.0, -0.25)).y;
 	float by = LINESOBEL_texOff(vec2(0.0, 0.25)).y;
-	
+
 	float xgrad = (tx + cx + cx + bx) / 8.0;
-	
+
 	float ygrad = (-ty + by) / 8.0;
-	
+
 	//Computes the luminance's gradient
 	return vec4(xgrad, ygrad, 0.0, 0.0);
 }
@@ -221,16 +221,16 @@ vec4 hook() {
 
 vec4 hook() {
 	vec2 d = HOOKED_pt;
-	
+
 	float relstr = HOOKED_size.y / 1080.0 * STRENGTH;
-	
+
 	vec2 pos = HOOKED_pos;
 	for (int i=0; i<ITERATIONS; i++) {
 		vec2 dn = LINESOBEL_tex(pos).xy;
 		vec2 dd = (dn / (length(dn) + 0.01)) * d * relstr; //Quasi-normalization for large vectors, avoids divide by zero
 		pos -= dd;
 	}
-	
+
 	return HOOKED_tex(pos);
-	
+
 }

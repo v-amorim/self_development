@@ -42,18 +42,18 @@ float gaussian(float x, float s, float m) {
 float lumGaussian(vec2 pos, vec2 d) {
 	float s = SIGMA * HOOKED_size.y / 1080;
 	float kernel_size = s * 2 + 1;
-	
+
 	float g = (L_tex(pos).x) * gaussian(0, s, 0);
 	float gn = gaussian(0, s, 0);
-	
+
 	g += (L_tex(pos - d).x + L_tex(pos + d).x) * gaussian(1, s, 0);
 	gn += gaussian(1, s, 0) * 2;
-	
+
 	for (int i=2; i<kernel_size; i++) {
 		g += (L_tex(pos - (d * i)).x + L_tex(pos + (d * i)).x) * gaussian(i, s, 0);
 		gn += gaussian(i, s, 0) * 2;
 	}
-	
+
 	return g / gn;
 }
 
@@ -81,18 +81,18 @@ float gaussian(float x, float s, float m) {
 float lumGaussian(vec2 pos, vec2 d) {
 	float s = SIGMA * HOOKED_size.y / 1080;
 	float kernel_size = s * 2 + 1;
-	
+
 	float g = (L_tex(pos).x) * gaussian(0, s, 0);
 	float gn = gaussian(0, s, 0);
-	
+
 	g += (L_tex(pos - d).x + L_tex(pos + d).x) * gaussian(1, s, 0);
 	gn += gaussian(1, s, 0) * 2;
-	
+
 	for (int i=2; i<kernel_size; i++) {
 		g += (L_tex(pos - (d * i)).x + L_tex(pos + (d * i)).x) * gaussian(i, s, 0);
 		gn += gaussian(i, s, 0) * 2;
 	}
-	
+
 	return g / gn;
 }
 
@@ -120,18 +120,18 @@ float gaussian(float x, float s, float m) {
 float lumGaussian(vec2 pos, vec2 d) {
 	float s = SIGMA * HOOKED_size.y / 1080;
 	float kernel_size = s * 2 + 1;
-	
+
 	float g = (L_tex(pos).x) * gaussian(0, s, 0);
 	float gn = gaussian(0, s, 0);
-	
+
 	g += (L_tex(pos - d).x + L_tex(pos + d).x) * gaussian(1, s, 0);
 	gn += gaussian(1, s, 0) * 2;
-	
+
 	for (int i=2; i<kernel_size; i++) {
 		g += (L_tex(pos - (d * i)).x + L_tex(pos + (d * i)).x) * gaussian(i, s, 0);
 		gn += gaussian(i, s, 0) * 2;
 	}
-	
+
 	return g / gn;
 }
 
@@ -159,18 +159,18 @@ float gaussian(float x, float s, float m) {
 float lumGaussian(vec2 pos, vec2 d) {
 	float s = SIGMA * HOOKED_size.y / 1080;
 	float kernel_size = s * 2 + 1;
-	
+
 	float g = (L_tex(pos).x) * gaussian(0, s, 0);
 	float gn = gaussian(0, s, 0);
-	
+
 	g += (L_tex(pos - d).x + L_tex(pos + d).x) * gaussian(1, s, 0);
 	gn += gaussian(1, s, 0) * 2;
-	
+
 	for (int i=2; i<kernel_size; i++) {
 		g += (L_tex(pos - (d * i)).x + L_tex(pos + (d * i)).x) * gaussian(i, s, 0);
 		gn += gaussian(i, s, 0) * 2;
 	}
-	
+
 	return g / gn;
 }
 
@@ -190,6 +190,3 @@ vec4 hook() {
 	float c = (MMKERNEL_tex(HOOKED_pos).x) * STRENGTH;
 	return vec4(clamp(c + L_tex(HOOKED_pos).x, 0, L_tex(HOOKED_pos).x), HOOKED_tex(HOOKED_pos).yz, 0);
 }
-
-
-

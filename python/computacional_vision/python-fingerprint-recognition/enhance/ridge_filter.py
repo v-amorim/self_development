@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
 """
 Created on Fri Apr 22 03:15:03 2016
 
 @author: utkarsh
 """
-
+from __future__ import annotations
 
 import itertools
+
+import numpy as np
+import scipy
 # RIDGEFILTER - enhances fingerprint image via oriented filters
 #
 # Function to enhance fingerprint image via oriented filters
@@ -34,23 +36,16 @@ import itertools
 #         newim    - The enhanced image
 #
 # See also: RIDGEORIENT, RIDGEFREQ, RIDGESEGMENT
-
 # Reference:
 # Hong, L., Wan, Y., and Jain, A. K. Fingerprint image enhancement:
 # Algorithm and performance evaluation. IEEE Transactions on Pattern
 # Analysis and Machine Intelligence 20, 8 (1998), 777 789.
-
 # REFERENCES
-
 # Peter Kovesi
 # School of Computer Science & Software Engineering
 # The University of Western Australia
 # pk at csse uwa edu au
 # http://www.csse.uwa.edu.au/~pk
-
-
-import numpy as np
-import scipy
 
 
 def ridge_filter(im, orient, freq, kx, ky):
@@ -69,7 +64,7 @@ def ridge_filter(im, orient, freq, kx, ky):
     # number of distinct frequencies we have to deal with.
 
     non_zero_elems_in_freq = freq_1d[0][ind]
-    non_zero_elems_in_freq = np.double(np.round((non_zero_elems_in_freq * 100))) / 100
+    non_zero_elems_in_freq = np.double(np.round(non_zero_elems_in_freq * 100)) / 100
 
     unfreq = np.unique(non_zero_elems_in_freq)
 
@@ -81,9 +76,10 @@ def ridge_filter(im, orient, freq, kx, ky):
 
     sze = np.round(3 * np.max([sigmax, sigmay]))
 
-    x, y = np.meshgrid(np.linspace(-sze, sze, int((2 * sze + 1))), np.linspace(-sze, sze, int((2 * sze + 1))))
+    x, y = np.meshgrid(np.linspace(-sze, sze, int(2 * sze + 1)), np.linspace(-sze, sze, int(2 * sze + 1)))
 
-    reffilter = np.exp(-(((np.power(x, 2)) / (sigmax * sigmax) + (np.power(y, 2)) / (sigmay * sigmay)))) * np.cos(2 * np.pi * unfreq[0] * x)  # this is the original gabor filter
+    reffilter = np.exp(-((np.power(x, 2)) / (sigmax * sigmax) + (np.power(y, 2)) / (sigmay * sigmay))
+                       ) * np.cos(2 * np.pi * unfreq[0] * x)  # this is the original gabor filter
 
     filt_rows, filt_cols = reffilter.shape
 
@@ -125,9 +121,9 @@ def ridge_filter(im, orient, freq, kx, ky):
     # do the filtering
 
     for i, j in itertools.product(range(rows), range(cols)):
-        if(orientindex[i][j] < 1):
+        if (orientindex[i][j] < 1):
             orientindex[i][j] = orientindex[i][j] + maxorientindex
-        if(orientindex[i][j] > maxorientindex):
+        if (orientindex[i][j] > maxorientindex):
             orientindex[i][j] = orientindex[i][j] - maxorientindex
     finalind_rows, finalind_cols = np.shape(finalind)
     sze = int(sze)
@@ -139,4 +135,4 @@ def ridge_filter(im, orient, freq, kx, ky):
 
         newim[r][c] = np.sum(img_block * gabor_filter[int(orientindex[r][c]) - 1])
 
-    return(newim)
+    return (newim)

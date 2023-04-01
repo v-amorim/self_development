@@ -1,5 +1,7 @@
-from matplotlib import pyplot as plt
+from __future__ import annotations
+
 import cv2
+from matplotlib import pyplot as plt
 
 img = cv2.imread('./content/julius.jpg')
 plt.imshow(img)

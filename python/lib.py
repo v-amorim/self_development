@@ -63,7 +63,7 @@ def show_images(images: np.ndarray | list[np.ndarray | list[str | int]],
         return
 
     if isinstance(images, np.ndarray):
-        show_single_image(images, figsize)
+        show_single_image(images, figsize)  # type: ignore
         return
 
     if not isinstance(images[0], list):

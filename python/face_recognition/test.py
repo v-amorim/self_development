@@ -35,11 +35,11 @@ encodelist = encoding1(images)
 while True:
     ret, frame = cap.read()
     frame1 = cv2.resize(frame, (0, 0), None, 0.25, 0.25)
-    face_locations = face_recognition.face_locations(frame1)
-    curframe_encoding = face_recognition.face_encodings(frame1, face_locations)
+    face_locations = face_recognition.face_locations(frame1)  # type: ignore
+    curframe_encoding = face_recognition.face_encodings(frame1, face_locations)  # type: ignore
     for encodeface, facelocation in zip(curframe_encoding, face_locations):
-        results = face_recognition.compare_faces(encodelist, encodeface)
-        distance = face_recognition.face_distance(encodelist, encodeface)
+        results = face_recognition.compare_faces(encodelist, encodeface)  # type: ignore
+        distance = face_recognition.face_distance(encodelist, encodeface)  # type: ignore
         match_index = np.argmin(distance)
         name = names[match_index]
         x1, y1, x2, y2 = facelocation

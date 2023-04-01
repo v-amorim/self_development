@@ -8,7 +8,7 @@ import pyautogui
 
 first_frame = None
 status_list = [None, None]
-time_list = []
+time_list: list = []
 video = cv2.VideoCapture(0)
 
 while True:

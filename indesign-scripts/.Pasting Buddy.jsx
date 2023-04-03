@@ -8,7 +8,7 @@ dialog.onClose = function() {
     doc.removeEventListener('afterSelectionChanged', selectionChanged)
 }
 
-dialog.add("statictext", undefined, "Last copied text:");
+dialog.add("statictext", undefined, "Next text:");
 
 var textEdit = dialog.add("edittext");
 textEdit.text = "";

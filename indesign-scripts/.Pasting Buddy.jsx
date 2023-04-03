@@ -1,5 +1,6 @@
 #targetengine session
 
+// Kind regards to Yuri Khristich for helping me solve this: https://stackoverflow.com/a/69066444
 var dialog = new Window("palette", "Pasting Buddy", undefined);
 dialog.preferredSize.width = 300;
 dialog.preferredSize.height = 50;

@@ -32,9 +32,6 @@
 *.bbl
 *.blg
 
-# Log created by Adobe Reader
-C:\\nppdf32Log\\debuglog.txt
-
 # Sublime Text Project Files (usually contain absolute paths)
 *.sublime-project
 *.sublime-workspace
@@ -69,3 +66,12 @@ __pycache__/
 
 # Excel
 *.csv
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

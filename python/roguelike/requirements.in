@@ -1,0 +1,6 @@
+autopep8
+flake8
+numpy
+pre-commit
+virtualenv
+tcod

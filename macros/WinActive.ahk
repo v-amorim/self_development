@@ -23,9 +23,9 @@
         BlockInput, Off
     Return
 
-    $!+WheelDown::AutoLeftClicks()
+    $!+WheelDown::SpamLeftClicks()
 
-    $!+WheelUp::AutoLeftClicks()
+    $!+WheelUp::SpamLeftClicks()
 #IfWinActive
 
 #IfWinActive ahk_exe Photoshop.exe
@@ -140,54 +140,19 @@
 #IfWinActive
 
 #IfWinActive ahk_exe Diablo III64.exe
-    $^!LButton::
-        Send, {LButton}{Enter}
-    Return
+    $^!LButton::EnterClick() ; Bind function to Ctrl+Alt+LButton hotkey
 
-    ^LButton::
-        while (GetKeyState("LButton", "P"))
-        {
-            MouseClick, Left
-        }
-    return
+    ^LButton::SpamClick("LButton") ; Bind function to Ctrl+LButton hotkey
 
-    ^RButton::
-        while (GetKeyState("RButton", "P"))
-        {
-            MouseClick, Right
-        }
-    return
+    ^RButton::SpamClick("RButton") ; Bind function to Ctrl+RButton hotkey
 
-    ^XButton2:: ;urshi-gambler https://firzjberg.ru/diablo-3-fast-gamble-salvage-guide/
-        Loop, 2 {
-            Send {Shift down} ;forcestand to avoid movement
-            MouseMove, 270, 545, 0
-            MouseClick, Left
-            Send {Shift up} ;disable forcestand
-            sleep 1500
-        }
-        Send {T}
-        Loop, 3 {
-            Send {Shift down} ;forcestand to avoid movement
-            MouseMove, 270, 545, 0
-            MouseClick, Left
-            Send {Shift up} ;disable forcestand
-            sleep 1500
-        }
-        MouseMove, 900, 500
-    return
+    ^XButton2:: UrshiEnchant() ; Bind function to Ctrl+XButton2 hotkey
 
-    !XButton2:: ;enchant speed
-        MouseGetPos, PosX, PosY
-        MouseMove, 265, 785, 0
-        sleep, 50
-        MouseClick, Left
-        MouseMove, %PosX%, %PosY%
-    return
+    !XButton2:: SpeedEnchant() ; Bind function to Alt+XButton2 hotkey
 
-    $^WheelDown::AutoRightClicks()
+    $^WheelDown::SpamRightClicks() ; Bind function to Ctrl+WheelDown hotkey
 
-    $^WheelUp::AutoRightClicks()
+    $^WheelUp::SpamRightClicks() ; Bind function to Ctrl+WheelUp hotkey
 #IfWinActive
 
 #IfWinActive ahk_exe PathOfExile.exe ; https://github.com/nidark/Poe-Companion/blob/master/PoeCompanion.ahk
@@ -204,12 +169,12 @@
     $XButton1::SpamPots()
 
     $!WheelUp::Send {Left}
-    $^WheelUp::AutoLeftClicks()
-    $+WheelUp::AutoLeftClicks()
+    $^WheelUp::SpamLeftClicks()
+    $+WheelUp::SpamLeftClicks()
 
     $!WheelDown::Send {Right}
-    $^WheelDown::AutoLeftClicks()
-    $+WheelDown::AutoLeftClicks()
+    $^WheelDown::SpamLeftClicks()
+    $+WheelDown::SpamLeftClicks()
 #IfWinActive
 
 #IfWinActive ahk_exe opera.exe
@@ -254,18 +219,65 @@
     Return
 #IfWinActive
 
-AutoLeftClicks(){
+; Function to spam Left clicks
+SpamLeftClicks(){
     BlockInput On
     Send {Blind}{LButton down}{LButton up}
     BlockInput Off
 }
 
-AutoRightClicks(){
+; Function to spam right clicks
+SpamRightClicks(){
     BlockInput On
     Send {Blind}{RButton down}{RButton up}
     BlockInput Off
 }
 
+; Function to press LButton and Enter
+EnterClick(){
+    Send, {LButton}{Enter}
+}
+
+; Function to spam the key while holding
+SpamClick(key) {
+    while (GetKeyState(key, "P")) {
+        if (key = "LButton") {
+            MouseClick, Left
+        } else if (key = "RButton") {
+            MouseClick, Right
+        } else {
+            return ; Exit function if invalid key is provided
+        }
+    }
+}
+
+; Function to enchant on Mystic faster
+SpeedEnchant() {
+    MouseGetPos, PosX, PosY ; Save current mouse position
+    MouseMove, 265, 785, 0 ; Move mouse to the Enchant button location
+    Sleep, 50
+    MouseClick, Left
+    MouseMove, %PosX%, %PosY% ; Move mouse back to the original position
+}
+
+; Function to perform the Urshi Enchants
+UrshiEnchant() {
+    EnchantLoop(2) ; Perform two enchant loops for the first two enchants
+    Send {T} ; Start returning to town
+    EnchantLoop(3) ; Perform three enchant loops for the last three enchants
+    MouseMove, 900, 500 ; Move mouse to the middle of the screen
+}
+
+; Helper function to perform a single Enchant loop
+EnchantLoop(n) {
+    Loop, %n% {
+        MouseMove, 270, 545, 0 ; Move mouse to the enchant button location
+        MouseClick, Left
+        Sleep 1500
+    }
+}
+
+; Function to spam pots one at the time
 SpamPots(){
     BlockInput On
 
@@ -280,6 +292,7 @@ SpamPots(){
     Return
 }
 
+; Function to open a Portal Scroll
 GoHome(){
     BlockInput On
 
@@ -302,6 +315,7 @@ GoHome(){
     Return
 }
 
+; Function to generate a random number between min and max
 RandomSleep(min, max){
     Random, r, %min%, %max%
     r:=floor(r/Speed)

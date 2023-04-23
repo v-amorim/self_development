@@ -159,7 +159,6 @@
     return
 
     ^XButton2:: ;urshi-gambler
-        MouseGetPos, PosX, PosY
         Loop, 2 {
             Send {Shift down} ;forcestand to avoid movement
             MouseMove, 270, 545, 0
@@ -175,7 +174,7 @@
             Send {Shift up} ;disable forcestand
             sleep 1500
         }
-        MouseMove, %PosX%, %PosY%
+        MouseMove, 900, 500
     return
 
     !XButton2:: ;enchant speed

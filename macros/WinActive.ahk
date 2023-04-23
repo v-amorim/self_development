@@ -144,6 +144,48 @@
         Send, {LButton}{Enter}
     Return
 
+    ^LButton::
+        while (GetKeyState("LButton", "P"))
+        {
+            MouseClick, Left
+        }
+    return
+
+    ^RButton::
+        while (GetKeyState("RButton", "P"))
+        {
+            MouseClick, Right
+        }
+    return
+
+    ^XButton2:: ;urshi-gambler
+        MouseGetPos, PosX, PosY
+        Loop, 2 {
+            Send {Shift down} ;forcestand to avoid movement
+            MouseMove, 270, 545, 0
+            MouseClick, Left
+            Send {Shift up} ;disable forcestand
+            sleep 1500
+        }
+        Send {T}
+        Loop, 3 {
+            Send {Shift down} ;forcestand to avoid movement
+            MouseMove, 270, 545, 0
+            MouseClick, Left
+            Send {Shift up} ;disable forcestand
+            sleep 1500
+        }
+        MouseMove, %PosX%, %PosY%
+    return
+
+    !XButton2:: ;enchant speed
+        MouseGetPos, PosX, PosY
+        MouseMove, 265, 785, 0
+        sleep, 50
+        MouseClick, Left
+        MouseMove, %PosX%, %PosY%
+    return
+
     $^WheelDown::AutoRightClicks()
 
     $^WheelUp::AutoRightClicks()

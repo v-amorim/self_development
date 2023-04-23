@@ -263,6 +263,7 @@ SpeedEnchant() {
 ; Function to perform the Urshi Enchants
 UrshiEnchant() {
     EnchantLoop(2) ; Perform two enchant loops for the first two enchants
+    Sleep, 50
     Send {T} ; Start returning to town
     EnchantLoop(3) ; Perform three enchant loops for the last three enchants
     MouseMove, 900, 500 ; Move mouse to the middle of the screen
@@ -273,7 +274,7 @@ EnchantLoop(n) {
     Loop, %n% {
         MouseMove, 270, 545, 0 ; Move mouse to the enchant button location
         MouseClick, Left
-        Sleep 1500
+        Sleep 1550
     }
 }
 

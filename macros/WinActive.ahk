@@ -158,7 +158,7 @@
         }
     return
 
-    ^XButton2:: ;urshi-gambler
+    ^XButton2:: ;urshi-gambler https://firzjberg.ru/diablo-3-fast-gamble-salvage-guide/
         Loop, 2 {
             Send {Shift down} ;forcestand to avoid movement
             MouseMove, 270, 545, 0

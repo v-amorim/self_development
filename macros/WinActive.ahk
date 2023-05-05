@@ -1,12 +1,12 @@
 #IfWinActive ahk_exe Illustrator.exe
     $XButton1::
-        Send, {F3}
+        SendInput, {F3}
     Return
 
     $XButton2::
-        Send, !^{Numpad0}
+        SendInput, !^{Numpad0}
         Sleep, 100
-        Send, ^{Tab}
+        SendInput, ^{Tab}
     Return
 #IfWinActive
 
@@ -30,28 +30,28 @@
 
 #IfWinActive ahk_exe Photoshop.exe
     $XButton1::
-        Send, {F10}
+        SendInput, {F10}
     Return
 
     $XButton2::
-        Send, {u}
+        SendInput, {u}
     Return
 
     $MButton::
-        Send, ^{0}
+        SendInput, ^{0}
         Sleep, 333
-        Send, ^{Tab}
+        SendInput, ^{Tab}
     Return
 
     $+WheelUp::
         BlockInput On
-        Send, {LControl down}{Tab}{LControl up}
+        SendInput, {LControl down}{Tab}{LControl up}
         BlockInput Off
     Return
 
     $+WheelDown::
         BlockInput On
-        Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
+        SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput Off
     Return
 #IfWinActive
@@ -60,7 +60,7 @@
     $^Numpad1::
         Sendinput, {Text}%email_tg%
         Sleep, 100
-        Send {Tab}
+        SendInput, {Tab}
         Sleep, 50
         Sendinput, {Text}%password_wf_tg%
     Return
@@ -68,56 +68,56 @@
     $^Numpad2::
         Sendinput, {Text}%email_vd%
         Sleep, 100
-        Send {Tab}
+        SendInput, {Tab}
         Sleep, 50
-        Send, {Text}%password_wf_vd%
+        SendInput, {Text}%password_wf_vd%
     Return
 
     $^Numpad3::
         Sendinput, {Text}%email_gcc%
         Sleep, 100
-        Send {Tab}
+        SendInput, {Tab}
         Sleep, 50
         Sendinput, {Text}%password_wf_gcc%
     Return
 
     $XButton1::
-        Send, {Ctrl down}
+        SendInput, {Ctrl down}
         Sleep, 1
-        Send, {Space down}
+        SendInput, {Space down}
         Sleep, 1
-        Send, {Space up}
-        Send, {Ctrl up}
+        SendInput, {Space up}
+        SendInput, {Ctrl up}
         Sleep, 100
         ; Roll after Bullet Jump
-        Send, {Shift down}
+        SendInput, {Shift down}
         Sleep, 1
-        Send, {Space down}
+        SendInput, {Space down}
         Sleep, 1
-        Send, {Space up}
-        Send, {Shift up}
+        SendInput, {Space up}
+        SendInput, {Shift up}
         Sleep 400
     Return
 
     $!XButton1::
-        Send, {Ctrl down}
+        SendInput, {Ctrl down}
         Sleep, 1
-        Send, {Wheelup down}
+        SendInput, {Wheelup down}
         Sleep, 1
-        Send, {Ctrl up}
+        SendInput, {Ctrl up}
         Sleep 300
     Return
 
     $!XButton2::
-        Send, 5
+        SendInput, 5
         Sleep, 200
-        Send, {Ctrl Down}
+        SendInput, {Ctrl Down}
         Sleep, 200
-        Send, {Space}
+        SendInput, {Space}
         Sleep, 200
-        Send {Ctrl Up}
+        SendInput, {Ctrl Up}
         Sleep, 200
-        Send, 5
+        SendInput, 5
     Return
 #IfWinActive
 
@@ -125,17 +125,17 @@
     $^Numpad1::
         Sendinput, {Text}%username_px_riot%
         Sleep, 100
-        Send {Tab}
+        SendInput, {Tab}
         Sleep, 50
-        Send, {Text}%password_px_riot%
+        SendInput, {Text}%password_px_riot%
     Return
 
     $^Numpad2::
         Sendinput, {Text}%username_mz_riot%
         Sleep, 100
-        Send {Tab}
+        SendInput, {Tab}
         Sleep, 50
-        Send, {Text}%password_mz_riot%
+        SendInput, {Text}%password_mz_riot%
     Return
 #IfWinActive
 
@@ -161,54 +161,55 @@
     Return
 
     $+F11::
-        Send, {LButton}{Enter}
+        SendInput, {LButton}{Enter}
     Return
 
     $MButton::GoHome()
 
     $XButton1::SpamPots()
 
-    $!WheelUp::Send {Left}
+    $!WheelUp::SendInput, {Left}
     $^WheelUp::SpamLeftClicks()
     $+WheelUp::SpamLeftClicks()
 
-    $!WheelDown::Send {Right}
+    $!WheelDown::SendInput, {Right}
     $^WheelDown::SpamLeftClicks()
     $+WheelDown::SpamLeftClicks()
 #IfWinActive
 
 #IfWinActive ahk_exe opera.exe
     SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
-    $!WheelUp:: ; Cicle Up a tab
-        BlockInput, On
-        Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
-        BlockInput, Off
-    Return
 
-    $!WheelDown:: ; Cicle Down a tab
+    $!WheelUp::
         BlockInput, On
-        Send, {LControl down}{Tab}{LControl up}
+        SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput, Off
-    Return
+    return
+
+    $!WheelDown::
+        BlockInput, On
+        SendInput, {LControl down}{Tab}{LControl up}
+        BlockInput, Off
+    return
 
     ~$Alt:: ; Disable Alt
         BlockInput, On
         KeyWait, Alt
         BlockInput, Off
-    Return
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe Code.exe
     SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
     $!WheelUp:: ; Cicle Up a tab
         BlockInput, On
-        Send, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
+        SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput, Off
     Return
 
     $!WheelDown:: ; Cicle Down a tab
         BlockInput, On
-        Send, {LControl down}{Tab}{LControl up}
+        SendInput, {LControl down}{Tab}{LControl up}
         BlockInput, Off
     Return
 
@@ -222,20 +223,20 @@
 ; Function to spam Left clicks
 SpamLeftClicks(){
     BlockInput On
-    Send {Blind}{LButton down}{LButton up}
+    SendInput, {Blind}{LButton down}{LButton up}
     BlockInput Off
 }
 
 ; Function to spam right clicks
 SpamRightClicks(){
     BlockInput On
-    Send {Blind}{RButton down}{RButton up}
+    SendInput, {Blind}{RButton down}{RButton up}
     BlockInput Off
 }
 
 ; Function to press LButton and Enter
 EnterClick(){
-    Send, {LButton}{Enter}
+    SendInput, {LButton}{Enter}
 }
 
 ; Function to spam the key while holding
@@ -264,7 +265,7 @@ SpeedEnchant() {
 UrshiEnchant() {
     EnchantLoop(2) ; Perform two enchant loops for the first two enchants
     Sleep, 50
-    Send {T} ; Start returning to town
+    SendInput, {T} ; Start returning to town
     EnchantLoop(3) ; Perform three enchant loops for the last three enchants
     MouseMove, 900, 500 ; Move mouse to the middle of the screen
 }
@@ -283,7 +284,7 @@ SpamPots(){
     BlockInput On
 
     global Flask
-    Send %Flask%
+    SendInput, %Flask%
     Flask += 1
 
     BlockInput Off
@@ -300,7 +301,7 @@ GoHome(){
     RandomSleep(110, 220)
 
     MouseGetPos xx, yy
-    Send {'}
+    SendInput, {'}
     RandomSleep(50, 70)
 
     MouseMove, 1871, 820, 0
@@ -309,7 +310,7 @@ GoHome(){
     Click Right
     RandomSleep(50, 150)
 
-    Send {'}
+    SendInput, {'}
     MouseMove, xx, yy, 0
 
     BlockInput Off

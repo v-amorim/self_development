@@ -34,6 +34,6 @@ ShowTerminal() {
 
 HideTerminal() {
     WinActivateBottom, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-    Send, !{Tab}
+    SendInput, !{Tab}
     WinHide ahk_class CASCADIA_HOSTING_WINDOW_CLASS
 }

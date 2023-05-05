@@ -5,7 +5,7 @@
 #UseHook
 #WheelUp::
     BlockInput On
-    Send {Volume_Up}
+    SendInput, {Volume_Up}
     toggle_icon = 0
     Gosub, vmeter
     BlockInput Off
@@ -13,7 +13,7 @@ Return
 
 +#WheelUp::
     BlockInput On
-    Send {Volume_Up}{Volume_Down}
+    SendInput, {Volume_Up}{Volume_Down}
     SoundSet, +10
     toggle_icon = 0
     Gosub, vmeter
@@ -22,7 +22,7 @@ Return
 
 #WheelDown::
     BlockInput On
-    Send {Volume_Down}
+    SendInput, {Volume_Down}
     toggle_icon = 0
     Gosub, vmeter
     BlockInput Off
@@ -30,7 +30,7 @@ Return
 
 +#WheelDown::
     BlockInput On
-    Send {Volume_Down}{Volume_Up}
+    SendInput, {Volume_Down}{Volume_Up}
     SoundSet, -10
     toggle_icon = 0
     Gosub, vmeter
@@ -39,7 +39,7 @@ Return
 
 #MButton::
     BlockInput On
-    Send {Volume_Mute}
+    SendInput, {Volume_Mute}
     toggle_icon = 1
     Gosub, vmeter
 Return

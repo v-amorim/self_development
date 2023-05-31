@@ -3,17 +3,20 @@
 // Kind regards to Yuri Khristich for helping me solve this: https://stackoverflow.com/a/69066444
 var dialog = new Window("palette", "Pasting Buddy", undefined);
 dialog.preferredSize.width = 300;
-dialog.preferredSize.height = 50;
+dialog.preferredSize.height = 80;
 dialog.text = "Pasting Buddy";
 dialog.onClose = function() {
     doc.removeEventListener('afterSelectionChanged', selectionChanged)
 }
 
-dialog.add("statictext", undefined, "Next text:");
+dialog.add("statictext", undefined, "Last text:");
+var lastPastedTextEdit = dialog.add("edittext");
+lastPastedTextEdit.characters = 40;
 
-var textEdit = dialog.add("edittext");
-textEdit.text = "";
-textEdit.characters = 40;
+dialog.add("statictext", undefined, "Next text:");
+var nextTextEdit = dialog.add("edittext");
+nextTextEdit.text = "";
+nextTextEdit.characters = 40;
 
 // ACTIONSPANEL
 // ============
@@ -33,8 +36,8 @@ var pauseButton = actionsPanel.add("button", undefined, undefined, {
 pauseButton.text = "Pause";
 pauseButton.onClick = function() {
     pauseState = !pauseState;
-    if (pauseState) textEdit.text = "[PAUSED] " + textEdit.text;
-    if (!pauseState) textEdit.text = textEdit.text.replace(/^\[PAUSED\] /, "");
+    if (pauseState) nextTextEdit.text = "[PAUSED] " + nextTextEdit.text;
+    if (!pauseState) nextTextEdit.text = nextTextEdit.text.replace(/^\[PAUSED\] /, "");
     pauseButton.text = pauseState ? "Resume" : "Pause";
 };
 
@@ -81,12 +84,18 @@ function selectionChanged() {
         if (sel.contents == '' && master_frame.contents != '') {
             app.select(master_frame.paragraphs[0], SelectionOptions.REPLACE_WITH);
             nextText = master_frame.paragraphs[1] ? master_frame.paragraphs[1].contents : "";
-            textEdit.text = nextText;
+            nextTextEdit.text = nextText;
             app.cut();
             app.selection = null;
             sel.texts.everyItem().select();
 
-            formattingState ? app.pasteWithoutFormatting() : app.paste();
+            if (formattingState) {
+                app.pasteWithoutFormatting();
+            } else {
+                app.paste();
+            }
+            lastPastedTextEdit.text = sel.contents;
+
 
             app.selection = null;
 

@@ -9,14 +9,14 @@ dialog.onClose = function() {
     doc.removeEventListener('afterSelectionChanged', selectionChanged)
 }
 
-dialog.add("statictext", undefined, "Last text:");
-var lastPastedTextEdit = dialog.add("edittext");
-lastPastedTextEdit.characters = 40;
+dialog.add("statictext", undefined, "Previous text:");
+var previousPastedTextEdit = dialog.add("edittext");
+previousPastedTextEdit.characters = 40;
 
 dialog.add("statictext", undefined, "Next text:");
-var nextTextEdit = dialog.add("edittext");
-nextTextEdit.text = "";
-nextTextEdit.characters = 40;
+var nextPasteTextEdit = dialog.add("edittext");
+nextPasteTextEdit.text = "";
+nextPasteTextEdit.characters = 40;
 
 // ACTIONSPANEL
 // ============
@@ -36,8 +36,8 @@ var pauseButton = actionsPanel.add("button", undefined, undefined, {
 pauseButton.text = "Pause";
 pauseButton.onClick = function() {
     pauseState = !pauseState;
-    if (pauseState) nextTextEdit.text = "[PAUSED] " + nextTextEdit.text;
-    if (!pauseState) nextTextEdit.text = nextTextEdit.text.replace(/^\[PAUSED\] /, "");
+    if (pauseState) nextPasteTextEdit.text = "[PAUSED] " + nextPasteTextEdit.text;
+    if (!pauseState) nextPasteTextEdit.text = nextPasteTextEdit.text.replace(/^\[PAUSED\] /, "");
     pauseButton.text = pauseState ? "Resume" : "Pause";
 };
 
@@ -84,7 +84,7 @@ function selectionChanged() {
         if (sel.contents == '' && master_frame.contents != '') {
             app.select(master_frame.paragraphs[0], SelectionOptions.REPLACE_WITH);
             nextText = master_frame.paragraphs[1] ? master_frame.paragraphs[1].contents : "";
-            nextTextEdit.text = nextText;
+            nextPasteTextEdit.text = nextText;
             app.cut();
             app.selection = null;
             sel.texts.everyItem().select();
@@ -94,7 +94,7 @@ function selectionChanged() {
             } else {
                 app.paste();
             }
-            lastPastedTextEdit.text = sel.contents;
+            previousPastedTextEdit.text = sel.contents;
 
 
             app.selection = null;

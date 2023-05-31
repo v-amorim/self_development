@@ -177,6 +177,14 @@
     $+WheelDown::SpamLeftClicks()
 #IfWinActive
 
+#IfWinActive ahk_exe dotnet.exe ; TModLoader
+    #^LButton::SpamClick("LButton") ; Bind function to Win+Ctrl+LButton hotkey
+    #+LButton::SpamClick("LButton") ; Bind function to Win+Shift+LButton hotkey
+    #!LButton::SpamClick("LButton") ; Bind function to Win+Alt+LButton hotkey
+
+    ^RButton::SpamClick("RButton") ; Bind function to Ctrl+RButton hotkey
+#IfWinActive
+
 #IfWinActive ahk_exe opera.exe
     SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
 

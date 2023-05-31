@@ -48,6 +48,15 @@ formattingButton.onClick = function() {
     formattingButton.text = formattingState ? "Paste without formatting" : "Paste with formatting";
 };
 
+var removeEmptyLinesButton = actionsPanel.add("button", undefined, undefined, {
+    name: "removeEmptyLinesButton"
+});
+removeEmptyLinesButton.text = "Remove Empty Lines";
+removeEmptyLinesButton.onClick = function() {
+    removeEmptyLinesFromMasterFrame();
+};
+
+
 var doc = app.activeDocument;
 var master_frame = app.selection[0]; // <-- the Text Script frame
 
@@ -82,12 +91,14 @@ function selectionChanged() {
             app.selection = null;
 
             removeLineBreaks(sel);
+
             sel.parentStory.changeGrep();
         }
 
         if (master_frame.contents == '') alert("No text to paste anymore!")
     }
 }
+
 
 function removeLineBreaks(sel) {
     // remove '\r' at the end
@@ -96,5 +107,18 @@ function removeLineBreaks(sel) {
     sel.changeGrep();
     sel.parentStory.changeGrep();
 }
+
+function removeEmptyLinesFromMasterFrame() {
+    // remove lines with only '\r' from master_frame
+    var paragraphs = master_frame.paragraphs;
+    for (var i = paragraphs.length - 1; i >= 0; i--) {
+        var paragraph = paragraphs[i];
+        if (paragraph.contents == "\r") {
+            paragraph.remove();
+        }
+    }
+}
+
+
 
 init();

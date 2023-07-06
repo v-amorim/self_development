@@ -3,7 +3,7 @@
 ::  To add to Windows Terminal, add a `/k path/to/alias.bat` to the end of the `commandline` property on the [Settings>Profiles>Command Prompt] (Ctrl+,) page.
 
 ::  General shortcuts
-    DOSKEY alias=   echo "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[mkdir],[p],[pe311],[pe38],[pe],[pf],[pm],[pp],[a],[d],[ga],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[gs],[greset]"
+    DOSKEY alias=   echo "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[mkdir],[p],[pe],[pe311],[pe38],[pf],[pm],[pp],[a],[d],[pc],[pci],[pcall],[ptc],[pts],[ga],[gma],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[greset],[gs]"
     DOSKEY -alias=  echo "List all available aliases"
     DOSKEY grep=find /i "$*"                    & DOSKEY -grep=     echo "Search for text within files [find /i <text>]"
     DOSKEY h=DOSKEY /HISTORY                    & DOSKEY -h=        echo "List all used aliases [DOSKEY /HISTORY]"
@@ -27,11 +27,14 @@
     DOSKEY a=.venv\Scripts\activate.bat         & DOSKEY -a=        echo "Activate the virtual environment [.venv\Scripts\activate.bat]"
     DOSKEY d=deactivate                         & DOSKEY -d=        echo "Deactivate the virtual environment [deactivate]"
 
-:: Pre-commit shortcut
+:: Pre-commit shortcuts
     DOSKEY pc=pre-commit $*                     & DOSKEY -pc=       echo "Run pre-commit hooks [pre-commit <command>]"
     DOSKEY pci=pre-commit install               & DOSKEY -pci=      echo "Install pre-commit hooks [pre-commit install]"
     DOSKEY pcall=pre-commit run --all-files     & DOSKEY -pcall=    echo "Run pre-commit hooks on all files [pre-commit run --all-files]"
 
+:: Pip-tools shortcuts
+    DOSKEY ptc=pip-compile --upgrade --resolver=backtracking   & DOSKEY -ptc=       echo "Run pip-compile on requirements.in [pip-compile --upgrade --resolver=backtracking]"
+    DOSKEY pts=pip-sync                                        & DOSKEY -pts=       echo "Run pip-sync on requirements.txt [pip-sync]"
 
 :: Git shortcuts
     DOSKEY ga=git add $*                        & DOSKEY -ga=       echo "Stage changes for commit [git add <file>]"

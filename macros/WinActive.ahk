@@ -137,6 +137,14 @@
         Sleep, 50
         SendInput, {Text}%password_mz_riot%
     Return
+
+    $^Numpad3::
+        Sendinput, {Text}%username_lmz_riot%
+        Sleep, 100
+        SendInput, {Tab}
+        Sleep, 50
+        SendInput, {Text}%password_lmz_riot%
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe Diablo III64.exe
@@ -200,11 +208,11 @@
         BlockInput, Off
     return
 
-    ~$Alt:: ; Disable Alt
-        BlockInput, On
-        KeyWait, Alt
-        BlockInput, Off
-    return
+; ~$Alt:: ; Disable Alt
+;     BlockInput, On
+;     KeyWait, Alt
+;     BlockInput, Off
+; return
 #IfWinActive
 
 #IfWinActive ahk_exe Code.exe

@@ -147,6 +147,15 @@
     Return
 #IfWinActive
 
+#IfWinActive ahk_exe League of Legends.exe
+    $c::
+        If GetKeyState("c")
+            Send {c Up}
+        Else
+            Send {c Down}
+    Return
+#IfWinActive
+
 #IfWinActive ahk_exe Diablo III64.exe
     $^!LButton::EnterClick() ; Bind function to Ctrl+Alt+LButton hotkey
 
@@ -208,11 +217,11 @@
         BlockInput, Off
     return
 
-; ~$Alt:: ; Disable Alt
-;     BlockInput, On
-;     KeyWait, Alt
-;     BlockInput, Off
-; return
+    ~$Alt:: ; Disable Alt
+        BlockInput, On
+        KeyWait, Alt
+        BlockInput, Off
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe Code.exe

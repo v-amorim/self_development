@@ -22,7 +22,7 @@ ToggleTerminal() {
 }
 
 OpenNewTerminal() {
-    Run wt.exe
+    Run *RunAs wt.exe
     Sleep, 500
     ShowTerminal()
 }

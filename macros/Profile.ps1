@@ -1,5 +1,5 @@
 ##--- General shorcuts
-    function alias  { "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[mkdir],[p],[pe],[pe311],[pe38],[pf],[pm],[pp],[a],[d],[pc],[pci],[pcall],[ptc],[pts],[ga],[gma],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[greset],[gs]" }
+    function alias  { "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[mkdir],[wsls],[p],[pe],[peu],[pe311],[pe38],[pf],[pm],[pp],[a],[d],[pc],[pci],[pcall],[ptc],[pts],[ga],[gma],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[greset],[gs]" }
     function -alias { "List all aliases" }
     function grep   { Select-String -Path $args }   ; function -grep   { "Search for text within files [find /i <text>]" }
     function h      { Get-History }                 ; function -h      { "List all used aliases [DOSKEY /HISTORY]" }
@@ -11,10 +11,12 @@
     function .....  { Set-Location ..\..\..\.. }    ; function -.....  { "Go up four directories [cd ..\..\..\..]" }
     function cls    { Clear-Host }                  ; function -cls    { "Clear the console [cls]" }
     function mkdir  { New-Item -ItemType Directory $args[0] | Set-Location } ; function -mkdir { "Create a new directory and navigate to it [mkdir <directory> && cd <directory>]" }
+    function wsls    { wsl --shutdown }                  ; function -wsls    { "Shutdown the active WSL [wsl --shutdown]" }
 
 ##--- Python shortcuts
     function p      { python $args }                ; function -p      { "Run a Python script [python <script.py>]" }
     function pe     { pyenv $args }                 ; function -pe     { "Manage Python versions [pyenv <command>]" }
+    function peu    { pyenv update }                ; function -peu    { "Update Pyenv version list [pyenv update]" }
     function pe311  { pyenv shell 3.11.2 }          ; function -pe311  { "Activate Python 3.11.2 on the current shell [pyenv shell 3.11.2]" }
     function pe38   { pyenv shell 3.8.10 }          ; function -pe38   { "Activate Python 3.8.10 on the current shell [pyenv shell 3.8.10]" }
     function pf     { python -m pip freeze }        ; function -pf     { "List all installed packages [python -m pip freeze]" }

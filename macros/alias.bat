@@ -3,7 +3,7 @@
 ::  To add to Windows Terminal, add a `/k path/to/alias.bat` to the end of the `commandline` property on the [Settings>Profiles>Command Prompt] (Ctrl+,) page.
 
 ::  General shortcuts
-    DOSKEY alias=   echo "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[mkdir],[p],[pe],[pe311],[pe38],[pf],[pm],[pp],[a],[d],[pc],[pci],[pcall],[ptc],[pts],[ga],[gma],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[greset],[gs]"
+    DOSKEY alias=   echo "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[wsls],[p],[pe],[peu],[pe311],[pe38],[pf],[pm],[pp],[a],[d],[pc],[pci],[pcall],[ptc],[pts],[ga],[gma],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[greset],[gs]"
     DOSKEY -alias=  echo "List all available aliases"
     DOSKEY grep=find /i "$*"                    & DOSKEY -grep=     echo "Search for text within files [find /i <text>]"
     DOSKEY h=DOSKEY /HISTORY                    & DOSKEY -h=        echo "List all used aliases [DOSKEY /HISTORY]"
@@ -13,10 +13,12 @@
     DOSKEY ...=cd ..\..                         & DOSKEY -...=      echo "Go up two directories [cd ..\..]"
     DOSKEY ....=cd ..\..\..                     & DOSKEY -....=     echo "Go up three directories [cd ..\..\..]"
     DOSKEY .....=cd ..\..\..\..                 & DOSKEY -.....=    echo "Go up four directories [cd ..\..\..\..]"
-
+    DOSKEY wsls=wsl --shutdown                  & DOSKEY -wsls=     echo "Shutdown the active WSL [wsl --shutdown]"
+    
 :: Python shortcuts
     DOSKEY p=python $*                          & DOSKEY -p=        echo "Run a Python script [python <script.py>]"
     DOSKEY pe=pyenv $*                          & DOSKEY -pe=       echo "Manage Python versions [pyenv <command>]"
+    DOSKEY peu=pyenv update                     & DOSKEY -peu=      echo "Update Pyenv version list [pyenv update]"
     DOSKEY pe311=pyenv shell 3.11.2             & DOSKEY -pe311=    echo "Activate Python 3.11.2 on the current shell [pyenv shell 3.11.2]"
     DOSKEY pe38=pyenv shell 3.8.10              & DOSKEY -pe38=     echo "Activate Python 3.8.10 on the current shell [pyenv shell 3.8.10]"
     DOSKEY pf=python -m pip freeze              & DOSKEY -pf=       echo "List all installed packages [python -m pip freeze]"

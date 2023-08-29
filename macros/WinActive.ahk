@@ -1,9 +1,9 @@
 #IfWinActive ahk_exe Illustrator.exe
-    $XButton1::
+    $XButton1:: ; XButton1
         SendInput, {F3}
     Return
 
-    $XButton2::
+    $XButton2:: ; XButton2
         SendInput, !^{Numpad0}
         Sleep, 100
         SendInput, ^{Tab}
@@ -11,45 +11,45 @@
 #IfWinActive
 
 #IfWinActive ahk_exe inDesign.exe
-    $WheelUp::
+    $WheelUp:: ; WheelUp
         BlockInput, On
         SendInput !{PGUP}
         BlockInput, Off
     Return
 
-    $WheelDown::
+    $WheelDown:: ; WheelDown
         BlockInput, On
         SendInput !{PGDN}
         BlockInput, Off
     Return
 
-    $!+WheelDown::SpamLeftClicks()
+    $!+WheelDown::SpamLeftClicks() ; Alt + Shift + WheelDown
 
-    $!+WheelUp::SpamLeftClicks()
+    $!+WheelUp::SpamLeftClicks() ; Alt + Shift + WheelUp
 #IfWinActive
 
 #IfWinActive ahk_exe Photoshop.exe
-    $XButton1::
+    $XButton1:: ; XButton1
         SendInput, {F10}
     Return
 
-    $XButton2::
+    $XButton2:: ; XButton2
         SendInput, {u}
     Return
 
-    $MButton::
+    $MButton:: ; Middle mouse button
         SendInput, ^{0}
         Sleep, 333
         SendInput, ^{Tab}
     Return
 
-    $+WheelUp::
+    $+WheelUp:: ; Shift + WheelUp
         BlockInput On
         SendInput, {LControl down}{Tab}{LControl up}
         BlockInput Off
     Return
 
-    $+WheelDown::
+    $+WheelDown:: ; Shift + WheelDown
         BlockInput On
         SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput Off
@@ -57,7 +57,7 @@
 #IfWinActive
 
 #IfWinActive ahk_exe Warframe.x64.exe
-    $^Numpad1::
+    $^Numpad1:: ; Ctrl + Numpad1
         Sendinput, {Text}%email_tg%
         Sleep, 100
         SendInput, {Tab}
@@ -65,7 +65,7 @@
         Sendinput, {Text}%password_wf_tg%
     Return
 
-    $^Numpad2::
+    $^Numpad2:: ; Ctrl + Numpad2
         Sendinput, {Text}%email_vd%
         Sleep, 100
         SendInput, {Tab}
@@ -73,7 +73,7 @@
         SendInput, {Text}%password_wf_vd%
     Return
 
-    $^Numpad3::
+    $^Numpad3:: ; Ctrl + Numpad3
         Sendinput, {Text}%email_gcc%
         Sleep, 100
         SendInput, {Tab}
@@ -81,7 +81,7 @@
         Sendinput, {Text}%password_wf_gcc%
     Return
 
-    $XButton1::
+    $XButton1:: ; XButton1
         SendInput, {Ctrl down}
         Sleep, 1
         SendInput, {Space down}
@@ -99,7 +99,7 @@
         Sleep 400
     Return
 
-    $!XButton1::
+    $!XButton1:: ; Alt + XButton1
         SendInput, {Ctrl down}
         Sleep, 1
         SendInput, {Wheelup down}
@@ -108,7 +108,7 @@
         Sleep 300
     Return
 
-    $!XButton2::
+    $!XButton2:: ; Alt + XButton2
         SendInput, 5
         Sleep, 200
         SendInput, {Ctrl Down}
@@ -122,7 +122,7 @@
 #IfWinActive
 
 #IfWinActive ahk_exe RiotClientUx.exe
-    $^Numpad1::
+    $^Numpad1:: ; Ctrl + Numpad1
         Sendinput, {Text}%username_px_riot%
         Sleep, 100
         SendInput, {Tab}
@@ -130,7 +130,7 @@
         SendInput, {Text}%password_px_riot%
     Return
 
-    $^Numpad2::
+    $^Numpad2:: ; Ctrl + Numpad2
         Sendinput, {Text}%username_mz_riot%
         Sleep, 100
         SendInput, {Tab}
@@ -138,7 +138,7 @@
         SendInput, {Text}%password_mz_riot%
     Return
 
-    $^Numpad3::
+    $^Numpad3:: ; Ctrl + Numpad3
         Sendinput, {Text}%username_lmz_riot%
         Sleep, 100
         SendInput, {Tab}
@@ -148,7 +148,7 @@
 #IfWinActive
 
 #IfWinActive ahk_exe League of Legends.exe
-    $c::
+    $c:: ; Toggle C (to show range indicators)
         If GetKeyState("c")
             Send {c Up}
         Else
@@ -157,61 +157,61 @@
 #IfWinActive
 
 #IfWinActive ahk_exe Diablo III64.exe
-    $^!LButton::EnterClick() ; Bind function to Ctrl+Alt+LButton hotkey
+    $^!LButton::EnterClick() ; Ctrl+Alt+LButton hotkey
 
-    ^LButton::SpamClick("LButton") ; Bind function to Ctrl+LButton hotkey
+    ^LButton::SpamClick("LButton") ; Ctrl+LButton hotkey
 
-    ^RButton::SpamClick("RButton") ; Bind function to Ctrl+RButton hotkey
+    ^RButton::SpamClick("RButton") ; Ctrl+RButton hotkey
 
-    ^XButton2:: UrshiEnchant() ; Bind function to Ctrl+XButton2 hotkey
+    ^XButton2:: UrshiEnchant() ; Ctrl+XButton2 hotkey
 
-    !XButton2:: SpeedEnchant() ; Bind function to Alt+XButton2 hotkey
+    !XButton2:: SpeedEnchant() ; Alt+XButton2 hotkey
 
-    $^WheelDown::SpamRightClicks() ; Bind function to Ctrl+WheelDown hotkey
+    $^WheelDown::SpamRightClicks() ; Ctrl+WheelDown hotkey
 
-    $^WheelUp::SpamRightClicks() ; Bind function to Ctrl+WheelUp hotkey
+    $^WheelUp::SpamRightClicks() ; Ctrl+WheelUp hotkey
 #IfWinActive
 
 #IfWinActive ahk_exe PathOfExile.exe ; https://github.com/nidark/Poe-Companion/blob/master/PoeCompanion.ahk
-    $^Numpad1::
+    $^Numpad1:: ; Ctrl + Numpad1
         Sendinput, {Text}%password_poe%
     Return
 
-    $+F11::
+    $+F11:: ; Shift + F11
         SendInput, {LButton}{Enter}
     Return
 
-    $MButton::GoHome()
+    $MButton::GoHome() ; Middle mouse button
 
-    $XButton1::SpamPots()
+    $XButton1::SpamPots() ; XButton1
 
-    $!WheelUp::SendInput, {Left}
-    $^WheelUp::SpamLeftClicks()
-    $+WheelUp::SpamLeftClicks()
+    $!WheelUp::SendInput, {Left} ; Alt + WheelUp
+    $^WheelUp::SpamLeftClicks() ; Ctrl + WheelUp
+    $+WheelUp::SpamLeftClicks() ; Shift + WheelUp
 
-    $!WheelDown::SendInput, {Right}
-    $^WheelDown::SpamLeftClicks()
-    $+WheelDown::SpamLeftClicks()
+    $!WheelDown::SendInput, {Right} ; Alt + WheelDown
+    $^WheelDown::SpamLeftClicks() ; Ctrl + WheelDown
+    $+WheelDown::SpamLeftClicks() ; Shift + WheelDown
 #IfWinActive
 
 #IfWinActive ahk_exe dotnet.exe ; TModLoader
-    #^LButton::SpamClick("LButton") ; Bind function to Win+Ctrl+LButton hotkey
-    #+LButton::SpamClick("LButton") ; Bind function to Win+Shift+LButton hotkey
-    #!LButton::SpamClick("LButton") ; Bind function to Win+Alt+LButton hotkey
+    #^LButton::SpamClick("LButton") ; Win + Ctrl + LButton
+    #+LButton::SpamClick("LButton") ; Win + Shift + LButton
+    #!LButton::SpamClick("LButton") ; Win + Alt + LButton
 
-    ^RButton::SpamClick("RButton") ; Bind function to Ctrl+RButton hotkey
+    ^RButton::SpamClick("RButton") ; Ctrl + RButton
 #IfWinActive
 
 #IfWinActive ahk_exe opera.exe
     SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
 
-    $!WheelUp::
+    $!WheelUp:: ; Ctrl + WheelUp
         BlockInput, On
         SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput, Off
     return
 
-    $!WheelDown::
+    $!WheelDown:: ; Ctrl + WheelDown
         BlockInput, On
         SendInput, {LControl down}{Tab}{LControl up}
         BlockInput, Off

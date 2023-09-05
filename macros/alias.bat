@@ -14,7 +14,7 @@
     DOSKEY ....=cd ..\..\..                     & DOSKEY -....=     echo "Go up three directories [cd ..\..\..]"
     DOSKEY .....=cd ..\..\..\..                 & DOSKEY -.....=    echo "Go up four directories [cd ..\..\..\..]"
     DOSKEY wsls=wsl --shutdown                  & DOSKEY -wsls=     echo "Shutdown the active WSL [wsl --shutdown]"
-    
+
 :: Python shortcuts
     DOSKEY p=python $*                          & DOSKEY -p=        echo "Run a Python script [python <script.py>]"
     DOSKEY pe=pyenv $*                          & DOSKEY -pe=       echo "Manage Python versions [pyenv <command>]"
@@ -35,8 +35,8 @@
     DOSKEY pcall=pre-commit run --all-files     & DOSKEY -pcall=    echo "Run pre-commit hooks on all files [pre-commit run --all-files]"
 
 :: Pip-tools shortcuts
-    DOSKEY ptc=pip-compile --upgrade --resolver=backtracking   & DOSKEY -ptc=       echo "Run pip-compile on requirements.in [pip-compile --upgrade --resolver=backtracking]"
-    DOSKEY pts=pip-sync                                        & DOSKEY -pts=       echo "Run pip-sync on requirements.txt [pip-sync]"
+    DOSKEY ptc=python -m piptools compile       & DOSKEY -ptc=      echo "Run pip-compile on requirements.in [python -m piptools compile]"
+    DOSKEY pts=python -m piptools sync          & DOSKEY -pts=      echo "Run pip-sync on requirements.txt [python -m piptools sync]"
 
 :: Git shortcuts
     DOSKEY ga=git add $*                        & DOSKEY -ga=       echo "Stage changes for commit [git add <file>]"

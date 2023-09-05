@@ -33,8 +33,8 @@
     function pcall  { pre-commit run --all-files }  ; function -pcall  { "Run pre-commit hooks on all files [pre-commit run --all-files]" }
 
 ##--- Pip-tools shortcuts
-    function ptc    { pip-compile --upgrade --resolver=backtracking } ; function -ptc     { "Run pip-compile on requirements.in [pip-compile --upgrade --resolver=backtracking]" }
-    function pts    { pip-sync }                                      ; function -pts     { "Run pip-sync on requirements.txt [pip-sync]" }
+    function ptc    { python -m piptools compile }  ; function -ptc    { "Run pip-compile on requirements.in [python -m piptools compile]" }
+    function pts    { python -m piptools sync }     ; function -pts    { "Run pip-sync on requirements.txt [python -m piptools sync]" }
 
 ##--- Git shortcuts
     function ga     { git add $args }               ; function -ga     { "Stage changes for commit [git add <file>]" }

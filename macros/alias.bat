@@ -14,6 +14,7 @@
     DOSKEY ....=cd ..\..\..                     & DOSKEY -....=     echo "Go up three directories [cd ..\..\..]"
     DOSKEY .....=cd ..\..\..\..                 & DOSKEY -.....=    echo "Go up four directories [cd ..\..\..\..]"
     DOSKEY wsls=wsl --shutdown                  & DOSKEY -wsls=     echo "Shutdown the active WSL [wsl --shutdown]"
+    DOSKEY y=yt-dlp $*                          & DOSKEY -y=        echo "Downloads youtube video [yt-dlp <url>]"
 
 :: Python shortcuts
     DOSKEY p=python $*                          & DOSKEY -p=        echo "Run a Python script [python <script.py>]"

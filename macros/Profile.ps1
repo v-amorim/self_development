@@ -10,8 +10,9 @@
     function ....   { Set-Location ..\..\.. }       ; function -....   { "Go up three directories [cd ..\..\..]" }
     function .....  { Set-Location ..\..\..\.. }    ; function -.....  { "Go up four directories [cd ..\..\..\..]" }
     function cls    { Clear-Host }                  ; function -cls    { "Clear the console [cls]" }
-    function mkdir  { New-Item -ItemType Directory $args[0] | Set-Location } ; function -mkdir { "Create a new directory and navigate to it [mkdir <directory> && cd <directory>]" }
-    function wsls    { wsl --shutdown }                  ; function -wsls    { "Shutdown the active WSL [wsl --shutdown]" }
+    function mkdir  { New-Item -ItemType Directory $args[0] | Set-Location }    ; function -mkdir { "Create a new directory and navigate to it [mkdir <directory> && cd <directory>]" }
+    function wsls   { wsl --shutdown }              ; function -wsls   { "Shutdown the active WSL [wsl --shutdown]" }
+    function y      { yt-dlp $args }                ; function -y      { "Downloads youtube video [yt-dlp <url>]" }
 
 ##--- Python shortcuts
     function p      { python $args }                ; function -p      { "Run a Python script [python <script.py>]" }

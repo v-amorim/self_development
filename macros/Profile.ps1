@@ -13,6 +13,7 @@
     function mkdir  { New-Item -ItemType Directory $args[0] | Set-Location }    ; function -mkdir { "Create a new directory and navigate to it [mkdir <directory> && cd <directory>]" }
     function wsls   { wsl --shutdown }              ; function -wsls   { "Shutdown the active WSL [wsl --shutdown]" }
     function y      { yt-dlp $args }                ; function -y      { "Downloads youtube video [yt-dlp <url>]" }
+    function ys      { yt-dlp --sponsorblock-mark all,-filler $args }           ; function -ys      { "Downloads youtube video with SponsorBlock chapters [yt-dlp args <url>]" }
 
 ##--- Python shortcuts
     function p      { python $args }                ; function -p      { "Run a Python script [python <script.py>]" }

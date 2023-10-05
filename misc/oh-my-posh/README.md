@@ -19,7 +19,7 @@
 4. Paste these lines at the start of the file:
 
    ```powershell
-   oh-my-posh init pwsh --config 'C:\Users\Amorim\Documents\GitHub\self-development\misc\oh-my-posh\themes\viniam_bubblesextra.omp.json' | Invoke-Expression
+   oh-my-posh init pwsh --config '~\Amorim\Documents\GitHub\self-development\misc\oh-my-posh\themes\viniam_bubblesextra.omp.json' | Invoke-Expression
    $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
    ```
 

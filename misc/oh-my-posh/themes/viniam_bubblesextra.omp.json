@@ -9,8 +9,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#3EC669",
-          "leading_diamond": "",
-          "trailing_diamond": "",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
           "template": "\ue5ff {{ .Path }}",
           "properties": {
             "style": "folder"
@@ -21,8 +21,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#43CCEA",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
           "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "properties": {
             "branch_max_length": 25,
@@ -42,8 +42,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#E4F34A",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
           "template": "\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
           "properties": {
             "fetch_version": false
@@ -54,8 +54,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#7FD5EA",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
           "template": "\ue626{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
           "properties": {
             "fetch_version": false
@@ -66,8 +66,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#42E66C",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
           "template": "\ue718{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
           "properties": {
             "fetch_version": false
@@ -78,8 +78,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#FF5370",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
           "template": "\ue791{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
           "properties": {
             "fetch_version": false
@@ -90,8 +90,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#FF5370",
-          "leading_diamond": " ",
-          "trailing_diamond": "",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
           "template": "\ue738{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
           "properties": {
             "fetch_version": false
@@ -108,8 +108,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#C792EA",
-          "leading_diamond": " ",
-          "trailing_diamond": " ",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4 ",
           "properties": {
             "time_format": "15:04:05"
           }
@@ -119,8 +119,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#ffffff",
-          "leading_diamond": "",
-          "trailing_diamond": ""
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4"
         }
       ],
       "type": "prompt"
@@ -134,8 +134,8 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#AEA4BF",
-          "leading_diamond": "",
-          "trailing_diamond": " ",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
           "template": "{{ .FormattedMs }}",
           "properties": {
             "style": "austin",
@@ -147,7 +147,7 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#FF5370",
-          "leading_diamond": "",
+          "leading_diamond": "\ue0b6",
           "trailing_diamond": "",
           "template": "{{ .UserName }} \u276f"
         }

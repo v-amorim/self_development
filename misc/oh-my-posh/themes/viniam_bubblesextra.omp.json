@@ -5,16 +5,13 @@
       "alignment": "right",
       "segments": [
         {
-          "type": "path",
+          "type": "text",
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#3EC669",
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
-          "template": "\ue5ff {{ .Path }}",
-          "properties": {
-            "style": "folder"
-          }
+          "template": "{{ .UserName }} \u276f"
         },
         {
           "type": "git",
@@ -143,13 +140,16 @@
           }
         },
         {
-          "type": "text",
+          "type": "path",
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#FF5370",
           "leading_diamond": "\ue0b6",
-          "trailing_diamond": "",
-          "template": "{{ .UserName }} \u276f"
+          "trailing_diamond": "\ue0b4",
+          "template": "\ue5ff {{ .Path }}",
+          "properties": {
+            "style": "folder"
+          }
         }
       ],
       "type": "prompt"

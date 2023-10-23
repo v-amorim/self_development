@@ -11,7 +11,7 @@
           "foreground": "#3EC669",
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
-          "template": "{{ .UserName }} \u276f"
+          "template": "{{ .UserName }}"
         },
         {
           "type": "git",
@@ -146,7 +146,7 @@
           "foreground": "#FF5370",
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
-          "template": "\ue5ff {{ .Path }}",
+          "template": "\ue5ff {{ .Path }} \u276f",
           "properties": {
             "style": "folder"
           }

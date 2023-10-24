@@ -98,6 +98,8 @@
           "type": "upgrade",
           "foreground": "#111111",
           "background": "#FFD664",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
           "style": "plain"
         },
         {

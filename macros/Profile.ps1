@@ -1,7 +1,7 @@
 ##--- General shorcuts
     function alias  { "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[mkdir],[wsls],[p],[pe],[peu],[pe311],[pe38],[pf],[pm],[pp],[a],[d],[pc],[pci],[pcall],[ptc],[pts],[ga],[gma],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[greset],[gs]" }
     function -alias { "List all aliases" }
-    function grep   { findstr $args }               ; function -grep   { "Search for text within files [findstr <text>]" }
+    function grep   { Select-String $args }         ; function -grep   { "Search for text within files [Select-String <text>]" }
     function h      { Get-History }                 ; function -h      { "List all used aliases [DOSKEY /HISTORY]" }
     function ls     { Get-ChildItem $args }         ; function -ls     { "List files and folders in the current directory [DIR <file>]" }
     function s      { Invoke-Item . }               ; function -s      { "Open File Explorer in the current directory [start .]" }

@@ -5,7 +5,6 @@
 ::  General shortcuts
     DOSKEY alias=   echo "Use -<command> for more description: [alias],[grep],[h],[ls],[s],[..],[...],[....],[.....],[wsls],[p],[pe],[peu],[pe311],[pe38],[pf],[pm],[pp],[a],[d],[pc],[pci],[pcall],[ptc],[pts],[ga],[gma],[gc],[gcl],[gco],[gd],[gf],[gforce],[gl],[glog],[gp],[gr],[greset],[gs]"
     DOSKEY -alias=  echo "List all available aliases"
-    DOSKEY grep=findstr $*                      & DOSKEY -grep=     echo "Search for text within files [findstr <text>]"
     DOSKEY h=DOSKEY /HISTORY                    & DOSKEY -h=        echo "List all used aliases [DOSKEY /HISTORY]"
     DOSKEY ls=DIR $*                            & DOSKEY -ls=       echo "List files and folders in the current directory [DIR <file>]"
     DOSKEY s=start .                            & DOSKEY -s=        echo "Open File Explorer in the current directory [start .]"

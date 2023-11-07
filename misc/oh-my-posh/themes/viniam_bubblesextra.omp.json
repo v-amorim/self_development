@@ -96,11 +96,11 @@
         },
         {
           "type": "upgrade",
+          "style": "diamond",
           "foreground": "#111111",
           "background": "#FFD664",
           "leading_diamond": " \ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "style": "plain"
+          "trailing_diamond": "\ue0b4"
         },
         {
           "type": "time",

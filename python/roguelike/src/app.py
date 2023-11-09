@@ -12,7 +12,7 @@ DATA_FOLDER = os.path.join(SCRIPT_DIR, 'data')
 FONT_FILE = os.path.join(DATA_FOLDER, 'dejavu10x10_gs_tc.png')
 
 
-def main() -> None:
+def main_loop() -> None:
     screen_width = 80
     screen_height = 50
     player_x = screen_width // 2
@@ -52,4 +52,4 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    main()
+    main_loop()

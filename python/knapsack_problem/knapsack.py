@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import itertools
 
 
@@ -33,5 +35,5 @@ items = [(2, 10), (3, 7), (4, 13), (5, 17)]
 weight_capacity = 10
 selected_items, total_value = knapsack(items, weight_capacity)
 
-print(f"Itens selecionados: {selected_items}")
-print(f"Valor total: {total_value}")
+print(f'Itens selecionados: {selected_items}')
+print(f'Valor total: {total_value}')

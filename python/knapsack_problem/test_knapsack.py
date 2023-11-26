@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import unittest
+
 from knapsack import knapsack
 
 

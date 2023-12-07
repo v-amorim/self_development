@@ -1,5 +1,5 @@
 # Save all videos here
---paths "D:\Videos\Youtube"
+--paths "S:\Videos\Youtube"
 --output %(title)s.%(ext)s
 
 # Restrict filenames to only ASCII characters, and avoid "&" and spaces in filenames
@@ -27,4 +27,4 @@
 --concurrent-fragments 4
 
 # ffmpeg location
---ffmpeg-location "E:\Everything\Resources\Annie_Video_downloader"
+--ffmpeg-location "S:\Everything\Resources\Annie_Video_downloader"

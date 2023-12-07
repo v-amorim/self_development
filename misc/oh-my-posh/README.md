@@ -37,21 +37,13 @@
    curl -s https://ohmyposh.dev/install.sh | sudo bash -s
    ```
 
-2. Create the custom theme:
-
-   ```bash
-   code ~/.poshthemes/viniam_bubblesextra.omp.json
-   ```
-
-3. Paste the contents of `viniam_bubblesextra.omp.json` in the file and save.
-
-4. Go to your `.bashrc` file:
+2. Go to your `.bashrc` file:
 
    ```bash
    code ~/.bashrc
    ```
 
-5. Paste this line at the end:
+3. Paste this line at the end:
 
    ```bash
    eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/self-development/main/misc/oh-my-posh/themes/viniam_bubblesextra.omp.json')"

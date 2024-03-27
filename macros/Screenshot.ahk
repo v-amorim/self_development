@@ -2,7 +2,7 @@
 #NoEnv
 #SingleInstance, Force
 
-^Printscreen:: ScreenPrintScreen()
+; ^Printscreen:: ScreenPrintScreen()
 #Printscreen:: SnipPrintScreen()
 !+F11::
     BlockInput, On

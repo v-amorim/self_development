@@ -16,16 +16,21 @@ IniRead, email_gcc, %env%, Credentials, email_gcc
 IniRead, email_tg, %env%, Credentials, email_tg
 IniRead, email_va, %env%, Credentials, email_va
 IniRead, email_vd, %env%, Credentials, email_vd
-IniRead, password_lmz_riot, %env%, Credentials, password_lmz_riot
-IniRead, password_mz_riot, %env%, Credentials, password_mz_riot
-IniRead, password_poe, %env%, Credentials, password_poe
-IniRead, password_px_riot, %env%, Credentials, password_px_riot
-IniRead, password_wf_gcc, %env%, Credentials, password_wf_gcc
-IniRead, password_wf_tg, %env%, Credentials, password_wf_tg
-IniRead, password_wf_vd, %env%, Credentials, password_wf_vd
-IniRead, username_lmz_riot, %env%, Credentials, username_lmz_riot
-IniRead, username_mz_riot, %env%, Credentials, username_mz_riot
-IniRead, username_px_riot, %env%, Credentials, username_px_riot
+
+IniRead, user_riot_px, %env%, Credentials, user_riot_px
+IniRead, user_riot_mz, %env%, Credentials, user_riot_mz
+IniRead, user_riot_lmz, %env%, Credentials, user_riot_lmz
+
+IniRead, pass_riot_px, %env%, Credentials, pass_riot_px
+IniRead, pass_riot_mz, %env%, Credentials, pass_riot_mz
+IniRead, pass_riot_lmz, %env%, Credentials, pass_riot_lmz
+
+IniRead, pass_poe_va, %env%, Credentials, pass_poe_va
+IniRead, pass_poe_gcc, %env%, Credentials, pass_poe_gcc
+
+IniRead, pass_wf_tg, %env%, Credentials, pass_wf_tg
+IniRead, pass_wf_vd, %env%, Credentials, pass_wf_vd
+IniRead, pass_wf_gcc, %env%, Credentials, pass_wf_gcc
 
 ; Hotstring
 :*:>bot::

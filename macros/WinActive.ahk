@@ -62,7 +62,7 @@
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        Sendinput, {Text}%password_wf_tg%
+        Sendinput, {Text}%pass_wf_tg%
     Return
 
     $^Numpad2:: ; Ctrl + Numpad2
@@ -70,7 +70,7 @@
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        SendInput, {Text}%password_wf_vd%
+        SendInput, {Text}%pass_wf_vd%
     Return
 
     $^Numpad3:: ; Ctrl + Numpad3
@@ -78,7 +78,7 @@
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        Sendinput, {Text}%password_wf_gcc%
+        Sendinput, {Text}%pass_wf_gcc%
     Return
 
     $XButton1:: ; XButton1
@@ -123,32 +123,58 @@
 
 #IfWinActive ahk_exe RiotClientUx.exe
     $^Numpad1:: ; Ctrl + Numpad1
-        Sendinput, {Text}%username_px_riot%
+        Sendinput, {Text}%user_riot_px%
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        SendInput, {Text}%password_px_riot%
+        SendInput, {Text}%pass_riot_px%
     Return
 
     $^Numpad2:: ; Ctrl + Numpad2
-        Sendinput, {Text}%username_mz_riot%
+        Sendinput, {Text}%user_riot_mz%
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        SendInput, {Text}%password_mz_riot%
+        SendInput, {Text}%pass_riot_mz%
     Return
 
     $^Numpad3:: ; Ctrl + Numpad3
-        Sendinput, {Text}%username_lmz_riot%
+        Sendinput, {Text}%user_riot_lmz%
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        SendInput, {Text}%password_lmz_riot%
+        SendInput, {Text}%pass_riot_lmz%
+    Return
+#IfWinActive
+
+#IfWinActive ahk_exe Riot Client.exe
+    $^Numpad1:: ; Ctrl + Numpad1
+        Sendinput, {Text}%user_riot_px%
+        Sleep, 100
+        SendInput, {Tab}
+        Sleep, 50
+        SendInput, {Text}%pass_riot_px%
+    Return
+
+    $^Numpad2:: ; Ctrl + Numpad2
+        Sendinput, {Text}%user_riot_mz%
+        Sleep, 100
+        SendInput, {Tab}
+        Sleep, 50
+        SendInput, {Text}%pass_riot_mz%
+    Return
+
+    $^Numpad3:: ; Ctrl + Numpad3
+        Sendinput, {Text}%user_riot_lmz%
+        Sleep, 100
+        SendInput, {Tab}
+        Sleep, 50
+        SendInput, {Text}%pass_riot_lmz%
     Return
 #IfWinActive
 
 #IfWinActive ahk_exe League of Legends.exe
-    $c:: ; Toggle C (to show range indicators)
+    $+c:: ; Toggle C (to show range indicators)
         If GetKeyState("c")
             Send {c Up}
         Else
@@ -174,16 +200,38 @@
 
 #IfWinActive ahk_exe PathOfExile.exe ; https://github.com/nidark/Poe-Companion/blob/master/PoeCompanion.ahk
     $^Numpad1:: ; Ctrl + Numpad1
-        Sendinput, {Text}%password_poe%
+        Sendinput, {Text}%pass_poe_va%
     Return
 
-    $+F11:: ; Shift + F11
+    $^Numpad4:: ; Ctrl + Shift + Numpad1
+        Sendinput, {Text}%email_va%
+        Sleep, 100
+        SendInput, {Tab}
+        Sleep, 50
+        SendInput, {Text}%pass_poe_va%
+    Return
+
+    $^Numpad2:: ; Ctrl + Numpad2
+        Sendinput, {Text}%pass_poe_gcc%
+    Return
+
+    $^Numpad5:: ; Ctrl + Shift + Numpad2
+        Sendinput, {Text}%email_gcc%
+        Sleep, 100
+        SendInput, {Tab}
+        Sleep, 50
+        SendInput, {Text}%pass_poe_gcc%
+    Return
+
+    $+F11:: ; Shift + F11 ("DPI UP" button)
         SendInput, {LButton}{Enter}
     Return
 
-    $MButton::GoHome() ; Middle mouse button
+    ; $MButton::GoHome() ; Middle mouse button
+    $XButton1::GoHome() ; XButton1
 
-    $XButton1::SpamPots() ; XButton1
+    ; $XButton1::SpamPots() ; XButton1
+    $!W::Send, {W down} ; Alt + W
 
     $!WheelUp::SendInput, {Left} ; Alt + WheelUp
     $^WheelUp::SpamLeftClicks() ; Ctrl + WheelUp
@@ -214,6 +262,52 @@
     $!WheelDown:: ; Ctrl + WheelDown
         BlockInput, On
         SendInput, {LControl down}{Tab}{LControl up}
+        BlockInput, Off
+    return
+
+    $+WheelUp:: ; Shift + WheelUp
+        BlockInput, On
+        SendInput, {Up}
+        BlockInput, Off
+    return
+
+    $+WheelDown:: ; Shift + WheelDown
+        BlockInput, On
+        SendInput, {Down}
+        BlockInput, Off
+    return
+
+    ~$Alt:: ; Disable Alt
+        BlockInput, On
+        KeyWait, Alt
+        BlockInput, Off
+    return
+#IfWinActive
+
+#IfWinActive ahk_exe chrome.exe
+    SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
+
+    $!WheelUp:: ; Ctrl + WheelUp
+        BlockInput, On
+        SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
+        BlockInput, Off
+    return
+
+    $!WheelDown:: ; Ctrl + WheelDown
+        BlockInput, On
+        SendInput, {LControl down}{Tab}{LControl up}
+        BlockInput, Off
+    return
+
+    $+WheelUp:: ; Shift + WheelUp
+        BlockInput, On
+        SendInput, {Up}
+        BlockInput, Off
+    return
+
+    $+WheelDown:: ; Shift + WheelDown
+        BlockInput, On
+        SendInput, {Down}
         BlockInput, Off
     return
 

@@ -27,4 +27,4 @@
 --concurrent-fragments 4
 
 # ffmpeg location
---ffmpeg-location "S:\Everything\Resources\Annie_Video_downloader"
+--ffmpeg-location "C:\Program Files (x86)\SVP 4\utils"

@@ -29,6 +29,13 @@
    . $PROFILE
    ```
 
+6. To get the latest versions whenever there's an update, run:
+
+   ```powershell
+      winget upgrade JanDeDobbeleer.OhMyPosh -s winget
+      winget upgrade --all # Or this, to update all
+   ```
+
 ## Linux
 
 1. Install [Oh My Posh](https://ohmyposh.dev/docs/installation/linux):
@@ -47,4 +54,10 @@
 
    ```bash
    eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/self-development/main/misc/oh-my-posh/themes/viniam_bubblesextra.omp.json')"
+   ```
+
+4. To get the latest versions whenever there's an update, run:
+
+   ```bash
+      curl -s https://ohmyposh.dev/install.sh | sudo bash -s
    ```

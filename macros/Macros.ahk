@@ -1,4 +1,6 @@
-﻿#Include Gdip.ahk
+﻿#MaxHotkeysPerInterval 200
+
+#Include Gdip.ahk
 #Include Hotstrings.ahk
 #Include WinActive.ahk
 #Include WindowsTerminal.ahk

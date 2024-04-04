@@ -228,7 +228,7 @@
     Return
 
     ; $MButton::GoHome() ; Middle mouse button
-    $XButton1::GoHome() ; XButton1
+    ; $XButton1::GoHome() ; XButton1
 
     ; $XButton1::SpamPots() ; XButton1
     $!W::Send, {W down} ; Alt + W

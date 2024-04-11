@@ -2,9 +2,10 @@ local utils = require "mp.utils"
 
 local subfolder = "watched"
 local previousFilePath = nil
+local fileMovingEnabled = true
 
 function movePreviousFile()
-    if previousFilePath then
+    if fileMovingEnabled and previousFilePath then
         local thisFolder, _ = utils.split_path(previousFilePath)
         local destFolder = utils.join_path(thisFolder, subfolder)
 
@@ -18,5 +19,12 @@ function recordPreviousFile()
     previousFilePath = mp.get_property("path")
 end
 
+function toggleFileMoving()
+    fileMovingEnabled = not fileMovingEnabled
+    mp.osd_message("File moving " .. (fileMovingEnabled and "enabled" or "disabled"))
+end
+
 mp.register_event("start-file", movePreviousFile)
 mp.register_event("file-loaded", recordPreviousFile)
+
+mp.add_key_binding("F10", "toggle_file_moving", toggleFileMoving)

@@ -1,27 +1,30 @@
-local utils = require "mp.utils"
+-- This script automatically moves the previously played file to a subfolder named "watched" upon loading a new file.
+-- Use `F10` key to toggle automatic file moving on/off with an OSD message.
+
+local utils = require("mp.utils")
 
 local subfolder = "watched"
 local previousFilePath = nil
 local fileMovingEnabled = true
 
 function movePreviousFile()
-    if fileMovingEnabled and previousFilePath then
-        local thisFolder, _ = utils.split_path(previousFilePath)
-        local destFolder = utils.join_path(thisFolder, subfolder)
+	if fileMovingEnabled and previousFilePath then
+		local thisFolder, _ = utils.split_path(previousFilePath)
+		local destFolder = utils.join_path(thisFolder, subfolder)
 
-        local args = {'cmd.exe', '/C', 'md', destFolder ,'&','move', previousFilePath, destFolder}
-        utils.subprocess({args = args, playback_only = false})
-        previousFilePath = nil
-    end
+		local args = { "cmd.exe", "/C", "md", destFolder, "&", "move", previousFilePath, destFolder }
+		utils.subprocess({ args = args, playback_only = false })
+		previousFilePath = nil
+	end
 end
 
 function recordPreviousFile()
-    previousFilePath = mp.get_property("path")
+	previousFilePath = mp.get_property("path")
 end
 
 function toggleFileMoving()
-    fileMovingEnabled = not fileMovingEnabled
-    mp.osd_message("File moving " .. (fileMovingEnabled and "enabled" or "disabled"))
+	fileMovingEnabled = not fileMovingEnabled
+	mp.osd_message("File moving " .. (fileMovingEnabled and "enabled" or "disabled"))
 end
 
 mp.register_event("start-file", movePreviousFile)

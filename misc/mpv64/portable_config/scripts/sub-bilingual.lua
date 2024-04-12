@@ -1,4 +1,3 @@
--- https://github.com/kelciour/mpv-scripts
 -- Usage:
 --    Shift + B - create bilingual subtitles (and automatically select as default subtitles with visibility set to true)
 -- Note:

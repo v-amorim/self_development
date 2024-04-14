@@ -1,37 +1,59 @@
 [
   {
-    "alang": ["jpn", "ja"],
+    "alang": [
+      "jpn",
+      "jap",
+      "ja"
+    ],
     "slang": "eng?",
-    "blacklist": ["sign"]
+    "blacklist": [
+      "sign",
+      "song"
+    ]
   },
   {
-    "alang": ["jpn", "ja"],
-    "slang": "und",
-    "blacklist": ["sign"]
+    "alang": [
+      "eng?",
+      "und"
+    ],
+    "slang": [
+      "eng?",
+      "und"
+    ],
+    "condition": "sub.forced"
   },
   {
-    "alang": "eng?",
-    "slang": ["eng?", "und"],
-    "whitelist": ["sign", "song"]
+    "inherit": "^",
+    "slang": "und"
   },
   {
     "alang": "*",
     "slang": "forced"
   },
   {
-    "alang": ["eng?", "no"],
+    "alang": "eng?",
+    "slang": [
+      "eng?",
+      "und"
+    ],
+    "whitelist": [
+      "sign",
+      "song"
+    ]
+  },
+  {
+    "alang": "eng?",
     "slang": "no"
   },
   {
     "alang": "*",
-    "slang": "eng?"
+    "slang": [
+      "eng?",
+      "und"
+    ]
   },
   {
-    "alang": "*",
-    "slang": "und"
-  },
-  {
-    "alang": "*",
-    "slang": "unk?"
+    "alang": "no",
+    "slang": "no"
   }
 ]

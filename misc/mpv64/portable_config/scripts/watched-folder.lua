@@ -30,4 +30,4 @@ end
 mp.register_event("start-file", movePreviousFile)
 mp.register_event("file-loaded", recordPreviousFile)
 
-mp.add_key_binding("F10", "toggle_file_moving", toggleFileMoving)
+mp.add_key_binding("F10", "toggle-file-moving", toggleFileMoving)

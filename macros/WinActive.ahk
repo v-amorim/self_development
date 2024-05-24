@@ -121,7 +121,7 @@
     Return
 #IfWinActive
 
-#IfWinActive ahk_exe RiotClientUx.exe
+#If (WinActive("ahk_exe RiotClientUx.exe") || WinActive("ahk_exe Riot Client.exe"))
     $^Numpad1:: ; Ctrl + Numpad1
         Sendinput, {Text}%user_riot_px%
         Sleep, 100
@@ -145,42 +145,32 @@
         Sleep, 50
         SendInput, {Text}%pass_riot_lmz%
     Return
-#IfWinActive
 
-#IfWinActive ahk_exe Riot Client.exe
-    $^Numpad1:: ; Ctrl + Numpad1
-        Sendinput, {Text}%user_riot_px%
+    $^Numpad4:: ; Ctrl + Numpad4
+        Sendinput, {Text}%user_riot_4g%
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        SendInput, {Text}%pass_riot_px%
+        SendInput, {Text}%pass_riot_4g%
     Return
 
-    $^Numpad2:: ; Ctrl + Numpad2
-        Sendinput, {Text}%user_riot_mz%
+    $^Numpad5:: ; Ctrl + Numpad5
+        Sendinput, {Text}%user_riot_kt4%
         Sleep, 100
         SendInput, {Tab}
         Sleep, 50
-        SendInput, {Text}%pass_riot_mz%
-    Return
-
-    $^Numpad3:: ; Ctrl + Numpad3
-        Sendinput, {Text}%user_riot_lmz%
-        Sleep, 100
-        SendInput, {Tab}
-        Sleep, 50
-        SendInput, {Text}%pass_riot_lmz%
+        SendInput, {Text}%pass_riot_kt4%
     Return
 #IfWinActive
 
-#IfWinActive ahk_exe League of Legends.exe
-    $+c:: ; Toggle C (to show range indicators)
-        If GetKeyState("c")
-            Send {c Up}
-        Else
-            Send {c Down}
-    Return
-#IfWinActive
+; #IfWinActive ahk_exe League of Legends.exe
+;     $+c:: ; Toggle C (to show range indicators)
+;         If GetKeyState("c")
+;             Send {c Up}
+;         Else
+;             Send {c Down}
+;     Return
+; #IfWinActive
 
 #IfWinActive ahk_exe Diablo III64.exe
     $^!LButton::EnterClick() ; Ctrl+Alt+LButton hotkey
@@ -191,7 +181,7 @@
 
     ^XButton2:: UrshiEnchant() ; Ctrl+XButton2 hotkey
 
-    !XButton2:: SpeedEnchant() ; Alt+XButton2 hotkey
+    ^XButton1:: SpeedEnchant() ; Ctrl+XButton1 hotkey
 
     $^WheelDown::SpamRightClicks() ; Ctrl+WheelDown hotkey
 
@@ -394,7 +384,7 @@ EnchantLoop(n) {
     Loop, %n% {
         MouseMove, 270, 545, 0 ; Move mouse to the enchant button location
         MouseClick, Left
-        Sleep 1550
+        Sleep 1500
     }
 }
 

@@ -9,10 +9,12 @@
     function ....   { Set-Location ..\..\.. }       ; function -....   { "Go up three directories [cd ..\..\..]" }
     function .....  { Set-Location ..\..\..\.. }    ; function -.....  { "Go up four directories [cd ..\..\..\..]" }
     function cls    { Clear-Host }                  ; function -cls    { "Clear the console [cls]" }
-    function mkdir  { New-Item -ItemType Directory $args[0] | Set-Location }    ; function -mkdir { "Create a new directory and navigate to it [mkdir <directory> && cd <directory>]" }
     function wsls   { wsl --shutdown }              ; function -wsls   { "Shutdown the active WSL [wsl --shutdown]" }
-    function y      { yt-dlp $args }                ; function -y      { "Downloads youtube video [yt-dlp <url>]" }
-    function ys      { yt-dlp --sponsorblock-mark all,-filler $args }           ; function -ys      { "Downloads youtube video with SponsorBlock chapters [yt-dlp args <url>]" }
+    function mkdir  { New-Item -ItemType Directory $args[0] | Set-Location }                            ; function -mkdir { "Create a new directory and navigate to it [mkdir <directory> && cd <directory>]" }
+    function uomp   { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }                                ; function -uomp   { "Update Oh My Posh [winget upgrade JanDeDobbeleer.OhMyPosh -s winget]" }
+    function y      { yt-dlp $args }                                                                    ; function -y      { "Downloads youtube video [yt-dlp <url>]" }
+    function ys     { yt-dlp --sponsorblock-mark all,-filler $args }                                    ; function -ys      { "Downloads youtube video with SponsorBlock chapters [yt-dlp args <url>]" }
+    function hist { code $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt } ; function -hist      { "Opens the Powershell command history file [code ConsoleHost_history.txt]" }
 
 ##--- Python shortcuts
     function p      { python $args }                ; function -p      { "Run a Python script [python <script.py>]" }

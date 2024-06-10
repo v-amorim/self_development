@@ -6,6 +6,9 @@ IniRead, telephone_sun, %env%, Infos_Sun, telephone_sun
 IniRead, cpf_sun, %env%, Infos_Sun, cpf_sun
 IniRead, rg_sun, %env%, Infos_Sun, rg_sun
 IniRead, cnpj_sun, %env%, Infos_Sun, cnpj_sun
+IniRead, pix_sun, %env%, Infos_Sun, pix_sun
+IniRead, cep_oregon, %env%, Infos_Sun, cep_oregon
+IniRead, cep_aquarius, %env%, Infos_Sun, cep_aquarius
 
 ; Infos Shine envs
 IniRead, name_shine, %env%, Infos_Shine, name_shine
@@ -95,6 +98,21 @@ Return
 :*:>vcnpj::
     LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}%cnpj_sun%
+Return
+
+:*:>vpix::
+    LTrim(A_ThisHotkey,":oc?*")
+    SendInput,{raw}%pix_sun%
+Return
+
+:*:>coreg::
+    LTrim(A_ThisHotkey,":oc?*")
+    SendInput,{raw}%cep_oregon%
+Return
+
+:*:>caqua::
+    LTrim(A_ThisHotkey,":oc?*")
+    SendInput,{raw}%cep_aquarius%
 Return
 
 ; Info Shine

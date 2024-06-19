@@ -146,3 +146,23 @@ Return
     LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}top com %nickname_shine%
 Return
+
+:*:>wame::
+    LTrim(A_ThisHotkey,":oc?*")
+    SendInput,{raw}https://web.whatsapp.com/send?phone=55
+Return
+
+:*:>code::
+    Clipboard := ClipboardAll
+    StringReplace, Clipboard, Clipboard, `r`n, `n, All ; Remove CRLF (Carriage Return + Line Feed)
+    StringLen, ClipLength, Clipboard
+    LeftMoves := ClipLength + 5
+
+    LTrim(A_ThisHotkey,":oc?*")
+    Send, {U+0060}{U+0060}{U+0060}
+    Send, {Shift down}{Enter}{Shift up}
+    Send, ^v
+    Send, {Shift down}{Enter}{Shift up}
+    Send, {U+0060}{U+0060}{U+0060}
+    SendInput, {Left %LeftMoves%}
+Return

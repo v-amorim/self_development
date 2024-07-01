@@ -15,6 +15,7 @@
     function y      { yt-dlp $args }                                                                    ; function -y      { "Downloads youtube video [yt-dlp <url>]" }
     function ys     { yt-dlp --sponsorblock-mark all,-filler $args }                                    ; function -ys      { "Downloads youtube video with SponsorBlock chapters [yt-dlp args <url>]" }
     function hist { code $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt } ; function -hist      { "Opens the Powershell command history file [code ConsoleHost_history.txt]" }
+    function ctt    { iwr -useb https://christitus.com/win | iex }                                      ; function -ctt      { "Run Chris Titus's Windows Utility [iwr -useb https://christitus.com/win | iex]" }
 
 ##--- Python shortcuts
     function p      { python $args }                ; function -p      { "Run a Python script [python <script.py>]" }

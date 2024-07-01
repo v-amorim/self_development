@@ -149,7 +149,7 @@ Return
 
 :*:>wame::
     LTrim(A_ThisHotkey,":oc?*")
-    SendInput,{raw}https://web.whatsapp.com/send?phone=55
+    SendInput,{raw}wa.me/55
 Return
 
 :*:>code::

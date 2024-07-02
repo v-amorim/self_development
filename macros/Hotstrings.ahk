@@ -48,6 +48,10 @@ IniRead, pass_wf_vd, %env%, Credentials, pass_wf_vd
 IniRead, pass_wf_gcc, %env%, Credentials, pass_wf_gcc
 
 ; Hotstring
+:*:>_::
+    ListHotstrings()
+Return
+
 ; Emails
 :*:>va::
     LTrim(A_ThisHotkey,":oc?*")
@@ -186,7 +190,7 @@ Return
     Sleep, 50
     Clipboard := ClipSaved
     ClipSaved := ""
-return
+Return
 
 ^!c:: ; Surrounds the selected text with 3 backticks
     backticks_char := Chr(96) Chr(96) Chr(96)
@@ -206,4 +210,14 @@ return
     Sleep, 50
     Clipboard := ClipSaved
     ClipSaved := ""
-return
+Return
+
+ListHotstrings() {
+    HotkeyList := "va, vd, tg, gcc, gcg, vnam, vtel, vcpf, vrg, vcnpj, vpix, coreg, caqua, gnam, gtel, gcpf, grg, bot, top, wame, code"
+    Loop {
+        Hotkey := HotkeyList . A_Index . ": " . HotkeyList . A_Index . "`n"
+        if A_Index = 20
+            break
+    }
+    MsgBox, % "List of Hotstrings:`n`n" . HotkeyList
+}

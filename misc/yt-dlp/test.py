@@ -16,7 +16,7 @@ def loop_updater(iterations=11, delay=0.1):
 
             for iteration in range(num_iterations):
                 content = content_provider(iteration, *args, **kwargs)
-                print(f'{CONTROL_SEQUENCES["UP"]}{CONTROL_SEQUENCES["ERASE_LINE"]}{content}')
+                print(f'{CONTROL_SEQUENCES['UP']}{CONTROL_SEQUENCES['ERASE_LINE']}{content}')
                 time.sleep(delay)
 
             print(CONTROL_SEQUENCES['RESET'])  # Reset to the default state after the loop

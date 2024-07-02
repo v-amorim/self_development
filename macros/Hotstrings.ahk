@@ -153,16 +153,57 @@ Return
 Return
 
 :*:>code::
+    backticks_unicode := "{U+0060}{U+0060}{U+0060}"
     Clipboard := ClipboardAll
     StringReplace, Clipboard, Clipboard, `r`n, `n, All ; Remove CRLF (Carriage Return + Line Feed)
     StringLen, ClipLength, Clipboard
     LeftMoves := ClipLength + 5
 
     LTrim(A_ThisHotkey,":oc?*")
-    Send, {U+0060}{U+0060}{U+0060}
+    Send, %backticks_unicode%
     Send, {Shift down}{Enter}{Shift up}
     Send, ^v
     Send, {Shift down}{Enter}{Shift up}
-    Send, {U+0060}{U+0060}{U+0060}
+    Send, %backticks_unicode%
     SendInput, {Left %LeftMoves%}
 Return
+
+!c:: ; Surrounds the selected text with backticks
+    backtick_char := Chr(96)
+
+    ClipSaved := ClipboardAll
+    Clipboard :=
+    Send, ^c
+    ClipWait, 1
+
+    if (Clipboard != "")
+    {
+        Clipboard := backtick_char . Clipboard . backtick_char
+        Sleep, 50
+        Send, ^v
+    }
+
+    Sleep, 50
+    Clipboard := ClipSaved
+    ClipSaved := ""
+return
+
+^!c:: ; Surrounds the selected text with 3 backticks
+    backticks_char := Chr(96) Chr(96) Chr(96)
+
+    ClipSaved := ClipboardAll
+    Clipboard :=
+    Send, ^c
+    ClipWait, 1
+
+    if (Clipboard != "")
+    {
+        Clipboard := backticks_char . Clipboard . backticks_char
+        Sleep, 50
+        Send, ^v
+    }
+
+    Sleep, 50
+    Clipboard := ClipSaved
+    ClipSaved := ""
+return

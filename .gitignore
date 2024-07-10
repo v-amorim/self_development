@@ -58,7 +58,7 @@ __pycache__/
 /python/miui_mindmap_to_md/DOM extractor
 
 # Fonts
-*.ttf
+# *.ttf
 
 # Audio
 *.wav
@@ -81,3 +81,7 @@ venv.bak/
 *.dll
 *.traineddata
 python/set_time.cmd
+*.glsl
+*.hook
+cache/
+misc/mpv64/portable_config/shader/SSimSuperRes Options.txt

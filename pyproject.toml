@@ -38,6 +38,8 @@
         "D212",     # multi-line-summary-first-line     : Multi-line docstring summary should start at the first line
         "E402",	    # module-import-not-at-top-of-file  : Module level import not at top of cell
         "ISC001",   # single-line-implicit-string-concatenation : Implicit string concatenation
+        "PYI024",   # collections-named-tuple           : Checks for uses of collections.namedtuple in stub files.
+        "S603",     # subprocess-without-shell-equals-true : Check for method calls that initiate a subprocess without a shell.
         "T201",     # print statement	                : Checks for print statements
     ]
 

@@ -1,12 +1,12 @@
 # Original Idea from https://gist.github.com/FichteFoll/4488489
 
-import subprocess
-import re
-import os
 import configparser
+import re
+import subprocess
 import tkinter as tk
-from tkinter import filedialog, messagebox
 from collections import namedtuple
+from pathlib import Path
+from tkinter import filedialog, messagebox
 
 
 class ConfigHandler:
@@ -16,14 +16,14 @@ class ConfigHandler:
         self.config = configparser.ConfigParser()
         self.mkvtoolnix_path = ""
 
-        if not os.path.exists(self.CONFIG_FILE):
+        if not Path(self.CONFIG_FILE).exists():
             self._create_config()
         else:
             self._load_config()
 
     def _create_config(self):
         self.config["DEFAULT"] = {"mkvtoolnix_path": ""}
-        with open(self.CONFIG_FILE, "w") as configfile:
+        with Path(self.CONFIG_FILE).open("w") as configfile:
             self.config.write(configfile)
 
     def _load_config(self):
@@ -32,7 +32,7 @@ class ConfigHandler:
 
     def save_config(self, mkvtoolnix_path):
         self.config["DEFAULT"]["mkvtoolnix_path"] = mkvtoolnix_path
-        with open(self.CONFIG_FILE, "w") as configfile:
+        with Path(self.CONFIG_FILE).open("w") as configfile:
             self.config.write(configfile)
         self.mkvtoolnix_path = mkvtoolnix_path
 
@@ -44,17 +44,17 @@ class MKVExtractor:
     def __init__(self, video_path, mkvtoolnix_path):
         self.video_path = video_path
         self.mkvtoolnix_path = mkvtoolnix_path
-        self.output_folder = os.path.splitext(video_path)[0]
+        self.output_folder = Path(video_path).parent / Path(video_path).stem
         self._ensure_output_folder()
         self.container = self._identify_container()
 
     def _ensure_output_folder(self):
-        if not os.path.exists(self.output_folder):
-            os.makedirs(self.output_folder)
+        if not Path(self.output_folder).exists():
+            Path(self.output_folder).mkdir(parents=True)
 
     def _run_mkv(self, tool, *params):
         cmd = (
-            os.path.join(self.mkvtoolnix_path, f"mkv{tool}.exe"),
+            Path(self.mkvtoolnix_path) / f"mkv{tool}.exe",
             "--ui-language",
             "en",
             *params,
@@ -74,20 +74,17 @@ class MKVExtractor:
         Track = namedtuple("Track", "id type codec")
         Attachment = namedtuple("Attachment", "id type size name")
 
-        regexp_track = re.compile(
-            r"^Track ID (?P<id>\d+): (?P<type>\w+) \((?P<codec>[^\)]+)\)$", re.M
-        )
+        regexp_track = re.compile(r"^Track ID (?P<id>\d+): (?P<type>\w+) \((?P<codec>[^\)]+)\)$", re.MULTILINE)
         regexp_attachment = re.compile(
-            r"^Attachment ID (?P<id>\d+): type '(?P<type>[^']+)', size (?P<size>\d+) bytes, file name '(?P<name>[^']+)'$",
-            re.M,
+            r"^Attachment ID (?P<id>\d+): type '(?P<type>[^']+)', "
+            r"size (?P<size>\d+) bytes, file name '(?P<name>[^']+)'$",
+            re.MULTILINE,
         )
 
         def collect(regex, container):
             return [container(*match.groups()) for match in regex.finditer(identify)]
 
-        return MatroskaContainer(
-            collect(regexp_track, Track), collect(regexp_attachment, Attachment)
-        )
+        return MatroskaContainer(collect(regexp_track, Track), collect(regexp_attachment, Attachment))
 
     def extract_attachments(self):
         attachments = self.container.attachments
@@ -104,7 +101,7 @@ class MKVExtractor:
 
     def _should_extract(self, attach):
         def match_extension(name):
-            return re.search("\\.(ttf|otf|ass)$", name, re.I)
+            return re.search("\\.(ttf|otf|ass)$", name, re.IGNORECASE)
 
         extension_matches = match_extension(attach.name)
         type_matches = attach.type in self.attachment_types
@@ -112,17 +109,13 @@ class MKVExtractor:
         if not extension_matches and not type_matches:
             print(f"Skipping '{attach.name}' ({attach.id})...")
             return False
-        if os.path.exists(os.path.join(self.output_folder, attach.name)):
+        if (self.output_folder / attach.name).exists():
             print(f"'{attach.name}' ({attach.id}) already exists, skipping...")
             return False
         if not extension_matches:
-            print(
-                f"Type mismatch but extension of a font; still extracting... ('{attach.name}', {attach.type})"
-            )
+            print(f"Type mismatch but extension of a font; still extracting... ('{attach.name}', {attach.type})")
         if not type_matches:
-            print(
-                f"Extension mismatch but type of a font; still extracting... ('{attach.name}', {attach.type})"
-            )
+            print(f"Extension mismatch but type of a font; still extracting... ('{attach.name}', {attach.type})")
 
         return True
 
@@ -133,7 +126,7 @@ class MKVExtractor:
                     "extract",
                     "attachments",
                     self.video_path,
-                    f"{attach.id}:{os.path.join(self.output_folder, attach.name)}",
+                    f"{attach.id}:{Path(self.output_folder) / attach.name}",
                 )
             )
             print(f"Extracting '{attach.name}'...")
@@ -152,48 +145,39 @@ class MKVExtractorGUI:
         self.label = tk.Label(root, text="Select a Matroska video file:")
         self.label.pack(pady=10)
 
-        self.select_button = tk.Button(
-            root, text="Select File", command=self.select_file
-        )
+        self.select_button = tk.Button(root, text="Select File", command=self.select_file)
         self.select_button.pack(pady=5)
 
-        self.extract_button = tk.Button(
-            root, text="Extract Fonts", command=self.extract_fonts, state=tk.DISABLED
-        )
+        self.extract_button = tk.Button(root, text="Extract Fonts", command=self.extract_fonts, state=tk.DISABLED)
         self.extract_button.pack(pady=5)
 
         self.video_path = ""
 
     def _ensure_mkvtoolnix_path(self):
-        if not self.config_handler.mkvtoolnix_path:
+        if not self.config_handler.mkvtoolnix_path or not self._verify_mkvtoolnix_path(
+            self.config_handler.mkvtoolnix_path
+        ):
             self._prompt_mkvtoolnix_path()
-        else:
-            if not self._verify_mkvtoolnix_path(self.config_handler.mkvtoolnix_path):
-                self._prompt_mkvtoolnix_path()
 
     def _prompt_mkvtoolnix_path(self):
         while True:
             path = filedialog.askdirectory(title="Select MKVToolNix Directory")
+
             if path and self._verify_mkvtoolnix_path(path):
                 self.config_handler.save_config(path)
                 break
-            else:
-                messagebox.showerror(
-                    "Error",
-                    "Invalid MKVToolNix path. Please select the correct directory.",
-                )
+
+            messagebox.showerror(
+                "Error",
+                "Invalid MKVToolNix path. Please select the correct directory.",
+            )
 
     def _verify_mkvtoolnix_path(self, path):
         required_files = ["mkvmerge.exe", "mkvextract.exe"]
-        for file in required_files:
-            if not os.path.isfile(os.path.join(path, file)):
-                return False
-        return True
+        return all((Path(path) / file).is_file() for file in required_files)
 
     def select_file(self):
-        self.video_path = filedialog.askopenfilename(
-            filetypes=[("Matroska Video Files", "*.mkv")]
-        )
+        self.video_path = filedialog.askopenfilename(filetypes=[("Matroska Video Files", "*.mkv")])
         if self.video_path:
             self.extract_button.config(state=tk.NORMAL)
 

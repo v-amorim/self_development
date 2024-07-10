@@ -80,3 +80,4 @@ venv.bak/
 *.exe
 *.dll
 *.traineddata
+python/set_time.cmd

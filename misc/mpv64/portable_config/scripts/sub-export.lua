@@ -42,6 +42,10 @@ function export_selected_subtitles()
 				subtitles_ext = ".ass"
 			end
 
+			if track_codec == "srt" then
+				subtitles_ext = ".srt"
+			end
+
 			if track_lang ~= nil then
 				subtitles_ext = "." .. track_lang .. subtitles_ext
 			end
@@ -87,7 +91,7 @@ function process()
 		mp.commandv("sub-add", subtitles_file)
 		mp.set_property("sub-visibility", "yes")
 	else
-		mp.osd_message("Failed to export subtitles")
+		mp.osd_message("Failed to export subtitles, maybe it is not ASS/SRT")
 	end
 end
 

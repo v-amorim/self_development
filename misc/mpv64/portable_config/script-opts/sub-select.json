@@ -8,6 +8,19 @@
     "slang": "eng?",
     "blacklist": [
       "sign",
+      "song",
+      "forced"
+    ]
+  },
+  {
+    "alang": [
+      "jpn",
+      "jap",
+      "ja"
+    ],
+    "slang": "eng?",
+    "blacklist": [
+      "sign",
       "song"
     ]
   },

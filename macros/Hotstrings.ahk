@@ -151,9 +151,15 @@ Return
     SendInput,{raw}top com %nickname_shine%
 Return
 
+; Miscelaneous
 :*:>wame::
     LTrim(A_ThisHotkey,":oc?*")
     SendInput,{raw}wa.me/55
+Return
+
+:*:>inf::
+    LTrim(A_ThisHotkey,":oc?*")
+    SendInput,{raw}ꝏ
 Return
 
 :*:>code::

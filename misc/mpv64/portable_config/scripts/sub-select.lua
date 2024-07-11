@@ -50,7 +50,7 @@ opt.read_options(o, "sub_select")
 
 local prefs
 
-local ENABLED = o.force_enable or mp.get_property("options/sid", "auto") == "auto"
+local ENABLED = o.force_enable or true
 local latest_audio = {}
 local alang_priority = mp.get_property_native("alang", {})
 local audio_tracks = {}
@@ -248,7 +248,7 @@ local function is_valid_audio(audio, pref)
 					return true
 				end
 			else
-				if audio.lang and audio.lang:find(lang) then
+				if audio.lang and audio.lang:lower():find(lang) then
 					return true
 				end
 			end
@@ -278,7 +278,7 @@ local function is_valid_sub(sub, slang, pref)
 			if sub.forced and o.explicit_forced_subs then
 				return false
 			end
-			if not sub.lang:find(slang) and slang ~= "*" then
+			if not sub.lang:lower():find(slang) and slang ~= "*" then
 				return false
 			end
 		end
@@ -425,11 +425,14 @@ mp.observe_property("track-auto-selection", "bool", function(_, b)
 	track_auto_selection = b
 end)
 
-local function continue_script()
+local function continue_script(initial_file_load)
 	if #sub_tracks < 1 then
 		return false
 	end
 	if not ENABLED then
+		return false
+	end
+	if initial_file_load and mp.get_property("sid") ~= "auto" then
 		return false
 	end
 	if not track_auto_selection then
@@ -468,13 +471,25 @@ local function read_track_list()
 	end
 end
 
+local function reset_track_ids()
+	if not continue_script() then
+		return
+	end
+	mp.set_property("sid", "auto")
+	if o.select_audio then
+		mp.set_property("aid", "auto")
+	end
+end
+
+mp.add_hook("on_unload", 1000, reset_track_ids)
+
 --setup the audio and subtitle track lists when a new file is loaded
 mp.add_hook("on_preloaded", 25, read_track_list)
 
 --events for file loading
 if o.preload then
 	mp.add_hook("on_preloaded", 30, function()
-		if not continue_script() then
+		if not continue_script(true) then
 			return
 		end
 		preload()
@@ -491,7 +506,7 @@ if o.preload then
 	end
 else
 	mp.register_event("file-loaded", function()
-		if not continue_script() then
+		if not continue_script(true) then
 			return
 		end
 		async_load()

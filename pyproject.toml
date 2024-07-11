@@ -20,11 +20,12 @@
     select = ["ALL"]
     ignore = [
         #### Modules
-        "ANN",      # flake8-annotations
-        "C90",      # mccabe
-        "COM",      # flake8-commas
-        "ERA",      # eradicate
+        "INP",      # flake8-no-pep420
         "EXE",      # flake8-executable
+        "ERA",      # eradicate
+        "COM",      # flake8-commas
+        "C90",      # mccabe
+        "ANN",      # flake8-annotations
         #### Rules
         "D100",     # undocumented-public-module        : Missing docstring in public module
         "D101",     # undocumented-public-class         : Missing docstring in public class
@@ -34,12 +35,12 @@
         "D105",     # undocumented-magic-method	        : Missing docstring in magic method
         "D106",     # undocumented-public-nested-class  : Missing docstring in public nested class
         "D107",     # undocumented-public-init          : Missing docstring in __init__
-        "D203",     # one-blank-line-before-class	    : Checks for docstrings on class definitions that are not preceded by a blank line.
+        "D203",     # one-blank-line-before-class	    : Checks for docstrings on class definitions that are not preceded by a blank line
         "D212",     # multi-line-summary-first-line     : Multi-line docstring summary should start at the first line
         "E402",	    # module-import-not-at-top-of-file  : Module level import not at top of cell
         "ISC001",   # single-line-implicit-string-concatenation : Implicit string concatenation
         "PYI024",   # collections-named-tuple           : Checks for uses of collections.namedtuple in stub files.
-        "S603",     # subprocess-without-shell-equals-true : Check for method calls that initiate a subprocess without a shell.
+        "S603",     # subprocess-without-shell-equals-true : Check for method calls that initiate a subprocess without a shell
         "T201",     # print statement	                : Checks for print statements
     ]
 

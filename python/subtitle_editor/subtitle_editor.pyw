@@ -54,7 +54,7 @@ class SubtitleEditor(QMainWindow):
 
         # Add save_close_box with Save and Close buttons
         self.save_close_box.accepted.connect(self.save_file)
-        self.save_close_box.rejected.connect(self.close())
+        self.save_close_box.rejected.connect(self.close)
 
     def open_file(self):
         file_dialog = QFileDialog()

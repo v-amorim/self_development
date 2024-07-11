@@ -6,11 +6,7 @@ from contextlib import ExitStack
 from pathlib import Path
 
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication
-from PyQt6.QtWidgets import QDialog
-from PyQt6.QtWidgets import QFileDialog
-from PyQt6.QtWidgets import QMainWindow
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow, QMessageBox
 
 INITIAL_INDEX = -1
 

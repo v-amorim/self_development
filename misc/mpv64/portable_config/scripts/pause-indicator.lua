@@ -1,5 +1,12 @@
---	Prints a pause icon in the middle of the screen when mpv is paused
---	Modified version of available at: https://github.com/CogentRedTester/mpv-scripts
+--[[
+    pause-indicator.lua - mpv script to restart the player
+
+    Prints a pause icon in the middle of the screen when mpv is paused
+	Modified version of the code available at: https://github.com/CogentRedTester/mpv-scripts
+
+    Source: https://github.com/v-amorim/self-development/blob/main/misc/mpv64/portable_config/scripts/restart-mpv.lua
+]]
+--
 
 local mp = require("mp")
 local screenx, screeny, aspect = mp.get_osd_size()

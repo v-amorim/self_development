@@ -1,3 +1,13 @@
+--[[
+    restart-mpv.lua - mpv script to restart the player
+
+    This script is made to restart the mpv instance, meant to refresh any changes made to the configuration file.
+	Use `F5` key to restart the player.
+
+    Source: https://github.com/v-amorim/self-development/blob/main/misc/mpv64/portable_config/scripts/restart-mpv.lua
+]]
+--
+
 local utils = require("mp.utils")
 
 local last_file_path = nil

@@ -1,5 +1,12 @@
--- This script automatically moves the previously played file to a subfolder named "watched" upon loading a new file.
--- Use `F10` key to toggle automatic file moving on/off with an OSD message.
+--[[
+    watched-folder.lua - mpv script to move files to a subfolder upon playing
+
+    This script automatically moves the previously played file to a subfolder named "watched" upon loading a new file.
+	Use `F10` key to toggle automatic file moving on/off with an OSD message.
+
+    Source: https://github.com/v-amorim/self-development/blob/main/misc/mpv64/portable_config/scripts/watched-folder.lua
+]]
+--
 
 local utils = require("mp.utils")
 
@@ -30,4 +37,4 @@ end
 mp.register_event("start-file", movePreviousFile)
 mp.register_event("file-loaded", recordPreviousFile)
 
-mp.add_key_binding("F10", "toggle-file-moving", toggleFileMoving)
+mp.add_key_binding("F10", "watched-folder", toggleFileMoving)

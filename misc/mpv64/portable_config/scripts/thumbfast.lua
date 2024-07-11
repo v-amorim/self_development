@@ -1,5 +1,7 @@
 -- thumbfast.lua
 --
+-- https://github.com/po5/thumbfast
+--
 -- High-performance on-the-fly thumbnailer
 --
 -- Built for easy integration in third-party UIs.

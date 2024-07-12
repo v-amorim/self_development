@@ -107,6 +107,7 @@ class SubtitleEditor(QMainWindow):
         self.subtitle_text.wheelEvent = self.subtitle_text_wheel_event
         self.start_time_entry.editingFinished.connect(self.update_start_time)
         self.search_entry.returnPressed.connect(self.search_subtitle)
+        self.search_entry.textChanged.connect(self.search_entry_changed)
         self.search_button.clicked.connect(self.search_subtitle)
         self.end_time_entry.editingFinished.connect(self.update_end_time)
         self.save_button.clicked.connect(self.save_file)
@@ -222,7 +223,7 @@ class SubtitleEditor(QMainWindow):
         QMessageBox.information(self, "Subtitle Not Found", f"Subtitle {desired_subtitle_number} not found.")
 
     def search_subtitle(self):
-        search_text = self.search_entry.text().strip().lower()
+        search_text = self.search_entry.text().lower()
         if not search_text:
             QMessageBox.warning(self, "Empty Search", "Please enter text to search.")
             return
@@ -242,11 +243,19 @@ class SubtitleEditor(QMainWindow):
             self.last_found_index = INITIAL_INDEX
 
     def highlight_search_term(self):
-        if search_text := self.search_entry.text().strip().lower():
+        if search_text := self.search_entry.text().lower():
             fmt = QTextCharFormat()
             fmt.setBackground(QColor("#0078d4"))
             self.highlighter.clear_highlight()
             self.highlighter.highlight_word(search_text, fmt)
+
+    def search_entry_changed(self):
+        if not self.search_entry.text():
+            self.clear_highlight()
+
+    def clear_highlight(self):
+        self.highlighter.clear_highlight()
+        self.subtitle_text.setPlainText(self.subtitle_text.toPlainText())
 
     def update_subtitle_text(self):
         if 0 <= self.current_subtitle_index < len(self.subtitles):

@@ -45,21 +45,23 @@ class SubtitleEditor(QMainWindow):
         # Connect the existing menu actions to their respective slots
         self.open_action.triggered.connect(self.open_file)
         self.save_action.triggered.connect(self.save_file)
+        self.overwrite_action.triggered.connect(self.overwrite_subtitle_file)
+        self.close_action.triggered.connect(self.close)
 
         # Connect signals and slots
         self.subtitle_number_spinbox.valueChanged.connect(self.subtitle_number_changed)
         self.subtitle_number_spinbox.setKeyboardTracking(False)
-        self.search_button.clicked.connect(self.search_subtitle)
         self.subtitle_text.textChanged.connect(self.update_subtitle_text)
-        self.start_time_entry.editingFinished.connect(self.update_start_time)
-        self.end_time_entry.editingFinished.connect(self.update_end_time)
-
-        # Enable mouse wheel scrolling in subtitle_text
         self.subtitle_text.wheelEvent = self.subtitle_text_wheel_event
+        self.start_time_entry.editingFinished.connect(self.update_start_time)
+        self.search_entry.returnPressed.connect(self.search_subtitle)
+        self.search_button.clicked.connect(self.search_subtitle)
+        self.end_time_entry.editingFinished.connect(self.update_end_time)
+        self.save_button.clicked.connect(self.save_file)
+        self.close_button.clicked.connect(self.close)
 
-        # Add save_close_box with Save and Close buttons
-        self.save_close_box.accepted.connect(self.save_file)
-        self.save_close_box.rejected.connect(self.close)
+        # Connect overwrite_button to overwrite_subtitle_file method
+        self.overwrite_button.clicked.connect(self.overwrite_subtitle_file)
 
     def open_file(self):
         file_dialog = QFileDialog()
@@ -70,6 +72,7 @@ class SubtitleEditor(QMainWindow):
 
     def load_subtitles(self, file_path):
         self.subtitles = []
+        self.subtitle_path = file_path  # Store the path of the currently open subtitle file
 
         with Path(file_path).open(encoding="utf-8") as file:
             subtitle_lines = file.readlines()
@@ -111,6 +114,37 @@ class SubtitleEditor(QMainWindow):
                 file = stack.enter_context(Path(save_path).open("w", encoding="utf-8"))
                 temp_file = stack.enter_context(Path(self.temp_file.name).open(encoding="utf-8"))
                 file.write(temp_file.read())
+
+    def overwrite_subtitle_file(self):
+        if not self.subtitles:
+            QMessageBox.warning(self, "No Subtitles", "There are no subtitles loaded to overwrite.")
+            return
+
+        if not self.temp_file.name:
+            QMessageBox.warning(self, "Temporary File Issue", "Temporary file not created properly.")
+            return
+
+        save_path = self.temp_file.name  # Use the temporary file for overwriting
+
+        # Ensure the user wants to overwrite the file
+        reply = QMessageBox.question(
+            self,
+            "Confirm Overwrite",
+            "Are you sure you want to overwrite the subtitle file?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+        if reply == QMessageBox.StandardButton.No:
+            return
+
+        # Write subtitles to the temporary file
+        self.save_to_temp_file()
+
+        # Copy the temporary file contents to the original subtitle file
+        with Path(save_path).open("r", encoding="utf-8") as temp_file:
+            with Path(self.subtitle_path).open("w", encoding="utf-8") as original_file:
+                original_file.write(temp_file.read())
+
+        QMessageBox.information(self, "Overwrite Complete", "Subtitle file has been successfully overwritten.")
 
     def display_subtitle(self):
         if 0 <= self.current_subtitle_index < len(self.subtitles):

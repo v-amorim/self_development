@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>450</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="font">
@@ -34,97 +34,38 @@
       <property name="rightMargin">
        <number>10</number>
       </property>
-      <item row="1" column="0">
-       <widget class="QLabel" name="search_label">
-        <property name="statusTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>Search Text:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="search_button">
-        <property name="statusTip">
-         <string>Search for the next subtitle containing the entered text</string>
-        </property>
-        <property name="text">
-         <string>Search</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="search_entry">
-        <property name="statusTip">
-         <string>Enter text to search within subtitles</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="subtitle_text_label">
-        <property name="statusTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>Subtitle Text:</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="subtitle_number_label">
-        <property name="text">
-         <string>Subtitle Number:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1" colspan="2">
        <widget class="QLineEdit" name="start_time_entry">
-        <property name="statusTip">
-         <string>Edit the start time of the subtitle</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="end_time_label">
-        <property name="text">
-         <string>End Time:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="start_time_label">
-        <property name="statusTip">
-         <string/>
-        </property>
-        <property name="text">
-         <string>Start Time:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QPlainTextEdit" name="subtitle_text">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
         <property name="statusTip">
-         <string>Edit the subtitle text</string>
+         <string>Edit the subtitle's [Start Time]</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>00:00:01,000</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1" colspan="2">
-       <widget class="QLineEdit" name="end_time_entry">
-        <property name="statusTip">
-         <string>Edit the end time of the subtitle</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" colspan="2">
+      <item row="0" column="0" colspan="4">
        <widget class="QSpinBox" name="subtitle_number_spinbox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="statusTip">
-         <string>Select a subtitle by number</string>
+         <string>Select a subtitle [by Number]</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
         <property name="minimum">
          <number>1</number>
@@ -134,19 +75,141 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="3">
-       <widget class="QDialogButtonBox" name="save_close_box">
+      <item row="2" column="0" colspan="4">
+       <widget class="QPlainTextEdit" name="subtitle_text">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="statusTip">
+         <string>Edit the subtitle's [Text]</string>
+        </property>
+        <property name="placeholderText">
+         <string>— Hello World!</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QPushButton" name="overwrite_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="statusTip">
+         <string>Overwrites the open file</string>
+        </property>
+        <property name="text">
+         <string>Overwrite</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2" colspan="2">
+       <widget class="QPushButton" name="save_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="statusTip">
+         <string>Save a new subtitle file</string>
+        </property>
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="4">
+       <widget class="QPushButton" name="close_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="4">
+       <widget class="QPushButton" name="search_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="statusTip">
+         <string>Change to the next found entry</string>
+        </property>
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLineEdit" name="end_time_entry">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="statusTip">
+         <string>Edit the subtitle's [End Time]</string>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
-        <property name="standardButtons">
-         <set>QDialogButtonBox::Close|QDialogButtonBox::Save</set>
+        <property name="placeholderText">
+         <string>00:00:01,500</string>
         </property>
-        <property name="centerButtons">
-         <bool>false</bool>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QLineEdit" name="search_entry">
+        <property name="statusTip">
+         <string>Find subtitles containing the [Entered Text]</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Hello</string>
         </property>
        </widget>
       </item>
@@ -159,7 +222,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>450</width>
      <height>21</height>
     </rect>
    </property>
@@ -169,6 +232,9 @@
     </property>
     <addaction name="open_action"/>
     <addaction name="save_action"/>
+    <addaction name="overwrite_action"/>
+    <addaction name="separator"/>
+    <addaction name="close_action"/>
    </widget>
    <addaction name="file_menu"/>
   </widget>
@@ -195,7 +261,36 @@
     <string>Ctrl+S</string>
    </property>
   </action>
+  <action name="overwrite_action">
+   <property name="text">
+    <string>Overwrite</string>
+   </property>
+   <property name="statusTip">
+    <string>Overwrite the current subtitle file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="close_action">
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="statusTip">
+    <string>Close the program</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
  </widget>
+ <tabstops>
+  <tabstop>subtitle_text</tabstop>
+  <tabstop>subtitle_number_spinbox</tabstop>
+  <tabstop>search_entry</tabstop>
+  <tabstop>start_time_entry</tabstop>
+  <tabstop>search_button</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

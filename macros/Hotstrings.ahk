@@ -162,6 +162,16 @@ Return
     SendInput,{raw}∞
 Return
 
+:*:>emd::
+    LTrim(A_ThisHotkey,":oc?*")
+    SendInput,{raw}—
+Return
+
+:*:>eli::
+    LTrim(A_ThisHotkey,":oc?*")
+    SendInput,{raw}…
+Return
+
 :*:>code::
     backticks_unicode := "{U+0060}{U+0060}{U+0060}"
     Clipboard := ClipboardAll

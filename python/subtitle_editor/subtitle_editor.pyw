@@ -152,6 +152,7 @@ class SubtitleEditor(QMainWindow):
 
         if self.subtitles:
             self.subtitle_number_spinbox.setMaximum(len(self.subtitles))
+            self.subtitle_number_spinbox.setSuffix(f" / {len(self.subtitles)}")
             self.current_subtitle_index = 0
             self.display_subtitle()
 

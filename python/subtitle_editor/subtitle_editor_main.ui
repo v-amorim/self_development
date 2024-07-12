@@ -217,7 +217,7 @@
        </widget>
       </item>
       <item row="2" column="0" colspan="4">
-       <widget class="QTextEdit" name="subtitle_text">
+       <widget class="QPlainTextEdit" name="subtitle_text">
         <property name="font">
          <font>
           <pointsize>12</pointsize>

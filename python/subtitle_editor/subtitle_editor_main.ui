@@ -64,6 +64,9 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
         <property name="statusTip">
          <string>Edit the subtitle's [End Time]</string>
         </property>
@@ -101,6 +104,9 @@
         <property name="statusTip">
          <string>Edit the subtitle's [Text]</string>
         </property>
+        <property name="tabChangesFocus">
+         <bool>true</bool>
+        </property>
         <property name="placeholderText">
          <string>— Hello World!</string>
         </property>
@@ -113,6 +119,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
         </property>
         <property name="statusTip">
          <string>Edit the subtitle's [Start Time]</string>
@@ -139,6 +148,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="statusTip">
          <string>Save a new subtitle file</string>
         </property>
@@ -160,6 +172,9 @@
           <width>100</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
         </property>
         <property name="statusTip">
          <string>Overwrites the open file</string>
@@ -183,6 +198,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="statusTip">
          <string/>
         </property>
@@ -204,6 +222,9 @@
           <width>100</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
         </property>
         <property name="statusTip">
          <string>Change to the next found entry</string>
@@ -227,6 +248,9 @@
     </rect>
    </property>
    <widget class="QMenu" name="file_menu">
+    <property name="statusTip">
+     <string>Menu with file options</string>
+    </property>
     <property name="title">
      <string>Menu</string>
     </property>
@@ -236,7 +260,29 @@
     <addaction name="separator"/>
     <addaction name="close_action"/>
    </widget>
+   <widget class="QMenu" name="symbols_menu">
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="statusTip">
+     <string>Menu to insert commonly used symbols</string>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="accessibleName">
+     <string/>
+    </property>
+    <property name="title">
+     <string>Symbols</string>
+    </property>
+    <addaction name="em_dash_action"/>
+    <addaction name="elipsis_action"/>
+    <addaction name="eight_note_action"/>
+    <addaction name="italics_action"/>
+   </widget>
    <addaction name="file_menu"/>
+   <addaction name="symbols_menu"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="open_action">
@@ -283,13 +329,52 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
+  <action name="em_dash_action">
+   <property name="text">
+    <string>—</string>
+   </property>
+   <property name="statusTip">
+    <string>Inserts a [—] at the current cursor location</string>
+   </property>
+  </action>
+  <action name="elipsis_action">
+   <property name="text">
+    <string>…</string>
+   </property>
+   <property name="statusTip">
+    <string> Inserts a […] at the current cursor location</string>
+   </property>
+  </action>
+  <action name="eight_note_action">
+   <property name="text">
+    <string>♪</string>
+   </property>
+   <property name="statusTip">
+    <string>Wraps the selected text with ♪ [♪ {selected_text] ♪]</string>
+   </property>
+  </action>
+  <action name="single_bar_note_action">
+   <property name="text">
+    <string>♫</string>
+   </property>
+  </action>
+  <action name="italics_action">
+   <property name="text">
+    <string>Italics</string>
+   </property>
+   <property name="statusTip">
+    <string>Wraps the selected text with Italics notation [&lt;i&gt;{selected_text]&lt;/i&gt;]</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>subtitle_text</tabstop>
-  <tabstop>subtitle_number_spinbox</tabstop>
   <tabstop>search_entry</tabstop>
-  <tabstop>start_time_entry</tabstop>
+  <tabstop>subtitle_number_spinbox</tabstop>
   <tabstop>search_button</tabstop>
+  <tabstop>save_button</tabstop>
+  <tabstop>overwrite_button</tabstop>
+  <tabstop>close_button</tabstop>
  </tabstops>
  <resources/>
  <connections/>

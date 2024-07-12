@@ -9,5 +9,6 @@ A simple subtitle editor written in Python using PyQt6.
 - Adjust subtitle time.
 - Export subtitles to a new file.
 - Keyboard shortcuts.
+- Insert common symbols.
 
 ### Screenshots

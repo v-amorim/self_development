@@ -48,6 +48,12 @@ class SubtitleEditor(QMainWindow):
         self.overwrite_action.triggered.connect(self.overwrite_subtitle_file)
         self.close_action.triggered.connect(self.close)
 
+        # Connect the existing Symbols actions to their respective slots
+        self.em_dash_action.triggered.connect(self.insert_em_dash)
+        self.elipsis_action.triggered.connect(self.insert_elipsis)
+        self.eight_note_action.triggered.connect(self.insert_eight_note)
+        self.italics_action.triggered.connect(self.insert_italics)
+
         # Connect signals and slots
         self.subtitle_number_spinbox.valueChanged.connect(self.subtitle_number_changed)
         self.subtitle_number_spinbox.setKeyboardTracking(False)
@@ -140,9 +146,10 @@ class SubtitleEditor(QMainWindow):
         self.save_to_temp_file()
 
         # Copy the temporary file contents to the original subtitle file
-        with Path(save_path).open("r", encoding="utf-8") as temp_file:
-            with Path(self.subtitle_path).open("w", encoding="utf-8") as original_file:
-                original_file.write(temp_file.read())
+        with ExitStack() as stack:
+            temp_file = stack.enter_context(Path(save_path).open("r", encoding="utf-8"))
+            original_file = stack.enter_context(Path(self.subtitle_path).open("w", encoding="utf-8"))
+            original_file.write(temp_file.read())
 
         QMessageBox.information(self, "Overwrite Complete", "Subtitle file has been successfully overwritten.")
 
@@ -206,6 +213,24 @@ class SubtitleEditor(QMainWindow):
             self.current_subtitle_index = min(len(self.subtitles) - 1, self.current_subtitle_index - 1)
         self.display_subtitle()
         event.accept()
+
+    def insert_em_dash(self):
+        self.subtitle_text.insertPlainText("— ")
+
+    def insert_elipsis(self):
+        self.subtitle_text.insertPlainText("…")
+
+    def insert_eight_note(self):
+        self.wrap_selected_text("♪ ", " ♪")
+
+    def insert_italics(self):
+        self.wrap_selected_text("<i>", "</i>")
+
+    def wrap_selected_text(self, start_char, end_char):
+        cursor = self.subtitle_text.textCursor()
+        selected_text = cursor.selectedText()
+        wrapped_text = f"{start_char}{selected_text}{end_char}"
+        cursor.insertText(wrapped_text)
 
 
 if __name__ == "__main__":

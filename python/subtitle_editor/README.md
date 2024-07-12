@@ -29,6 +29,6 @@ Menu bar and Symbols bar
 
 Example of usage
 
-![image](https://github.com/user-attachments/assets/b7ddc378-c53b-4fcf-8c8e-68181e84af10)
+![image](https://github.com/user-attachments/assets/1925173a-6942-4867-a97b-3ff66a4649e6)
 
 Here we have a word (literally) highlighted, also shows the Symbols and detailed description at the bottom

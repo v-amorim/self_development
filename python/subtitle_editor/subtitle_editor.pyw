@@ -21,7 +21,7 @@ class IntroDialog(QDialog):
 
 
 class SubtitleEditor(QMainWindow):
-    def __init__(self):
+    def __init__(self, subtitle_path=None):
         super().__init__()
         self.subtitles = []
         self.current_subtitle_index = 0
@@ -32,7 +32,12 @@ class SubtitleEditor(QMainWindow):
         self.init_ui()
         self.intro_dialog = IntroDialog(self)
         self.intro_dialog.open_button_clicked(self.open_file)
-        self.intro_dialog.exec()
+
+        if subtitle_path:
+            self.load_subtitles(subtitle_path)
+            self.intro_dialog.close()
+        else:
+            self.intro_dialog.exec()
 
     def init_ui(self):
         uic.loadUi("subtitle_editor_main.ui", self)
@@ -171,6 +176,7 @@ class SubtitleEditor(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    subtitle_editor = SubtitleEditor()
+    subtitle_path = sys.argv[1] if len(sys.argv) > 1 else None
+    subtitle_editor = SubtitleEditor(subtitle_path)
     subtitle_editor.show()
     sys.exit(app.exec())

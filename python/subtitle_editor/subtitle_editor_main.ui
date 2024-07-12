@@ -34,25 +34,6 @@
       <property name="rightMargin">
        <number>10</number>
       </property>
-      <item row="3" column="0">
-       <widget class="QLineEdit" name="start_time_entry">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="statusTip">
-         <string>Edit the subtitle's [Start Time]</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="placeholderText">
-         <string>00:00:01,000</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0" colspan="4">
        <widget class="QSpinBox" name="subtitle_number_spinbox">
         <property name="sizePolicy">
@@ -75,6 +56,41 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="3">
+       <widget class="QLineEdit" name="end_time_entry">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="statusTip">
+         <string>Edit the subtitle's [End Time]</string>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>00:00:01,500</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QLineEdit" name="search_entry">
+        <property name="statusTip">
+         <string>Find subtitles containing the [Entered Text]</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Hello</string>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="0" colspan="4">
        <widget class="QPlainTextEdit" name="subtitle_text">
         <property name="font">
@@ -90,25 +106,22 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="2">
-       <widget class="QPushButton" name="overwrite_button">
+      <item row="3" column="0">
+       <widget class="QLineEdit" name="start_time_entry">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
         <property name="statusTip">
-         <string>Overwrites the open file</string>
+         <string>Edit the subtitle's [Start Time]</string>
         </property>
-        <property name="text">
-         <string>Overwrite</string>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>00:00:01,000</string>
         </property>
        </widget>
       </item>
@@ -131,6 +144,28 @@
         </property>
         <property name="text">
          <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QPushButton" name="overwrite_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="statusTip">
+         <string>Overwrites the open file</string>
+        </property>
+        <property name="text">
+         <string>Overwrite</string>
         </property>
        </widget>
       </item>
@@ -175,41 +210,6 @@
         </property>
         <property name="text">
          <string>Search</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLineEdit" name="end_time_entry">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="statusTip">
-         <string>Edit the subtitle's [End Time]</string>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="placeholderText">
-         <string>00:00:01,500</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="QLineEdit" name="search_entry">
-        <property name="statusTip">
-         <string>Find subtitles containing the [Entered Text]</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="placeholderText">
-         <string>Hello</string>
         </property>
        </widget>
       </item>

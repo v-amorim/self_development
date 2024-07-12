@@ -159,7 +159,7 @@ Return
 
 :*:>inf::
     LTrim(A_ThisHotkey,":oc?*")
-    SendInput,{raw}ꝏ
+    SendInput,{raw}∞
 Return
 
 :*:>code::

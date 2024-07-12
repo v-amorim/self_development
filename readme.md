@@ -1,12 +1,12 @@
 # Self Development
 
-[Indesign Scripts][README_indesign-scripts] | [Macros][README_macros] | [Misc][README_misc] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
+[Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Misc][README_misc] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
 
 ## Introduction
 
 This repository contains a collection of scripts and macros that I have written/use for various purposes. The scripts are written in Python, Ruby, and AHK. The scripts are written for various applications such as InDesign, Excel, Word, and LaTeX. The repository also contains a collection of LaTeX templates that I have created for various purposes.
 
-## [InDesign Scripts][README_indesign-scripts]
+## [InDesign Scripts][README_indesign_scripts]
 
 The InDesign scripts are written in JavaScript. The scripts are written for various purposes such as automating the creation of documents, formatting text, and exporting documents to PDF. The scripts are written for InDesign CS6 and later versions.
 
@@ -32,7 +32,8 @@ The LaTeX templates are written for various purposes such as creating documents,
 
 <!-- URLS -->
 
-[README_indesign-scripts]: indesign-scripts/README.md
+[README_self_development]: readme.md
+[README_indesign_scripts]: indesign-scripts/README.md
 [README_macros]: macros/README.md
 [README_misc]: misc/README.md
 [README_python]: python/README.md

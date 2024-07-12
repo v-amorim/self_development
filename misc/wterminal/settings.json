@@ -51,7 +51,7 @@
                 "name": "Windows PowerShell"
             },
             {
-                "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\Documents\\GitHub\\self-development\\macros\\alias.bat",
+                "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\Documents\\GitHub\\self_development\\macros\\alias.bat",
                 "font": {
                     "face": "FiraCode Nerd Font Mono"
                 },

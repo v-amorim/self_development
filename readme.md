@@ -33,7 +33,7 @@ The LaTeX templates are written for various purposes such as creating documents,
 <!-- URLS -->
 
 [README_self_development]: readme.md
-[README_indesign_scripts]: indesign-scripts/README.md
+[README_indesign_scripts]: indesign_scripts/README.md
 [README_macros]: macros/README.md
 [README_misc]: misc/README.md
 [README_python]: python/README.md

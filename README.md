@@ -1,6 +1,6 @@
 # Self Development
 
-[Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Misc][README_misc] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
+[Home][README_self_development] | [Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Misc][README_misc] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
 
 ## Introduction
 
@@ -32,7 +32,7 @@ The LaTeX templates are written for various purposes such as creating documents,
 
 <!-- URLS -->
 
-[README_self_development]: readme.md
+[README_self_development]: https://github.com/v-amorim/self_development/README.md
 [README_indesign_scripts]: indesign_scripts/README.md
 [README_macros]: macros/README.md
 [README_misc]: misc/README.md

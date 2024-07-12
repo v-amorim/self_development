@@ -1,4 +1,8 @@
-# indesign_scripts
+# Self Development
+
+[Home][README_self_development] | [Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Misc][README_misc] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
+
+## Indesign Scripts
 
 General InDesign Scripts primarily designed for use in manga lettering
 
@@ -18,3 +22,13 @@ Allows you to load a script in a .txt file and automatically input lines into te
 You can choose your starting point by selecting the required line in the script list.
 
 This is an early version of the script, and changes will most likely be coming quicky in order to further flesh it out. It hasn't been tested that much, so I expect some bugs to happen while using it. Please contact me with any issues which may occur while using this script.
+
+<!-- URLS -->
+
+[README_self_development]: https://github.com/v-amorim/self_development/README.md
+[README_indesign_scripts]: indesign_scripts/README.md
+[README_macros]: macros/README.md
+[README_misc]: misc/README.md
+[README_python]: python/README.md
+[README_ruby]: ruby/README.md
+[README_tex]: tex/README.md

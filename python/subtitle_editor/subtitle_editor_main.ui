@@ -43,7 +43,7 @@
          </sizepolicy>
         </property>
         <property name="statusTip">
-         <string>Select a subtitle [current / total]</string>
+         <string>Select a subtitle [current / total] (Mouse scroll to change prev/next)</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -230,7 +230,7 @@
          </font>
         </property>
         <property name="statusTip">
-         <string>Edit the subtitle's [Text]</string>
+         <string>Edit the subtitle's [Text] (Mouse scroll to change prev/next)</string>
         </property>
         <property name="placeholderText">
          <string>— This is an ♪ awesome ♪ tool</string>

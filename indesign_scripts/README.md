@@ -25,7 +25,7 @@ This is an early version of the script, and changes will most likely be coming q
 
 <!-- URLS -->
 
-[README_self_development]: https://github.com/v-amorim/self_development/README.md
+[README_self_development]: https://github.com/v-amorim/self_development
 [README_indesign_scripts]: indesign_scripts/README.md
 [README_macros]: macros/README.md
 [README_misc]: misc/README.md

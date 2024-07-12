@@ -43,10 +43,16 @@
          </sizepolicy>
         </property>
         <property name="statusTip">
-         <string>Select a subtitle [by Number]</string>
+         <string>Select a subtitle [current / total]</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+        <property name="suffix">
+         <string/>
+        </property>
+        <property name="prefix">
+         <string/>
         </property>
         <property name="minimum">
          <number>1</number>

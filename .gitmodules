@@ -1,0 +1,3 @@
+[submodule "python/subtitle_editor"]
+	path = python/subtitle_editor
+	url = https://github.com/v-amorim/subtitle_editor

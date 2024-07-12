@@ -56,6 +56,19 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QLineEdit" name="search_entry">
+        <property name="statusTip">
+         <string>Find subtitles containing the [Entered Text]</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>eg: words</string>
+        </property>
+       </widget>
+      </item>
       <item row="3" column="3">
        <widget class="QLineEdit" name="end_time_entry">
         <property name="sizePolicy">
@@ -78,37 +91,6 @@
         </property>
         <property name="placeholderText">
          <string>00:00:01,500</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="QLineEdit" name="search_entry">
-        <property name="statusTip">
-         <string>Find subtitles containing the [Entered Text]</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="placeholderText">
-         <string>Hello</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="4">
-       <widget class="QPlainTextEdit" name="subtitle_text">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="statusTip">
-         <string>Edit the subtitle's [Text]</string>
-        </property>
-        <property name="tabChangesFocus">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>— Hello World!</string>
         </property>
        </widget>
       </item>
@@ -184,6 +166,31 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0" colspan="4">
+       <widget class="QPushButton" name="search_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="statusTip">
+         <string>Change to the next found entry, also highlights it</string>
+        </property>
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
       <item row="6" column="0" colspan="4">
        <widget class="QPushButton" name="close_button">
         <property name="sizePolicy">
@@ -209,28 +216,18 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="4">
-       <widget class="QPushButton" name="search_button">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
+      <item row="2" column="0" colspan="4">
+       <widget class="QTextEdit" name="subtitle_text">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
         </property>
         <property name="statusTip">
-         <string>Change to the next found entry</string>
+         <string>Edit the subtitle's [Text]</string>
         </property>
-        <property name="text">
-         <string>Search</string>
+        <property name="placeholderText">
+         <string>— This is an ♪ awesome ♪ tool</string>
         </property>
        </widget>
       </item>

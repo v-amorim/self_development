@@ -6,9 +6,55 @@ from contextlib import ExitStack
 from pathlib import Path
 
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow, QMessageBox
+from PyQt6.QtGui import (
+    QColor,
+    QSyntaxHighlighter,
+    QTextCharFormat,
+)
+from PyQt6.QtWidgets import (
+    QApplication,
+    QDialog,
+    QFileDialog,
+    QMainWindow,
+    QMessageBox,
+)
 
 INITIAL_INDEX = -1
+
+
+class SyntaxHighlighter(QSyntaxHighlighter):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self._highlight_lines = {}
+        self._highlight_words = {}
+
+    def highlight_line(self, line, fmt):
+        if isinstance(line, int) and line >= 0 and isinstance(fmt, QTextCharFormat):
+            self._highlight_lines[line] = fmt
+            tb = self.document().findBlockByLineNumber(line)
+            self.rehighlightBlock(tb)
+
+    def highlight_word(self, word, fmt):
+        if isinstance(word, str) and word and isinstance(fmt, QTextCharFormat):
+            self._highlight_words[word] = fmt
+            self.rehighlight()
+
+    def clear_highlight(self):
+        self._highlight_lines = {}
+        self._highlight_words = {}
+        self.rehighlight()
+
+    def highlightBlock(self, text):  # noqa: N802
+        line = self.currentBlock().blockNumber()
+        fmt = self._highlight_lines.get(line)
+        if fmt is not None:
+            self.setFormat(0, len(text), fmt)
+
+        for word, fmt in self._highlight_words.items():
+            start_idx = text.lower().find(word.lower())
+            while start_idx != -1:
+                self.setFormat(start_idx, len(word), fmt)
+                start_idx = text.lower().find(word.lower(), start_idx + len(word))
 
 
 class IntroDialog(QDialog):
@@ -68,6 +114,9 @@ class SubtitleEditor(QMainWindow):
 
         # Connect overwrite_button to overwrite_subtitle_file method
         self.overwrite_button.clicked.connect(self.overwrite_subtitle_file)
+
+        # Initialize SyntaxHighlighter
+        self.highlighter = SyntaxHighlighter(self.subtitle_text.document())
 
     def open_file(self):
         file_dialog = QFileDialog()
@@ -160,6 +209,7 @@ class SubtitleEditor(QMainWindow):
             self.subtitle_text.setPlainText(subtitle["text"])
             self.start_time_entry.setText(subtitle["start_time"])
             self.end_time_entry.setText(subtitle["end_time"])
+            self.highlight_search_term()
 
     def subtitle_number_changed(self):
         desired_subtitle_number = self.subtitle_number_spinbox.value()
@@ -189,6 +239,13 @@ class SubtitleEditor(QMainWindow):
         else:
             QMessageBox.information(self, "Subtitle Not Found", f"No more subtitles contain the text '{search_text}'.")
             self.last_found_index = INITIAL_INDEX
+
+    def highlight_search_term(self):
+        if search_text := self.search_entry.text().strip().lower():
+            fmt = QTextCharFormat()
+            fmt.setBackground(QColor("#0078d4"))
+            self.highlighter.clear_highlight()
+            self.highlighter.highlight_word(search_text, fmt)
 
     def update_subtitle_text(self):
         if 0 <= self.current_subtitle_index < len(self.subtitles):

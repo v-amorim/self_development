@@ -4,7 +4,7 @@
     Prints a pause icon in the middle of the screen when mpv is paused
 	Modified version of the code available at: https://github.com/CogentRedTester/mpv-scripts
 
-    Source: https://github.com/v-amorim/self_development/blob/main/misc/mpv64/portable_config/scripts/restart-mpv.lua
+    Source: https://github.com/v-amorim/self-development/blob/main/misc/mpv64/portable_config/scripts/restart-mpv.lua
 ]]
 --
 

@@ -54,7 +54,7 @@
           "foreground": "#5dabf3",
           "leading_diamond": " \ue0b6",
           "trailing_diamond": "\ue0b4",
-          "template": "\ue7b2 {{.Project}} :: {{.Account}}"
+          "template": "\ue7b2 {{.Project}}"
         },
         {
           "type": "upgrade",

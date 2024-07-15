@@ -11,7 +11,7 @@
           "foreground": "#C792EA",
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
-          "template": "\ueb99 {{ .UserName }}[{{ .Name }}]"
+          "template": "\uf2bd {{ .UserName }}[{{ .Name }}]"
         },
         {
           "type": "git",

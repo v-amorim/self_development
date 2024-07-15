@@ -68,7 +68,7 @@
           "type": "time",
           "style": "diamond",
           "background": "#29315A",
-          "foreground": "#C792EA",
+          "foreground": "#AEA4BF",
           "leading_diamond": " \ue0b6",
           "trailing_diamond": "\ue0b4",
           "template": "\uf017 {{ .CurrentDate | date .Format }}",

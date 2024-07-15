@@ -51,7 +51,7 @@
           "type": "gcp",
           "style": "diamond",
           "background": "#29315A",
-          "foreground": "#C792EA",
+          "foreground": "#5dabf3",
           "leading_diamond": " \ue0b6",
           "trailing_diamond": "\ue0b4",
           "template": "\ue7b2 {{.Project}} :: {{.Account}}"

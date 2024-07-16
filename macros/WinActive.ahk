@@ -350,6 +350,7 @@
             PostMessage, 0x111, 28931, 0 , A
     return
 
+    #v::Send, {AppsKey}i ; Win + V [Opens the folder in VSCode]
 #IfWinActive
 
 ; Function to spam Left clicks

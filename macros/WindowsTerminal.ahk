@@ -1,9 +1,9 @@
 ; https://gist.github.com/andrewgodwin/89920ee02501ab12d09b02500897066c
 
-$#T::ToggleTerminal()
-$#V::RunVSCode()
-$^#T::ToggleTerminal(true)
-$^#V::RunVSCode(true)
+$#T::ToggleTerminal() ; Win + T
+$#V::RunVSCode() ; Win + V
+$^#T::ToggleTerminal(true) ; Ctrl + Win + T
+$^#V::RunVSCode(true) ; Ctrl + Win + V
 
 RunVSCode(isAdmin := false){
     if (isAdmin)
@@ -11,7 +11,6 @@ RunVSCode(isAdmin := false){
     else
         Run, C:\Users\%A_UserName%\AppData\Local\Programs\Microsoft VS Code\Code.exe
 }
-
 
 ToggleTerminal(isAdmin := false) {
     matcher := "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"

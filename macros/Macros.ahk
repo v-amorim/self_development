@@ -9,15 +9,15 @@ Menu, Tray, Icon, Logo.ico
 #Include BlockKBnM.ahk
 #Include VolumeControl.ahk
 
-$^+!P:: RunPoEDependencies()
-$!O:: GetMousePosition()
+$^+!P:: RunPoEDependencies() ; Ctrl + Shift + Alt + P
+$!O:: GetMousePosition() ; Alt + O
 
-+#F12::
++#F12:: ; Shift + Win + F12
     Reload
     SoundBeep, 100, 500
 Return
 
-$#F12::
+$#F12:: ; Win + F12
     Suspend
     SoundBeep, 750, 500
 Return

@@ -1,4 +1,5 @@
 ﻿#MaxHotkeysPerInterval 200
+Menu, Tray, Icon, Logo.ico
 
 #Include Gdip.ahk
 #Include Hotstrings.ahk

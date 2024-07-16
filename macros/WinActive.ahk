@@ -329,6 +329,29 @@
     Return
 #IfWinActive
 
+#IfWinActive ahk_exe explorer.exe
+    #x:: ; Win + X
+        explorerRegPath := "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+        explorerRegValue := "HideFileExt"
+        explorerEhClass := "CabinetWClass"
+
+        RegRead, HiddenExt, %explorerRegPath%, %explorerRegValue% ; Read current setting
+
+        If (HiddenExt = 1) { ; Extensions currently hidden
+            RegWrite, REG_DWORD, %explorerRegPath%, %explorerRegValue%, 0 ; Set to show extensions
+        } Else { ; Extensions currently shown
+            RegWrite, REG_DWORD, %explorerRegPath%, %explorerRegValue%, 1 ; Set to hide extensions
+        }
+
+        WinGetClass, eh_Class, A
+        If (eh_Class = explorerEhClass)
+            Send, {F5}
+        Else
+            PostMessage, 0x111, 28931, 0 , A
+    return
+
+#IfWinActive
+
 ; Function to spam Left clicks
 SpamLeftClicks(){
     BlockInput On

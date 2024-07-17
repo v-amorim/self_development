@@ -36,6 +36,12 @@
       winget upgrade --all # Or this, to update all
    ```
 
+This can fix some terminal erros:
+
+```powershell
+   Install-Module PsReadLine -Force
+```
+
 ## Linux
 
 1. Install [Oh My Posh](https://ohmyposh.dev/docs/installation/linux):

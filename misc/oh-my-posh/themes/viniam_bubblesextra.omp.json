@@ -76,6 +76,15 @@
           "properties": {
             "time_format": "15:04:05"
           }
+        },
+        {
+          "type": "root",
+          "style": "diamond",
+          "foreground": "#111111",
+          "background": "#FF5370",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "\uF0E7"
         }
       ],
       "type": "prompt"

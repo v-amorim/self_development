@@ -2,6 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "auto_upgrade": true,
   "disable_notice": true,
+  "final_space": true,
+  "version": 2,
   "blocks": [
     {
       "alignment": "left",
@@ -93,11 +95,11 @@
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#5DABF3",
-          "leading_diamond": " \ue0b6",
+          "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
-          "template": "\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}[{{ .Full }}]{{ end }}",
+          "template": "\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}[{{ .Full }}]{{ end }}",
           "properties": {
-            "fetch_version": false
+            "fetch_version": true
           }
         },
         {
@@ -115,7 +117,5 @@
       ],
       "type": "prompt"
     }
-  ],
-  "final_space": true,
-  "version": 2
+  ]
 }

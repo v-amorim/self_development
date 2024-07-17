@@ -73,3 +73,9 @@ This can fix some terminal erros:
    ```bash
       curl -s https://ohmyposh.dev/install.sh | sudo bash -s
    ```
+
+This can fix the auto update requiring sudo:
+
+```bash
+   sudo chown -R $(whoami) /usr/local/bin
+```

@@ -228,6 +228,7 @@ Return
     ClipSaved := ""
 Return
 
+; Open a message box with a list of hotstrings
 ListHotstrings() {
     HotkeyList := "va, vd, tg, gcc, gcg, vnam, vtel, vcpf, vrg, vcnpj, vpix, coreg, caqua, gnam, gtel, gcpf, grg, bot, top, wame, code"
     Loop {

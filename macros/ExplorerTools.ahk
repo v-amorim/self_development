@@ -1,15 +1,22 @@
-$^#T::ToggleTerminal(true) ; Ctrl + Win + T
-$^#V::OpenNewVSCode(true) ; Ctrl + Win + V
-
-$#T:: ; Win + T
+$#T:: ; Win + T [Opens a new terminal in the current file explorer's folder]
     path := GetActiveExplorerPath()
     OpenNewTerminal(false, path)
+return
+
+$^#T:: ; Ctrl + Win + T [Opens a new terminal in the current file explorer's folder as Admin]
+    path := GetActiveExplorerPath()
+    OpenNewTerminal(true, path)
 return
 
 $#V:: ; Win + V [Opens the current file explorer's folder in VSCode]
     path := GetActiveExplorerPath()
     OpenNewVSCode(false, path)
 return
+
+$^#V:: ; Ctrl + Win + V [Opens the current file explorer's folder in VSCode as Admin]
+    path := GetActiveExplorerPath()
+    OpenNewVSCode(true, path)
+Return
 
 ; Thanks to: https://stackoverflow.com/questions/72077329/how-do-i-add-a-keyboard-shortcut-to-open-vs-code-on-the-folder-from-file-explore
 GetActiveExplorerPath()
@@ -24,36 +31,10 @@ GetActiveExplorerPath()
             if (window.hwnd==explorerHwnd)
             {
                 path := window.Document.Folder.Self.Path
-                return path
+                Return path
             }
         }
     }
-}
-
-; Original Idea from: https://gist.github.com/andrewgodwin/89920ee02501ab12d09b02500897066c
-ToggleTerminal(isAdmin := false, path := "") {
-    matcher := "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"
-    DetectHiddenWindows, On
-    if (WinExist(matcher)) {
-        if (!WinActive(matcher)) {
-            ShowTerminal()
-        } else if (WinExist(matcher)) {
-            HideTerminal()
-        }
-    } else {
-        OpenNewTerminal(isAdmin, path)
-    }
-}
-
-ShowTerminal() {
-    WinShow, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-    WinActivate, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-}
-
-HideTerminal() {
-    WinActivateBottom, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-    SendInput, !{Tab}
-    WinHide, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
 }
 
 OpenNewTerminal(isAdmin := false, path := "") {

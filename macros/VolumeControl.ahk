@@ -3,7 +3,8 @@
 #SingleInstance force
 #Persistent
 #UseHook
-#WheelUp::
+
+#WheelUp:: ; Windows + WheelUp [Volume Up +2]
     BlockInput On
     SendInput, {Volume_Up}
     toggle_icon = 0
@@ -11,7 +12,7 @@
     BlockInput Off
 Return
 
-+#WheelUp::
++#WheelUp:: ; Shift + Windows + WheelUp [Volume Up +10]
     BlockInput On
     SendInput, {Volume_Up}{Volume_Down}
     SoundSet, +10
@@ -20,7 +21,7 @@ Return
     BlockInput Off
 Return
 
-#WheelDown::
+#WheelDown:: ; Windows + WheelDown [Volume Down -2]
     BlockInput On
     SendInput, {Volume_Down}
     toggle_icon = 0
@@ -28,7 +29,7 @@ Return
     BlockInput Off
 Return
 
-+#WheelDown::
++#WheelDown:: ; Shift + Windows + WheelDown [Volume Down -10]
     BlockInput On
     SendInput, {Volume_Down}{Volume_Up}
     SoundSet, -10
@@ -37,7 +38,7 @@ Return
     BlockInput Off
 Return
 
-#MButton::
+#MButton:: ; Windows + Middle Mouse Button [Mute]
     BlockInput On
     SendInput, {Volume_Mute}
     toggle_icon = 1
@@ -61,7 +62,7 @@ vmeter: ; show volume meter
     SetTimer,vmeterclose, 2000
 Return
 
-vmeterclose:
+vmeterclose: ; close volume meter
     SetTimer,vmeterclose, off
     Gui, destroy
 Return

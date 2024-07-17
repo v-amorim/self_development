@@ -233,90 +233,56 @@
 #IfWinActive
 
 #IfWinActive ahk_exe dotnet.exe ; TModLoader
-    #^LButton::SpamClick("LButton") ; Win + Ctrl + LButton
-    #+LButton::SpamClick("LButton") ; Win + Shift + LButton
-    #!LButton::SpamClick("LButton") ; Win + Alt + LButton
+    #^LButton::SpamClick("LButton") ; Win + Ctrl + LButton [Spam Left Clicks]
+    #+LButton::SpamClick("LButton") ; Win + Shift + LButton [Spam Left Clicks]
+    #!LButton::SpamClick("LButton") ; Win + Alt + LButton [Spam Left Clicks]
 
-    ^RButton::SpamClick("RButton") ; Ctrl + RButton
+    ^RButton::SpamClick("RButton") ; Ctrl + RButton [Spam Right Clicks]
 #IfWinActive
 
-#IfWinActive ahk_exe opera.exe
+#If (WinActive("ahk_exe opera.exe") || WinActive("ahk_exe chrome.exe"))
     SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
 
-    $!WheelUp:: ; Ctrl + WheelUp
-        BlockInput, On
-        SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
-        BlockInput, Off
-    return
-
-    $!WheelDown:: ; Ctrl + WheelDown
-        BlockInput, On
-        SendInput, {LControl down}{Tab}{LControl up}
-        BlockInput, Off
-    return
-
-    $+WheelUp:: ; Shift + WheelUp
-        BlockInput, On
-        SendInput, {Up}
-        BlockInput, Off
-    return
-
-    $+WheelDown:: ; Shift + WheelDown
-        BlockInput, On
-        SendInput, {Down}
-        BlockInput, Off
-    return
-
-    ~$Alt:: ; Disable Alt
-        BlockInput, On
-        KeyWait, Alt
-        BlockInput, Off
-    return
-#IfWinActive
-
-#IfWinActive ahk_exe chrome.exe
-    SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
-
-    $!WheelUp:: ; Ctrl + WheelUp
-        BlockInput, On
-        SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
-        BlockInput, Off
-    return
-
-    $!WheelDown:: ; Ctrl + WheelDown
-        BlockInput, On
-        SendInput, {LControl down}{Tab}{LControl up}
-        BlockInput, Off
-    return
-
-    $+WheelUp:: ; Shift + WheelUp
-        BlockInput, On
-        SendInput, {Up}
-        BlockInput, Off
-    return
-
-    $+WheelDown:: ; Shift + WheelDown
-        BlockInput, On
-        SendInput, {Down}
-        BlockInput, Off
-    return
-
-    ~$Alt:: ; Disable Alt
-        BlockInput, On
-        KeyWait, Alt
-        BlockInput, Off
-    return
-#IfWinActive
-
-#IfWinActive ahk_exe Code.exe
-    SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
-    $!WheelUp:: ; Cicle Up a tab
+    $!WheelUp:: ; Ctrl + WheelUp [Cicle Up a tab]
         BlockInput, On
         SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput, Off
     Return
 
-    $!WheelDown:: ; Cicle Down a tab
+    $!WheelDown:: ; Ctrl + WheelDown [Cicle Down a tab]
+        BlockInput, On
+        SendInput, {LControl down}{Tab}{LControl up}
+        BlockInput, Off
+    Return
+
+    $+WheelUp:: ; Shift + WheelUp [Add +1, for numeric input fields]
+        BlockInput, On
+        SendInput, {Up}
+        BlockInput, Off
+    Return
+
+    $+WheelDown:: ; Shift + WheelDown [Subtract -1, for numeric input fields]
+        BlockInput, On
+        SendInput, {Down}
+        BlockInput, Off
+    Return
+
+    ~$Alt:: ; Disable Alt
+        BlockInput, On
+        KeyWait, Alt
+        BlockInput, Off
+    Return
+#IfWinActive
+
+#IfWinActive ahk_exe Code.exe
+    SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
+    $!WheelUp:: ; Alt + WheelUp [Cicle Up a tab]
+        BlockInput, On
+        SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
+        BlockInput, Off
+    Return
+
+    $!WheelDown:: ; Alt + WheelDown [Cicle Down a tab]
         BlockInput, On
         SendInput, {LControl down}{Tab}{LControl up}
         BlockInput, Off
@@ -330,7 +296,7 @@
 #IfWinActive
 
 #IfWinActive ahk_exe explorer.exe
-    #x:: ; Win + X
+    #x:: ; Win + X [Toggle file extensions]
         explorerRegPath := "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
         explorerRegValue := "HideFileExt"
         explorerEhClass := "CabinetWClass"
@@ -348,9 +314,7 @@
             Send, {F5}
         Else
             PostMessage, 0x111, 28931, 0 , A
-    return
-
-    #v::Send, {AppsKey}i ; Win + V [Opens the folder in VSCode]
+    Return
 #IfWinActive
 
 ; Function to spam Left clicks
@@ -380,7 +344,7 @@ SpamClick(key) {
         } else if (key = "RButton") {
             MouseClick, Right
         } else {
-            return ; Exit function if invalid key is provided
+            Return ; Exit function if invalid key is provided
         }
     }
 }
@@ -457,6 +421,7 @@ RandomSleep(min, max){
     Sleep %r%
     Return
 }
+
 ; ^ Ctrl
 ; ! Alt
 ; + Shift

@@ -11,15 +11,15 @@
 ;screenColor_arg ..... RGB Hex background color for the hiding GUI
 
 !F1::
-    LockKeyAndMouse()
+    LockKeyAndMouse() ; Disable all keyboard keys and mouse buttons
 Return
 
 !F2::
-    UnlockKeyAndMouse()
+    UnlockKeyAndMouse() ; Enable all keyboard keys and mouse buttons
 Return
 
 !F3::
-    LockKeyMouseAndScreen()
+    LockKeyMouseAndScreen() ; Disable keyboard mouse and add a black screen
 Return
 
 LockKeyAndMouse(){
@@ -98,30 +98,30 @@ Lock(lockKeyboard_arg:=false, hideScreen_arg:=false, displayOnce_arg:=false, mou
             Progress, Off
     }
     Block_Input:
-        if (displayOnce_var != 1)
-        {
-            if (message_var != "") {
-                if (lockKeyboard_var || lockMouse_var)
-                    Progress, b1 zh0 fm14,, %message_var%
-                else
-                    Progress, b1 zh0 fm14,, %message_var%
-                SetTimer, TimeoutTimer, % -timeout_arg*1000
-            }
+    if (displayOnce_var != 1)
+    {
+        if (message_var != "") {
+            if (lockKeyboard_var || lockMouse_var)
+                Progress, b1 zh0 fm14,, %message_var%
             else
-                Progress, Off
-        }
-        ;------------------
-        if (hideScreen_var = 1)
-        {
-            Gui screen: -Caption
-            Gui screen: Color, % screenColor_arg
-            Gui screen: Show, x0 y0 h74 w%a_screenwidth% h%a_screenheight%, New GUI Window
+                Progress, b1 zh0 fm14,, %message_var%
+            SetTimer, TimeoutTimer, % -timeout_arg*1000
         }
         else
-            gui screen: Hide
+            Progress, Off
+    }
+    ;------------------
+    if (hideScreen_var = 1)
+    {
+        Gui screen: -Caption
+        Gui screen: Color, % screenColor_arg
+        Gui screen: Show, x0 y0 h74 w%a_screenwidth% h%a_screenheight%, New GUI Window
+    }
+    else
+        gui screen: Hide
 
     Return
     TimeoutTimer:
-        Progress, Off
+    Progress, Off
     Return
 }

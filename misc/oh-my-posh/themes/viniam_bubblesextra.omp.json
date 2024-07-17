@@ -7,11 +7,24 @@
       "alignment": "right",
       "segments": [
         {
+          "type": "executiontime",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#AEA4BF",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "\udb84\udfab {{ .FormattedMs }}",
+          "properties": {
+            "style": "austin",
+            "threshold": 150
+          }
+        },
+        {
           "type": "shell",
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#C792EA",
-          "leading_diamond": "\ue0b6",
+          "leading_diamond": " \ue0b6",
           "trailing_diamond": "\ue0b4",
           "template": "\uf2bd {{ .UserName }}[{{ .Name }}]"
         },
@@ -95,24 +108,11 @@
       "newline": true,
       "segments": [
         {
-          "type": "executiontime",
-          "style": "diamond",
-          "background": "#29315A",
-          "foreground": "#AEA4BF",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "template": "{{ .FormattedMs }}",
-          "properties": {
-            "style": "austin",
-            "threshold": 150
-          }
-        },
-        {
           "type": "path",
           "style": "diamond",
           "background": "#29315A",
           "foreground": "#FF5370",
-          "leading_diamond": " \ue0b6",
+          "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
           "template": "\ue5ff {{ path .Path .Location }} \u276f",
           "properties": {

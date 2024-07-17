@@ -36,7 +36,7 @@ LockKeyMouseAndScreen(){
     hideScreen:= true
     displayOnce:= false
     lockMouseMode:= 1
-    message:= "Keyboard, Mouse & Screen`nLocked`n!F1 to Unlock"
+    message:= "Keyboard, Mouse & Screen`nLocked"
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable keyboard mouse and screen
 }
 

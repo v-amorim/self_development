@@ -12,8 +12,7 @@
 1. Go to your WindowsPowerShell folder and paste the contents of `Microsoft.PowerShell_profile.ps1` in the beginning of the file:
 
    ```powershell
-   cd ~\Documents\WindowsPowerShell\
-   code Microsoft.PowerShell_profile.ps1
+   code $PROFILE
    ```
 
 1. Paste these lines at the start of the file:
@@ -29,17 +28,18 @@
    . $PROFILE
    ```
 
-1. To get the latest versions whenever there's an update, run:
-
-   ```powershell
-      winget upgrade JanDeDobbeleer.OhMyPosh -s winget
-      winget upgrade --all # Or this, to update all
-   ```
-
-This can fix some terminal erros:
+1. To enable auto suggestions, run:
 
 ```powershell
    Install-Module PsReadLine -Force
+   Install-Module -Name Terminal-Icons -Repository PSGallery
+```
+
+To get the latest versions whenever there's an update, run:
+
+```powershell
+   winget upgrade JanDeDobbeleer.OhMyPosh -s winget
+   winget upgrade --all # Or this, to update all
 ```
 
 ## Linux

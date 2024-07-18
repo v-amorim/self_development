@@ -1,5 +1,9 @@
 ﻿; https://www.autohotkey.com/boards/viewtopic.php?t=33925
+#Persistent
 #SingleInstance force
+
+AutoLock := false
+isLocked := false
 
 ;lockKeyboard_arg .... Disable/enable keyboard [true/false]
 ;mouse=1 ............. Disable all mouse buttons
@@ -15,11 +19,44 @@
 Return
 
 !F2::
-    UnlockKeyAndMouse() ; Enable all keyboard keys and mouse buttons
+    AutoLock := !AutoLock
+    isLocked := false
+
+    if (AutoLock) {
+        SetTimer, ShowIdleTime, 1000
+    } else {
+        SetTimer, ShowIdleTime, Off
+        Tooltip
+    }
+
+    UnlockKeyAndMouse(AutoLock ? "ON" : "OFF") ; Enable all keyboard keys and mouse buttons
 Return
 
 !F3::
     LockKeyMouseAndScreen() ; Disable keyboard mouse and add a black screen
+Return
+
+ShowIdleTime:
+    IdleTime := A_TimeIdle
+    IdleSeconds := Round(IdleTime / 1000, 1)
+
+    CoordMode, ToolTip, Screen
+    Padding := 1
+    RightmostX := A_ScreenWidth - Padding
+    BottomY := A_ScreenHeight - Padding
+
+    if (IdleSeconds > 5) {
+        Tooltip, Idle: %IdleSeconds%s, RightmostX, BottomY
+        WinSet, Transparent, 100, ahk_class tooltips_class32 ; Set transparency level (0-255)
+
+        if (!isLocked) {
+            LockKeyMouseAndScreen()
+            isLocked := true
+        }
+    } else {
+        Tooltip
+        isLocked := false
+    }
 Return
 
 LockKeyAndMouse(){
@@ -40,12 +77,12 @@ LockKeyMouseAndScreen(){
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable keyboard mouse and screen
 }
 
-UnlockKeyAndMouse(){
+UnlockKeyAndMouse(AutoLockStatus){
     lockKeyboard:= false
     hideScreen:= false
     displayOnce:= false
     lockMouseMode:= 0
-    message:= "Keyboard & Mouse`nUnlocked"
+    message:= "Keyboard & Mouse`nUnlocked`nAuto Lock: " . AutoLockStatus
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Enable all keyboard keys and mouse buttons
 }
 

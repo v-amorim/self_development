@@ -38,7 +38,7 @@ Return
     BlockInput Off
 Return
 
-#MButton:: ; Windows + Middle Mouse Button [Mute]
+#Pause:: ; Windows + Pause [Mute]
     BlockInput On
     SendInput, {Volume_Mute}
     toggle_icon = 1

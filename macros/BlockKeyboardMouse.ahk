@@ -19,6 +19,14 @@ isLocked := false
 Return
 
 !F2::
+    UnlockKeyAndMouse(AutoLock ? "ON" : "OFF") ; Enable all keyboard keys and mouse buttons
+Return
+
+!F3::
+    LockKeyMouseAndScreen() ; Disable keyboard mouse and add a black screen
+Return
+
+!Pause::
     AutoLock := !AutoLock
     isLocked := false
 
@@ -30,10 +38,6 @@ Return
     }
 
     UnlockKeyAndMouse(AutoLock ? "ON" : "OFF") ; Enable all keyboard keys and mouse buttons
-Return
-
-!F3::
-    LockKeyMouseAndScreen() ; Disable keyboard mouse and add a black screen
 Return
 
 ShowIdleTime:

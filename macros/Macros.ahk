@@ -6,7 +6,7 @@ Menu, Tray, Icon, Logo.ico
 #Include WinActive.ahk
 #Include ExplorerTools.ahk
 #Include Screenshot.ahk
-#Include BlockKBnM.ahk
+#Include BlockKeyboardMouse.ahk
 #Include VolumeControl.ahk
 
 $^+!P:: RunPoEDependencies() ; Ctrl + Shift + Alt + P [Runs necessary Path of Exile (PoE) related applications]

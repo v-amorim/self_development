@@ -43,9 +43,16 @@ Return
 !#WheelUp:: ; Alt + Windows + WheelUp [Window Transparency Up]
     BlockInput On
     WinGet, currentTransparency, Transparent, A
+
+    ; Ensure currentTransparency is initialized properly
+    if (currentTransparency = "")
+        currentTransparency := 255 ; Assume full transparency if not initialized
+
     newTransparency := currentTransparency + 25 ; Increase transparency by 25 (adjust as needed)
-    if (newTransparency <= 0)
-        newTransparency := 0
+
+    if (newTransparency > 255)
+        newTransparency := 255
+
     WinSet, Transparent, %newTransparency%, A ; Set new transparency
     BlockInput Off
 Return
@@ -70,9 +77,16 @@ Return
 !#WheelDown:: ; Alt + Windows + WheelDown [Window Transparency Down]
     BlockInput On
     WinGet, currentTransparency, Transparent, A
-    newTransparency := currentTransparency - 25 ; Increase transparency by 25 (adjust as needed)
-    if (newTransparency > 255)
-        newTransparency := 255
+
+    ; Ensure currentTransparency is initialized properly
+    if (currentTransparency = "")
+        currentTransparency := 255 ; Assume full transparency if not initialized
+
+    newTransparency := currentTransparency - 25 ; Decrease transparency by 25 (adjust as needed)
+
+    if (newTransparency < 0)
+        newTransparency := 0
+
     WinSet, Transparent, %newTransparency%, A ; Set new transparency
     BlockInput Off
 Return

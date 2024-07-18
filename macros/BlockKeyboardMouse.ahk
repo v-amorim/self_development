@@ -1,4 +1,4 @@
-﻿; https://www.autohotkey.com/boards/viewtopic.php?t=33925
+﻿; Initial Idea from: https://www.autohotkey.com/boards/viewtopic.php?t=33925
 #Persistent
 #SingleInstance force
 

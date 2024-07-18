@@ -1,9 +1,11 @@
-﻿; Initial Idea from: https://www.autohotkey.com/boards/viewtopic.php?t=33925
+﻿; Adapted from: https://www.autohotkey.com/boards/viewtopic.php?t=33925
 #Persistent
 #SingleInstance force
 
 AutoLock := false
 isLocked := false
+
+global AutoLock
 
 ;lockKeyboard_arg .... Disable/enable keyboard [true/false]
 ;mouse=1 ............. Disable all mouse buttons
@@ -19,7 +21,7 @@ isLocked := false
 Return
 
 !F2::
-    UnlockKeyAndMouse(AutoLock ? "ON" : "OFF") ; Enable all keyboard keys and mouse buttons
+    UnlockKeyAndMouse() ; Enable all keyboard keys and mouse buttons
 Return
 
 !F3::
@@ -37,7 +39,7 @@ Return
         Tooltip
     }
 
-    UnlockKeyAndMouse(AutoLock ? "ON" : "OFF") ; Enable all keyboard keys and mouse buttons
+    UnlockKeyAndMouse() ; Enable all keyboard keys and mouse buttons
 Return
 
 ShowIdleTime:
@@ -81,7 +83,8 @@ LockKeyMouseAndScreen(){
     Lock(lockKeyboard, hideScreen, displayOnce, lockMouseMode, message) ; Disable keyboard mouse and screen
 }
 
-UnlockKeyAndMouse(AutoLockStatus){
+UnlockKeyAndMouse(){
+    AutoLockStatus:= AutoLock ? "ON" : "OFF"
     lockKeyboard:= false
     hideScreen:= false
     displayOnce:= false

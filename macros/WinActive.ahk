@@ -188,7 +188,7 @@
     $^WheelUp::SpamRightClicks() ; Ctrl+WheelUp hotkey
 #IfWinActive
 
-#IfWinActive ahk_exe PathOfExile.exe ; https://github.com/nidark/Poe-Companion/blob/master/PoeCompanion.ahk
+#IfWinActive ahk_exe PathOfExile.exe ; Some stuff were adapted from: https://github.com/nidark/Poe-Companion/blob/master/PoeCompanion.ahk
     $^Numpad1:: ; Ctrl + Numpad1
         Sendinput, {Text}%pass_poe_va%
     Return

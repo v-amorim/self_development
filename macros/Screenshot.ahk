@@ -1,9 +1,11 @@
-﻿;https://www.autohotkey.com/boards/viewtopic.php?t=63872
-#NoEnv
+﻿; Adapted from: https://www.autohotkey.com/boards/viewtopic.php?t=63872
 #SingleInstance, Force
 
-; ^Printscreen:: ScreenPrintScreen()
-#Printscreen:: SnipPrintScreen()
+global ahk_screenshot_path, ahk_screenshot_clipboard_path, desktop_path
+
+^Printscreen:: ScreenPrintScreen() ; Ctrl + Printscreen [Prints the current monitor screen only]
+#Printscreen:: SnipPrintScreen() ; Win + Printscreen [Sends the current clipboard printscreen to a desired folder]
+
 !+F11::
     BlockInput, On
     SnipPrintScreen()
@@ -19,12 +21,20 @@ Return
 ScreenPrintScreen(){
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
-    Screenshot("C:\Users\Amorim\Pictures\AHK Screenshots\" CurrentDate "_" CurrentTime ".png")
+
+    ; Construct file path using the read variable
+    FilePath := ahk_screenshot_path . CurrentDate "_" CurrentTime ".png"
+
+    ; Debugging: Print out the FilePath being used
+    MsgBox, FilePath: %FilePath%
+
+    ; Take screenshot
+    Screenshot(FilePath)
     Return
 }
 
 SnipPrintScreen(){
-    Critical, OnA
+    Critical, On
     hBM := 0
     HotKey, %A_ThisHotKey%, Off
     hBM := CB_hBMP_Get()
@@ -34,19 +44,22 @@ SnipPrintScreen(){
     {
         CurrentDate := A_YYYY "-" A_MM "-" A_DD
         CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
-        sFile := "C:\Users\Amorim\Pictures\AHK Screenshots\Clipboard\" CurrentDate "_" CurrentTime ".png"
-        dFile := "C:\Users\Amorim\Desktop\" CurrentDate "_" CurrentTime ".png"
+
+        ; Construct file paths using the read variables
+        ScreenshotFile := ahk_screenshot_clipboard_path . CurrentDate "_" CurrentTime ".png"
+        DesktopFile := desktop_path . CurrentDate "_" CurrentTime ".png"
+
+        ; Debugging: Print out the ScreenshotFile and DesktopFile being used
+        MsgBox, ScreenshotFile: %ScreenshotFile%
+        MsgBox, DesktopFile: %DesktopFile%
+
         GDIP("Startup")
-        SavePicture(hBM, sFile)
-        SavePicture(hBM, dFile)
+        SavePicture(hBM, ScreenshotFile)
+        SavePicture(hBM, DesktopFile)
         GDIP("Shutdown")
-        DllCall( "DeleteObject", "Ptr",hBM )
-        ; If FileExist(sFile)
-        ; {
-        ;     SoundBeep
-        ;     Run %sFile%
-        ; }
+        DllCall("DeleteObject", "Ptr", hBM)
     }
+
     HotKey, %A_ThisHotKey%, On
     Return
 }

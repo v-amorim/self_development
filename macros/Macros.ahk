@@ -2,12 +2,15 @@
 Menu, Tray, Icon, Logo.ico
 
 #Include Gdip.ahk
+
+#Include LoadEnv.ahk
 #Include Hotstrings.ahk
 #Include WinActive.ahk
-#Include ExplorerTools.ahk
+#Include WindowsTools.ahk
 #Include Screenshot.ahk
 #Include BlockKeyboardMouse.ahk
-#Include VolumeControl.ahk
+
+global awakened_poe_trade_path, poe_lurker_path, path_of_building_path
 
 $^+!P:: RunPoEDependencies() ; Ctrl + Shift + Alt + P [Runs necessary Path of Exile (PoE) related applications]
 $!O:: GetMousePosition() ; Alt + O [Gets the current mouse position and color]
@@ -24,9 +27,9 @@ Return
 
 ; Runs necessary Path of Exile (PoE) related applications.
 RunPoEDependencies(){
-    Run C:\Users\%A_UserName%\AppData\Local\Programs\Awakened PoE Trade\Awakened PoE Trade.exe
-    Run C:\Users\%A_UserName%\AppData\Local\PoeLurker\PoeLurker.exe
-    Run C:\Users\%A_UserName%\AppData\Roaming\Path of Building Community\Path of Building.exe
+    Run, %awakened_poe_trade_path%
+    Run, %poe_lurker_path%
+    Run, %path_of_building_path%
     Return
 }
 

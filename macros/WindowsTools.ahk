@@ -44,16 +44,15 @@ Return
     BlockInput On
     WinGet, currentTransparency, Transparent, A
 
-    ; Ensure currentTransparency is initialized properly
     if (currentTransparency = "")
-        currentTransparency := 255 ; Assume full transparency if not initialized
+        currentTransparency := 255
 
-    newTransparency := currentTransparency + 25 ; Increase transparency by 25 (adjust as needed)
+    newTransparency := currentTransparency + 10
 
     if (newTransparency > 255)
         newTransparency := 255
 
-    WinSet, Transparent, %newTransparency%, A ; Set new transparency
+    WinSet, Transparent, %newTransparency%, A
     BlockInput Off
 Return
 
@@ -78,16 +77,15 @@ Return
     BlockInput On
     WinGet, currentTransparency, Transparent, A
 
-    ; Ensure currentTransparency is initialized properly
     if (currentTransparency = "")
-        currentTransparency := 255 ; Assume full transparency if not initialized
+        currentTransparency := 255
 
-    newTransparency := currentTransparency - 25 ; Decrease transparency by 25 (adjust as needed)
+    newTransparency := currentTransparency - 10
 
     if (newTransparency < 0)
         newTransparency := 0
 
-    WinSet, Transparent, %newTransparency%, A ; Set new transparency
+    WinSet, Transparent, %newTransparency%, A
     BlockInput Off
 Return
 
@@ -99,19 +97,19 @@ Return
 Return
 
 !#Pause:: ; Alt+ Windows + Pause button [Reset Window Transparency]
-    WinGet, windows, List ; Get list of all windows
+    WinGet, windows, List
     Loop, %windows%
     {
         WinID := windows%A_Index%
-        WinSet, Transparent, 255, ahk_id %WinID% ; Set transparency to 255 (fully opaque)
+        WinSet, Transparent, 255, ahk_id %WinID%
     }
     ToolTip, Windows's transparency reset
     SetTimer, RemoveToolTip, 1000
 Return
 
 RemoveToolTip:
-    ToolTip ; Remove the tooltip
-    SetTimer, RemoveToolTip, Off ; Turn off the timer
+    ToolTip
+    SetTimer, RemoveToolTip, Off
 Return
 
 vmeter: ; show volume meter, adapted from: https://www.autohotkey.com/board/topic/10240-very-nice-simple-but-good-looking-volume-control/

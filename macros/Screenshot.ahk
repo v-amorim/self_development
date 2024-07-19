@@ -21,14 +21,7 @@ Return
 ScreenPrintScreen(){
     CurrentDate := A_YYYY "-" A_MM "-" A_DD
     CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
-
-    ; Construct file path using the read variable
     FilePath := ahk_screenshot_path . CurrentDate "_" CurrentTime ".png"
-
-    ; Debugging: Print out the FilePath being used
-    MsgBox, FilePath: %FilePath%
-
-    ; Take screenshot
     Screenshot(FilePath)
     Return
 }
@@ -45,13 +38,8 @@ SnipPrintScreen(){
         CurrentDate := A_YYYY "-" A_MM "-" A_DD
         CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
 
-        ; Construct file paths using the read variables
         ScreenshotFile := ahk_screenshot_clipboard_path . CurrentDate "_" CurrentTime ".png"
         DesktopFile := desktop_path . CurrentDate "_" CurrentTime ".png"
-
-        ; Debugging: Print out the ScreenshotFile and DesktopFile being used
-        MsgBox, ScreenshotFile: %ScreenshotFile%
-        MsgBox, DesktopFile: %DesktopFile%
 
         GDIP("Startup")
         SavePicture(hBM, ScreenshotFile)

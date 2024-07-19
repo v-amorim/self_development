@@ -12,7 +12,7 @@ Menu, Tray, Icon, Logo.ico
 
 global awakened_poe_trade_path, poe_lurker_path, path_of_building_path
 
-$^+!P:: RunPoEDependencies() ; Ctrl + Shift + Alt + P [Runs necessary Path of Exile (PoE) related applications]
+$#^+!P:: RunPoEDependencies() ; Win + Ctrl + Shift + Alt + P [Runs necessary Path of Exile (PoE) related applications]
 $!O:: GetMousePosition() ; Alt + O [Gets the current mouse position and color]
 
 +#F12:: ; Shift + Win + F12 [Reloads the script]

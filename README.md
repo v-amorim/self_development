@@ -40,7 +40,7 @@ The LaTeX templates are written for various purposes such as creating documents,
 [README_self_development]: README.md
 [README_indesign_scripts]: indesign_scripts/README.md
 [README_macros]: macros/README.md
-[README_config]: misc/README.md
+[README_config]: config/README.md
 [README_python]: python/README.md
 [README_ruby]: ruby/README.md
 [README_tex]: tex/README.md

@@ -12,9 +12,15 @@ Where I keep my mpv scripts and configurations. Also contains my SVP configurati
 
 ### oh-my-posh
 
+Contains my oh-my-posh theme configurations, together with a guide on how to install and configure it.
+
 ### wterminal
 
+Contains my Windows Terminal configurations and theme.
+
 ### yt-dlp
+
+Contains my yt-dlp configurations and guide on how to install it.
 
 <!-- URLS -->
 

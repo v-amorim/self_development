@@ -1,4 +1,6 @@
-# Setup
+# Oh My Posh
+
+This is my custom theme for [Oh My Posh](https://ohmyposh.dev/), a prompt theming engine for any shell.
 
 ## Windows
 

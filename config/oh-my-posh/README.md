@@ -53,7 +53,9 @@ To get the latest versions whenever there's an update, run:
 1. Install [Oh My Posh](https://ohmyposh.dev/docs/installation/linux):
 
    ```bash
-   curl -s https://ohmyposh.dev/install.sh | sudo bash -s
+   sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
+   sudo chmod +x /usr/local/bin/oh-my-posh
+   sudo apt install unzip; curl -s https://ohmyposh.dev/install.sh | sudo bash -s
    ```
 
 1. Go to your `.bashrc` file:

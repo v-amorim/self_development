@@ -9,7 +9,7 @@ PowerShell Profile Help
 =======================
 Use -<command> for more description on the command.
 
-[alias], [.....], [....], [...], [..], [a], [cls], [d], [flushdns], [ga], [gc], [gcl], [gco], [gd], [getip], [gf], [gforce], [gl], [glog], [gma], [gp], [gr], [grep], [greset], [gs], [h], [hist], [ls], [mkdir], [p], [pc], [pcall], [pci], [pe311], [pe38], [pe], [peu], [pf], [pm], [pp], [ptc], [pts], [s], [sysinfo], [uomp], [uptime], [which], [winutil], [wsls], [y], [ys]
+[.....], [....], [...], [..], [a], [add_to_path], [alias], [cls], [d], [flushdns], [ga], [gc], [gcl], [gco], [gd], [getip], [gf], [gforce], [gl], [glog], [gma], [gp], [gr], [grep], [greset], [gs], [h], [hist], [ls], [mkdir], [p], [pc], [pcall], [pci], [pe311], [pe38], [pe], [peu], [pf], [pm], [pp], [ptc], [pts], [s], [sysinfo], [uomp], [uptime], [which], [winutil], [wsls], [y], [ys]
 "@
 }
 function -alias  { "List all aliases" }
@@ -68,6 +68,23 @@ function gr     { git remote $args }             ; function -gr     { "Manage th
 function greset { git reset --hard origin/main}  ; function -greset { "See the current status of the repository [git status]" }
 function gs     { git status }                   ; function -gs     { "Reset the current branch to the origin/main branch [git reset --hard origin/main]" }
 
+##--- Multi-line Functions
+function add_to_path {
+    param (
+        [string]$filePath
+    )
+
+    $currentPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+    $directory = [System.IO.Path]::GetDirectoryName($filePath)
+
+    if ($currentPath -notlike "*$directory*") {
+        $newPath = "$currentPath;$directory"
+        [System.Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
+        Write-Output "Added $directory to PATH."
+    } else {
+        Write-Output "$directory is already in PATH."
+    }
+} ; function -add_to_path { "Add a directory to the PATH [add_to_path <directory>]" }
 
 ##--- Functions adapted/retrieved from: https://github.com/ChrisTitusTech/powershell-profile
 

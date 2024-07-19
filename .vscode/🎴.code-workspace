@@ -5,16 +5,16 @@
       "path": "../",
     },
     {
+      "name": "Config",
+      "path": "../config"
+    },
+    {
       "name": "Indesign Scripts",
       "path": "../indesign_scripts"
     },
     {
       "name": "Macros",
       "path": "../macros"
-    },
-    {
-      "name": "Miscellaneous",
-      "path": "../misc"
     },
     {
       "name": "Python",

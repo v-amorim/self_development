@@ -1,9 +1,9 @@
 ![][waves_top]
 
 <div  align="center">
-   <h1>🎴Self Development🎴</h1>
+   <h1>🎴Self Development - Macros🎴</h1>
 
-[Home][README_self_development] | [Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Misc][README_misc] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
+[Home][README_self_development] | [Config][README_config] | [Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
 
 </div>
 
@@ -94,7 +94,7 @@ If it didn't work, run the `Profile.bat` and copy the `Profile.ps1` to the folde
 [README_self_development]: ../README.md
 [README_indesign_scripts]: ../indesign_scripts/README.md
 [README_macros]: README.md
-[README_misc]: ../misc/README.md
+[README_config]: ../config/README.md
 [README_python]: ../python/README.md
 [README_ruby]: ../ruby/README.md
 [README_tex]: ../tex/README.md

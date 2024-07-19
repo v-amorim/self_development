@@ -3,7 +3,7 @@
 <div  align="center">
    <h1>🎴Self Development🎴</h1>
 
-[Home][README_self_development] | [Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Misc][README_misc] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
+[Home][README_self_development] | [Config][README_config] | [Indesign Scripts][README_indesign_scripts] | [Macros][README_macros] | [Python][README_python] | [Ruby][README_ruby] | [LaTeX][README_tex]
 
 </div>
 
@@ -19,9 +19,9 @@ The InDesign scripts are written in JavaScript. The scripts are written for vari
 
 The macros are written in AHK. The macros are written for various purposes such as automation, hotkeys, text shortcuts, and window management. The macros are written for Windows.
 
-## [Misc][README_misc]
+## [Config][README_config]
 
-The misc folder contains a collection of scripts or configurations that I use or have written for various purposes.
+The Config folder contains a collection of scripts or configurations that I use or have written for various purposes.
 
 ## [Python][README_python]
 
@@ -40,7 +40,7 @@ The LaTeX templates are written for various purposes such as creating documents,
 [README_self_development]: README.md
 [README_indesign_scripts]: indesign_scripts/README.md
 [README_macros]: macros/README.md
-[README_misc]: misc/README.md
+[README_config]: misc/README.md
 [README_python]: python/README.md
 [README_ruby]: ruby/README.md
 [README_tex]: tex/README.md

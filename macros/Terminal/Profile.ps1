@@ -1,5 +1,5 @@
 ##--- Oh My Posh settings
-oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/misc/oh-my-posh/themes/viniam_bubblesextra.omp.json' | Invoke-Expression
+oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/viniam_bubblesextra.omp.json' | Invoke-Expression
 $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 
 ##--- General shorcuts

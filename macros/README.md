@@ -72,7 +72,13 @@ To add to Windows Terminal, add a `/k path/to/alias.bat` to the end of the `comm
 
 Contains various aliases that are useful for the PowerShell.
 
-To add to Windows Terminal, run the `Profile.bat` and copy the `Profile.ps1` to it.
+You can add it to your PowerShell profile by running the following command, in an elevated (Administrator) PowerShell:
+
+```powershell
+irm "https://raw.githubusercontent.com/v-amorim/self_development/main/macros/PowershellSetup.ps1" | iex
+```
+
+If it didn't work, run the `Profile.bat` and copy the `Profile.ps1` to the folder it opens.
 
 <!-- URLS -->
 

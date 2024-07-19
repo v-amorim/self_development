@@ -101,7 +101,8 @@
           "properties": {
             "fetch_version": true,
             "folder_name_fallback": false
-          }
+          },
+          "max_width": 100
         },
         {
           "type": "python",
@@ -115,7 +116,7 @@
             "fetch_version": true,
             "folder_name_fallback": false
           },
-          "max_width": 100
+          "min_width": 100
         },
         {
           "type": "path",

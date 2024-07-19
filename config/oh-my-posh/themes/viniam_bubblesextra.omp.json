@@ -32,7 +32,18 @@
           "foreground": "#C792EA",
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b0",
-          "template": "\uf2bd {{ .UserName }}[{{ .Name }}]\u2009"
+          "template": "\uf2bd ",
+          "max_width": 100
+        },
+        {
+          "type": "shell",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#C792EA",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b0",
+          "template": "\uf2bd {{ .UserName }}[{{ .Name }}] ",
+          "min_width": 100
         },
         {
           "type": "executiontime",
@@ -46,6 +57,22 @@
             "style": "austin",
             "threshold": 150
           }
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#5DABF3",
+          "leading_diamond": "<transparent,background>\ue0b0</>",
+          "trailing_diamond": "\ue0b0",
+          "template": "{{ if( .UpstreamIcon ) }} {{ url .UpstreamIcon .UpstreamURL }}{{ end }}",
+          "properties": {
+            "branch_max_length": 25,
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "max_width": 100
         },
         {
           "type": "git",

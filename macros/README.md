@@ -58,7 +58,11 @@ Provides various tools that interact with Windows as such:
   - New empty Window
   - New current directory Window, when focused on File Explorer
 
-## Aliases
+### Useful
+
+We don't talk about the useful scripts, but they are useful.
+
+## Terminal
 
 Terminal shortcuts are useful for quick access to various commands. The aliases are written for Windows.
 
@@ -75,7 +79,7 @@ Contains various aliases that are useful for the PowerShell.
 You can add it to your PowerShell profile by running the following command, in an elevated (Administrator) PowerShell:
 
 ```powershell
-irm "https://raw.githubusercontent.com/v-amorim/self_development/main/macros/PowershellSetup.ps1" | iex
+irm "https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/PowershellSetup.ps1" | iex
 ```
 
 If it didn't work, run the `Profile.bat` and copy the `Profile.ps1` to the folder it opens.

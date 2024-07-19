@@ -97,11 +97,25 @@
           "foreground": "#C792EA",
           "leading_diamond": "<transparent,background>\ue0b0</>",
           "trailing_diamond": "\ue0b0",
-          "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}[{{ .Full }}]{{ end }}",
+          "template": " \ue235 {{ if .Venv }}{{ .Venv }}{{ end }}",
           "properties": {
             "fetch_version": true,
             "folder_name_fallback": false
           }
+        },
+        {
+          "type": "python",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#C792EA",
+          "leading_diamond": "<transparent,background>\ue0b0</>",
+          "trailing_diamond": "\ue0b0",
+          "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}[{{ .Full }}]{{ end }}",
+          "properties": {
+            "fetch_version": true,
+            "folder_name_fallback": false
+          },
+          "max_width": 100
         },
         {
           "type": "path",
@@ -113,7 +127,8 @@
           "template": " \ue5ff {{ path .Path .Location }} \uf054",
           "properties": {
             "style": "folder"
-          }
+          },
+          "min_width": 100
         }
       ]
     }

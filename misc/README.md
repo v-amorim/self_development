@@ -6,6 +6,16 @@
 
 The misc folder contains a collection of scripts or configurations that I use or have written for various purposes.
 
+### mpv64
+
+Where I keep my mpv scripts and configurations. Also contains my SVP configurations.
+
+### oh-my-posh
+
+### wterminal
+
+### yt-dlp
+
 <!-- URLS -->
 
 [README_self_development]: ../README.md

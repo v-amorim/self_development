@@ -85,7 +85,6 @@ python/set_time.cmd
 *.hook
 cache/
 misc/mpv64/portable_config/shader/SSimSuperRes Options.txt
-misc/mpv64/portable_config/scripts/run-subtitle_editor.lua
 misc/mpv64/portable_config/script-opts/run_subtitle_editor.conf
 
 # License files

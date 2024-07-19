@@ -67,12 +67,13 @@
           "type": "python",
           "style": "diamond",
           "background": "#29315A",
-          "foreground": "#5DABF3",
+          "foreground": "#C792EA",
           "leading_diamond": "<transparent,background>\ue0b0</>",
           "trailing_diamond": "\ue0b0",
           "template": " \ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}[{{ .Full }}]{{ end }}",
           "properties": {
-            "fetch_version": true
+            "fetch_version": true,
+            "folder_name_fallback": false
           }
         },
         {

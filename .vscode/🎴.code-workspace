@@ -1,0 +1,132 @@
+{
+  "folders": [
+    {
+      "name": "ROOT",
+      "path": "../",
+    },
+    {
+      "name": "Indesign Scripts",
+      "path": "../indesign_scripts"
+    },
+    {
+      "name": "Macros",
+      "path": "../macros"
+    },
+    {
+      "name": "Miscellaneous",
+      "path": "../misc"
+    },
+    {
+      "name": "Python",
+      "path": "../python"
+    },
+    {
+      "name": "Ruby",
+      "path": "../ruby"
+    },
+    {
+      "name": "LaTeX",
+      "path": "../tex"
+    }
+  ],
+  "settings": {
+    "[ahk]": {
+      "editor.defaultFormatter": "mark-wiemer.vscode-autohotkey-plus-plus"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features",
+      "editor.tabSize": 2
+    },
+    "[lua]": {
+      "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    },
+    "[markdown]": {
+      "editor.tabSize": 3
+    },
+    "[python]": {
+      "editor.codeActionsOnSave": {
+        "notebook.source.fixAll": "explicit",
+        "notebook.source.organizeImports": "explicit",
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+      },
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.formatOnSave": true,
+      "editor.formatOnType": true,
+      "editor.rulers": [ 80, 88, 120 ],
+      "editor.tabSize": 4
+    },
+    "[yaml]": {
+      "editor.tabSize": 4
+    },
+    "codesnap.showWindowTitle": true,
+    "codesnap.shutterAction": "copy",
+    "debug.console.fontFamily": "FiraCode Nerd Font Mono",
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.codeLensFontFamily": "FiraCode Nerd Font Mono",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.fontFamily": "FiraCode Nerd Font Mono",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "editor.formatOnSave": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.hover.delay": 750,
+    "editor.hover.hidingDelay": 10,
+    "editor.inlineSuggest.enabled": true,
+    "editor.language.colorizedBracketPairs": [ [ "[", "]" ], [ "(", ")" ], [ "{", "}" ], [ ":" ] ],
+    "editor.minimap.maxColumn": 50,
+    "editor.minimap.renderCharacters": false,
+    "editor.mouseWheelZoom": true,
+    "editor.quickSuggestionsDelay": 750,
+    "editor.stickyScroll.enabled": false,
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "errorLens.enabled": true,
+    "errorLens.fontFamily": "FiraCode Nerd Font Mono",
+    "errorLens.onSaveTimeout": 4000,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.exclude": { },
+    "files.trimTrailingWhitespace": true,
+    "json.format.keepLines": true,
+    "notebook.diff.ignoreMetadata": true,
+    "notebook.diff.ignoreOutputs": true,
+    "notebook.formatOnSave.enabled": true,
+    "notebook.lineNumbers": "on",
+    "ruff.fixAll": true,
+    "ruff.format.args": [ "--line-length=120" ],
+    "ruff.lineLength": 120,
+    "ruff.organizeImports": true,
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.hideOnStartup": "always",
+    "window.zoomLevel": -1,
+    "workbench.colorTheme": "Darkam Theme",
+    "workbench.iconTheme": "material-icon-theme"
+  },
+  "extensions": {
+    "recommendations": [
+      "2noscript.vscodesnapshot",
+      "adam-bender.commit-message-editor",
+      "charliermarsh.ruff",
+      "dzhavat.bracket-pair-toggler",
+      "eamodio.gitlens",
+      "github.vscode-pull-request-github",
+      "kamikillerto.vscode-colorize",
+      "ms-python.python",
+      "ms-toolsai.jupyter",
+      "ms-vscode-remote.remote-wsl",
+      "oderwat.indent-rainbow",
+      "pkief.material-icon-theme",
+      "pranshuagrawal.toggle-case",
+      "usernamehw.errorlens",
+      "visualstudioexptteam.vscodeintellicode",
+      "wakatime.vscode-wakatime",
+      "wraith13.unsaved-files-vscode"
+    ]
+  }
+}

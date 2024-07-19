@@ -128,8 +128,7 @@
           "template": " \ue5ff {{ path .Path .Location }} \uf054",
           "properties": {
             "style": "folder"
-          },
-          "min_width": 100
+          }
         }
       ]
     }

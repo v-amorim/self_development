@@ -2,6 +2,10 @@
 
 This is my custom theme for [Oh My Posh](https://ohmyposh.dev/), a prompt theming engine for any shell.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9f36e26c-8527-42c2-b709-9c9067bbb266" width="100%"/>
+</p>
+
 ## Windows
 
 1. Install [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)

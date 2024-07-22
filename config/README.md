@@ -11,6 +11,10 @@
 
 The Config folder contains a collection of scripts or configurations that I use or have written for various purposes.
 
+### [bash][bash]
+
+Contains my bash configurations, aliases and useful guides.
+
 ### [mpv64][mpv64]
 
 Where I keep my MPV scripts and configurations. Also contains my SVP configurations.
@@ -40,6 +44,7 @@ Contains my yt-dlp configurations and guide on how to install it.
 
 <!-- URLS -->
 
+[bash]: ./bash/README.md
 [mpv64]: ./mpv64/README.md
 [oh-my-posh]: ./oh-my-posh/README.md
 [wterminal]: ./wterminal/README.md

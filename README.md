@@ -24,15 +24,17 @@ The macros are written in AHK. The macros are written for various purposes such 
 The Config folder contains a collection of scripts or configurations that I use or have written for various purposes. As an example: Oh My Posh terminal theme, MPV configuration
 
 My Oh My Posh configuration:
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/962a3d94-59ce-440b-9d41-3b55b59fcd5a" width="100%"/>
 </p>
 
 My MPV configuration:
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/8a902a84-a526-49f9-b456-066a2b727981" width="49%"/>
   &nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/> 
+  <img src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/>
 </p>
 
 ## [Python][README_python]

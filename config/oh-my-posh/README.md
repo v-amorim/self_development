@@ -36,16 +36,16 @@ This is my custom theme for [Oh My Posh](https://ohmyposh.dev/), a prompt themin
 
 1. To enable auto suggestions, run:
 
-```powershell
+   ```powershell
    Install-Module PsReadLine -Force
    Install-Module -Name Terminal-Icons -Repository PSGallery
-```
+   ```
 
 To get the latest versions whenever there's an update, run:
 
 ```powershell
-   winget upgrade JanDeDobbeleer.OhMyPosh -s winget
-   winget upgrade --all # Or this, to update all
+winget upgrade JanDeDobbeleer.OhMyPosh -s winget
+winget upgrade --all # Or this, to update all
 ```
 
 ## Linux
@@ -79,11 +79,11 @@ To get the latest versions whenever there's an update, run:
 1. To get the latest versions whenever there's an update, run:
 
    ```bash
-      curl -s https://ohmyposh.dev/install.sh | sudo bash -s
+   curl -s https://ohmyposh.dev/install.sh | sudo bash -s
    ```
 
 This can fix the auto update requiring sudo:
 
 ```bash
-   sudo chown -R $(whoami) /usr/local/bin
+sudo chown -R $(whoami) /usr/local/bin
 ```

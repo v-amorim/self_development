@@ -33,10 +33,10 @@ Disable_Keys(BOOL := False) { ; (en/dis) -able all keys
         Hotkey, *%KeyName%, Block_Input, %Block% UseErrorLevel
 
     Block_Input:
-        If (Block = "On") {
-            Progress, B1 ZH0, %Message%
-            Sleep, 2000
-            Progress, Off
-        }
+    If (Block = "On") {
+        Progress, B1 ZH0, %Message%
+        Sleep, 2000
+        Progress, Off
+    }
     Return
 }

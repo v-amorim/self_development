@@ -9,7 +9,7 @@ Paste the `/portable_config` folder into your `./portable_config/mpv/` folder, d
 <p align="center">
   <img src="https://github.com/user-attachments/assets/8a902a84-a526-49f9-b456-066a2b727981" width="49%"/>
   &nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/> 
+  <img src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/>
 </p>
 
 ## Main folder

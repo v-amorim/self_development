@@ -16,31 +16,31 @@ do
 	-- this function was taken from https://github.com/mpvnet-player/mpv.net/issues/575#issuecomment-1817413401
 	local winapi = nil
 
-	if state.platform == 'windows' and config.refine.sorting then
+	if state.platform == "windows" and config.refine.sorting then
 		-- is_ffi_loaded is false usually means the mpv builds without luajit
-		local is_ffi_loaded, ffi = pcall(require, 'ffi')
+		local is_ffi_loaded, ffi = pcall(require, "ffi")
 
 		if is_ffi_loaded then
 			winapi = {
 				ffi = ffi,
 				C = ffi.C,
 				CP_UTF8 = 65001,
-				shlwapi = ffi.load('shlwapi'),
+				shlwapi = ffi.load("shlwapi"),
 			}
 
 			-- ffi code from https://github.com/po5/thumbfast, Mozilla Public License Version 2.0
-			ffi.cdef [[
+			ffi.cdef([[
 				int __stdcall MultiByteToWideChar(unsigned int CodePage, unsigned long dwFlags, const char *lpMultiByteStr,
 				int cbMultiByte, wchar_t *lpWideCharStr, int cchWideChar);
 				int __stdcall StrCmpLogicalW(wchar_t *psz1, wchar_t *psz2);
-			]]
+			]])
 
 			winapi.utf8_to_wide = function(utf8_str)
 				if utf8_str then
 					local utf16_len = winapi.C.MultiByteToWideChar(winapi.CP_UTF8, 0, utf8_str, -1, nil, 0)
 
 					if utf16_len > 0 then
-						local utf16_str = winapi.ffi.new('wchar_t[?]', utf16_len)
+						local utf16_str = winapi.ffi.new("wchar_t[?]", utf16_len)
 
 						if winapi.C.MultiByteToWideChar(winapi.CP_UTF8, 0, utf8_str, -1, utf16_str, utf16_len) > 0 then
 							return utf16_str
@@ -48,7 +48,7 @@ do
 					end
 				end
 
-				return ''
+				return ""
 			end
 		end
 	end
@@ -57,19 +57,20 @@ do
 	-- alphanum sorting for humans in Lua
 	-- http://notebook.kulchenko.com/algorithms/alphanumeric-natural-sorting-for-humans-in-lua
 	local function padnum(n, d)
-		return #d > 0 and ('%03d%s%.12f'):format(#n, n, tonumber(d) / (10 ^ #d))
-			or ('%03d%s'):format(#n, n)
+		return #d > 0 and ("%03d%s%.12f"):format(#n, n, tonumber(d) / (10 ^ #d)) or ("%03d%s"):format(#n, n)
 	end
 
 	local function sort_lua(strings)
 		local tuples = {}
 		for i, f in ipairs(strings) do
-			tuples[i] = {f:lower():gsub('0*(%d+)%.?(%d*)', padnum), f}
+			tuples[i] = { f:lower():gsub("0*(%d+)%.?(%d*)", padnum), f }
 		end
 		table.sort(tuples, function(a, b)
 			return a[1] == b[1] and #b[2] < #a[2] or a[1] < b[1]
 		end)
-		for i, tuple in ipairs(tuples) do strings[i] = tuple[2] end
+		for i, tuple in ipairs(tuples) do
+			strings[i] = tuple[2]
+		end
 		return strings
 	end
 
@@ -93,11 +94,17 @@ end
 ---@param callback? fun() Called either on animation end, or when animation is killed.
 function tween(from, to, setter, duration_or_callback, callback)
 	local duration = duration_or_callback
-	if type(duration_or_callback) == 'function' then callback = duration_or_callback end
-	if type(duration) ~= 'number' then duration = options.animation_duration end
+	if type(duration_or_callback) == "function" then
+		callback = duration_or_callback
+	end
+	if type(duration) ~= "number" then
+		duration = options.animation_duration
+	end
 
 	local current, done, timeout = from, false, nil
-	local get_to = type(to) == 'function' and to or function() return to --[[@as number]] end
+	local get_to = type(to) == "function" and to or function()
+		return to --[[@as number]]
+	end
 	local distance = math.abs(get_to() - current)
 	local cutoff = distance * 0.01
 	local target_ticks = (math.max(duration, 1) / (state.render_delay * 1000))
@@ -108,7 +115,9 @@ function tween(from, to, setter, duration_or_callback, callback)
 			setter(get_to())
 			done = true
 			timeout:kill()
-			if callback then callback() end
+			if callback then
+				callback()
+			end
 			request_render()
 		end
 	end
@@ -127,7 +136,11 @@ function tween(from, to, setter, duration_or_callback, callback)
 	end
 
 	timeout = mp.add_timeout(state.render_delay, tick)
-	if cutoff > 0 then tick() else finish() end
+	if cutoff > 0 then
+		tick()
+	else
+		finish()
+	end
 
 	return finish
 end
@@ -150,8 +163,10 @@ end
 ---@param point Point
 ---@param hitbox Hitbox
 function point_collides_with(point, hitbox)
-	return (hitbox.r and get_point_to_point_proximity(point, hitbox.point) <= hitbox.r) or
-		(not hitbox.r and get_point_to_rectangle_proximity(point, hitbox --[[@as Rect]]) == 0)
+	return (hitbox.r and get_point_to_point_proximity(point, hitbox.point) <= hitbox.r)
+		or (
+			not hitbox.r and get_point_to_rectangle_proximity(point, hitbox --[[@as Rect]]) == 0
+		)
 end
 
 ---@param lax number
@@ -164,10 +179,10 @@ end
 ---@param mby number
 function get_line_to_line_intersection(lax, lay, lbx, lby, max, may, mbx, mby)
 	-- Calculate the direction of the lines
-	local uA = ((mbx - max) * (lay - may) - (mby - may) * (lax - max)) /
-		((mby - may) * (lbx - lax) - (mbx - max) * (lby - lay))
-	local uB = ((lbx - lax) * (lay - may) - (lby - lay) * (lax - max)) /
-		((mby - may) * (lbx - lax) - (mbx - max) * (lby - lay))
+	local uA = ((mbx - max) * (lay - may) - (mby - may) * (lax - max))
+		/ ((mby - may) * (lbx - lax) - (mbx - max) * (lby - lay))
+	local uB = ((lbx - lax) * (lay - may) - (lby - lay) * (lax - max))
+		/ ((mby - may) * (lbx - lax) - (mbx - max) * (lby - lay))
 
 	-- If uA and uB are between 0-1, lines are colliding
 	if uA >= 0 and uA <= 1 and uB >= 0 and uB <= 1 then
@@ -212,7 +227,9 @@ function get_ray_to_rectangle_distance(ax, ay, bx, by, rect)
 	local closest = nil
 
 	local function updateDistance(distance)
-		if distance and (not closest or distance < closest) then closest = distance end
+		if distance and (not closest or distance < closest) then
+			closest = distance
+		end
 	end
 
 	updateDistance(get_ray_to_line_distance(ax, ay, bx, by, rect.ax, rect.ay, rect.bx, rect.ay))
@@ -225,7 +242,9 @@ end
 
 -- Call function with args if it exists
 function call_maybe(fn, ...)
-	if type(fn) == 'function' then fn(...) end
+	if type(fn) == "function" then
+		fn(...)
+	end
 end
 
 -- Extracts the properties used by property expansion of that string.
@@ -234,13 +253,17 @@ end
 ---@return { [string] : boolean }
 function get_expansion_props(str, res)
 	res = res or {}
-	for str in str:gmatch('%$(%b{})') do
-		local name, str = str:match('^{[?!]?=?([^:]+):?(.*)}$')
+	for str in str:gmatch("%$(%b{})") do
+		local name, str = str:match("^{[?!]?=?([^:]+):?(.*)}$")
 		if name then
-			local s = name:find('==') or nil
-			if s then name = name:sub(0, s - 1) end
+			local s = name:find("==") or nil
+			if s then
+				name = name:sub(0, s - 1)
+			end
 			res[name] = true
-			if str and str ~= '' then get_expansion_props(str, res) end
+			if str and str ~= "" then
+				get_expansion_props(str, res)
+			end
 		end
 	end
 	return res
@@ -252,15 +275,15 @@ function ass_escape(str)
 	-- There is no escape for '\' in ASS (I think?) but '\' is used verbatim if
 	-- it isn't followed by a recognized character, so add a zero-width
 	-- non-breaking space
-	str = str:gsub('\\', '\\\239\187\191')
-	str = str:gsub('{', '\\{')
-	str = str:gsub('}', '\\}')
+	str = str:gsub("\\", "\\\239\187\191")
+	str = str:gsub("{", "\\{")
+	str = str:gsub("}", "\\}")
 	-- Precede newlines with a ZWNBSP to prevent ASS's weird collapsing of
 	-- consecutive newlines
-	str = str:gsub('\n', '\239\187\191\\N')
+	str = str:gsub("\n", "\239\187\191\\N")
 	-- Turn leading spaces into hard spaces to prevent ASS from stripping them
-	str = str:gsub('\\N ', '\\N\\h')
-	str = str:gsub('^ ', '\\h')
+	str = str:gsub("\\N ", "\\N\\h")
+	str = str:gsub("^ ", "\\h")
 	return str
 end
 
@@ -270,15 +293,17 @@ end
 function format_time(seconds, max_seconds)
 	local human = mp.format_time(seconds)
 	if options.time_precision > 0 then
-		local formatted = string.format('%.' .. options.time_precision .. 'f', math.abs(seconds) % 1)
-		human = human .. '.' .. string.sub(formatted, 3)
+		local formatted = string.format("%." .. options.time_precision .. "f", math.abs(seconds) % 1)
+		human = human .. "." .. string.sub(formatted, 3)
 	end
 	if max_seconds then
 		local trim_length = (max_seconds < 60 and 7 or (max_seconds < 3600 and 4 or 0))
 		if trim_length > 0 then
 			local has_minus = seconds < 0
 			human = string.sub(human, trim_length + (has_minus and 1 or 0))
-			if has_minus then human = '-' .. human end
+			if has_minus then
+				human = "-" .. human
+			end
 		end
 	end
 	return human
@@ -290,13 +315,13 @@ function opacity_to_alpha(opacity)
 end
 
 path_separator = (function()
-	local os_separator = state.platform == 'windows' and '\\' or '/'
+	local os_separator = state.platform == "windows" and "\\" or "/"
 
 	-- Get appropriate path separator for the given path.
 	---@param path string
 	---@return string
 	return function(path)
-		return path:sub(1, 2) == '\\\\' and '\\' or os_separator
+		return path:sub(1, 2) == "\\\\" and "\\" or os_separator
 	end
 end)()
 
@@ -315,12 +340,12 @@ end
 ---@param path string
 ---@return boolean
 function is_absolute(path)
-	if path:sub(1, 2) == '\\\\' then
+	if path:sub(1, 2) == "\\\\" then
 		return true
-	elseif state.platform == 'windows' then
-		return path:find('^%a+:') ~= nil
+	elseif state.platform == "windows" then
+		return path:find("^%a+:") ~= nil
 	else
-		return path:sub(1, 1) == '/'
+		return path:sub(1, 1) == "/"
 	end
 end
 
@@ -328,7 +353,9 @@ end
 ---@param path string
 ---@return string
 function ensure_absolute(path)
-	if is_absolute(path) then return path end
+	if is_absolute(path) then
+		return path
+	end
 	return join_path(state.cwd, path)
 end
 
@@ -338,11 +365,15 @@ end
 function trim_trailing_separator(path)
 	local separator = path_separator(path)
 	path = trim_end(path, separator)
-	if state.platform == 'windows' then
+	if state.platform == "windows" then
 		-- Drive letters on windows need trailing backslash
-		if path:sub(#path) == ':' then path = path .. '\\' end
+		if path:sub(#path) == ":" then
+			path = path .. "\\"
+		end
 	else
-		if path == '' then path = '/' end
+		if path == "" then
+			path = "/"
+		end
 	end
 	return path, separator
 end
@@ -352,7 +383,9 @@ end
 ---@param path string
 ---@return string
 function normalize_path_lite(path)
-	if not path or is_protocol(path) then return path end
+	if not path or is_protocol(path) then
+		return path
+	end
 	path = trim_trailing_separator(ensure_absolute(path))
 	return path
 end
@@ -361,20 +394,24 @@ end
 ---@param path string
 ---@return string
 function normalize_path(path)
-	if not path or is_protocol(path) then return path end
+	if not path or is_protocol(path) then
+		return path
+	end
 
 	path = ensure_absolute(path)
-	local is_unc = path:sub(1, 2) == '\\\\'
-	if state.platform == 'windows' or is_unc then path = path:gsub('/', '\\') end
+	local is_unc = path:sub(1, 2) == "\\\\"
+	if state.platform == "windows" or is_unc then
+		path = path:gsub("/", "\\")
+	end
 	path = trim_trailing_separator(path)
 
 	--Deduplication of path separators
 	if is_unc then
-		path = path:gsub('(.\\)\\+', '%1')
-	elseif state.platform == 'windows' then
-		path = path:gsub('\\\\+', '\\')
+		path = path:gsub("(.\\)\\+", "%1")
+	elseif state.platform == "windows" then
+		path = path:gsub("\\\\+", "\\")
 	else
-		path = path:gsub('//+', '/')
+		path = path:gsub("//+", "/")
 	end
 
 	return path
@@ -383,36 +420,44 @@ end
 -- Check if path is a protocol, such as `http://...`.
 ---@param path string
 function is_protocol(path)
-	return type(path) == 'string' and (path:find('^%a[%w.+-]-://') ~= nil or path:find('^%a[%w.+-]-:%?') ~= nil)
+	return type(path) == "string" and (path:find("^%a[%w.+-]-://") ~= nil or path:find("^%a[%w.+-]-:%?") ~= nil)
 end
 
 ---@param path string
 ---@param extensions string[] Lowercase extensions without the dot.
 function has_any_extension(path, extensions)
-	local path_last_dot_index = string_last_index_of(path, '.')
-	if not path_last_dot_index then return false end
+	local path_last_dot_index = string_last_index_of(path, ".")
+	if not path_last_dot_index then
+		return false
+	end
 	local path_extension = path:sub(path_last_dot_index + 1):lower()
 	for _, extension in ipairs(extensions) do
-		if path_extension == extension then return true end
+		if path_extension == extension then
+			return true
+		end
 	end
 	return false
 end
 
 ---@return string
 function get_default_directory()
-	return mp.command_native({'expand-path', options.default_directory})
+	return mp.command_native({ "expand-path", options.default_directory })
 end
 
 -- Serializes path into its semantic parts.
 ---@param path string
 ---@return nil|{path: string; is_root: boolean; dirname?: string; basename: string; filename: string; extension?: string;}
 function serialize_path(path)
-	if not path or is_protocol(path) then return end
+	if not path or is_protocol(path) then
+		return
+	end
 
 	local normal_path = normalize_path_lite(path)
 	local dirname, basename = utils.split_path(normal_path)
-	if basename == '' then basename, dirname = dirname:sub(1, #dirname - 1), nil end
-	local dot_i = string_last_index_of(basename, '.')
+	if basename == "" then
+		basename, dirname = dirname:sub(1, #dirname - 1), nil
+	end
+	local dot_i = string_last_index_of(basename, ".")
 
 	return {
 		path = normal_path,
@@ -431,7 +476,7 @@ end
 ---@return string[]|nil directories
 function read_directory(path, opts)
 	opts = opts or {}
-	local items, error = utils.readdir(path, 'all')
+	local items, error = utils.readdir(path, "all")
 
 	if not items then
 		msg.error('Reading files from "' .. path .. '" failed: ' .. error)
@@ -441,7 +486,7 @@ function read_directory(path, opts)
 	local files, directories = {}, {}
 
 	for _, item in ipairs(items) do
-		if item ~= '.' and item ~= '..' and (opts.hidden or item:sub(1, 1) ~= '.') then
+		if item ~= "." and item ~= ".." and (opts.hidden or item:sub(1, 1) ~= ".") then
 			local info = utils.file_info(join_path(path, item))
 			if info then
 				if info.is_file then
@@ -466,9 +511,13 @@ end
 function get_adjacent_files(file_path, opts)
 	opts = opts or {}
 	local current_meta = serialize_path(file_path)
-	if not current_meta then return end
-	local files = read_directory(current_meta.dirname, {hidden = opts.hidden})
-	if not files then return end
+	if not current_meta then
+		return
+	end
+	local files = read_directory(current_meta.dirname, { hidden = opts.hidden })
+	if not files then
+		return
+	end
 	sort_strings(files)
 	local current_file_index
 	local paths = {}
@@ -476,10 +525,14 @@ function get_adjacent_files(file_path, opts)
 		local is_current_file = current_meta.basename == file
 		if is_current_file or not opts.types or has_any_extension(file, opts.types) then
 			paths[#paths + 1] = join_path(current_meta.dirname, file)
-			if is_current_file then current_file_index = #paths end
+			if is_current_file then
+				current_file_index = #paths
+			end
 		end
 	end
-	if not current_file_index then return end
+	if not current_file_index then
+		return
+	end
 	return paths, current_file_index
 end
 
@@ -489,17 +542,20 @@ end
 ---@param current_index number
 ---@param delta number 1 or -1 for forward or backward
 function decide_navigation_in_list(paths, current_index, delta)
-	if #paths < 2 then return end
+	if #paths < 2 then
+		return
+	end
 	delta = delta < 0 and -1 or 1
 
 	-- Shuffle looks at the played files history trimmed to 80% length of the paths
 	-- and removes all paths in it from the potential shuffle pool. This guarantees
 	-- no path repetition until at least 80% of the playlist has been exhausted.
 	if state.shuffle then
-		state.shuffle_history = state.shuffle_history or {
-			pos = #state.history,
-			paths = itable_slice(state.history),
-		}
+		state.shuffle_history = state.shuffle_history
+			or {
+				pos = #state.history,
+				paths = itable_slice(state.history),
+			}
 		state.shuffle_history.pos = state.shuffle_history.pos + delta
 		local history_path = state.shuffle_history.paths[state.shuffle_history.pos]
 		local next_index = history_path and itable_index_of(paths, history_path)
@@ -529,7 +585,7 @@ function decide_navigation_in_list(paths, current_index, delta)
 	end
 
 	local new_index = current_index + delta
-	if mp.get_property_native('loop-playlist') then
+	if mp.get_property_native("loop-playlist") then
 		if new_index > #paths then
 			new_index = new_index % #paths
 		elseif new_index < 1 then
@@ -544,7 +600,9 @@ end
 
 ---@param delta number
 function navigate_directory(delta)
-	if not state.path or is_protocol(state.path) then return false end
+	if not state.path or is_protocol(state.path) then
+		return false
+	end
 	local paths, current_index = get_adjacent_files(state.path, {
 		types = config.types.autoload,
 		hidden = options.show_hidden_files,
@@ -552,7 +610,7 @@ function navigate_directory(delta)
 	if paths and current_index then
 		local _, path = decide_navigation_in_list(paths, current_index, delta)
 		if path then
-			mp.commandv('loadfile', path)
+			mp.commandv("loadfile", path)
 			return true
 		end
 	end
@@ -561,12 +619,14 @@ end
 
 ---@param delta number
 function navigate_playlist(delta)
-	local playlist, pos = mp.get_property_native('playlist'), mp.get_property_native('playlist-pos-1')
+	local playlist, pos = mp.get_property_native("playlist"), mp.get_property_native("playlist-pos-1")
 	if playlist and #playlist > 1 and pos then
-		local paths = itable_map(playlist, function(item) return normalize_path(item.filename) end)
+		local paths = itable_map(playlist, function(item)
+			return normalize_path(item.filename)
+		end)
 		local index = decide_navigation_in_list(paths, pos, delta)
 		if index then
-			mp.commandv('playlist-play-index', index - 1)
+			mp.commandv("playlist-play-index", index - 1)
 			return true
 		end
 	end
@@ -575,7 +635,11 @@ end
 
 ---@param delta number
 function navigate_item(delta)
-	if state.has_playlist then return navigate_playlist(delta) else return navigate_directory(delta) end
+	if state.has_playlist then
+		return navigate_playlist(delta)
+	else
+		return navigate_directory(delta)
+	end
 end
 
 -- Can't use `os.remove()` as it fails on paths with unicode characters.
@@ -583,7 +647,7 @@ end
 -- `status:number(<0=error), stdout, stderr, error_string, killed_by_us:boolean`
 ---@param path string
 function delete_file(path)
-	if state.platform == 'windows' then
+	if state.platform == "windows" then
 		if options.use_trash then
 			local ps_code = [[
 				Add-Type -AssemblyName Microsoft.VisualBasic
@@ -591,23 +655,23 @@ function delete_file(path)
 			]]
 
 			local escaped_path = string.gsub(path, "'", "''")
-			escaped_path = string.gsub(escaped_path, '’', '’’')
-			escaped_path = string.gsub(escaped_path, '%%', '%%%%')
-			ps_code = string.gsub(ps_code, '__path__', escaped_path)
-			args = {'powershell', '-NoProfile', '-Command', ps_code}
+			escaped_path = string.gsub(escaped_path, "’", "’’")
+			escaped_path = string.gsub(escaped_path, "%%", "%%%%")
+			ps_code = string.gsub(ps_code, "__path__", escaped_path)
+			args = { "powershell", "-NoProfile", "-Command", ps_code }
 		else
-			args = {'cmd', '/C', 'del', path}
+			args = { "cmd", "/C", "del", path }
 		end
 	else
 		if options.use_trash then
 			--On Linux and Macos the app trash-cli/trash must be installed first.
-			args = {'trash', path}
+			args = { "trash", path }
 		else
-			args = {'rm', path}
+			args = { "rm", path }
 		end
 	end
 	return mp.command_native({
-		name = 'subprocess',
+		name = "subprocess",
 		args = args,
 		playback_only = false,
 		capture_stdout = true,
@@ -621,15 +685,15 @@ function delete_file_navigate(delta)
 
 	if navigate_item(delta) then
 		if state.has_playlist then
-			mp.commandv('playlist-remove', playlist_pos - 1)
+			mp.commandv("playlist-remove", playlist_pos - 1)
 		end
 	else
-		mp.command('stop')
+		mp.command("stop")
 	end
 
 	if is_local_file then
-		if Menu:is_open('open-file') then
-			Elements:maybe('menu', 'delete_value', path)
+		if Menu:is_open("open-file") then
+			Elements:maybe("menu", "delete_value", path)
 		end
 		delete_file(path)
 	end
@@ -639,34 +703,46 @@ function serialize_chapter_ranges(normalized_chapters)
 	local ranges = {}
 	local simple_ranges = {
 		{
-			name = 'openings',
+			name = "openings",
 			patterns = {
-				'^op ', '^op$', ' op$',
-				'^opening$', ' opening$',
+				"^op ",
+				"^op$",
+				" op$",
+				"^opening$",
+				" opening$",
 			},
 			requires_next_chapter = true,
 		},
 		{
-			name = 'intros',
+			name = "intros",
 			patterns = {
-				'^intro$', ' intro$',
-				'^avant$', '^prologue$',
+				"^intro$",
+				" intro$",
+				"^avant$",
+				"^prologue$",
 			},
 			requires_next_chapter = true,
 		},
 		{
-			name = 'endings',
+			name = "endings",
 			patterns = {
-				'^ed ', '^ed$', ' ed$',
-				'^ending ', '^ending$', ' ending$',
+				"^ed ",
+				"^ed$",
+				" ed$",
+				"^ending ",
+				"^ending$",
+				" ending$",
 			},
 		},
 		{
-			name = 'outros',
+			name = "outros",
 			patterns = {
-				'^outro$', ' outro$',
-				'^closing$', '^closing ',
-				'^preview$', '^pv$',
+				"^outro$",
+				" outro$",
+				"^closing$",
+				"^closing ",
+				"^preview$",
+				"^pv$",
 			},
 		},
 	}
@@ -675,24 +751,30 @@ function serialize_chapter_ranges(normalized_chapters)
 	-- Extend with alt patterns
 	for _, meta in ipairs(simple_ranges) do
 		local alt_patterns = config.chapter_ranges[meta.name] and config.chapter_ranges[meta.name].patterns
-		if alt_patterns then meta.patterns = itable_join(meta.patterns, alt_patterns) end
+		if alt_patterns then
+			meta.patterns = itable_join(meta.patterns, alt_patterns)
+		end
 	end
 
 	-- Clone chapters
 	local chapters = {}
-	for i, normalized in ipairs(normalized_chapters) do chapters[i] = table_assign({}, normalized) end
+	for i, normalized in ipairs(normalized_chapters) do
+		chapters[i] = table_assign({}, normalized)
+	end
 
 	for i, chapter in ipairs(chapters) do
 		-- Simple ranges
 		for _, meta in ipairs(simple_ranges) do
 			if config.chapter_ranges[meta.name] then
-				local match = itable_find(meta.patterns, function(p) return chapter.lowercase_title:find(p) end)
+				local match = itable_find(meta.patterns, function(p)
+					return chapter.lowercase_title:find(p)
+				end)
 				if match then
 					local next_chapter = chapters[i + 1]
 					if next_chapter or not meta.requires_next_chapter then
 						ranges[#ranges + 1] = table_assign({
 							start = chapter.time,
-							['end'] = next_chapter and next_chapter.time or math.huge,
+							["end"] = next_chapter and next_chapter.time or math.huge,
 						}, config.chapter_ranges[meta.name])
 					end
 				end
@@ -701,29 +783,31 @@ function serialize_chapter_ranges(normalized_chapters)
 
 		-- Sponsor blocks
 		if config.chapter_ranges.ads then
-			local id = chapter.lowercase_title:match('segment start *%(([%w]%w-)%)')
+			local id = chapter.lowercase_title:match("segment start *%(([%w]%w-)%)")
 			if id then -- ad range from sponsorblock
 				for j = i + 1, #chapters, 1 do
 					local end_chapter = chapters[j]
-					local end_match = end_chapter.lowercase_title:match('segment end *%(' .. id .. '%)')
+					local end_match = end_chapter.lowercase_title:match("segment end *%(" .. id .. "%)")
 					if end_match then
 						local range = table_assign({
 							start_chapter = chapter,
 							end_chapter = end_chapter,
 							start = chapter.time,
-							['end'] = end_chapter.time,
+							["end"] = end_chapter.time,
 						}, config.chapter_ranges.ads)
 						ranges[#ranges + 1], sponsor_ranges[#sponsor_ranges + 1] = range, range
 						end_chapter.is_end_only = true
 						break
 					end
 				end -- single chapter for ad
-			elseif not chapter.is_end_only and
-				(chapter.lowercase_title:find('%[sponsorblock%]:') or chapter.lowercase_title:find('^sponsors?')) then
+			elseif
+				not chapter.is_end_only
+				and (chapter.lowercase_title:find("%[sponsorblock%]:") or chapter.lowercase_title:find("^sponsors?"))
+			then
 				local next_chapter = chapters[i + 1]
 				ranges[#ranges + 1] = table_assign({
 					start = chapter.time,
-					['end'] = next_chapter and next_chapter.time or math.huge,
+					["end"] = next_chapter and next_chapter.time or math.huge,
 				}, config.chapter_ranges.ads)
 			end
 		end
@@ -733,31 +817,37 @@ function serialize_chapter_ranges(normalized_chapters)
 	for index, range in ipairs(sponsor_ranges) do
 		local next_range = sponsor_ranges[index + 1]
 		if next_range then
-			local delta = next_range.start - range['end']
+			local delta = next_range.start - range["end"]
 			if delta < 0 then
-				local mid_point = range['end'] + delta / 2
-				range['end'], range.end_chapter.time = mid_point - 0.01, mid_point - 0.01
+				local mid_point = range["end"] + delta / 2
+				range["end"], range.end_chapter.time = mid_point - 0.01, mid_point - 0.01
 				next_range.start, next_range.start_chapter.time = mid_point, mid_point
 			end
 		end
 	end
-	table.sort(chapters, function(a, b) return a.time < b.time end)
+	table.sort(chapters, function(a, b)
+		return a.time < b.time
+	end)
 
 	return chapters, ranges
 end
 
 -- Ensures chapters are in chronological order
 function normalize_chapters(chapters)
-	if not chapters then return {} end
+	if not chapters then
+		return {}
+	end
 	-- Ensure chronological order
-	table.sort(chapters, function(a, b) return a.time < b.time end)
+	table.sort(chapters, function(a, b)
+		return a.time < b.time
+	end)
 	-- Ensure titles
 	for index, chapter in ipairs(chapters) do
-		local chapter_number = chapter.title and string.match(chapter.title, '^Chapter (%d+)$')
+		local chapter_number = chapter.title and string.match(chapter.title, "^Chapter (%d+)$")
 		if chapter_number then
-			chapter.title = t('Chapter %s', tonumber(chapter_number))
+			chapter.title = t("Chapter %s", tonumber(chapter_number))
 		end
-		chapter.title = chapter.title ~= '(unnamed)' and chapter.title ~= '' and chapter.title or t('Chapter %s', index)
+		chapter.title = chapter.title ~= "(unnamed)" and chapter.title ~= "" and chapter.title or t("Chapter %s", index)
 		chapter.lowercase_title = chapter.title:lower()
 	end
 	return chapters
@@ -765,9 +855,11 @@ end
 
 function serialize_chapters(chapters)
 	chapters = normalize_chapters(chapters)
-	if not chapters then return end
+	if not chapters then
+		return
+	end
 	--- timeline font size isn't accessible here, so normalize to size 1 and then scale during rendering
-	local opts = {size = 1, bold = true}
+	local opts = { size = 1, bold = true }
 	for index, chapter in ipairs(chapters) do
 		chapter.index = index
 		chapter.title_wrapped, chapter.title_lines = wrap_text(chapter.title, opts, 25)
@@ -781,10 +873,14 @@ end
 ---@param key string|nil
 ---@return {[string]: table}|table
 function find_active_keybindings(key)
-	local bindings = mp.get_property_native('input-bindings', {})
+	local bindings = mp.get_property_native("input-bindings", {})
 	local active = {} -- map: key-name -> bind-info
 	for _, bind in pairs(bindings) do
-		if bind.owner ~= 'uosc' and bind.priority >= 0 and (not key or bind.key == key) and (
+		if
+			bind.owner ~= "uosc"
+			and bind.priority >= 0
+			and (not key or bind.key == key)
+			and (
 				not active[bind.key]
 				or (active[bind.key].is_weak and not bind.is_weak)
 				or (bind.is_weak == active[bind.key].is_weak and bind.priority > active[bind.key].priority)
@@ -799,25 +895,25 @@ end
 ---@param type 'sub'|'audio'|'video'
 ---@param path string
 function load_track(type, path)
-	mp.commandv(type .. '-add', path, 'cached')
+	mp.commandv(type .. "-add", path, "cached")
 	-- If subtitle track was loaded, assume the user also wants to see it
-	if type == 'sub' then
-		mp.commandv('set', 'sub-visibility', 'yes')
+	if type == "sub" then
+		mp.commandv("set", "sub-visibility", "yes")
 	end
 end
 
 ---@return string|nil
 function get_clipboard()
 	local result = mp.command_native({
-		name = 'subprocess',
+		name = "subprocess",
 		capture_stderr = true,
 		capture_stdout = true,
 		playback_only = false,
-		args = {config.ziggy_path, 'get-clipboard'},
+		args = { config.ziggy_path, "get-clipboard" },
 	})
 
 	local function print_error(message)
-		msg.error('Getting clipboard data failed. Error: ' .. message)
+		msg.error("Getting clipboard data failed. Error: " .. message)
 	end
 
 	if result.status == 0 then
@@ -825,23 +921,27 @@ function get_clipboard()
 		if data and data.payload then
 			return data.payload
 		else
-			print_error(data and (data.error and data.message or 'unknown error') or 'couldn\'t parse json')
+			print_error(data and (data.error and data.message or "unknown error") or "couldn't parse json")
 		end
 	else
-		print_error('exit code ' .. result.status .. ': ' .. result.stdout .. result.stderr)
+		print_error("exit code " .. result.status .. ": " .. result.stdout .. result.stderr)
 	end
 end
 
 --[[ RENDERING ]]
 
 function render()
-	if not display.initialized then return end
+	if not display.initialized then
+		return
+	end
 	state.render_last_time = mp.get_time()
 
 	cursor:clear_zones()
 
 	-- Click on empty area detection
-	if setup_click_detection then setup_click_detection() end
+	if setup_click_detection then
+		setup_click_detection()
+	end
 
 	-- Actual rendering
 	local ass = assdraw.ass_new()
@@ -850,27 +950,35 @@ function render()
 	if state.is_idle and not Manager.disabled.idle_indicator then
 		local smaller_side = math.min(display.width, display.height)
 		local center_x, center_y, icon_size = display.width / 2, display.height / 2, math.max(smaller_side / 4, 56)
-		ass:icon(center_x, center_y - icon_size / 4, icon_size, 'not_started', {
-			color = fg, opacity = config.opacity.idle_indicator,
+		ass:icon(center_x, center_y - icon_size / 4, icon_size, "not_started", {
+			color = fg,
+			opacity = config.opacity.idle_indicator,
 		})
-		ass:txt(center_x, center_y + icon_size / 2, 8, t('Drop files or URLs to play here'), {
-			size = icon_size / 4, color = fg, opacity = config.opacity.idle_indicator,
+		ass:txt(center_x, center_y + icon_size / 2, 8, t("Drop files or URLs to play here"), {
+			size = icon_size / 4,
+			color = fg,
+			opacity = config.opacity.idle_indicator,
 		})
 	end
 
 	-- Audio indicator
-	if state.is_audio and not state.has_image and not Manager.disabled.audio_indicator
-		and not (state.pause and options.pause_indicator == 'static') then
+	if
+		state.is_audio
+		and not state.has_image
+		and not Manager.disabled.audio_indicator
+		and not (state.pause and options.pause_indicator == "static")
+	then
 		local smaller_side = math.min(display.width, display.height)
-		ass:icon(display.width / 2, display.height / 2, smaller_side / 4, 'graphic_eq', {
-			color = fg, opacity = config.opacity.audio_indicator,
+		ass:icon(display.width / 2, display.height / 2, smaller_side / 4, "graphic_eq", {
+			color = fg,
+			opacity = config.opacity.audio_indicator,
 		})
 	end
 
 	-- Elements
 	for _, element in Elements:ipairs() do
 		if element.enabled then
-			local result = element:maybe('render')
+			local result = element:maybe("render")
 			if result then
 				ass:new_event()
 				ass:merge(result)
@@ -900,7 +1008,9 @@ end
 state.render_timer = mp.add_timeout(0, render)
 state.render_timer:kill()
 function request_render()
-	if state.render_timer:is_enabled() then return end
+	if state.render_timer:is_enabled() then
+		return
+	end
 	local timeout = math.max(0, state.render_delay - (mp.get_time() - state.render_last_time))
 	state.render_timer.timeout = timeout
 	state.render_timer:resume()

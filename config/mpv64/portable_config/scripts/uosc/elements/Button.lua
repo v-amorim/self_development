@@ -1,4 +1,4 @@
-local Element = require('elements/Element')
+local Element = require("elements/Element")
 
 ---@alias ButtonProps {icon: string; on_click: function; anchor_id?: string; active?: boolean; badge?: string|number; foreground?: string; background?: string; tooltip?: string}
 
@@ -7,7 +7,9 @@ local Button = class(Element)
 
 ---@param id string
 ---@param props ButtonProps
-function Button:new(id, props) return Class.new(self, id, props) --[[@as Button]] end
+function Button:new(id, props)
+	return Class.new(self, id, props) --[[@as Button]]
+end
 ---@param id string
 ---@param props ButtonProps
 function Button:init(id, props)
@@ -22,7 +24,9 @@ function Button:init(id, props)
 	Element.init(self, id, props)
 end
 
-function Button:on_coordinates() self.font_size = round((self.by - self.ay) * 0.7) end
+function Button:on_coordinates()
+	self.font_size = round((self.by - self.ay) * 0.7)
+end
 function Button:handle_cursor_click()
 	-- We delay the callback to next tick, otherwise we are risking race
 	-- conditions as we are in the middle of event dispatching.
@@ -33,8 +37,12 @@ end
 
 function Button:render()
 	local visibility = self:get_visibility()
-	if visibility <= 0 then return end
-	cursor:zone('primary_click', self, function() self:handle_cursor_click() end)
+	if visibility <= 0 then
+		return
+	end
+	cursor:zone("primary_click", self, function()
+		self:handle_cursor_click()
+	end)
 
 	local ass = assdraw.ass_new()
 	local is_hover = self.proximity_raw == 0
@@ -52,13 +60,15 @@ function Button:render()
 	end
 
 	-- Tooltip on hover
-	if is_hover and self.tooltip then ass:tooltip(self, self.tooltip) end
+	if is_hover and self.tooltip then
+		ass:tooltip(self, self.tooltip)
+	end
 
 	-- Badge
 	local icon_clip
 	if self.badge then
 		local badge_font_size = self.font_size * 0.6
-		local badge_opts = {size = badge_font_size, color = background, opacity = visibility}
+		local badge_opts = { size = badge_font_size, color = background, opacity = visibility }
 		local badge_width = text_width(self.badge, badge_opts)
 		local width, height = math.ceil(badge_width + (badge_font_size / 7) * 2), math.ceil(badge_font_size * 0.93)
 		local bx, by = self.bx - 1, self.by - 1
@@ -74,9 +84,13 @@ function Button:render()
 		local clip_border = math.max(self.font_size / 20, 1)
 		local clip_path = assdraw.ass_new()
 		clip_path:round_rect_cw(
-			math.floor((bx - width) - clip_border), math.floor((by - height) - clip_border), bx, by, 3
+			math.floor((bx - width) - clip_border),
+			math.floor((by - height) - clip_border),
+			bx,
+			by,
+			3
 		)
-		icon_clip = '\\iclip(' .. clip_path.scale .. ', ' .. clip_path.text .. ')'
+		icon_clip = "\\iclip(" .. clip_path.scale .. ", " .. clip_path.text .. ")"
 	end
 
 	-- Icon

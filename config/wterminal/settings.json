@@ -1,11 +1,9 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
-    [
+    "actions": [
         {
-            "command":
-            {
+            "command": {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -21,8 +19,7 @@
             "keys": "ctrl+v"
         },
         {
-            "command":
-            {
+            "command": {
                 "action": "copy",
                 "singleLine": false
             },
@@ -32,27 +29,22 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-    "newTabMenu":
-    [
+    "newTabMenu": [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles":
-    {
-        "defaults":
-        {
+    "profiles": {
+        "defaults": {
             "colorScheme": "viniam_MaterialDarker",
             "cursorHeight": 18,
             "cursorShape": "vintage",
-            "font":
-            {
+            "font": {
                 "face": "FiraCode Nerd Font Mono",
                 "size": 10.0
             }
         },
-        "list":
-        [
+        "list": [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nologo",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -61,8 +53,7 @@
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe /k %USERPROFILE%\\Documents\\GitHub\\self-development\\macros\\alias.bat",
-                "font":
-                {
+                "font": {
                     "face": "FiraCode Nerd Font Mono"
                 },
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -86,8 +77,7 @@
             }
         ]
     },
-    "schemes":
-    [
+    "schemes": [
         {
             "background": "#0D1117",
             "black": "#000000",

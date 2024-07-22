@@ -4,7 +4,9 @@ var dialog = new Window("palette", undefined, undefined);
 dialog.preferredSize.width = 300;
 dialog.preferredSize.height = 50;
 dialog.text = "Please, select next frame";
-dialog.onClose = function () { doc.removeEventListener('afterSelectionChanged', selectionChanged) }
+dialog.onClose = function() {
+    doc.removeEventListener('afterSelectionChanged', selectionChanged)
+}
 
 dialog.add("statictext", undefined, "Last copied text:");
 
@@ -15,7 +17,7 @@ msg.characters = 40;
 // --- here is the Pause button
 var pause = false;
 var pause_btn = dialog.add("button", [10, 10, 300, 30], "Pause");
-pause_btn.onClick = function () {
+pause_btn.onClick = function() {
     pause = !pause;
     if (pause) msg.text = "[PAUSED] " + msg.text; // it can be done better, but it works, too
     if (!pause) msg.text = msg.text.replace(/^\[PAUSED\] /, "");

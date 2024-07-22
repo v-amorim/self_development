@@ -16,13 +16,15 @@ var isTextFrameSelected = false;
 
 // DIALOG
 // ======
-var dialog = new Window("palette", "Letterer Buddy", undefined, { maximizeButton: false });
+var dialog = new Window("palette", "Letterer Buddy", undefined, {
+    maximizeButton: false
+});
 dialog.text = "Letterer Buddy";
 dialog.orientation = "column";
 dialog.alignChildren = ["center", "top"];
 dialog.spacing = 10;
 dialog.margins = 16;
-dialog.onClose = function () {
+dialog.onClose = function() {
     doc.removeEventListener('afterSelectionChanged', selectionChanged);
     doc.removeEventListener('afterSelectionChanged', selectionChangedAlternative);
     saveOptions();
@@ -30,7 +32,9 @@ dialog.onClose = function () {
 
 // TPANEL1
 // =======
-var tpanel1 = dialog.add("tabbedpanel", undefined, undefined, { name: "tpanel1" });
+var tpanel1 = dialog.add("tabbedpanel", undefined, undefined, {
+    name: "tpanel1"
+});
 tpanel1.alignChildren = "fill";
 tpanel1.preferredSize.width = windowDimensions.width;
 tpanel1.preferredSize.height = windowDimensions.height - 7000;
@@ -38,7 +42,9 @@ tpanel1.margins = 0;
 
 // SCRIPTTAB
 // =========
-var scriptTab = tpanel1.add("tab", undefined, undefined, { name: "scriptTab" });
+var scriptTab = tpanel1.add("tab", undefined, undefined, {
+    name: "scriptTab"
+});
 scriptTab.text = "Script";
 scriptTab.orientation = "column";
 scriptTab.alignChildren = ["left", "top"];
@@ -55,7 +61,9 @@ list.preferredSize.height = windowDimensions.height - 800;
 
 // ACTIONSPANEL
 // ============
-var actionsPanel = scriptTab.add("panel", undefined, undefined, { name: "actionsPanel" });
+var actionsPanel = scriptTab.add("panel", undefined, undefined, {
+    name: "actionsPanel"
+});
 actionsPanel.text = "Actions";
 actionsPanel.orientation = "row";
 actionsPanel.alignChildren = ["center", "top"];
@@ -63,33 +71,41 @@ actionsPanel.spacing = 10;
 actionsPanel.margins = 10;
 actionsPanel.preferredSize.width = windowDimensions.width - 30;
 
-var loadScript = actionsPanel.add("button", undefined, undefined, { name: "loadScript" });
+var loadScript = actionsPanel.add("button", undefined, undefined, {
+    name: "loadScript"
+});
 loadScript.text = "Load Script";
-loadScript.onClick = function () {
+loadScript.onClick = function() {
     resetOptions();
     openScript();
     readScript();
     populateList();
 };
 
-var resetScript = actionsPanel.add("button", undefined, undefined, { name: "resetScript" });
+var resetScript = actionsPanel.add("button", undefined, undefined, {
+    name: "resetScript"
+});
 resetScript.text = "Reset Script";
-resetScript.onClick = function () {
+resetScript.onClick = function() {
     resetOptions();
     readScript();
     populateList();
 };
 
-var pauseBtn = actionsPanel.add("button", undefined, undefined, { name: "pauseBtn" });
+var pauseBtn = actionsPanel.add("button", undefined, undefined, {
+    name: "pauseBtn"
+});
 pauseBtn.text = "Pause";
-pauseBtn.onClick = function () {
+pauseBtn.onClick = function() {
     isPaused = !isPaused;
     pauseBtn.text = isPaused ? "Resume" : "Pause";
 };
 
 // TextFrame Alternative Tab
 // =========================
-var textFrameTab = tpanel1.add("tab", undefined, undefined, { name: "textFrameTab" });
+var textFrameTab = tpanel1.add("tab", undefined, undefined, {
+    name: "textFrameTab"
+});
 textFrameTab.text = "TextFrame";
 textFrameTab.orientation = "column";
 textFrameTab.alignChildren = ["center", "center"];
@@ -101,7 +117,9 @@ var msg = textFrameTab.add("edittext");
 msg.text = "";
 msg.characters = 30
 
-var actionsPanelFrameTab = textFrameTab.add("panel", undefined, undefined, { name: "actionsPanelFrameTab" });
+var actionsPanelFrameTab = textFrameTab.add("panel", undefined, undefined, {
+    name: "actionsPanelFrameTab"
+});
 actionsPanelFrameTab.text = "Actions";
 actionsPanelFrameTab.orientation = "row";
 actionsPanelFrameTab.alignChildren = ["center", "top"];
@@ -109,11 +127,15 @@ actionsPanelFrameTab.spacing = 10;
 actionsPanelFrameTab.margins = 10;
 actionsPanelFrameTab.preferredSize.width = windowDimensions.width - 30;
 
-var selectTextFrame = actionsPanelFrameTab.add("button", undefined, undefined, { name: "selectTextFrame" });
+var selectTextFrame = actionsPanelFrameTab.add("button", undefined, undefined, {
+    name: "selectTextFrame"
+});
 selectTextFrame.text = "Select TextFrame";
-var pauseBtn = actionsPanelFrameTab.add("button", undefined, undefined, { name: "pauseBtn" });
+var pauseBtn = actionsPanelFrameTab.add("button", undefined, undefined, {
+    name: "pauseBtn"
+});
 pauseBtn.text = "Pause";
-pauseBtn.onClick = function () {
+pauseBtn.onClick = function() {
     isPaused = !isPaused;
     pauseBtn.text = isPaused ? "Resume" : "Pause";
 };
@@ -122,7 +144,7 @@ pauseBtn.onClick = function () {
 var doc = app.activeDocument;
 var master_frame = app.selection[0]; // <-- the Text Script frame
 
-selectTextFrame.onClick = function () {
+selectTextFrame.onClick = function() {
     isTextFrameSelected = true;
     selectTextFrame.text = isTextFrameSelected ? "Selected!" : "Select TextFrame";
     if (master_frame instanceof TextFrame || master_frame instanceof Story) {
@@ -139,61 +161,75 @@ selectTextFrame.onClick = function () {
 
 // SETTINGSTAB
 // ===========
-var settingsTab = tpanel1.add("tab", undefined, undefined, { name: "settingsTab" });
+var settingsTab = tpanel1.add("tab", undefined, undefined, {
+    name: "settingsTab"
+});
 settingsTab.text = "Settings";
 settingsTab.orientation = "column";
 settingsTab.alignChildren = ["left", "top"];
 settingsTab.spacing = 0;
 settingsTab.margins = 10;
 
-var speakerText = settingsTab.add("checkbox", undefined, undefined, { name: "speakerText" });
+var speakerText = settingsTab.add("checkbox", undefined, undefined, {
+    name: "speakerText"
+});
 speakerText.text = "Remove Speaker Text";
-speakerText.onClick = function () {
+speakerText.onClick = function() {
     if (list != null) {
         speakerTextFunction();
         populateList();
     }
 };
 
-var crossbarI = settingsTab.add("checkbox", undefined, undefined, { name: "crossbarI" });
+var crossbarI = settingsTab.add("checkbox", undefined, undefined, {
+    name: "crossbarI"
+});
 crossbarI.text = "Replace Crossbar I";
-crossbarI.onClick = function () {
+crossbarI.onClick = function() {
     if (list != null) {
         crossbarIFunction();
         populateList();
     }
 };
 
-var ellipses = settingsTab.add("checkbox", undefined, undefined, { name: "ellipses" });
+var ellipses = settingsTab.add("checkbox", undefined, undefined, {
+    name: "ellipses"
+});
 ellipses.text = "Replace Ellipses with Periods";
-ellipses.onClick = function () {
+ellipses.onClick = function() {
     if (list != null) {
         ellipsesFunction();
         populateList();
     }
 };
 
-var trimPeriods = settingsTab.add("checkbox", undefined, undefined, { name: "trimPeriods" });
+var trimPeriods = settingsTab.add("checkbox", undefined, undefined, {
+    name: "trimPeriods"
+});
 trimPeriods.text = "Trim ...+ to ...";
-trimPeriods.onClick = function () {
+trimPeriods.onClick = function() {
     if (list != null) {
         trimPeriodsFunction();
         populateList();
     }
 };
 
-var removeJP = settingsTab.add("checkbox", undefined, undefined, { name: "removeJP" });
+var removeJP = settingsTab.add("checkbox", undefined, undefined, {
+    name: "removeJP"
+});
 removeJP.text = "Remove JP Characters";
-removeJP.onClick = function () {
+removeJP.onClick = function() {
     if (list != null) {
         removeJPFunction();
         populateList();
     }
 };
 
-var replaceSplit = settingsTab.add("checkbox", undefined, undefined, { name: "replaceSplit" });
+var replaceSplit = settingsTab.add("checkbox", undefined, undefined, {
+    name: "replaceSplit"
+});
 replaceSplit.text = "Replace Bubble Separator with New Line";
-replaceSplit.onClick = function () {
+replaceSplit.onClick = function() {
     if (list != null) {
         replaceSplitFunction();
         populateList();
@@ -203,50 +239,64 @@ replaceSplit.onClick = function () {
 var splitText = settingsTab.add('edittext {properties: {name: "splitText"}}');
 splitText.text = "//";
 
-var removePageNumbers = settingsTab.add("checkbox", undefined, undefined, { name: "removePageNumbers" });
+var removePageNumbers = settingsTab.add("checkbox", undefined, undefined, {
+    name: "removePageNumbers"
+});
 removePageNumbers.text = "Remove Page Numbers";
-removePageNumbers.onClick = function () {
+removePageNumbers.onClick = function() {
     if (list != null) {
         removePageNumbersFunction();
         populateList();
     }
 };
 
-var removeParentheticalText = settingsTab.add("checkbox", undefined, undefined, { name: "removeParentheticalText" });
+var removeParentheticalText = settingsTab.add("checkbox", undefined, undefined, {
+    name: "removeParentheticalText"
+});
 removeParentheticalText.text = "Remove Parathentical Text";
-removeParentheticalText.onClick = function () {
+removeParentheticalText.onClick = function() {
     if (list != null) {
         removeParentheticalTextFunction();
         populateList();
     }
 };
 
-var removeBracketedText = settingsTab.add("checkbox", undefined, undefined, { name: "removeBracketedText" });
+var removeBracketedText = settingsTab.add("checkbox", undefined, undefined, {
+    name: "removeBracketedText"
+});
 removeBracketedText.text = "Remove Bracketed Text";
-removeBracketedText.onClick = function () {
+removeBracketedText.onClick = function() {
     if (list != null) {
         removeBracketedTextFunction();
         populateList();
     }
 };
 
-var removeCurlyBracedText = settingsTab.add("checkbox", undefined, undefined, { name: "removeCurlyBracedText" });
+var removeCurlyBracedText = settingsTab.add("checkbox", undefined, undefined, {
+    name: "removeCurlyBracedText"
+});
 removeCurlyBracedText.text = "Remove Curly Braced Text";
-removeCurlyBracedText.onClick = function () {
+removeCurlyBracedText.onClick = function() {
     if (list != null) {
         removeCurlyBracedTextFunction();
         populateList();
     }
 };
 
-var pasteFromColumn = settingsTab.add("dropdownlist", undefined, [1, 2, 3], { name: "pasteFromColumn" });
+var pasteFromColumn = settingsTab.add("dropdownlist", undefined, [1, 2, 3], {
+    name: "pasteFromColumn"
+});
 pasteFromColumn.text = "Paste from Column:";
 pasteFromColumn.selection = 0;
 
-var saveSettings = settingsTab.add("checkbox", undefined, undefined, { name: "saveSettings" });
+var saveSettings = settingsTab.add("checkbox", undefined, undefined, {
+    name: "saveSettings"
+});
 saveSettings.text = "Save Settings";
 
-var loadLastScript = settingsTab.add("checkbox", undefined, undefined, { name: "loadLastScript" });
+var loadLastScript = settingsTab.add("checkbox", undefined, undefined, {
+    name: "loadLastScript"
+});
 loadLastScript.text = "Load Last Script";
 
 loadOptions();
@@ -304,9 +354,9 @@ function selectionChangedAlternative(doc, master_frame) {
 function placeText() {
     if (list.selection != null) {
         if (doc.selection[0] instanceof TextFrame) {
-            var textToPlace = pasteFromColumn.selection > 0 && pasteFromColumn.selection <= list.selection.subItems.length
-                ? list.selection.subItems[pasteFromColumn.selection - 1].text
-                : list.selection.text;
+            var textToPlace = pasteFromColumn.selection > 0 && pasteFromColumn.selection <= list.selection.subItems.length ?
+                list.selection.subItems[pasteFromColumn.selection - 1].text :
+                list.selection.text;
             doc.selection[0].contents = textToPlace;
             if (list.selection < list.items.length) {
                 list.selection = list.selection + 1;
@@ -319,18 +369,17 @@ function populateList() {
     if (scriptFile != "" && scriptFile != null && scriptFileName.indexOf(".txt") == -1) {
         alert("This file type is not supported. Please use .txt files only.");
         return;
-    }
-    else if (scriptFile != "" && scriptFile != null) {
+    } else if (scriptFile != "" && scriptFile != null) {
         list.removeAll();
 
-        forEach(script, function (line) {
+        forEach(script, function(line) {
             if (line.length <= 0) return; // ignore empty lines
             var lineSplitByTabs = line.split('\t');
             var listItem = list.add("item", lineSplitByTabs[0]);
 
             // if there's more than one item, add 'em
             if (lineSplitByTabs.length > 1) {
-                forEach(lineSplitByTabs, function (subItem, idx) {
+                forEach(lineSplitByTabs, function(subItem, idx) {
                     if (idx > 0 && !!listItem.subItems[idx - 1]) { // don't add the first item twice
                         listItem.subItems[idx - 1].text = subItem;
                     }
@@ -339,8 +388,7 @@ function populateList() {
         })
         if (newScript) {
             list.selection = 0;
-        }
-        else {
+        } else {
             list.selection = lastScriptIndex;
         }
     }
@@ -366,15 +414,13 @@ function openScript() {
     if (scriptFile == null && loadLastScript.value && lastScriptPath != null) {
         scriptFile = File(lastScriptPath);
         newScript = 0;
-    }
-    else {
+    } else {
         scriptFile = File.openDialog("Select your script text file");
         newScript = 1;
     }
     if (scriptFile != null) {
         scriptFileName = scriptFile.name;
-    }
-    else if (scriptFileOld != null && scriptFile == null) {
+    } else if (scriptFileOld != null && scriptFile == null) {
         scriptFile = scriptFileOld;
     }
 }
@@ -522,8 +568,7 @@ function ellipsesFunction() {
                 script[i] = script[i].replace("…", "...");
             }
         }
-    }
-    else if (ellipses.value == 0) {
+    } else if (ellipses.value == 0) {
         for (var i = 0; i < list.items.length; i++) {
             if (script[i].match("...")) {
                 script[i] = script[i].replace("...", "…");
@@ -564,8 +609,7 @@ function replaceSplitFunction() {
                 for (var j = 0; j < lines.length; j++) {
                     if (j == 0) {
                         script[i] = trim(lines[0]);
-                    }
-                    else {
+                    } else {
                         script.splice(i + j, 0, trim(lines[j]));
                     }
                 }
@@ -633,7 +677,9 @@ function forEach(arr, fn) {
         for (var i = 0; i < arr.length; i++) {
             fn(arr[i], i);
         }
-    } catch (err) { alert(err) }
+    } catch (err) {
+        alert(err)
+    }
 }
 
 function removeEmptyLines(array) {

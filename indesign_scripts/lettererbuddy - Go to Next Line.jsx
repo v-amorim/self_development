@@ -15,8 +15,8 @@ Notes:
 
 */
 
-var window = Window.find("palette","Letterer Buddy");
-if(window && window.visible){
+var window = Window.find("palette", "Letterer Buddy");
+if (window && window.visible) {
     var list = window.findElement("scriptList");
     if (list !== null && list.selection < list.items.length) {
         list.selection = list.selection + 1;

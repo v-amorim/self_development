@@ -23,6 +23,22 @@ Where I keep my MPV scripts and configurations. Also contains my SVP configurati
 
 Contains my oh-my-posh theme configurations, together with a guide on how to install and configure it.
 
+### [powershell][powershell]
+
+Terminal shortcuts are useful for quick access to various commands. The aliases are written for Windows.
+
+Contains various aliases that are useful for the PowerShell.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/962a3d94-59ce-440b-9d41-3b55b59fcd5a" width="100%"/>
+</p>
+
+You can add it to your PowerShell profile by running the following command, in an elevated (Administrator) PowerShell:
+
+```powershell
+irm "https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/PowershellSetup.ps1" | iex
+```
+
 ### [wterminal][wterminal]
 
 Contains my Windows Terminal configurations and theme.
@@ -34,6 +50,12 @@ Contains my yt-dlp configurations and guide on how to install it.
 ### [winutil_config.json][winutil_config]
 
 Contains my Chris Titus Tech Windows Utilities configurations.
+
+### [config.jsonc][fastfetch_config]
+
+Contains my FastFetch configurations.
+
+Save it to `C:/ProgramData/fastfetch/`
 
 <!-- URLS -->
 
@@ -54,3 +76,5 @@ Contains my Chris Titus Tech Windows Utilities configurations.
 [wterminal]: ./wterminal/README.md
 [yt-dlp]: ./yt-dlp/README.md
 [winutil_config]: ./winutil_config.json
+[fastfetch_config]: ./config.jsonc
+[powershell]: ./powershell

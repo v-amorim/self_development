@@ -31,6 +31,10 @@ Contains my Windows Terminal configurations and theme.
 
 Contains my yt-dlp configurations and guide on how to install it.
 
+### [winutil_config.json][winutil_config]
+
+Contains my Chris Titus Tech Windows Utilities configurations.
+
 <!-- URLS -->
 
 [README_self_development]: ../README.md
@@ -49,3 +53,4 @@ Contains my yt-dlp configurations and guide on how to install it.
 [oh-my-posh]: ./oh-my-posh/README.md
 [wterminal]: ./wterminal/README.md
 [yt-dlp]: ./yt-dlp/README.md
+[winutil_config]: ./winutil_config.json

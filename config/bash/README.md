@@ -7,8 +7,49 @@ A collection of useful bash scripts, commands and files.
 A list of commands to install the necessary tools for a new machine.
 
 ```bash
-sudo add-apt-repository ppa:deadsnakes/ppa ; sudo apt-get update ; sudo apt-get upgrade ; sudo apt-get install -y build-essential make wget git zip postgresql-client build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev  curl libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev llvm jq libpq-dev default-jdk apt-transport-https ca-certificates gnupg google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin
+sudo add-apt-repository ppa:deadsnakes/ppa ; sudo apt-get update ; sudo apt-get upgrade ; sudo apt-get install -y apt-transport-https bash-completion build-essential ca-certificates command-not-found curl default-jdk git gnupg jq libbz2-dev libffi-dev liblzma-dev libncurses5-dev libpq-dev libreadline-dev libsqlite3-dev libssl-dev libxml2-dev libxmlsec1-dev llvm make postgresql-client tk-dev wget xz-utils zip zlib1g-dev
 ```
+
+<details>
+  <summary>Single line version, for some reason the batched version don't install all of them</summary>
+
+```bash
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y bash-completion
+sudo apt-get install -y build-essential
+sudo apt-get install -y ca-certificates
+sudo apt-get install -y command-not-found
+sudo apt-get install -y curl
+sudo apt-get install -y default-jdk
+sudo apt-get install -y git
+sudo apt-get install -y gnupg
+sudo apt-get install -y jq
+sudo apt-get install -y libbz2-dev
+sudo apt-get install -y libffi-dev
+sudo apt-get install -y liblzma-dev
+sudo apt-get install -y libncurses5-dev
+sudo apt-get install -y libpq-dev
+sudo apt-get install -y libreadline-dev
+sudo apt-get install -y libsqlite3-dev
+sudo apt-get install -y libssl-dev
+sudo apt-get install -y libxml2-dev
+sudo apt-get install -y libxmlsec1-dev
+sudo apt-get install -y llvm
+sudo apt-get install -y make
+sudo apt-get install -y postgresql-client
+sudo apt-get install -y tk-dev
+sudo apt-get install -y wget
+sudo apt-get install -y xz-utils
+sudo apt-get install -y zip
+sudo apt-get install -y zlib1g-dev
+sudo snap install google-cloud-cli --classic
+sudo snap install google-cloud-sdk --classic
+```
+
+</details>
 
 ### Pyenv
 

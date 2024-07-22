@@ -3,16 +3,17 @@ oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/v-amorim/self_d
 $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 
 ##--- General shorcuts
-function alias {
+function alias_help {
 @"
 PowerShell Profile Help
 =======================
 Use -<command> for more description on the command.
 
-[.....], [....], [...], [..], [a], [add_to_path], [alias], [cls], [d], [flushdns], [ga], [gc], [gcl], [gco], [gd], [getip], [gf], [gforce], [gl], [glog], [gma], [gp], [gr], [grep], [greset], [gs], [h], [hist], [ls], [mkdir], [p], [pc], [pcall], [pci], [pe311], [pe38], [pe], [peu], [pf], [pm], [pp], [ptc], [pts], [s], [sysinfo], [uomp], [uptime], [which], [winutil], [wsls], [y], [ys]
+[.....], [....], [...], [..], [a], [add_to_path], [alias_edit], [alias_help], [alias_update], [cls], [d], [flushdns], [ga], [gc], [gcl], [gco], [gd], [getip], [gf], [gforce], [gl], [glog], [gma], [gp], [gr], [grep], [greset], [gs], [h], [hist], [ls], [mkdir], [p], [pc], [pcall], [pci], [pe311], [pe38], [pe], [peu], [pf], [pm], [pp], [ptc], [pts], [s], [sysinfo], [uomp], [uptime], [which], [winutil], [wsls], [y], [ys]
 "@
-}
-function -alias  { "List all aliases" }
+}                                                ; function -alias_help   { "List all aliases" }
+function alias_update { . $PROFILE }             ; function -alias_update { "Updates the PowerShell profile file [. $PROFILE]" }
+function alias_edit   { code $PROFILE }          ; function -alias_edit   { "Edit the PowerShell profile file [code $PROFILE]" }
 function h       { Get-History }                 ; function -h      { "List all used aliases [DOSKEY /HISTORY]" }
 function ls      { Get-ChildItem $args }         ; function -ls     { "List files and folders in the current directory [DIR <file>]" }
 function s       { Invoke-Item . }               ; function -s      { "Open File Explorer in the current directory [start .]" }
@@ -121,10 +122,27 @@ function flushdns {
 } ; function -flushdns { "Flush the DNS cache" }
 
 # Enhanced PowerShell Experience
-Set-PSReadLineOption -Colors @{
+if ($PSVersionTable.PSVersion.Major -ge 7) {
+    $PSROptions = @{
+        ContinuationPrompt = '  '
+        Colors             = @{
+            Command            = $PSStyle.Foreground.Yellow
+            ContinuationPrompt = $PSStyle.Foreground.BrightBlack
+            Error              = $PSStyle.Foreground.Red
+            InLinePrediction   = $PSStyle.Foreground.BrightBlack
+            Parameter          = $PSStyle.Foreground.Magenta
+            Selection          = $PSStyle.Background.BrightBlue + $PSStyle.Foreground.White
+            String             = $PSStyle.Foreground.BrightBlue
+        }
+        HistoryNoDuplicates = $True
+    }
+    Set-PSReadLineOption @PSROptions
+} else {
+    Set-PSReadLineOption -Colors @{
     Command = 'Yellow'
+    InLinePrediction = 'Gray'
     Parameter = 'Green'
     String = 'DarkCyan'
+    ContinuationPrompt = 'Gray'
+    }
 }
-
-Set-PSReadLineKeyHandler -Chord 'Ctrl+f' -Function ForwardWord

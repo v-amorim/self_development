@@ -1,0 +1,176 @@
+﻿{
+    "WPFTweaks": [
+        "WPFTweaksRestorePoint",
+        "WPFTweaksWifi",
+        "WPFTweaksHome",
+        "WPFTweaksStorage",
+        "WPFTweaksHiber",
+        "WPFTweaksConsumerFeatures",
+        "WPFTweaksDVR",
+        "WPFTweaksTele",
+        "WPFTweaksDisplay",
+        "WPFTweaksAH",
+        "WPFTweaksEndTaskOnTaskbar",
+        "WPFTweaksRemoveCopilot",
+        "WPFTweaksLoc",
+        "WPFTweaksDiskCleanup",
+        "WPFTweaksServices",
+        "WPFTweaksTeredo",
+        "WPFTweaksPowershell7Tele",
+        "WPFTweaksDeleteTempFiles",
+        "WPFTweaksPowershell7"
+    ],
+    "Install": [
+        {
+            "winget": "Microsoft.WindowsTerminal",
+            "choco": "microsoft-windows-terminal"
+        },
+        {
+            "winget": "7zip.7zip",
+            "choco": "7zip"
+        },
+        {
+            "winget": "Microsoft.DotNet.DesktopRuntime.6",
+            "choco": "dotnet-6.0-runtime"
+        },
+        {
+            "winget": "Gyan.FFmpeg",
+            "choco": "ffmpeg-full"
+        },
+        {
+            "winget": "na",
+            "choco": "pyenv-win"
+        },
+        {
+            "winget": "AutoHotkey.AutoHotkey",
+            "choco": "autohotkey"
+        },
+        {
+            "winget": "JanDeDobbeleer.OhMyPosh",
+            "choco": "oh-my-posh"
+        },
+        {
+            "winget": "GitHub.GitHubDesktop",
+            "choco": "git;github-desktop"
+        },
+        {
+            "winget": "Microsoft.VCRedist.2015+.x86",
+            "choco": "na"
+        },
+        {
+            "winget": "Microsoft.PowerToys",
+            "choco": "powertoys"
+        },
+        {
+            "winget": "yt-dlp.yt-dlp",
+            "choco": "yt-dlp"
+        },
+        {
+            "winget": "Microsoft.Sysinternals.Autoruns",
+            "choco": "autoruns"
+        },
+        {
+            "winget": "Valve.Steam",
+            "choco": "steam-client"
+        },
+        {
+            "winget": "OBSProject.OBSStudio",
+            "choco": "obs-studio"
+        },
+        {
+            "winget": "Microsoft.DotNet.DesktopRuntime.8",
+            "choco": "dotnet-8.0-runtime"
+        },
+        {
+            "winget": "Microsoft.VCRedist.2015+.x64",
+            "choco": "na"
+        },
+        {
+            "winget": "Microsoft.DotNet.DesktopRuntime.5",
+            "choco": "dotnet-5.0-runtime"
+        },
+        {
+            "winget": "Microsoft.DotNet.DesktopRuntime.3_1",
+            "choco": "dotnetcore3-desktop-runtime"
+        },
+        {
+            "winget": "Microsoft.PowerShell",
+            "choco": "powershell-core"
+        },
+        {
+            "winget": "qBittorrent.qBittorrent",
+            "choco": "qbittorrent"
+        },
+        {
+            "winget": "Microsoft.VisualStudioCode",
+            "choco": "vscode"
+        },
+        {
+            "winget": "DuongDieuPhap.ImageGlass",
+            "choco": "imageglass"
+        },
+        {
+            "winget": "Stremio.Stremio",
+            "choco": "stremio"
+        },
+        {
+            "winget": "Discord.Discord",
+            "choco": "discord"
+        },
+        {
+            "winget": "calibre.calibre",
+            "choco": "calibre"
+        },
+        {
+            "winget": "Git.Git",
+            "choco": "git"
+        },
+        {
+            "winget": "Microsoft.DotNet.DesktopRuntime.7",
+            "choco": "dotnet-7.0-runtime"
+        },
+        {
+            "winget": "Fastfetch-cli.Fastfetch",
+            "choco": "na"
+        }
+    ],
+    "WPFInstall": [
+        "WPFInstallterminal",
+        "WPFInstall7zip",
+        "WPFInstalldotnet6",
+        "WPFInstallffmpeg",
+        "WPFInstallpyenvwin",
+        "WPFInstallautohotkey",
+        "WPFInstallposh",
+        "WPFInstallgithubdesktop",
+        "WPFInstallvc2015_32",
+        "WPFInstallpowertoys",
+        "WPFInstallytdlp",
+        "WPFInstallautoruns",
+        "WPFInstallsteam",
+        "WPFInstallobs",
+        "WPFInstalldotnet8",
+        "WPFInstallvc2015_64",
+        "WPFInstalldotnet5",
+        "WPFInstalldotnet3",
+        "WPFInstallpowershell",
+        "WPFInstallqbittorrent",
+        "WPFInstallvscode",
+        "WPFInstallimageglass",
+        "WPFInstallstremio",
+        "WPFInstalldiscord",
+        "WPFInstallcalibre",
+        "WPFInstallgit",
+        "WPFInstalldotnet7",
+        "WPFInstallfastfetch"
+    ],
+    "WPFFeature": [
+        "WPFFeaturewsl",
+        "WPFFeatureRegBackup",
+        "WPFFeaturesdotnet",
+        "WPFFeaturesandbox",
+        "WPFFeatureEnableLegacyRecovery",
+        "WPFFeatureshyperv",
+        "WPFFeatureDisableSearchSuggestions"
+    ]
+}

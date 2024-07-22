@@ -113,5 +113,5 @@ If it didn't work, run the `Profile.bat` and copy the `Profile.ps1` to the folde
 [Screenshot]: ./Screenshot.ahk
 [WinActive]: ./WinActive.ahk
 [WindowsTools]: ./WindowsTools.ahk
-[alias]: ./alias.bat
-[Profile]: ./Profile.ps1
+[alias]: ./Terminal/alias.bat
+[Profile]: ./Terminal/Profile.ps1

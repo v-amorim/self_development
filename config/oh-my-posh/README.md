@@ -24,7 +24,7 @@ This is my custom theme for [Oh My Posh](https://ohmyposh.dev/), a prompt themin
 1. Paste these lines at the start of the file:
 
    ```powershell
-   oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/viniam_bubblesextra.omp.json' | Invoke-Expression
+   oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json' | Invoke-Expression
    $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
    ```
 
@@ -67,7 +67,7 @@ winget upgrade --all # Or this, to update all
 1. Paste this line at the end:
 
    ```bash
-   eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/viniam_bubblesextra.omp.json')"
+   eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json')"
    ```
 
 1. Reload your profile:

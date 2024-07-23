@@ -133,3 +133,5 @@ try {
 catch {
     Write-Error "Failed to install Terminal Icons module. Error: $_"
 }
+
+Install-Module PSReadLine -Force

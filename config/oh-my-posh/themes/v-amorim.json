@@ -1,0 +1,86 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "auto_upgrade": false,
+  "disable_notice": true,
+  "final_space": true,
+  "version": 2,
+  "blocks": [
+
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "overflow": "hide",
+      "segments": [
+        {
+          "type": "root",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#B86CB3",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "\udb81\udc98"
+        },
+        {
+          "type": "upgrade",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#49EF95",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "\udb83\udecc"
+
+        },
+        {
+          "type": "executiontime",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#cbcfe7",
+          "leading_diamond": "\ue0b6",
+          "template": "\uf017 {{ .FormattedMs }} \uf444",
+          "properties": {
+            "style": "austin",
+            "threshold": 150
+          }
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#5DABF3",
+          "leading_diamond": "\ue0b6",
+          "template": "{{ if( .UpstreamIcon ) }}{{ url .UpstreamIcon .UpstreamURL }}{{ end }}{{ .HEAD }} \uf444",
+          "properties": {
+            "branch_max_length": 25,
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          }
+        },
+        {
+          "type": "python",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#8192D9",
+          "leading_diamond": "\ue0b6",
+          "template": "\ue235{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}[{{ .Full }}]{{ end }} \uf444",
+          "properties": {
+            "fetch_version": true,
+            "folder_name_fallback": false
+          }
+        },
+        {
+          "type": "path",
+          "style": "diamond",
+          "background": "#29315A",
+          "foreground": "#CA5FA6",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "\ue5ff {{ path .Path .Location }} \uf054",
+          "properties": {
+            "style": "folder"
+          }
+        }
+      ]
+    }
+  ]
+}

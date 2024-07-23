@@ -17,7 +17,7 @@ fi
 
 ##--- User defined settings ---##
 # Defines the oh-my-posh theme
-eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/viniam_bubblesextra.omp.json')"
+eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json')"
 
 # Pyenv configuration
 export PYENV_ROOT="$HOME/.pyenv"

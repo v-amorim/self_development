@@ -5,11 +5,27 @@
   "final_space": true,
   "version": 2,
   "blocks": [
-
+    {
+      "type": "rprompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "style": "diamond",
+          "background": "#29315a",
+          "foreground": "#aea4bf",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "{{ .CurrentDate | date .Format }}",
+          "properties": {
+            "time_format": "15:04:05"
+          }
+        }
+      ]
+    },
     {
       "type": "prompt",
       "alignment": "left",
-      "overflow": "hide",
       "segments": [
         {
           "type": "root",
@@ -36,10 +52,10 @@
           "background": "#29315A",
           "foreground": "#cbcfe7",
           "leading_diamond": "\ue0b6",
-          "template": "\uf017 {{ .FormattedMs }} \uf444",
+          "template": "\uf017{{ .FormattedMs }} \uf444",
           "properties": {
             "style": "austin",
-            "threshold": 150
+            "threshold": 500
           }
         },
         {

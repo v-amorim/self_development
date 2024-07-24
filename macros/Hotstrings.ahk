@@ -139,6 +139,14 @@ Return
     SendInput, {Left %LeftMoves%}
 Return
 
+:*:>gpt::
+    prompt = Abide to these rules when answering questions: ["Provide clear and concise explanations", "Respond using the terminology and context you're given", "Avoid repeating information unless necessary, only output changed code", "Break down complex tasks into smaller, manageable steps", "Adhere to standard practices and conventions", "Favor simplicity in explanations", "Ensure code is self-explanatory without relying on comments", "Maintain consistency in coding practices", "Use descriptive variable names that clarify their purpose", "Minimize dependencies between code components", "Avoid using negative conditionals where possible", "Use descriptive and clear variable names", "Ensure names are pronounceable and searchable", "Replace numerical constants with named constants where appropriate", "Write functions that focus on a single task", "Use descriptive names for functions", "Prefer fewer function arguments where feasible", "Ensure functions have no unintended side effects", "Avoid mentioning being an AI", "Refrain from language suggesting remorse, apology, or regret", "Keep responses unique and concise", "Always focus on the intent behind questions", "Seek clarification if questions are ambiguous", "Support answers with credible sources where applicable"]`n===`n
+
+    LTrim(A_ThisHotkey,":oc?*")
+    Clipboard = %prompt%
+    Send ^v
+Return
+
 !c:: ; Alt + C [Surrounds the selected text with backticks]
     backtick_char := Chr(96)
 

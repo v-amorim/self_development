@@ -5,6 +5,13 @@ $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 ##--- Modules
 Import-Module -Name Terminal-Icons
 
+# [PSReadLine] Move cursor to the end of the line when searching history
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+
+# [PSReadLine] Bind Alt + Up/Down Arrow to cycle through suggestions
+Set-PSReadLineKeyHandler -Key Ctrl+UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key Ctrl+DownArrow -Function HistorySearchForward
+
 ##--- General shorcuts
 function alias_help {
 @"

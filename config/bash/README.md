@@ -147,12 +147,6 @@ Useful aliases for the terminal.
 
 Append the contents of the `.bash_aliases` file to your `code ~/.bash_aliases` file.
 
-### [.inputrc][inputrc]
-
-To enable command completion based on the history of commands.
-
-Append the contents of the `.inputrc` file to your `code ~/.inputrc` file.
-
 ## Guides
 
 Some useful command guides for using bash.

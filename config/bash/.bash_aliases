@@ -1,3 +1,22 @@
+#--- Bindings
+bind '"\e[1;5A":history-search-backward'    # [Alt+Up/Down] to search history
+bind '"\e[1;5B":history-search-forward'     # [Alt+Up/Down] to search history
+bind '"\e[1;5C":forward-word'               # [Alt+Left/Right] to move between words
+bind '"\e[1;5D":backward-word'              # [Alt+Left/Right] to move between words
+bind '"\e[3;3~": "\C-e\C-u"'                # [Alt+Delete] to delete entire forward line
+bind '"\e[3;2~": "\C-u"'                    # [Shift+Delete] to delete backward
+bind 'set completion-ignore-case on'        # Ignore case when completing
+bind 'set show-all-if-ambiguous on'         # Immediately display all possible completions
+bind 'set completion-query-items 100'       # Show all possible completions without asking
+
+
+#--- Bash History config, credits to: https://unix.stackexchange.com/a/419779
+shopt -s histappend                         # append to the history file, don't overwrite it
+export HISTCONTROL=ignoreboth:erasedups     # do not store duplicates in history
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r"              # reload and cleanup history after each command
+tac "$HISTFILE" | awk '!x[$0]++' > /tmp/tmpfile && tac /tmp/tmpfile > "$HISTFILE"   # remove duplicates from history
+rm /tmp/tmpfile
+
 #--- General aliases
 alias alias_edit='code ~/.bash_aliases'     ; alias h_edit_aliases='echo "Open bash aliases [code ~/.bash_aliases]"'
 alias alias_update='source ~/.bashrc'       ; alias h_update_aliases='echo "Refreshes the bashrc, to update the aliases [source ~/.bashrc]"'
@@ -6,7 +25,7 @@ alias ls='ls -aFh --color=always'           ; alias h_ls='echo "List files with 
 alias check='ls -l'                         ; alias h_check='echo "Check permissions [ls -l <arg>]"'
 alias cls='clear'                           ; alias h_cls='echo "Clear terminal [clear]"'
 alias s='source'                            ; alias h_s='echo "Refreshes the file [source <arg>]"'
-alias history='code ~/.bash_history'        ; alias h_history='echo "Open bash history [code ~/.bash_history]"'
+alias hist='code ~/.bash_history'           ; alias h_hist='echo "Open bash history [code ~/.bash_history]"'
 alias please='sudo'                         ; alias h_please='echo "Run a command as sudo [sudo <arg>]"'
 alias uomp='curl -s https://ohmyposh.dev/install.sh | sudo bash -s'                                                  ; alias h_uomp='echo "Updates Oh My Posh [curl -s https://ohmyposh.dev/install.sh | sudo bash -s]"'
 alias update='sudo apt update; sudo apt upgrade; sudo apt autoremove; sudo apt autoclean'                            ; alias h_update='echo "Update and upgrade [sudo (apt update, upgrade, autoremove, autoclean)]"'
@@ -17,7 +36,7 @@ echo "Bash Profile Help"
 echo "================="
 echo "Use h_<command> for more description on the command."
 echo ""
-echo "[alist], [aliases], [la], [ls], [check], [cls], [s], [update_aliases], [history], [please], [uomp], [update], [fixtime], [..], [...], [....], [.....], [bd], [home], [p], [pm], [pp], [ppu], [pr]"
+echo "[alist], [aliases], [la], [ls], [check], [cls], [s], [update_aliases], [hist], [please], [uomp], [update], [fixtime], [..], [...], [....], [.....], [bd], [home], [p], [pm], [pp], [ppu], [pr]"
 echo "[processing], [cprocessing], [spark_proc], [cspark_proc]"
 }
 
@@ -45,7 +64,11 @@ alias pr='poetry run'                       ; alias h_pr='echo "Runs a `poetry r
 
 #--- Deep aliases
 
-alias processing='cd ~/spark-proc/apps/processing/'                             ; alias h_processing='echo "Go to processing directory [cd ~/spark-proc/apps/processing/]"'
-alias cprocessing='cd ~/spark-proc/apps/processing/; code .'                    ; alias h_cprocessing='echo "Go to processing directory and open on VSCode [cd ~/spark-proc/apps/processing/; code .]"'
 alias spark_proc='cd ~/spark-proc'                                              ; alias h_spark_proc='echo "Go to spark-proc directory [cd ~/spark-proc]"'
 alias cspark_proc='cd ~/spark-proc; code ".vscode/spark-proc.code-workspace"'   ; alias h_cspark_proc='echo "Open the spark_proc workspace [cd ~/spark-proc; code .vscode/spark-proc.code-workspace]"'
+
+alias processing='cd ~/spark-proc/apps/processing/'                             ; alias h_processing='echo "Go to processing directory [cd ~/spark-proc/apps/processing/]"'
+alias cprocessing='cd ~/spark-proc/apps/processing/; code .'                    ; alias h_cprocessing='echo "Go to processing directory and open on VSCode [cd ~/spark-proc/apps/processing/; code .]"'
+
+alias datawarehouse='cd ~/spark-proc/apps/datawarehouse/'                       ; alias h_datawarehouse='echo "Go to datawarehouse directory [cd ~/spark-proc/apps/datawarehouse/]"'
+alias cdatawarehouse='cd ~/spark-proc/apps/datawarehouse/; code .'              ; alias h_cdatawarehouse='echo "Go to datawarehouse directory [cd ~/spark-proc/apps/datawarehouse/; code .]"'

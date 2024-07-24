@@ -175,5 +175,25 @@
         }
       ]
     }
+  ],
+  "tooltips": [
+    {
+      "type": "python",
+      "tips": [
+        "python"
+      ],
+      "style": "diamond",
+      "background": "p:main_background",
+      "foreground": "p:terminal_lightblue",
+      "leading_diamond": "\ue0b6",
+      "trailing_diamond": "\ue0b4",
+      "template": "{{.Var.python}} {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+      "properties": {
+        "fetch_version": true,
+        "folder_name_fallback": false,
+        "home_enabled": true,
+        "display_mode": "always"
+      }
+    }
   ]
 }

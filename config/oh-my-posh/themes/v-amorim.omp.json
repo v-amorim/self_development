@@ -8,10 +8,10 @@
     "template": "{{ if eq .Shell \"pwsh\" }}powershell{{ else }}others{{ end }}",
     "list": {
       "powershell": {
-        "git_branch_divergence": "p:terminal_red",
+        "git_branch_divergence": "p:terminal_pink",
         "git_changes_pending": "p:terminal_blue",
         "git_commits_ahead": "p:terminal_lightteal",
-        "git_commits_behind": "p:terminal_pink",
+        "git_commits_behind": "p:terminal_red",
         "main_background": "#1f2335",
         "os_color": "p:terminal_blue",
         "terminal_blue": "#5DABF3",
@@ -24,10 +24,10 @@
         "terminal_red": "#CA5FA6"
       },
       "others": {
-        "git_branch_divergence": "p:terminal_red",
+        "git_branch_divergence": "p:terminal_pink",
         "git_changes_pending": "p:terminal_blue",
         "git_commits_ahead": "p:terminal_lightteal",
-        "git_commits_behind": "p:terminal_pink",
+        "git_commits_behind": "p:terminal_red",
         "main_background": "#1f2335",
         "os_color": "p:terminal_pink",
         "terminal_blue": "#5DABF3",

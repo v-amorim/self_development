@@ -111,7 +111,7 @@
           "background": "p:main_background",
           "foreground": "p:terminal_lightgray",
           "leading_diamond": "\ue0b6",
-          "template": "{{.Var.executiontime}}{{ .FormattedMs }} {{.Var.dot}}",
+          "template": "{{ .FormattedMs }} {{.Var.dot}}",
           "properties": {
             "style": "austin",
             "threshold": 500

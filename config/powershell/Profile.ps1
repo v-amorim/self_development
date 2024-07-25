@@ -90,6 +90,12 @@ function Remove-DuplicateHistory {
     }
 } Remove-DuplicateHistory
 
+Function IsAdmin {
+    $currentPrincipal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
+    $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+
 function Format-Hyperlink { # Credits https://stackoverflow.com/a/78366066/7977183
     param(
         [Parameter(ValueFromPipeline = $true, Position = 0)]
@@ -283,15 +289,21 @@ function add_to_path {
     }
 }
 
-function sudo {
+Function sudo {
     param (
-        [string]$Command
+        [string]$command
     )
 
-    $encodedCommand = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($Command))
+    $psVersion = $PSVersionTable.PSVersion.Major
+    $shell = if ($psVersion -lt 6) { "powershell.exe" } else { "pwsh" }
 
-    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -EncodedCommand $encodedCommand" -Verb RunAs
+    if (IsAdmin) {
+        & $shell -NoExit -ExecutionPolicy Bypass -Command "$command"
+    } else {
+        Start-Process wt.exe -ArgumentList "new-tab $shell -NoExit -ExecutionPolicy Bypass -Command $command" -Verb RunAs
+    }
 }
+
 
 #--- Functions adapted/retrieved from: https://github.com/ChrisTitusTech/powershell-profile
 function getip { (Invoke-WebRequest http://ifconfig.me/ip).Content }

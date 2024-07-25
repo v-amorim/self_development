@@ -136,25 +136,12 @@
           }
         },
         {
-          "type": "python",
-          "style": "diamond",
-          "background": "p:main_background",
-          "foreground": "p:terminal_lightblue",
-          "leading_diamond": "\ue0b6",
-          "template": "{{.Var.python}} {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} {{.Var.dot}}",
-          "properties": {
-            "fetch_version": true,
-            "folder_name_fallback": false
-          }
-        },
-        {
           "type": "path",
           "style": "diamond",
           "background": "p:main_background",
           "foreground": "p:terminal_red",
           "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "template": "{{ path .Path .Location }} {{.Var.terminal_arrow}}",
+          "template": "{{ path .Path .Location }}",
           "properties": {
             "style": "agnoster_short",
             "folder_icon": "\ue5ff",
@@ -172,6 +159,25 @@
               "~\\Videos": "\uf04b"
             }
           }
+        },
+        {
+          "type": "python",
+          "style": "diamond",
+          "background": "p:main_background",
+          "foreground": "p:terminal_lightblue",
+          "template": " {{.Var.python}}",
+          "properties": {
+            "fetch_version": true,
+            "folder_name_fallback": false
+          }
+        },
+        {
+          "type": "text",
+          "style": "diamond",
+          "background": "p:main_background",
+          "foreground": "p:terminal_red",
+          "trailing_diamond": "\ue0b4",
+          "template": " {{.Var.terminal_arrow}}"
         }
       ]
     }

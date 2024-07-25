@@ -36,7 +36,13 @@ Contains various aliases that are useful for the PowerShell.
 You can add it to your PowerShell profile by running the following command, in an elevated (Administrator) PowerShell:
 
 ```powershell
-irm "https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/SetupPowershell.ps1" | iex
+irm "https://raw.githubusercontent.com/v-amorim/self_development/main/config/powershell/SetupPowershell.ps1" | iex
+```
+
+If for some reason the command above doesn't work, download the `SetupPowershell.ps1` and enter its path on the following command in the PowerShell:
+
+```powershell
+Invoke-Expression -Command (Get-Content -Path "./SetupPowershell.ps1" -Raw)
 ```
 
 ### [wterminal][wterminal]

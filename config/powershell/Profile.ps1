@@ -22,14 +22,6 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
         HistorySearchCursorMovesToEnd = $True
     }
     Set-PSReadLineOption @PSROptions
-} else {
-    Set-PSReadLineOption -Colors @{
-    Command = 'Yellow'
-    InLinePrediction = 'Gray'
-    Parameter = 'Green'
-    String = 'DarkCyan'
-    ContinuationPrompt = 'Gray'
-    }
 }
 
 # Navigate through history with Ctrl+Up/Down

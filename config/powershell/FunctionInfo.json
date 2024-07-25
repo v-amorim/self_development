@@ -99,7 +99,10 @@
       "[python -m pip install <package>]" ],
     "ppu": [
       "Updates a Python package",
-      "[python -m pip install -U <package>]" ]
+      "[python -m pip install -U <package>]" ],
+    "pv": [
+      "Checks the Python version",
+      "[python -V]" ]
   },
   "Pyenv Functions": {
     "pe": [

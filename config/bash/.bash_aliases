@@ -19,6 +19,13 @@ rm /tmp/tmpfile
 
 
 #--- General aliases
+function alias_help() {
+echo "Bash Profile Help"
+echo "================="
+echo "Use h_<command> for more description on the command."
+echo ""
+echo "[.....], [....], [...], [..], [a], [aliases], [alist], [bd], [check], [cls], [d], [fixtime], [hist], [home], [la], [ls], [p], [please], [pm], [pp], [ppu], [pr], [pv], [s], [uomp], [update], [update_aliases]"
+}                                           ; alias h_alias_help='echo "List all aliases"'
 alias alias_edit='code ~/.bash_aliases'     ; alias h_edit_aliases='echo "Edit the .bash_aliases file [code ~/.bash_aliases]"'
 alias alias_update='source ~/.bashrc'       ; alias h_update_aliases='echo "Refreshes the .bashrc file [source ~/.bashrc]"'
 alias check='ls -l'                         ; alias h_check='echo "Check permissions [ls -l <arg>]"'
@@ -46,6 +53,7 @@ alias pf='python -m pip freeze'             ; alias h_pf='echo "List all install
 alias pm='python -m '                       ; alias h_pm='echo "Run a Python module [python -m <module>]"'
 alias pp='python -m pip install '           ; alias h_pp='echo "Install a Python package [python -m pip install <package>]"'
 alias ppu='python -m pip install -U '       ; alias h_ppu='echo "Updates a Python package [python -m pip install -U <package>]"'
+alias pv='python -V'                        ; alias h_pv='echo "Checks the Python version [python -V]"'
 
 ##--- Virtualenv aliases
 alias a='source .venv/bin/activate'         ; alias h_a='echo "Activate the virtual environment [source .venv/bin/activate]"'
@@ -73,14 +81,6 @@ alias pts='python -m piptools sync'         ; alias h_pts='echo "Run pip-sync on
 
 
 #--- Multi-line Functions
-function alias_help() {
-echo "Bash Profile Help"
-echo "================="
-echo "Use h_<command> for more description on the command."
-echo ""
-echo "[.....], [....], [...], [..], [a], [aliases], [alist], [bd], [check], [cls], [d], [fixtime], [hist], [home], [la], [ls], [p], [please], [pm], [pp], [ppu], [pr], [s], [uomp], [update], [update_aliases]"
-} ; alias h_alias_help='echo "List all aliases"'
-
 function fwhich() {
     readlink -f $(which "$1")
 } ; alias h_fwhich='echo "Full path version of a `which` command [readlink -f \$(which <arg>)]"'

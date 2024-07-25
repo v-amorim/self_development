@@ -11,22 +11,44 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
         ContinuationPrompt = '  '
         Colors             = @{
             Command            = $PSStyle.Foreground.Yellow
+            Comment            = "`e[97;2;3m"
             ContinuationPrompt = $PSStyle.Foreground.BrightBlack
             Error              = $PSStyle.Foreground.Red
             InLinePrediction   = $PSStyle.Foreground.BrightBlack
+            Keyword            = $PSStyle.Foreground.BrightRed
+            Member             = $PSStyle.Foreground.BrightCyan
+            Number             = $PSStyle.Foreground.Cyan
+            Operator           = $PSStyle.Foreground.BrightRed
             Parameter          = $PSStyle.Foreground.Magenta
             Selection          = $PSStyle.Background.BrightBlue + $PSStyle.Foreground.White
             String             = $PSStyle.Foreground.BrightBlue
+            Type               = $PSStyle.Foreground.BrightYellow
+            Variable           = $PSStyle.Foreground.BrightGreen
         }
         HistoryNoDuplicates = $True
-        HistorySearchCursorMovesToEnd = $True
+        HistorySearchCursorMovesToEnd = $False
+        PredictionSource = "HistoryAndPlugin"
     }
     Set-PSReadLineOption @PSROptions
+}
+
+function Handle-CtrlRightArrow {
+    $hasPrediction = [Microsoft.PowerShell.PSConsoleReadLine]::GetPrediction -ne $null
+
+    if ($hasPrediction) {
+        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptNextSuggestionWord()
+    } else {
+        [Microsoft.PowerShell.PSConsoleReadLine]::ForwardWord()
+    }
 }
 
 # Navigate through history with Ctrl+Up/Down
 Set-PSReadLineKeyHandler -Key Ctrl+UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key Ctrl+DownArrow -Function HistorySearchForward
+
+# Bind the custom function to the Ctrl+RightArrow key chord
+Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -ScriptBlock ${function:Handle-CtrlRightArrow}
+
 
 #--- Variables
 $profilePath = ""
@@ -225,6 +247,7 @@ function pf     { python -m pip freeze }
 function pm     { python -m $args }
 function pp     { python -m pip install $args }
 function ppu    { python -m pip install -U $args }
+function pv     { python -V }
 
 #--- Pyenv Functions
 function pe     { pyenv $args }

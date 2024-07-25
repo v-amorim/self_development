@@ -80,8 +80,15 @@ if (!(Test-Path -Path $PROFILE -PathType Leaf)) {
             New-Item -Path $profilePath -ItemType "directory"
         }
 
+        # Create or update the PowerShell profile
         Invoke-RestMethod https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/Profile.ps1 -OutFile $PROFILE
         Write-Host "The profile @ [$PROFILE] has been created."
+
+        # Download FunctionInfo.json
+        $functionInfoPath = "$profilePath\FunctionInfo.json"
+        Invoke-RestMethod https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/FunctionInfo.json -OutFile $functionInfoPath
+        Write-Host "FunctionInfo.json has been downloaded to [$functionInfoPath]."
+
         Write-Host "If you want to make any personal changes or customizations, please do so at [$profilePath\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes"
     }
     catch {
@@ -90,9 +97,19 @@ if (!(Test-Path -Path $PROFILE -PathType Leaf)) {
 }
 else {
     try {
+        # Backup existing profile
         Get-Item -Path $PROFILE | Move-Item -Destination "$env:userprofile\Documents\OldProfile.ps1" -Force
+        Get-Item -Path $functionInfoPath | Move-Item -Destination "$env:userprofile\Documents\OldFunctionInfo.json" -Force
+
+        # Create or update the PowerShell profile
         Invoke-RestMethod https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/Profile.ps1 -OutFile $PROFILE
         Write-Host "The profile @ [$PROFILE] has been created and old profile backed up to [$HOME\Documents\OldProfile.ps1]."
+
+        # Download FunctionInfo.json
+        $functionInfoPath = "$env:userprofile\Documents\FunctionInfo.json"
+        Invoke-RestMethod https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/FunctionInfo.json -OutFile $functionInfoPath
+        Write-Host "FunctionInfo.json has been downloaded to [$functionInfoPath]."
+
         Write-Host "Please back up any persistent components of your old profile to [$HOME\Documents\PowerShell\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes"
     }
     catch {

@@ -7,9 +7,9 @@ Here I keep my mpv scripts and configurations. Also contains my SVP configuratio
 Paste the `/portable_config` folder into your `./portable_config/mpv/` folder, doing so you load the configurations and scripts.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/8a902a84-a526-49f9-b456-066a2b727981" width="49%"/>
+  <img alt="mpv" src="https://github.com/user-attachments/assets/8a902a84-a526-49f9-b456-066a2b727981" width="49%"/>
   &nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/>
+  <img alt="mpv_context_menu" src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/>
 </p>
 
 ## Main folder
@@ -27,8 +27,8 @@ This is the main configuration file for MPV, here I set the general configuratio
 ### [`input.conf`][input_conf]
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/48b1bea8-c424-41ef-915d-a61575affdac" width="49%"/>
-  <img src="https://github.com/user-attachments/assets/d426835c-f2d8-450a-8a78-7580ca77bc85" width="49%"/>
+  <img alt="input_conf_1" src="https://github.com/user-attachments/assets/48b1bea8-c424-41ef-915d-a61575affdac" width="49%"/>
+  <img alt="input_conf_2" src="https://github.com/user-attachments/assets/d426835c-f2d8-450a-8a78-7580ca77bc85" width="49%"/>
 </p>
 
 This is my masterpiece, I've mapped as comment ~~almost~~ all the possible keybinds that you can use with MPV, split by the keyboard row. I've also mapped some of the most used keybinds that I use with MPV.

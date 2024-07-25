@@ -30,13 +30,13 @@ Terminal shortcuts are useful for quick access to various commands. The aliases 
 Contains various aliases that are useful for the PowerShell.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/962a3d94-59ce-440b-9d41-3b55b59fcd5a" width="100%"/>
+  <img alt="terminal" src="https://github.com/user-attachments/assets/962a3d94-59ce-440b-9d41-3b55b59fcd5a" width="100%"/>
 </p>
 
 You can add it to your PowerShell profile by running the following command, in an elevated (Administrator) PowerShell:
 
 ```powershell
-irm "https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/PowershellSetup.ps1" | iex
+irm "https://raw.githubusercontent.com/v-amorim/self_development/main/macros/Terminal/SetupPowershell.ps1" | iex
 ```
 
 ### [wterminal][wterminal]

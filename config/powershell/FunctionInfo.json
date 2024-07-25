@@ -1,0 +1,156 @@
+{
+  "General Functions": {
+    "add_to_path": [
+      "Add a directory to the PATH",
+      "[add_to_path <directory>]" ],
+    "alias_edit": [
+      "Edit the PowerShell profile file",
+      "[code $PROFILE]" ],
+    "alias_update": [
+      "Updates the PowerShell profile file",
+      "[. $PROFILE]" ],
+    "cls": [
+      "Clear the console",
+      "[cls]" ],
+    "credits": [
+      "Display the credits for the PowerShell profile",
+      "[https://github.com/v-amorim]" ],
+    "flushdns": [
+      "Flush the DNS cache",
+      "[]" ],
+    "getip": [
+      "Get your public IP address",
+      "[]" ],
+    "grep": [
+      "Search for a regex pattern in a file or directory",
+      "[grep <regex> <dir>]" ],
+    "hist": [
+      "Opens the Powershell command history file",
+      "[code ConsoleHost_history.txt]" ],
+    "ls": [
+      "List files and folders in the current directory",
+      "[DIR <file>]" ],
+    "mkdir": [
+      "Create a new directory and navigate to it",
+      "[mkdir <directory> && cd <directory>]" ],
+    "s": [
+      "Open File Explorer in the current directory",
+      "[start .]" ],
+    "sudo": [
+      "Run a command as an administrator, requires quotes or brackets around the command",
+      "[sudo {<command>}]" ],
+    "sysinfo": [
+      "Get system information",
+      "[]" ],
+    "uomp": [
+      "Update Oh My Posh",
+      "[winget upgrade JanDeDobbeleer.OhMyPosh -s winget]" ],
+    "update": [
+      "Update all installed packages",
+      "[winget upgrade]" ],
+    "uptime": [
+      "Get the system uptime",
+      "[]" ],
+    "which": [
+      "Locate a command",
+      "[which <command>]" ],
+    "winutil": [
+      "Run Chris Titus's Windows Utility",
+      "[iwr -useb https://christitus.com/win | iex]" ],
+    "wsls": [
+      "Shutdown the active WSL",
+      "[wsl --shutdown]" ],
+    "y": [
+      "Downloads youtube video",
+      "[yt-dlp <url>]" ],
+    "ys": [
+      "Downloads youtube video with SponsorBlock chapters",
+      "[yt-dlp args <url>]" ]
+  },
+  "Directory Navigation Functions": {
+    "..": [
+      "Go up one directory",
+      "[cd ..]" ],
+    "...": [
+      "Go up two directories",
+      "[cd ..\\..]" ],
+    "....": [
+      "Go up three directories",
+      "[cd ..\\..\\..]" ],
+    ".....": [
+      "Go up four directories",
+      "[cd ..\\..\\..\\..]" ],
+    "home": [
+      "Go to the user's home directory",
+      "[cd $env:USERPROFILE]" ]
+  },
+  "Python Functions": {
+    "p": [
+      "Run a Python script",
+      "[python <script.py>]" ],
+    "pf": [
+      "List all installed packages",
+      "[python -m pip freeze]" ],
+    "pm": [
+      "Run a Python module",
+      "[python -m <module>]" ],
+    "pp": [
+      "Install a Python package",
+      "[python -m pip install <package>]" ],
+    "ppu": [
+      "Updates a Python package",
+      "[python -m pip install -U <package>]" ]
+  },
+  "Pyenv Functions": {
+    "pe": [
+      "Run a Pyenv command",
+      "[pyenv <command>]" ],
+    "pev": [
+      "List all Python versions",
+      "[pyenv versions <arg>]" ],
+    "pes": [
+      "Set the Pyenv shell-specific Python version",
+      "[pyenv shell <version>]" ],
+    "peu": [
+      "Update Pyenv version list",
+      "[pyenv update]" ]
+  },
+  "Poetry Functions": {
+    "poi": [
+      "Install dependencies from the lock file",
+      "[poetry install]" ],
+    "por": [
+      "Run a command in the Poetry virtual environment",
+      "[poetry run <command>]" ],
+    "pos": [
+      "Activate the Poetry virtual environment",
+      "[poetry shell]" ]
+  },
+  "Pre-commit Functions": {
+    "pc": [
+      "Run selected pre-commit hooks",
+      "[pre-commit <command>]" ],
+    "pcall": [
+      "Run all pre-commit hooks on all files",
+      "[pre-commit run --all-files]" ],
+    "pci": [
+      "Install pre-commit hooks",
+      "[pre-commit install]" ]
+  },
+  "Pip-tools Functions": {
+    "ptc": [
+      "Run pip-compile on requirements.in",
+      "[python -m piptools compile]" ],
+    "pts": [
+      "Run pip-sync on requirements.txt",
+      "[python -m piptools sync]" ]
+  },
+  "Virtual Environment Functions": {
+    "a": [
+      "Activate the virtual environment",
+      "[.venv\\Scripts\\activate.bat]" ],
+    "d": [
+      "Deactivate the virtual environment",
+      "[deactivate]" ]
+  }
+}

@@ -11,14 +11,6 @@
 
 This repository contains a collection of scripts and macros that I have written/use for various purposes. The scripts are written in Python, Ruby, and AHK. The scripts are written for various applications such as InDesign, Excel, Word, and LaTeX. The repository also contains a collection of LaTeX templates that I have created for various purposes.
 
-## [InDesign Scripts][README_indesign_scripts]
-
-The InDesign scripts are written in JavaScript. The scripts are written for various purposes such as automating the creation of documents, formatting text, and exporting documents to PDF. The scripts are written for InDesign CS6 and later versions.
-
-## [Macros][README_macros]
-
-The macros are written in AHK. The macros are written for various purposes such as automation, hotkeys, text shortcuts, and window management. The macros are written for Windows.
-
 ## [Config][README_config]
 
 The Config folder contains a collection of scripts or configurations that I use or have written for various purposes. As an example: Oh My Posh terminal theme, MPV configuration
@@ -26,17 +18,24 @@ The Config folder contains a collection of scripts or configurations that I use 
 My Oh My Posh configuration:
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/417ed752-acec-4128-9be6-6c1b808e7dcf" width="100%"/>
+  <img alt="terminal" src="https://github.com/user-attachments/assets/417ed752-acec-4128-9be6-6c1b808e7dcf" width="100%"/>
 </p>
-
 
 My MPV configuration:
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/8a902a84-a526-49f9-b456-066a2b727981" width="49%"/>
+  <img alt="mpv" src="https://github.com/user-attachments/assets/8a902a84-a526-49f9-b456-066a2b727981" width="49%"/>
   &nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/>
+  <img alt="mpv_context_menu" src="https://github.com/user-attachments/assets/6f6654ac-246c-4f0b-8603-ab4e4993b7e9" width="49%"/>
 </p>
+
+## [InDesign Scripts][README_indesign_scripts]
+
+The InDesign scripts are written in JavaScript. The scripts are written for various purposes such as automating the creation of documents, formatting text, and exporting documents to PDF. The scripts are written for InDesign CS6 and later versions.
+
+## [Macros][README_macros]
+
+The macros are written in AHK. The macros are written for various purposes such as automation, hotkeys, text shortcuts, and window management. The macros are written for Windows.
 
 ## [Python][README_python]
 

@@ -80,11 +80,6 @@ class TruecolorConverter:
         return np.array([int(hex_color[i: i + 2], 16) for i in (0, 2, 4)])
 
     @staticmethod
-    def _color_ranges() -> tuple[int, int, int]:
-        """Generate RGB color ranges for display."""
-        return ((r, g, b) for r in range(0, 256, 51) for g in range(0, 256, 51) for b in range(0, 256, 51))
-
-    @staticmethod
     def _basic_colors() -> np.ndarray:
         """Return an array of the 16 basic ANSI colors."""
         return np.array(

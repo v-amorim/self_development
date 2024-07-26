@@ -64,7 +64,7 @@
             },
             "intenseTextStyle": "all",
             "opacity": 90,
-            "selectionBackground": "#4C4C4C",
+            "selectionBackground": "#4B94CB",
             "unfocusedAppearance":
             {
                 "opacity": 95,
@@ -93,20 +93,22 @@
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc",
+                "background": "#201319"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nologo",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "Windows PowerShell",
+                "background": "#111A29"
             }
         ]
     },
     "schemes":
     [
         {
-            "background": "#0D1117",
+            "background": "#0D0E17",
             "black": "#000000",
             "blue": "#82AAFF",
             "brightBlack": "#545454",

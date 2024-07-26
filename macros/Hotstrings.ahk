@@ -125,26 +125,31 @@ Return
 
 :*:>code::
     backticks_unicode := "{U+0060}{U+0060}{U+0060}"
+    backticks_char := Chr(96) Chr(96) Chr(96)
     Clipboard := ClipboardAll
     StringReplace, Clipboard, Clipboard, `r`n, `n, All ; Remove CRLF (Carriage Return + Line Feed)
-    StringLen, ClipLength, Clipboard
-    LeftMoves := ClipLength + 5
 
-    LTrim(A_ThisHotkey,":oc?*")
+    LTrim(A_ThisHotkey, ":oc?*")
+    Sleep, 250
     Send, %backticks_unicode%
     Send, {Shift down}{Enter}{Shift up}
     Send, ^v
     Send, {Shift down}{Enter}{Shift up}
     Send, %backticks_unicode%
-    SendInput, {Left %LeftMoves%}
-Return
+    Send, ^{Home}
 
-:*:>gpt::
-    prompt = Abide to these rules when answering questions: ["Provide clear and concise explanations", "Respond using the terminology and context you're given", "Avoid repeating information unless necessary, only output changed code", "Break down complex tasks into smaller, manageable steps", "Adhere to standard practices and conventions", "Favor simplicity in explanations", "Ensure code is self-explanatory without relying on comments", "Maintain consistency in coding practices", "Use descriptive variable names that clarify their purpose", "Minimize dependencies between code components", "Avoid using negative conditionals where possible", "Use descriptive and clear variable names", "Ensure names are pronounceable and searchable", "Replace numerical constants with named constants where appropriate", "Write functions that focus on a single task", "Use descriptive names for functions", "Prefer fewer function arguments where feasible", "Ensure functions have no unintended side effects", "Avoid mentioning being an AI", "Refrain from language suggesting remorse, apology, or regret", "Keep responses unique and concise", "Always focus on the intent behind questions", "Seek clarification if questions are ambiguous", "Support answers with credible sources where applicable"]`n===`n
-
-    LTrim(A_ThisHotkey,":oc?*")
-    Clipboard = %prompt%
-    Send ^v
+    ; Move cursor to the first occurrence of backticks_unicode
+    Clipboard := backticks_char
+    Sleep, 250
+    Send, ^f
+    Sleep, 250
+    Send, ^v
+    Sleep, 250
+    Send, {Enter}
+    Sleep, 250
+    Send, {Esc}
+    Sleep, 250
+    Send, {Right}
 Return
 
 !c:: ; Alt + C [Surrounds the selected text with backticks]
@@ -167,17 +172,17 @@ Return
     ClipSaved := ""
 Return
 
-^!c:: ; Ctrl + Alt + C [Surrounds the selected text with 3 backticks]
+^!c:: ; Ctrl + Alt + C [Surrounds the selected text with 3 backticks and adds line breaks]
     backticks_char := Chr(96) Chr(96) Chr(96)
 
     ClipSaved := ClipboardAll
-    Clipboard :=
+    Clipboard := ""
     Send, ^c
     ClipWait, 1
 
     if (Clipboard != "")
     {
-        Clipboard := backticks_char . Clipboard . backticks_char
+        Clipboard := backticks_char "`n" Clipboard "`n" backticks_char
         Sleep, 50
         Send, ^v
     }

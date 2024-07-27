@@ -6,6 +6,7 @@ $resetStyle = $PSStyle.Reset
 
 ##--- JSON File Variables
 $profilePath = Split-Path -Path $PROFILE
+$userPath = $env:userprofile
 $jsonFilePath = "$profilePath\FunctionInfo.json"
 $jsonContent = Get-Content -Path $jsonFilePath -Raw
 $jsonData = $jsonContent | ConvertFrom-Json
@@ -13,7 +14,7 @@ $markerFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\Remove-DuplicateHis
 
 ##--- Oh-My-Posh Variables
 $poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json"
-$poshThemesPath = "$env:userprofile\Documents\oh-my-posh\themes"
+$poshThemesPath = "$userPath\Documents\oh-my-posh\themes"
 $poshCurrentThemeUrlFilePath = "$poshThemesPath\.CurrentThemeUrl.txt"
 $poshPreviousThemeUrlFilePath = "$poshThemesPath\.PreviousThemeUrl.txt"
 
@@ -495,7 +496,8 @@ function ..           { Set-Location .. }
 function ...          { Set-Location ..\.. }
 function ....         { Set-Location ..\..\.. }
 function .....        { Set-Location ..\..\..\.. }
-function home         { Set-Location $env:USERPROFILE }
+function home         { Set-Location $userPath }
+function github       { Set-Location "$userPath\Documents\GitHub" }
 function dir {
     $TerminalIconsUnloaded = -not (Get-Module -Name Terminal-Icons)
     if ($TerminalIconsUnloaded) {

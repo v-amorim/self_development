@@ -1,25 +1,113 @@
-#--- Oh My Posh Configuration
+#--- Variables
+$escapeChar = "$([char]0x1b)"
+$historyPath = "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+$isLatestPowershell = $PSVersionTable.PSVersion.Major -ge 7
+$resetStyle = $PSStyle.Reset
+
+##--- JSON File Variables
+$profilePath = Split-Path -Path $PROFILE
+$jsonFilePath = "$profilePath\FunctionInfo.json"
+$jsonContent = Get-Content -Path $jsonFilePath -Raw
+$jsonData = $jsonContent | ConvertFrom-Json
+$markerFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\Remove-DuplicateHistory.marker"
+
+##--- Oh-My-Posh Variables
+$poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json"
+$poshThemesPath = "$env:userprofile\Documents\oh-my-posh\themes"
+$poshCurrentThemeUrlFilePath = "$poshThemesPath\.CurrentThemeUrl.txt"
+$poshPreviousThemeUrlFilePath = "$poshThemesPath\.PreviousThemeUrl.txt"
+
+
+#--- Private Functions
+function Save-ThemeUrl {
+    param (
+        [string]$url
+    )
+    $url = $url.Trim()
+    Set-Content -Path $poshCurrentThemeUrlFilePath -Value $url -Force
+}
+
+function Save-PreviousThemeUrl {
+    param (
+        [string]$url
+    )
+    $url = $url.Trim()
+    Set-Content -Path $poshPreviousThemeUrlFilePath -Value $url -Force
+}
+
+function Validate-Url {
+    param (
+        [string]$url
+    )
+    try {
+        $response = Invoke-WebRequest -Uri $url -Method Head -ErrorAction Stop
+        return $response.StatusCode -eq 200
+    } catch {
+        return $false
+    }
+}
+
+function Load-UrlFromFile {
+    param (
+        [string]$filePath
+    )
+    if (Test-Path $filePath) {
+        $urlContent = Get-Content -Path $filePath -Raw
+        if (-not [string]::IsNullOrWhiteSpace($urlContent)) {
+            $url = $urlContent.Trim()
+            if ($url -match "^https://raw.githubusercontent.com/.*\.omp\.json$") {
+                return $url
+            }
+        }
+    }
+    return $null
+}
+
+function Load-ThemeUrl {
+    $currentUrl = Load-UrlFromFile -filePath $poshCurrentThemeUrlFilePath
+    if ($currentUrl -and (Validate-Url -url $currentUrl)) {
+        return $currentUrl
+    }
+
+    $previousUrl = Load-UrlFromFile -filePath $poshPreviousThemeUrlFilePath
+    if ($previousUrl -and (Validate-Url -url $previousUrl)) {
+        Save-ThemeUrl -url $previousUrl
+        return $previousUrl
+    }
+
+    Save-ThemeUrl -url $poshDefaultThemeUrl
+    Save-PreviousThemeUrl -url $poshDefaultThemeUrl
+    return $poshDefaultThemeUrl
+}
+
 function Update-OhMyPoshTheme {
     param (
-        [string]$ohMyPoshGitPath = "https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json"
+        [string]$ohMyPoshGitPath
     )
 
-    $profilePath = "$env:userprofile\Documents\oh-my-posh\themes"
-    if (-not (Test-Path $profilePath)) {
-        New-Item -Path $profilePath -ItemType Directory -Force
+    if (-not (Test-Path $poshThemesPath)) {
+        New-Item -Path $poshThemesPath -ItemType Directory -Force
     }
 
     $tempDir = [System.IO.Path]::GetTempPath()
     $themeName = [regex]::Match($ohMyPoshGitPath, "/([^/]+)\.omp\.json$").Groups[1].Value
 
-    $currentPoshThemePath = "$profilePath\$themeName.omp.json"
+    $currentPoshThemePath = "$poshThemesPath\$themeName.omp.json"
     $tempDownloadPath = "$tempDir\$themeName-temp.omp.json"
-    $backupPath = "$profilePath\$themeName-$(Get-Date -Format 'yyyyMMddHHmmss').omp.json"
+    $backupPath = "$poshThemesPath\$themeName-$(Get-Date -Format 'yyyyMMddHHmmss').omp.json"
 
     $isThemeUpdateNeeded = -not (Test-Path $currentPoshThemePath) -or (New-TimeSpan -Start (Get-Item $currentPoshThemePath).LastWriteTime).TotalHours -ge 1
 
     if ($isThemeUpdateNeeded) {
-        Invoke-WebRequest -Uri $ohMyPoshGitPath -OutFile $tempDownloadPath
+        try {
+            Invoke-WebRequest -Uri $ohMyPoshGitPath -OutFile $tempDownloadPath -ErrorAction Stop
+        } catch {
+            $ohMyPoshGitPath = Load-UrlFromFile -filePath $poshPreviousThemeUrlFilePath
+            if ($ohMyPoshGitPath) {
+                Invoke-WebRequest -Uri $ohMyPoshGitPath -OutFile $tempDownloadPath -ErrorAction Stop
+            }
+        }
+
         $fileExists = Test-Path $currentPoshThemePath
 
         if ($fileExists) {
@@ -39,30 +127,6 @@ function Update-OhMyPoshTheme {
     return $currentPoshThemePath
 }
 
-# Define the theme URL
-$PoshThemeUrl = "https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json"
-
-# Update the OhMyPosh theme and get the path
-$PoshThemePath = Update-OhMyPoshTheme -ohMyPoshGitPath $PoshThemeUrl
-
-# Initialize Oh My Posh with the updated theme
-oh-my-posh init pwsh --config "$PoshThemePath" | Invoke-Expression
-$env:VIRTUAL_ENV_DISABLE_PROMPT = 1
-
-
-#--- Variables
-$profilePath = Split-Path -Path $PROFILE
-$historyPath = "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
-$markerFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\Remove-DuplicateHistory.marker"
-$jsonFilePath = "$profilePath\FunctionInfo.json"
-$jsonContent = Get-Content -Path $jsonFilePath -Raw
-$jsonData = $jsonContent | ConvertFrom-Json
-$resetStyle = $PSStyle.Reset
-$escapeChar = "$([char]0x1b)"
-$isLatestPowershell = $PSVersionTable.PSVersion.Major -ge 7
-
-
-#--- Helper Functions
 function Remove-DuplicateHistory {
     # Check if marker file exists and if it was last modified more than 5 minutes ago
     $shouldProcess = -not (Test-Path $markerFilePath) -or (New-TimeSpan -Start (Get-Item $markerFilePath).LastWriteTime).TotalMinutes -ge 5
@@ -106,7 +170,22 @@ function Remove-DuplicateHistory {
     }
 } Remove-DuplicateHistory
 
-function Format-Hyperlink { # Credits https://stackoverflow.com/a/78366066/7977183
+Function IsAdmin {
+    $currentPrincipal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
+    $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+function Handle-CtrlRightArrow {
+    $hasPrediction = [Microsoft.PowerShell.PSConsoleReadLine]::GetPrediction -ne $null
+
+    if ($hasPrediction) {
+        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptNextSuggestionWord()
+    } else {
+        [Microsoft.PowerShell.PSConsoleReadLine]::ForwardWord()
+    }
+}
+
+function Format-Hyperlink { # Credits: https://stackoverflow.com/a/78366066/7977183
     param(
         [Parameter(ValueFromPipeline = $true, Position = 0)]
         [ValidateNotNullOrEmpty()]
@@ -151,7 +230,8 @@ function Convert-HexToAnsiColor {
         [string]$ForegroundHexColor = '',
         [string]$BackgroundHexColor = '',
         [string[]]$Modifiers = @(),
-        [switch]$Display
+        [switch]$Display,
+        [string]$DisplayText
     )
 
     $FgCode = ''
@@ -204,83 +284,119 @@ function Convert-HexToAnsiColor {
         Write-Host "Modifiers : ${Modifiers}"
         Write-Host "Ansi Code : ${RawCombinedCode}"
         Write-Host "Combined  : ${CombinedCode}Sample Text with effects${resetStyle}"
-    } else {
+    } elseif ($DisplayText){
+        Return "${CombinedCode}${DisplayText}${resetStyle}"
+    }
+    else {
         return $CombinedCode
     }
+} Set-Alias -Name HexToAnsi -Value Convert-HexToAnsiColor
+
+##--- Color Palette
+function CCommand                { HexToAnsi "#FDB1A2" "" ("") $args }
+function CComment                { HexToAnsi "#8B949E" "" ("") $args }
+function CContinuationPrompt     { HexToAnsi "#4C4C4C" "" ("") $args }
+function CDefault                { HexToAnsi "#F8EAF8" "" ("") $args }
+function CEmphasis               { HexToAnsi "#89DDFF" "" ("") $args }
+function CError                  { HexToAnsi "#E83974" "" ("") $args }
+function CInLinePrediction       { HexToAnsi "#4C4C4C" "" ("") $args }
+function CKeyword                { HexToAnsi "#F97583" "" ("bold") $args }
+function CListPrediction         { HexToAnsi "#FFCB6B" "" ("") $args }
+function CListPredictionSelected { HexToAnsi "#B58EE8" "#4C4C4C" $args }
+function CListPredictionTooltip  { HexToAnsi "#7F7F7F" "" ("") $args }
+function CMember                 { HexToAnsi "#F69BDC" "" ("") $args }
+function CNumber                 { HexToAnsi "#79B8FF" "" ("") $args }
+function COperator               { HexToAnsi "#F97583" "" ("bold") $args }
+function CParameter              { HexToAnsi "#B58EE8" "" ("") $args }
+function CSelection              { HexToAnsi "#B58EE8" "#4C4C4C" ("") $args }
+function CString                 { HexToAnsi "#A5CFFF" "" ("") $args }
+function CType                   { HexToAnsi "#79C0FF" "" ("") $args }
+function CVariable               { HexToAnsi "#FF72B0" "" ("") $args }
+
+function CCredits                { HexToAnsi "#FF72B0" "" ("bold", "blinking") $args }
+$Credits = CCredits $(Format-Hyperlink -Uri "https://github.com/v-amorim" -Label ([char]0xf09b)) # \uf09b is the GitHub icon
+
+
+#--- Public Function
+function Initialize-OhMyPosh {
+    param (
+        [string]$PoshThemeUrl = (Load-ThemeUrl)
+    )
+
+    $currentUrl = Load-ThemeUrl
+    if ($currentUrl -ne $PoshThemeUrl) {
+        Save-ThemeUrl -url $PoshThemeUrl
+        Save-PreviousThemeUrl -url $currentUrl
+    }
+
+    $PoshThemePath = Update-OhMyPoshTheme -ohMyPoshGitPath $PoshThemeUrl
+    oh-my-posh init pwsh --config "$PoshThemePath" | Invoke-Expression
+    $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 }
 
-$CommandColor = Convert-HexToAnsiColor -ForegroundHexColor "#FDB1A2"
-$ArgumentColor = Convert-HexToAnsiColor -ForegroundHexColor "#B58EE8"
-$CreditsColor = Convert-HexToAnsiColor -ForegroundHexColor "#FF72B0" -Modifiers @("bold", "blinking")
-$Credits = "$CreditsColor$(Format-Hyperlink -Uri "https://github.com/v-amorim" -Label ([char]0xf09b))$resetStyle"
+Initialize-OhMyPosh
 
-function HexToAnsiColor-Example {
-    $ExampleFgHex           = "#B58EE8"
-    $ExampleFgCode          = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex
-    $ExampleBgHex           = "#4C4C4C"
-    $ExampleBgCode          = Convert-HexToAnsiColor -BackgroundHexColor $ExampleBgHex
+
+##--- Example Functions
+function HexToAnsiExample {
+    function ExampleFg   { HexToAnsi $ExampleFgHex "" ("") $args }
+    function ExampleBg   { HexToAnsi "" $ExampleBgHex $args }
     $ExampleModifiers       = @("italic", "blinking")
-    $ExampleCombinedCode    = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -BackgroundHexColor $ExampleBgHex -Modifiers $ExampleModifiers
+    $ExampleCombinedCode    = HexToAnsi $ExampleFgHex $ExampleBgHex $ExampleModifiers
     $ExampleRawCombinedCode = "``e[38;2;181;142;232;3;5m``e[48;2;76;76;76m"
 
-    $Bold                   = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("bold")
-    $Dim                    = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("dim")
-    $Italic                 = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("italic")
-    $Underline              = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("underline")
-    $Blinking               = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("blinking")
-    $Inverse                = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("inverse")
-    $Invisible              = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("invisible")
-    $Strikethrough          = Convert-HexToAnsiColor -ForegroundHexColor $ExampleFgHex -Modifiers @("strikethrough")
-
-    $Command                = Convert-HexToAnsiColor -ForegroundHexColor "#FDB1A2"
-    $Parameter              = Convert-HexToAnsiColor -ForegroundHexColor "#B58EE8"
-    $String                 = Convert-HexToAnsiColor -ForegroundHexColor "#A5CFFF"
-    $Keyword                = Convert-HexToAnsiColor -ForegroundHexColor "#F97583" -Modifiers @("bold")
-
+    function CBold          { HexToAnsi $ExampleFgHex "" ("bold") $args }
+    function CDim           { HexToAnsi $ExampleFgHex "" ("dim") $args }
+    function CItalic        { HexToAnsi $ExampleFgHex "" ("italic") $args }
+    function CUnderline     { HexToAnsi $ExampleFgHex "" ("underline") $args }
+    function CBlinking      { HexToAnsi $ExampleFgHex "" ("blinking") $args }
+    function CInverse       { HexToAnsi $ExampleFgHex "" ("inverse") $args }
+    function CInvisible     { HexToAnsi $ExampleFgHex "" ("invisible") $args }
+    function CStrikethrough { HexToAnsi $ExampleFgHex "" ("strikethrough") $args }
 
     @"
-=======================
+======================================
 ${Credits} Convert-HexToAnsiColor [Example]
-=======================
+======================================
 
-${Command}Convert-HexToAnsiColor${resetStyle} ${Parameter}-ForegroundHexColor${resetStyle} ${String}"#B58EE8"${resetStyle} ${Parameter}-BackgroundHexColor${resetStyle} ${String}"#4C4C4C"${resetStyle} ${Parameter}-Modifiers${resetStyle} @(${String}"italic"${resetStyle}${Keyword},${resetStyle} ${String}"blinking"${resetStyle})
+$(CCommand 'Convert-HexToAnsiColor') $(CParameter '-ForegroundHexColor') $(CString '"#B58EE8"') $(CParameter '-BackgroundHexColor') $(CString '"#4C4C4C"') $(CParameter '-Modifiers') ($(CString '"italic"') $(CKeyword ',') $(CString '"blinking"'))
+$(CCommand 'Convert-HexToAnsiColor') $(CString '"#B58EE8"') $(CString '"#4C4C4C"') ($(CString '"italic"') $(CKeyword ',') $(CString '"blinking"'))
 
-=======================
-Foreground: ${ExampleFgCode}${ExampleFgHex}${resetStyle}
-Background: ${ExampleBgCode}${ExampleBgHex}${resetStyle}
-Modifiers : ${ExampleModifiers}
-Ansi Code : ${ExampleRawCombinedCode}
-Combined  : ${ExampleCombinedCode}Sample Text with effects${resetStyle}
+======================================
+Foreground : $(ExampleFg '#B58EE8')
+Background : $(ExampleBg '#4C4C4C')
+Modifiers  : ("italic", "blinking")
+Ansi Code  : ${ExampleRawCombinedCode} "``e[38;2;181;142;232;3;5m``e[48;2;76;76;76m"
+Combined   : ${ExampleCombinedCode}Sample Text with effects${resetStyle}
 
-=======================
-Available modifiers: ${Bold}bold${resetStyle}, ${Dim}dim${resetStyle}, ${Italic}italic${resetStyle}, ${Underline}underline${resetStyle}, ${Blinking}blinking${resetStyle}, ${Inverse}inverse${resetStyle}, ${Invisible}invisible${resetStyle}(invisible), ${Strikethrough}strikethrough${resetStyle}
+
+======================================
+Available modifiers (can be combined)
+======================================
+
+[$(CBold 'bold')], [$(CDim 'dim')], [$(CItalic 'italic')], [$(CUnderline 'underline')], [$(CBlinking 'blinking')], [$(CInverse 'inverse')], [$(CInvisible 'invisible')], [$(CStrikethrough 'strikethrough')]
+
+
+======================================
+Ansi TrueColor Detail
+======================================
+[$(CCommand '\e[38')], [$(CCommand '\e[48')]: 38 = ForegroundColor,  48 = BackgroundColor
+[$(CCommand ';2')]            : Set style to ANSI TrueColor
+[$(CCommand ';181;142;232')]  : RGB Color
+[$(CCommand ';3;5')]          : Modifiers
+[$(CCommand 'm')]             : End of ANSI code
 "@
 }
 
-function Handle-CtrlRightArrow {
-    $hasPrediction = [Microsoft.PowerShell.PSConsoleReadLine]::GetPrediction -ne $null
-
-    if ($hasPrediction) {
-        [Microsoft.PowerShell.PSConsoleReadLine]::AcceptNextSuggestionWord()
-    } else {
-        [Microsoft.PowerShell.PSConsoleReadLine]::ForwardWord()
-    }
-}
-
-Function IsAdmin {
-    $currentPrincipal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
-    $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-}
-
-function Get-FunctionNames {
+function Get-FunctionsList {
     foreach ($category in $jsonData.PSObject.Properties.Name) {
-        Write-Host "${ArgumentColor}${category}${resetStyle}"
+        Write-Host "$(CParameter ${category})"
 
         $commands = $jsonData.$category.PSObject.Properties.Name
         $formattedCommands = @()
 
         foreach ($command in $commands) {
-            $formattedCommands += "[${CommandColor}${command}${resetStyle}]"
+            $formattedCommands += "[$(CCommand ${command})]"
         }
         $commandsList = $formattedCommands -join ", "
 
@@ -288,7 +404,7 @@ function Get-FunctionNames {
     }
 }
 
-function Get-FunctionDetails {
+function Get-FunctionsDetails {
     $maxFunctionNameLength = 0
     $detailedInfo = ""
 
@@ -301,12 +417,12 @@ function Get-FunctionDetails {
     }
 
     foreach ($category in $jsonData.PSObject.Properties.Name) {
-        Write-Host "${ArgumentColor}${category}${resetStyle}"
+        Write-Host "$(CParameter ${category})"
         foreach ($function in $jsonData.$category.PSObject.Properties.Name) {
             $description = $jsonData.$category.$function
             $functionName = $function
             $paddedFunctionName = $functionName.PadRight($maxFunctionNameLength)
-            $detailedInfo = "[${CommandColor}${paddedFunctionName}${resetStyle}]: ${description}"
+            $detailedInfo = "[$(CCommand ${paddedFunctionName})]: ${description}"
             Write-Host $detailedInfo
         }
         Write-Host ""
@@ -327,31 +443,164 @@ function alias_help {
     }
     if ($args -eq "-list") {
         @"
-=======================
+======================================
 ${Credits} PowerShell Profile - Help [List]
-=======================
+======================================
 
 "@
-        Get-FunctionNames
+        Get-FunctionsList
     } elseif ($args -eq "-detail") {
         @"
-=======================
+======================================
 ${Credits} PowerShell Profile - Help [Detail]
-=======================
+======================================
 
 "@
-        Get-FunctionDetails
+        Get-FunctionsDetails
     } else {
         @"
-=======================
+======================================
 ${Credits} PowerShell Profile - Help
-=======================
+======================================
 
-${CommandColor}alias_help${resetStyle} ${ArgumentColor}command${resetStyle}: to get the detailed help for a command
-${CommandColor}alias_help${resetStyle} ${ArgumentColor}-list${resetStyle}  : to list all available commands
-${CommandColor}alias_help${resetStyle} ${ArgumentColor}-detail${resetStyle}: to get the detailed help for all commands
+$(CCommand "alias_help") $(CParameter 'command'): to get the detailed help for a command
+$(CCommand "alias_help") $(CParameter '-list')  : to list all available commands
+$(CCommand "alias_help") $(CParameter '-detail'): to get the detailed help for all commands
 
 "@
+    }
+}
+
+
+##--- General Functions
+function alias_edit   { code $PROFILE }
+function alias_update { . $PROFILE }
+function cls          { Clear-Host }
+function credits      { Write-Host "Link to my GitHub: ${Credits}" }
+function hist         { code $historyPath }
+function ls           { Get-ChildItem $args }
+function mkdir        { New-Item -ItemType Directory $args[0] | Set-Location }
+function print        { Write-Host $args }
+function s            { Invoke-Item . }
+function uomp         { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
+function update       { winget upgrade }
+function winutil      { iwr -useb https://christitus.com/win | iex }
+function wsls         { wsl --shutdown }
+function y            { yt-dlp $args }
+function ys           { yt-dlp --sponsorblock-mark all,-filler $args }
+
+
+##--- Directory Navigation Functions
+function ..           { Set-Location .. }
+function ...          { Set-Location ..\.. }
+function ....         { Set-Location ..\..\.. }
+function .....        { Set-Location ..\..\..\.. }
+function home         { Set-Location $env:USERPROFILE }
+function dir {
+    $TerminalIconsUnloaded = -not (Get-Module -Name Terminal-Icons)
+    if ($TerminalIconsUnloaded) {
+        Import-Module -Name Terminal-Icons
+    }
+
+    # List directory contents
+    Get-ChildItem
+}
+
+##--- Python Functions
+function p            { python $args }
+function pf           { python -m pip freeze }
+function pm           { python -m $args }
+function pp           { python -m pip install $args }
+function ppu          { python -m pip install -U $args }
+function pv           { python -V }
+
+##--- Pyenv Functions
+function pe           { pyenv $args }
+function pev          { pyenv versions }
+function pes          { pyenv shell $args }
+function peu          { pyenv update }
+
+###--- Poetry Functions
+function poi          { poetry install }
+function por          { poetry run $args }
+function pos          { poetry shell }
+
+###--- Pre-commit Functions
+function pc           { pre-commit $* }
+function pcall        { pre-commit run --all-files }
+function pci          { pre-commit install }
+
+###--- Pip-tools Functions
+function ptc          { python -m piptools compile }
+function pts          { python -m piptools sync }
+
+###--- Virtual Environment Functions
+function a {
+    try {
+        & .venv\Scripts\activate.ps1
+    } catch {
+        Write-Error "Failed to activate the virtual environment. Ensure the path is correct, contains a virtual env.`nError details: $_"
+    }
+}
+
+function d {
+    try {
+        deactivate
+    } catch {
+        Write-Error "Failed to deactivate the virtual environment. Ensure that there is an active virtual environment."
+    }
+}
+
+##--- General Multi-line Functions
+function add_to_path {
+    param (
+        [string]$filePath
+    )
+
+    $currentPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+    $directory = [System.IO.Path]::GetDirectoryName($filePath)
+
+    if ($currentPath -notlike "*$directory*") {
+        $newPath = "$currentPath;$directory"
+        [System.Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
+        Write-Host "Added $directory to PATH."
+    } else {
+        Write-Host "$directory is already in PATH."
+    }
+}
+
+Function sudo {
+    param (
+        [string]$command
+    )
+
+    $shell = if ($isLatestPowershell) { "pwsh" } else { "powershell.exe" }
+
+    if (IsAdmin) {
+        & $shell -NoExit -ExecutionPolicy Bypass -Command "$command"
+    } else {
+        Start-Process wt.exe -ArgumentList "new-tab $shell -NoExit -ExecutionPolicy Bypass -Command $command" -Verb RunAs
+    }
+}
+
+
+##--- Functions adapted/retrieved from: https://github.com/ChrisTitusTech/powershell-profile
+function getip    { (Invoke-WebRequest http://ifconfig.me/ip).Content }
+function sysinfo  { Get-ComputerInfo }
+function flushdns {
+	Clear-DnsClientCache
+	Write-Host "DNS has been flushed"
+}
+
+function which($name) {
+    Get-Command $name | Select-Object -ExpandProperty Definition
+}
+
+function uptime {
+    if ($isLatestPowershell) {
+        net statistics workstation | Select-String "since" | ForEach-Object { $_.ToString().Replace('Statistics since ', '') }
+    } else {
+        Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
     }
 }
 
@@ -361,25 +610,25 @@ if ($isLatestPowershell) {
     $PSROptions = @{
         ContinuationPrompt = '  '
         Colors             = @{
-            Command                = Convert-HexToAnsiColor -ForegroundHexColor "#FDB1A2"
-            Comment                = Convert-HexToAnsiColor -ForegroundHexColor "#8B949E"
-            ContinuationPrompt     = Convert-HexToAnsiColor -ForegroundHexColor "#4C4C4C"
-            Default                = Convert-HexToAnsiColor -ForegroundHexColor "#F8EAF8"
-            Emphasis               = Convert-HexToAnsiColor -ForegroundHexColor "#89DDFF"
-            Error                  = Convert-HexToAnsiColor -ForegroundHexColor "#E83974"
-            InLinePrediction       = Convert-HexToAnsiColor -ForegroundHexColor "#4C4C4C"
-            Keyword                = Convert-HexToAnsiColor -ForegroundHexColor "#F97583" -Modifiers @("bold")
-            ListPrediction         = Convert-HexToAnsiColor -ForegroundHexColor "#FFCB6B"
-            ListPredictionSelected = Convert-HexToAnsiColor -ForegroundHexColor "#B58EE8" -BackgroundHexColor "#4C4C4C"
-            ListPredictionTooltip  = Convert-HexToAnsiColor -ForegroundHexColor "#7F7F7F"
-            Member                 = Convert-HexToAnsiColor -ForegroundHexColor "#F69BDC"
-            Number                 = Convert-HexToAnsiColor -ForegroundHexColor "#79B8FF"
-            Operator               = Convert-HexToAnsiColor -ForegroundHexColor "#F97583" -Modifiers @("bold")
-            Parameter              = Convert-HexToAnsiColor -ForegroundHexColor "#B58EE8"
-            Selection              = Convert-HexToAnsiColor -ForegroundHexColor "#B58EE8" -BackgroundHexColor "#4C4C4C"
-            String                 = Convert-HexToAnsiColor -ForegroundHexColor "#A5CFFF"
-            Type                   = Convert-HexToAnsiColor -ForegroundHexColor "#79C0FF"
-            Variable               = Convert-HexToAnsiColor -ForegroundHexColor "#FF72B0"
+            Command                = CCommand
+            Comment                = CComment
+            ContinuationPrompt     = CContinuationPrompt
+            Default                = CDefault
+            Emphasis               = CEmphasis
+            Error                  = CError
+            InLinePrediction       = CInLinePrediction
+            Keyword                = CKeyword
+            ListPrediction         = CListPrediction
+            ListPredictionSelected = CListPredictionSelected
+            ListPredictionTooltip  = CListPredictionTooltip
+            Member                 = CMember
+            Number                 = CNumber
+            Operator               = COperator
+            Parameter              = CParameter
+            Selection              = CSelection
+            String                 = CString
+            Type                   = CType
+            Variable               = CVariable
         }
         HistoryNoDuplicates = $True
         HistorySearchCursorMovesToEnd = $False
@@ -427,139 +676,3 @@ Set-PSReadLineKeyHandler -Key Ctrl+DownArrow -Function HistorySearchForward
 
 # Bind the custom function to the Ctrl+RightArrow key chord
 Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -ScriptBlock ${function:Handle-CtrlRightArrow}
-
-#--- Enter this string to test the colors
-#if (1+1) CommandColor -ParameterColor "StringColor $($VariableColor.MemberColor())" {[TypeColor]} # CommentColor
-
-
-##--- General Functions
-function alias_edit   { code $PROFILE }
-function alias_update { . $PROFILE }
-function cls          { Clear-Host }
-function credits      { Write-Host "Link to my GitHub: ${Credits}" }
-function hist         { code $historyPath }
-function ls           { Get-ChildItem $args }
-function mkdir        { New-Item -ItemType Directory $args[0] | Set-Location }
-function s            { Invoke-Item . }
-function uomp         { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
-function update       { winget upgrade }
-function winutil      { iwr -useb https://christitus.com/win | iex }
-function wsls         { wsl --shutdown }
-function y            { yt-dlp $args }
-function ys           { yt-dlp --sponsorblock-mark all,-filler $args }
-
-
-#--- Directory Navigation Functions
-function ..           { Set-Location .. }
-function ...          { Set-Location ..\.. }
-function ....         { Set-Location ..\..\.. }
-function .....        { Set-Location ..\..\..\.. }
-function home         { Set-Location $env:USERPROFILE }
-function dir {
-    $TerminalIconsUnloaded = -not (Get-Module -Name Terminal-Icons)
-    if ($TerminalIconsUnloaded) {
-        Import-Module -Name Terminal-Icons
-    }
-
-    # List directory contents
-    Get-ChildItem
-}
-
-#--- Python Functions
-function p            { python $args }
-function pf           { python -m pip freeze }
-function pm           { python -m $args }
-function pp           { python -m pip install $args }
-function ppu          { python -m pip install -U $args }
-function pv           { python -V }
-
-#--- Pyenv Functions
-function pe           { pyenv $args }
-function pev          { pyenv versions }
-function pes          { pyenv shell $args }
-function peu          { pyenv update }
-
-##--- Poetry Functions
-function poi          { poetry install }
-function por          { poetry run $args }
-function pos          { poetry shell }
-
-##--- Pre-commit Functions
-function pc           { pre-commit $* }
-function pcall        { pre-commit run --all-files }
-function pci          { pre-commit install }
-
-##--- Pip-tools Functions
-function ptc          { python -m piptools compile }
-function pts          { python -m piptools sync }
-
-##--- Virtual Environment Functions
-function a {
-    try {
-        & .venv\Scripts\activate.ps1
-    } catch {
-        Write-Error "Failed to activate the virtual environment. Ensure the path is correct, contains a virtual env.`nError details: $_"
-    }
-}
-
-function d {
-    try {
-        deactivate
-    } catch {
-        Write-Error "Failed to deactivate the virtual environment. Ensure that there is an active virtual environment."
-    }
-}
-
-#--- General Multi-line Functions
-function add_to_path {
-    param (
-        [string]$filePath
-    )
-
-    $currentPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-    $directory = [System.IO.Path]::GetDirectoryName($filePath)
-
-    if ($currentPath -notlike "*$directory*") {
-        $newPath = "$currentPath;$directory"
-        [System.Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
-        Write-Host "Added $directory to PATH."
-    } else {
-        Write-Host "$directory is already in PATH."
-    }
-}
-
-Function sudo {
-    param (
-        [string]$command
-    )
-
-    $psVersion = $PSVersionTable.PSVersion.Major
-    $shell = if ($psVersion -lt 6) { "powershell.exe" } else { "pwsh" }
-
-    if (IsAdmin) {
-        & $shell -NoExit -ExecutionPolicy Bypass -Command "$command"
-    } else {
-        Start-Process wt.exe -ArgumentList "new-tab $shell -NoExit -ExecutionPolicy Bypass -Command $command" -Verb RunAs
-    }
-}
-
-
-#--- Functions adapted/retrieved from: https://github.com/ChrisTitusTech/powershell-profile
-function getip    { (Invoke-WebRequest http://ifconfig.me/ip).Content }
-function sysinfo  { Get-ComputerInfo }
-function flushdns {
-	Clear-DnsClientCache
-	Write-Host "DNS has been flushed"
-}
-
-function which($name) {
-    Get-Command $name | Select-Object -ExpandProperty Definition
-}
-
-function uptime {
-    if ($PSVersionTable.PSVersion.Major -eq 5) {
-        Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
-    } else {
-        net statistics workstation | Select-String "since" | ForEach-Object { $_.ToString().Replace('Statistics since ', '') }
-    }
-}

@@ -62,7 +62,9 @@ class TruecolorConverter:
         closest_index = self.get_closest_ansi_color(hex_color)
         fg_ansi_code = f"\033[38;5;{closest_index}m"
         bg_ansi_code = f"\033[48;5;{closest_index}m"
-        return self.color_print_formatter(fg_ansi_code, hex_color, bg_ansi_code, " Closest ANSI 256 Color : ")
+        return self.color_print_formatter(
+            fg_ansi_code, hex_color, bg_ansi_code, f" Closest ANSI 256 Color [{closest_index}]: "
+        )
 
     def color_print_formatter(self, fg_ansi_code, hex_color, bg_ansi_code, color_message):
         output = (

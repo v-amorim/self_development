@@ -63,6 +63,12 @@ Contains my FastFetch configurations.
 
 Save it to `C:/ProgramData/fastfetch/`
 
+### [WaleGeneral.conf][wale_general]
+
+Contains my WaleAudioControl configurations.
+
+Save it on `AppData\Roaming\WaleAudioControl\WaleGeneral.conf`
+
 <!-- URLS -->
 
 [README_self_development]: ../README.md

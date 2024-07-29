@@ -152,6 +152,16 @@ Return
     Send, {Right}
 Return
 
+:*:>dcode::
+    backticks_char := Chr(96) Chr(96) Chr(96)
+    SendInput {Raw}<details>`n <summary></summary>`n
+    Send, {BackSpace}
+    Send, %backticks_char%
+    SendInput, `n`n
+    Send, %backticks_char%
+    SendInput, `n`n</details>
+Return
+
 !c:: ; Alt + C [Surrounds the selected text with backticks]
     backtick_char := Chr(96)
 

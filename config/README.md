@@ -90,3 +90,4 @@ Save it on `AppData\Roaming\WaleAudioControl\WaleGeneral.conf`
 [winutil_config]: ./winutil_config.json
 [fastfetch_config]: ./config.jsonc
 [powershell]: ./powershell
+[wale_general]: ./WaleGeneral.conf

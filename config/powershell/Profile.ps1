@@ -4,7 +4,7 @@ $historyPath = "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost
 $isLatestPowershell = $PSVersionTable.PSVersion.Major -ge 7
 $resetStyle = $PSStyle.Reset
 
-##--- JSON File Variables
+#--- JSON File Variables
 $profilePath = Split-Path -Path $PROFILE
 $userPath = $env:userprofile
 $jsonFilePath = "$profilePath\FunctionInfo.json"
@@ -12,7 +12,7 @@ $jsonContent = Get-Content -Path $jsonFilePath -Raw
 $jsonData = $jsonContent | ConvertFrom-Json
 $markerFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\Remove-DuplicateHistory.marker"
 
-##--- Oh-My-Posh Variables
+#--- Oh-My-Posh Variables
 $poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json"
 $poshThemesPath = "$userPath\Documents\oh-my-posh\themes"
 $poshCurrentThemeUrlFilePath = "$poshThemesPath\.CurrentThemeUrl.txt"
@@ -20,26 +20,18 @@ $poshPreviousThemeUrlFilePath = "$poshThemesPath\.PreviousThemeUrl.txt"
 
 
 #--- Private Functions
-function Save-ThemeUrl {
+function Print { Write-Host $args }
+function Save-Url {
     param (
-        [string]$url
+        [string]$url,
+        [string]$filePath
     )
     $url = $url.Trim()
-    Set-Content -Path $poshCurrentThemeUrlFilePath -Value $url -Force
-}
-
-function Save-PreviousThemeUrl {
-    param (
-        [string]$url
-    )
-    $url = $url.Trim()
-    Set-Content -Path $poshPreviousThemeUrlFilePath -Value $url -Force
+    Set-Content -Path $filePath -Value $url -Force
 }
 
 function Validate-Url {
-    param (
-        [string]$url
-    )
+    param ([string]$url)
     try {
         $response = Invoke-WebRequest -Uri $url -Method Head -ErrorAction Stop
         return $response.StatusCode -eq 200
@@ -49,9 +41,7 @@ function Validate-Url {
 }
 
 function Load-UrlFromFile {
-    param (
-        [string]$filePath
-    )
+    param ([string]$filePath)
     if (Test-Path $filePath) {
         $urlContent = Get-Content -Path $filePath -Raw
         if (-not [string]::IsNullOrWhiteSpace($urlContent)) {
@@ -72,19 +62,17 @@ function Load-ThemeUrl {
 
     $previousUrl = Load-UrlFromFile -filePath $poshPreviousThemeUrlFilePath
     if ($previousUrl -and (Validate-Url -url $previousUrl)) {
-        Save-ThemeUrl -url $previousUrl
+        Save-Url -url $previousUrl -filePath $poshCurrentThemeUrlFilePath
         return $previousUrl
     }
 
-    Save-ThemeUrl -url $poshDefaultThemeUrl
-    Save-PreviousThemeUrl -url $poshDefaultThemeUrl
+    Save-Url -url $poshDefaultThemeUrl -filePath $poshCurrentThemeUrlFilePath
+    Save-Url -url $poshDefaultThemeUrl -filePath $poshPreviousThemeUrlFilePath
     return $poshDefaultThemeUrl
 }
 
 function Update-OhMyPoshTheme {
-    param (
-        [string]$ohMyPoshGitPath
-    )
+    param ([string]$ohMyPoshGitPath)
 
     if (-not (Test-Path $poshThemesPath)) {
         New-Item -Path $poshThemesPath -ItemType Directory -Force
@@ -92,11 +80,9 @@ function Update-OhMyPoshTheme {
 
     $tempDir = [System.IO.Path]::GetTempPath()
     $themeName = [regex]::Match($ohMyPoshGitPath, "/([^/]+)\.omp\.json$").Groups[1].Value
-
-    $currentPoshThemePath = "$poshThemesPath\$themeName.omp.json"
+    $currentPoshThemePath = "$poshThemesPath\$themeName(current).omp.json"
     $tempDownloadPath = "$tempDir\$themeName-temp.omp.json"
     $backupPath = "$poshThemesPath\$themeName-$(Get-Date -Format 'yyyyMMddHHmmss').omp.json"
-
     $isThemeUpdateNeeded = -not (Test-Path $currentPoshThemePath) -or (New-TimeSpan -Start (Get-Item $currentPoshThemePath).LastWriteTime).TotalHours -ge 1
 
     if ($isThemeUpdateNeeded) {
@@ -109,23 +95,41 @@ function Update-OhMyPoshTheme {
             }
         }
 
-        $fileExists = Test-Path $currentPoshThemePath
-
-        if ($fileExists) {
+        if (Test-Path $currentPoshThemePath) {
             $currentHash = (Get-FileHash -Path $currentPoshThemePath).Hash
             $newHash = (Get-FileHash -Path $tempDownloadPath).Hash
             $isThemeUpdateNeeded = $currentHash -ne $newHash
-        }
 
-        if ($isThemeUpdateNeeded) {
-            if ($fileExists) {
+            if ($isThemeUpdateNeeded) {
                 Rename-Item -Path $currentPoshThemePath -NewName $backupPath
+                Copy-Item -Path $tempDownloadPath -Destination $currentPoshThemePath -Force
             }
+        } else {
             Copy-Item -Path $tempDownloadPath -Destination $currentPoshThemePath -Force
         }
+
         Remove-Item -Path $tempDownloadPath -Force
     }
+
     return $currentPoshThemePath
+}
+
+function Initialize-OhMyPosh {
+    param ([string]$PoshThemeUrl = (Load-ThemeUrl))
+
+    $currentUrl = Load-ThemeUrl
+    if ($currentUrl -ne $PoshThemeUrl) {
+        Save-Url -url $PoshThemeUrl -filePath $poshCurrentThemeUrlFilePath
+        Save-Url -url $currentUrl -filePath $poshPreviousThemeUrlFilePath
+        Print "Oh My Posh Theme changed, reload your shell to apply the changes."
+    }
+
+    $PoshThemePath = Update-OhMyPoshTheme -ohMyPoshGitPath $PoshThemeUrl
+    $ThemeName = [regex]::Match($PoshThemePath, "([^\\\/(]+)(?=\(current\))").Groups[1].Value + ".omp.json"
+    $ThemeName = "$escapeChar[38;5;217m$ThemeName$escapeChar[0m"
+    Print "Oh My Posh Theme: $ThemeName"
+    oh-my-posh init pwsh --config "$PoshThemePath" | Invoke-Expression
+    $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
 }
 
 function Remove-DuplicateHistory {
@@ -157,7 +161,7 @@ function Remove-DuplicateHistory {
                 }
 
                 $uniqueHistory | Set-Content $historyFilePath
-                Write-Host "Duplicates removed from history file, keeping the most recent occurrences."
+                Print "Duplicates removed from history file, keeping the most recent occurrences."
 
                 # Create or update marker file
                 New-Item -Path $markerFilePath -ItemType File -Force | Out-Null
@@ -169,7 +173,7 @@ function Remove-DuplicateHistory {
             Write-Error "History file does not exist at path: $historyFilePath"
         }
     }
-} Remove-DuplicateHistory
+}
 
 Function IsAdmin {
     $currentPrincipal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
@@ -280,11 +284,11 @@ function Convert-HexToAnsiColor {
     $CombinedCode = "$BgCode$FgCode"
 
     if ($Display) {
-        Write-Host "Foreground: ${FgCode}${ForegroundHexColor}${resetStyle}"
-        Write-Host "Background: ${BgCode}${BackgroundHexColor}${resetStyle}"
-        Write-Host "Modifiers : ${Modifiers}"
-        Write-Host "Ansi Code : ${RawCombinedCode}"
-        Write-Host "Combined  : ${CombinedCode}Sample Text with effects${resetStyle}"
+        Print "Foreground: ${FgCode}${ForegroundHexColor}${resetStyle}"
+        Print "Background: ${BgCode}${BackgroundHexColor}${resetStyle}"
+        Print "Modifiers : ${Modifiers}"
+        Print "Ansi Code : ${RawCombinedCode}"
+        Print "Combined  : ${CombinedCode}Sample Text with effects${resetStyle}"
     } elseif ($DisplayText){
         Return "${CombinedCode}${DisplayText}${resetStyle}"
     }
@@ -318,27 +322,7 @@ function CCredits                { HexToAnsi "#FF72B0" "" ("bold", "blinking") $
 $Credits = CCredits $(Format-Hyperlink -Uri "https://github.com/v-amorim" -Label ([char]0xf09b)) # \uf09b is the GitHub icon
 
 
-#--- Public Function
-function Initialize-OhMyPosh {
-    param (
-        [string]$PoshThemeUrl = (Load-ThemeUrl)
-    )
-
-    $currentUrl = Load-ThemeUrl
-    if ($currentUrl -ne $PoshThemeUrl) {
-        Save-ThemeUrl -url $PoshThemeUrl
-        Save-PreviousThemeUrl -url $currentUrl
-    }
-
-    $PoshThemePath = Update-OhMyPoshTheme -ohMyPoshGitPath $PoshThemeUrl
-    oh-my-posh init pwsh --config "$PoshThemePath" | Invoke-Expression
-    $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
-}
-
-Initialize-OhMyPosh
-
-
-##--- Example Functions
+#--- Example Functions
 function HexToAnsiExample {
     function ExampleFg   { HexToAnsi $ExampleFgHex "" ("") $args }
     function ExampleBg   { HexToAnsi "" $ExampleBgHex $args }
@@ -391,7 +375,7 @@ Ansi TrueColor Detail
 
 function Get-FunctionsList {
     foreach ($category in $jsonData.PSObject.Properties.Name) {
-        Write-Host "$(CParameter ${category})"
+        Print "$(CParameter ${category})"
 
         $commands = $jsonData.$category.PSObject.Properties.Name
         $formattedCommands = @()
@@ -401,7 +385,7 @@ function Get-FunctionsList {
         }
         $commandsList = $formattedCommands -join ", "
 
-        Write-Host "${commandsList}`n"
+        Print "${commandsList}`n"
     }
 }
 
@@ -418,15 +402,15 @@ function Get-FunctionsDetails {
     }
 
     foreach ($category in $jsonData.PSObject.Properties.Name) {
-        Write-Host "$(CParameter ${category})"
+        Print "$(CParameter ${category})"
         foreach ($function in $jsonData.$category.PSObject.Properties.Name) {
             $description = $jsonData.$category.$function
             $functionName = $function
             $paddedFunctionName = $functionName.PadRight($maxFunctionNameLength)
             $detailedInfo = "[$(CCommand ${paddedFunctionName})]: ${description}"
-            Write-Host $detailedInfo
+            Print $detailedInfo
         }
-        Write-Host ""
+        Print ""
     }
 }
 
@@ -438,7 +422,7 @@ function alias_help {
     foreach ($category in $jsonData.PSObject.Properties.Name) {
         if ($jsonData.$category.PSObject.Properties.Name -contains $Alias) {
             $value = $jsonData.$category.$Alias
-            Write-Host "${Alias}: ${value}"
+            Print "${Alias}: ${value}"
             return
         }
     }
@@ -473,7 +457,7 @@ $(CCommand "alias_help") $(CParameter '-detail'): to get the detailed help for a
 }
 
 
-##--- General Functions
+#--- General Functions
 function alias_edit   { code $PROFILE }
 function alias_update { . $PROFILE }
 function cls          { Clear-Host }
@@ -481,7 +465,6 @@ function credits      { Write-Host "Link to my GitHub: ${Credits}" }
 function hist         { code $historyPath }
 function ls           { Get-ChildItem $args }
 function mkdir        { New-Item -ItemType Directory $args[0] | Set-Location }
-function print        { Write-Host $args }
 function s            { Invoke-Item . }
 function uomp         { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
 function update       { winget upgrade }
@@ -491,7 +474,7 @@ function y            { yt-dlp $args }
 function ys           { yt-dlp --sponsorblock-mark all,-filler $args }
 
 
-##--- Directory Navigation Functions
+#--- Directory Navigation Functions
 function ..           { Set-Location .. }
 function ...          { Set-Location ..\.. }
 function ....         { Set-Location ..\..\.. }
@@ -508,7 +491,7 @@ function dir {
     Get-ChildItem
 }
 
-##--- Python Functions
+#--- Python Functions
 function p            { python $args }
 function pf           { python -m pip freeze }
 function pm           { python -m $args }
@@ -516,27 +499,27 @@ function pp           { python -m pip install $args }
 function ppu          { python -m pip install -U $args }
 function pv           { python -V }
 
-##--- Pyenv Functions
+#--- Pyenv Functions
 function pe           { pyenv $args }
 function pev          { pyenv versions }
 function pes          { pyenv shell $args }
 function peu          { pyenv update }
 
-###--- Poetry Functions
+##--- Poetry Functions
 function poi          { poetry install }
 function por          { poetry run $args }
 function pos          { poetry shell }
 
-###--- Pre-commit Functions
+##--- Pre-commit Functions
 function pc           { pre-commit $* }
 function pcall        { pre-commit run --all-files }
 function pci          { pre-commit install }
 
-###--- Pip-tools Functions
+##--- Pip-tools Functions
 function ptc          { python -m piptools compile }
 function pts          { python -m piptools sync }
 
-###--- Virtual Environment Functions
+##--- Virtual Environment Functions
 function a {
     try {
         & .venv\Scripts\activate.ps1
@@ -553,7 +536,7 @@ function d {
     }
 }
 
-##--- General Multi-line Functions
+#--- General Multi-line Functions
 function add_to_path {
     param (
         [string]$filePath
@@ -678,3 +661,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+DownArrow -Function HistorySearchForward
 
 # Bind the custom function to the Ctrl+RightArrow key chord
 Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -ScriptBlock ${function:Handle-CtrlRightArrow}
+
+#--- Initialization
+Remove-DuplicateHistory
+Initialize-OhMyPosh

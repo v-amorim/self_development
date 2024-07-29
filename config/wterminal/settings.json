@@ -63,14 +63,14 @@
                 "weight": "medium"
             },
             "intenseTextStyle": "all",
-            "opacity": 90,
+            "opacity": 97,
             "selectionBackground": "#4B94CB",
             "unfocusedAppearance":
             {
-                "opacity": 95,
-                "useAcrylic": false
+                "opacity": 90
             },
-            "useAcrylic": true
+            "useAcrylic": false,
+            "useAtlasEngine": true
         },
         "list":
         [
@@ -89,19 +89,19 @@
                 "name": "Command Prompt"
             },
             {
+                "background": "#190f13",
                 "bellStyle": "none",
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc",
-                "background": "#201319"
+                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
             },
             {
+                "background": "#111A29",
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -nologo",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell",
-                "background": "#111A29"
+                "name": "Windows PowerShell"
             }
         ]
     },
@@ -131,6 +131,7 @@
             "yellow": "#FFCB6B"
         }
     ],
+    "snapToGridOnResize": true,
     "theme": "dark",
     "themes": [ ],
     "useAcrylicInTabRow": true,

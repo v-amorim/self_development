@@ -91,6 +91,18 @@
           }
         },
         {
+          "type": "executiontime",
+          "style": "diamond",
+          "background": "p:main_background",
+          "foreground": "p:terminal_lightgray",
+          "trailing_diamond": "\ue0b4",
+          "template": "{{.Var.dot}} {{ .FormattedMs }}",
+          "properties": {
+            "style": "austin",
+            "threshold": 0
+          }
+        },
+        {
           "type": "upgrade",
           "style": "diamond",
           "background": "p:main_background",
@@ -98,18 +110,6 @@
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
           "template": "{{.Var.upgrade}}"
-        },
-        {
-          "type": "executiontime",
-          "style": "diamond",
-          "background": "p:main_background",
-          "foreground": "p:terminal_lightgray",
-          "leading_diamond": "\ue0b6",
-          "template": "{{ .FormattedMs }} {{.Var.dot}}",
-          "properties": {
-            "style": "austin",
-            "threshold": 500
-          }
         },
         {
           "type": "git",

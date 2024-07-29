@@ -707,7 +707,6 @@ if ($latestPowershell) {
         }
         HistoryNoDuplicates = $True
         HistorySearchCursorMovesToEnd = $False
-        PredictionSource = "History"
     }
     Set-PSReadLineOption @PSROptions
 }

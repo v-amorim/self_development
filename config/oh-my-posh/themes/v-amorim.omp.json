@@ -99,7 +99,7 @@
           "template": "{{.Var.dot}} {{ .FormattedMs }}",
           "properties": {
             "style": "austin",
-            "threshold": 0
+            "threshold": 500
           }
         },
         {

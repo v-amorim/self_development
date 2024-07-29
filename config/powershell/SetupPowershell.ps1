@@ -103,7 +103,7 @@ function InstallOrUpdateProfile {
 function Install-OhMyPosh {
     Write-Host "[Install Oh My Posh] " -NoNewline
     Write-Host "Checking if Oh My Posh is installed..." -NoNewline -ForegroundColor Cyan
-    if (-not (winget list --id "OhMyPosh")) {
+    if (-not (winget list --id "JanDeDobbeleer.OhMyPosh" -ErrorAction SilentlyContinue)) {
         Write-Host "Installing Oh My Posh..." -NoNewline -ForegroundColor Yellow
         try {
             winget install --accept-source-agreements --accept-package-agreements JanDeDobbeleer.OhMyPosh

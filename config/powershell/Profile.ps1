@@ -1,7 +1,7 @@
 #--- Variables
 $escapeChar = "$([char]0x1b)"
 $historyPath = "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
-$isLatestPowershell = $PSVersionTable.PSVersion.Major -ge 7
+$latestPowershell = $PSVersionTable.PSVersion.Major -ge 7
 $resetStyle = $PSStyle.Reset
 
 #--- JSON File Variables
@@ -114,24 +114,6 @@ function Update-OhMyPoshTheme {
     return $currentPoshThemePath
 }
 
-function Initialize-OhMyPosh {
-    param ([string]$PoshThemeUrl = (Load-ThemeUrl))
-
-    $currentUrl = Load-ThemeUrl
-    if ($currentUrl -ne $PoshThemeUrl) {
-        Save-Url -url $PoshThemeUrl -filePath $poshCurrentThemeUrlFilePath
-        Save-Url -url $currentUrl -filePath $poshPreviousThemeUrlFilePath
-        Print "Oh My Posh Theme changed, reload your shell to apply the changes."
-    }
-
-    $PoshThemePath = Update-OhMyPoshTheme -ohMyPoshGitPath $PoshThemeUrl
-    $ThemeName = [regex]::Match($PoshThemePath, "([^\\\/(]+)(?=\(current\))").Groups[1].Value + ".omp.json"
-    $ThemeName = "$escapeChar[38;5;217m$ThemeName$escapeChar[0m"
-    Print "Oh My Posh Theme: $ThemeName"
-    oh-my-posh init pwsh --config "$PoshThemePath" | Invoke-Expression
-    $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
-}
-
 function Remove-DuplicateHistory {
     # Check if marker file exists and if it was last modified more than 5 minutes ago
     $shouldProcess = -not (Test-Path $markerFilePath) -or (New-TimeSpan -Start (Get-Item $markerFilePath).LastWriteTime).TotalMinutes -ge 5
@@ -200,7 +182,7 @@ function Format-Hyperlink { # Credits: https://stackoverflow.com/a/78366066/7977
         [string] $Label
     )
 
-    if ($PSVersionTable.PSVersion.Major -lt 6 -and -not ($IsWindows -and $Env:WT_SESSION)) {
+    if (-not $latestPowershell -and -not ($IsWindows -and $Env:WT_SESSION)) {
         # Fallback for Windows users not inside Windows Terminal
         if ($Label) {
         return "$Label ($Uri)"
@@ -559,7 +541,7 @@ Function sudo {
         [string]$command
     )
 
-    $shell = if ($isLatestPowershell) { "pwsh" } else { "powershell.exe" }
+    $shell = if ($latestPowershell) { "pwsh" } else { "powershell.exe" }
 
     if (IsAdmin) {
         & $shell -NoExit -ExecutionPolicy Bypass -Command "$command"
@@ -582,16 +564,91 @@ function which($name) {
 }
 
 function uptime {
-    if ($isLatestPowershell) {
+    if ($latestPowershell) {
         net statistics workstation | Select-String "since" | ForEach-Object { $_.ToString().Replace('Statistics since ', '') }
     } else {
         Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
     }
 }
 
+#--- Inspired by: https://github.com/gangstanthony/PowerShell/blob/master/profile.ps1
+function rpw {
+    param (
+        [int]$Size = 10
+    )
+
+    $specialChars = "!@#$%^&*".ToCharArray()
+    $numUppercase = 1
+    $numLowercase = 3
+    $numDigits = 4
+    $numSpecial = 1
+
+    if ($Size -lt ($numUppercase + $numLowercase + $numDigits + $numSpecial)) {
+        throw "Size must be at least the sum of the minimum counts for each character type."
+    }
+
+    $numRemaining = $Size - ($numUppercase + $numLowercase + $numDigits + $numSpecial)
+
+    $pwChars = @(
+        1..$numUppercase | ForEach-Object { [char](65..90 | Get-Random) }
+        1..$numLowercase | ForEach-Object { [char](97..122 | Get-Random) }
+        1..$numDigits | ForEach-Object { [char](48..57 | Get-Random) }
+        1..$numSpecial | ForEach-Object { $specialChars | Get-Random }
+    )
+
+    $allChars = (65..90) + (97..122) + (48..57) + $specialChars
+    $pwChars += 1..$numRemaining | ForEach-Object {
+        [char]($allChars | Get-Random)
+    }
+
+    $pwChars = $pwChars | Get-Random -Count $pwChars.Count
+    $pw = -join $pwChars
+    $pw
+}
+
+
+#--- Credits to: https://github.com/gangstanthony/PowerShell/blob/master/Fix-Spaces.ps1
+# EXAMPLE:
+$a = @(
+'System File Checker Utility (Scan On Every Boot) = sfc /scanboot'
+'System File Checker Utility (Return Scan Setting To Default) = sfc /revert'
+)
+#
+# PS C:\> Fix-Spaces '=' $a
+# System File Checker Utility (Scan On Every Boot)             = sfc /scanboot
+# System File Checker Utility (Return Scan Setting To Default) = sfc /revert
+
+function Fix-Spaces {
+    param (
+        [string]$delim = $(Throw 'A delimiter must be supplied.'),
+        [string[]]$array
+    )
+
+    $len = 0
+    $array | % {
+        if ($_.contains($delim) -and $_.indexof($delim) -gt $len) {
+            $len = $_.indexof($delim)
+        }
+    }
+
+    $array | % {
+        if ($_.Contains($delim)) {
+            $front = $_.substring(0, $_.indexof($delim))
+            $back  = $_.substring($_.indexof($delim) + $delim.Length)
+            if ($front.length -lt $len) {
+                $spaces = $len - $front.Length - 1
+                0..$spaces | % {$front += ' '}
+            }
+            $front + $delim + $back
+        } else {
+            $_
+        }
+    }
+}
+
 
 #--- [PSReadLine] Configuration
-if ($isLatestPowershell) {
+if ($latestPowershell) {
     $PSROptions = @{
         ContinuationPrompt = '  '
         Colors             = @{
@@ -661,6 +718,27 @@ Set-PSReadLineKeyHandler -Key Ctrl+DownArrow -Function HistorySearchForward
 
 # Bind the custom function to the Ctrl+RightArrow key chord
 Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -ScriptBlock ${function:Handle-CtrlRightArrow}
+
+
+##--- Oh-My-Posh Initialization
+function Initialize-OhMyPosh {
+    param ([string]$PoshThemeUrl = (Load-ThemeUrl))
+
+    $currentUrl = Load-ThemeUrl
+    if ($currentUrl -ne $PoshThemeUrl) {
+        Save-Url -url $PoshThemeUrl -filePath $poshCurrentThemeUrlFilePath
+        Save-Url -url $currentUrl -filePath $poshPreviousThemeUrlFilePath
+        Print "Oh My Posh Theme changed, reload your shell to apply the changes."
+    }
+
+    $PoshThemePath = Update-OhMyPoshTheme -ohMyPoshGitPath $PoshThemeUrl
+    $ThemeName = [regex]::Match($PoshThemePath, "([^\\\/(]+)(?=\(current\))").Groups[1].Value + ".omp.json"
+    $ThemeName = CCommand $(Format-Hyperlink -Uri "$PoshThemePath" -Label ($ThemeName))
+    Print "Oh My Posh Theme: $ThemeName"
+
+    oh-my-posh init pwsh --config "$PoshThemePath" | Invoke-Expression
+    $env:VIRTUAL_ENV_DISABLE_PROMPT = 1
+}
 
 #--- Initialization
 Remove-DuplicateHistory

@@ -94,7 +94,7 @@ Tool to manage multiple versions of Python.
 For using the Oh My Posh theme
 
 <p align="center">
-  <img alt="terminal" src="https://github.com/user-attachments/assets/4284927c-ea40-4313-a1d6-5ac8e0253eb9" width="100%"/>
+  <img alt="terminal" src="https://github.com/user-attachments/assets/fba2907a-9a93-46b8-94ee-a0b13b4e863a" width="100%"/>
 </p>
 
 1. you need to install the necessary fonts.
@@ -130,7 +130,7 @@ For using the Oh My Posh theme
 1. Paste this line at the end:
 
    ```bash
-   eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json')"
+   eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/oh-my-posh/main/themes/Moonlight.omp.json')"
    ```
 
 ## Files

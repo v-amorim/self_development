@@ -14,7 +14,7 @@ $jsonData = $jsonContent | ConvertFrom-Json
 $markerFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\Remove-DuplicateHistory.marker"
 
 #--- Oh-My-Posh Variables
-$poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json"
+$poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/oh-my-posh/main/themes/Moonlight.omp.json"
 $poshThemesPath = "$userPath\Documents\oh-my-posh\themes"
 $poshCurrentThemeUrlFilePath = "$poshThemesPath\.CurrentThemeUrl.txt"
 $poshPreviousThemeUrlFilePath = "$poshThemesPath\.PreviousThemeUrl.txt"

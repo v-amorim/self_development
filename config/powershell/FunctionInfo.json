@@ -1,6 +1,6 @@
 {
   "General Functions": {
-    "Initialize-OhMyPosh": [ "Set the Oh My Posh theme, backups to '~/Documents/oh-my-posh/themes', uses `v-amorim.omp.json` as default", "[Initialize-OhMyPosh 'https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/v-amorim.omp.json']" ],
+    "Initialize-OhMyPosh": [ "Set the Oh My Posh theme, backups to '~/Documents/oh-my-posh/themes', uses `Moonlight.omp.json` as default", "[Initialize-OhMyPosh 'https://raw.githubusercontent.com/v-amorim/oh-my-posh/main/themes/Moonlight.omp.json']" ],
     "add_to_path": [
       "Add a directory to the PATH",
       "[add_to_path <directory>]" ],

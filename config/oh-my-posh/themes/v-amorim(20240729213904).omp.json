@@ -52,7 +52,7 @@
     "git_commits_behind": "<p:git_commits_behind>\udb81\udf2f</>",
     "python": "\ue235",
     "terminal_arrow": "\uf054",
-    "upgrade": "\udb80\udd62",
+    "upgrade": "\udb83\udecc",
     "github": "https://github.com/v-amorim"
   },
   "blocks": [
@@ -60,6 +60,13 @@
       "type": "prompt",
       "alignment": "left",
       "segments": [
+        {
+          "type": "root",
+          "style": "plain",
+          "background": "p:main_background",
+          "foreground": "p:terminal_lightblue",
+          "template": "<,transparent>🎴</>"
+        },
         {
           "type": "os",
           "style": "diamond",
@@ -94,6 +101,15 @@
             "style": "austin",
             "threshold": 500
           }
+        },
+        {
+          "type": "upgrade",
+          "style": "diamond",
+          "background": "p:main_background",
+          "foreground": "p:terminal_green",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "{{.Var.upgrade}}"
         },
         {
           "type": "git",
@@ -173,48 +189,6 @@
           "properties": {
             "always_enabled": true
           }
-        }
-      ]
-    },
-    {
-      "type": "rprompt",
-      "alignment": "right",
-      "segments": [
-        {
-          "type": "upgrade",
-          "style": "diamond",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "background": "p:main_background",
-          "foreground": "p:terminal_lightteal",
-          "template": "{{.Var.upgrade}}"
-        },
-        {
-          "type": "battery",
-          "style": "diamond",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "background": "p:main_background",
-          "foreground": "p:terminal_lightteal",
-          "template": "{{ if not .Error }}{{- if lt .Percentage 10 }}<p:terminal_error>\udb80\udc83</>{{- else if lt .Percentage 39 }}<p:terminal_red>\udb80\udc7b</>{{- else if lt .Percentage 59 }}<p:terminal_pink>\udb80\udc7d</>{{- else if lt .Percentage 79 }}<p:terminal_lightblue>\udb80\udc7f</>{{- else if lt .Percentage 98 }}<p:terminal_blue>\udb80\udc81</>{{- else }}<p:terminal_lightteal>\udb80\udc79</>{{- end }}{{ end }}"
-        },
-        {
-          "type": "connection",
-          "style": "diamond",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "background": "p:main_background",
-          "foreground": "p:terminal_lightblue",
-          "template": "{{ if eq .Type \"wifi\"}}\uf1eb{{ else if eq .Type \"ethernet\"}}\udb80\ude00{{ end }}"
-        },
-        {
-          "type": "session",
-          "style": "diamond",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b4",
-          "background": "p:main_background",
-          "foreground": "p:terminal_pink",
-          "template": "{{ if .SSHSession }}\udb82\udcc0 {{ end }}{{if .Root}}\udb82\udee2{{ end }}"
         }
       ]
     }

@@ -94,7 +94,7 @@ Tool to manage multiple versions of Python.
 For using the Oh My Posh theme
 
 <p align="center">
-  <img alt="terminal" src="https://github.com/user-attachments/assets/fba2907a-9a93-46b8-94ee-a0b13b4e863a" width="100%"/>
+  <img alt="terminal" src="https://github.com/user-attachments/assets/152f7d09-c85b-46c0-9c71-dbdcbd713bb4" width="100%"/>
 </p>
 
 1. you need to install the necessary fonts.

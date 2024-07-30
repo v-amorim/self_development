@@ -15,10 +15,10 @@ This repository contains a collection of scripts and macros that I have written/
 
 The Config folder contains a collection of scripts or configurations that I use or have written for various purposes. As an example: Oh My Posh terminal theme, MPV configuration
 
-My Oh My Posh configuration:
+My Windows Terminal + Oh My Posh configuration:
 
 <p align="center">
-  <img alt="terminal" src="https://github.com/user-attachments/assets/fba2907a-9a93-46b8-94ee-a0b13b4e863a" width="100%"/>
+  <img alt="terminal" src="https://github.com/user-attachments/assets/245d2b8d-0867-4936-99e6-514bf2ce433f" width="100%"/>
 </p>
 
 My MPV configuration:

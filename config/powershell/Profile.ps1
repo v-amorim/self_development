@@ -16,8 +16,9 @@ $markerFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\Remove-DuplicateHis
 #--- Oh-My-Posh Variables
 $poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/oh-my-posh/main/themes/Moonlight.omp.json"
 $poshThemesPath = "$userPath\Documents\oh-my-posh\themes"
-$poshCurrentThemeUrlFilePath = "$poshThemesPath\.CurrentThemeUrl.txt"
-$poshPreviousThemeUrlFilePath = "$poshThemesPath\.PreviousThemeUrl.txt"
+$poshBasePath = Split-Path $poshThemesPath
+$poshCurrentThemeUrlFilePath = "$poshBasePath\.CurrentThemeUrl.txt"
+$poshPreviousThemeUrlFilePath = "$poshBasePath\.PreviousThemeUrl.txt"
 
 
 #--- Private Functions
@@ -81,9 +82,9 @@ function Update-OhMyPoshTheme {
 
     $tempDir = [System.IO.Path]::GetTempPath()
     $themeName = [regex]::Match($ohMyPoshGitPath, "/([^/]+)\.omp\.json$").Groups[1].Value
-    $currentPoshThemePath = "$poshThemesPath\$themeName(current).omp.json"
+    $currentPoshThemePath = "$poshThemesPath\$themeName.omp.json"
     $tempDownloadPath = "$tempDir\$themeName-temp.omp.json"
-    $backupPath = "$poshThemesPath\$themeName($(Get-Date -Format 'yyyyMMddHHmmss')).omp.json"
+    $backupPath = "$poshThemesPath\($(Get-Date -Format 'yyyyMMddHHmmss'))$themeName.omp.json"
     $isThemeUpdateNeeded = -not (Test-Path $currentPoshThemePath) -or (New-TimeSpan -Start (Get-Item $currentPoshThemePath).LastWriteTime).TotalHours -ge 1
 
     if ($isThemeUpdateNeeded) {
@@ -738,7 +739,7 @@ function Initialize-OhMyPosh {
     }
 
     $PoshThemePath = Update-OhMyPoshTheme -ohMyPoshGitPath $PoshThemeUrl
-    $ThemeName = [regex]::Match($PoshThemePath, "([^\\\/(]+)(?=\(current\))").Groups[1].Value + ".omp.json"
+    $ThemeName = [regex]::Match($PoshThemePath, "([^\\\/]+)(?=\.omp\.json)").Groups[1].Value
     $ThemeName = CCommand $(Format-Hyperlink -Uri "$PoshThemePath" -Label ($ThemeName))
     Print "Oh My Posh Theme: $ThemeName"
 

@@ -1,3 +1,6 @@
 [submodule "python/subtitle_editor"]
 	path = python/subtitle_editor
 	url = https://github.com/v-amorim/subtitle_editor
+[submodule "config/oh-my-posh"]
+	path = config/oh-my-posh
+	url = https://github.com/v-amorim/oh-my-posh

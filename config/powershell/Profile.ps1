@@ -14,7 +14,7 @@ $jsonData = $jsonContent | ConvertFrom-Json
 $markerFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\Remove-DuplicateHistory.marker"
 
 #--- Oh-My-Posh Variables
-$poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/oh-my-posh/main/themes/Moonlight.omp.json"
+$poshDefaultThemeUrl = "https://raw.githubusercontent.com/v-amorim/self_development/main/config/oh-my-posh/themes/Moonlight.omp.json"
 $poshThemesPath = "$userPath\Documents\oh-my-posh\themes"
 $poshCurrentThemeUrlFilePath = "$poshThemesPath\.CurrentThemeUrl.txt"
 $poshPreviousThemeUrlFilePath = "$poshThemesPath\.PreviousThemeUrl.txt"
@@ -116,8 +116,11 @@ function Update-OhMyPoshTheme {
 }
 
 function Remove-DuplicateHistory {
-    # Check if marker file exists and if it was last modified more than 5 minutes ago
-    $shouldProcess = -not (Test-Path $markerFilePath) -or (New-TimeSpan -Start (Get-Item $markerFilePath).LastWriteTime).TotalMinutes -ge 5
+    param (
+        [switch]$Forced
+    )
+
+    $shouldProcess = $Forced -or (-not (Test-Path $markerFilePath) -or (New-TimeSpan -Start (Get-Item $markerFilePath).LastWriteTime).TotalMinutes -ge 5)
 
     if ($shouldProcess) {
         $historyFilePath = "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
@@ -128,7 +131,6 @@ function Remove-DuplicateHistory {
                 $seenEntries = @{}
                 $uniqueHistory = [System.Collections.Generic.List[object]]::new()
 
-                # Process lines in reverse order
                 $historyContent | ForEach-Object -Begin {
                     $reversedLines = [System.Collections.Generic.Stack[object]]::new()
                 } -Process {
@@ -146,7 +148,6 @@ function Remove-DuplicateHistory {
                 $uniqueHistory | Set-Content $historyFilePath
                 Print "Duplicates removed from history file, keeping the most recent occurrences."
 
-                # Create or update marker file
                 New-Item -Path $markerFilePath -ItemType File -Force | Out-Null
                 (Get-Item $markerFilePath).LastWriteTime = Get-Date
             } catch {
@@ -157,6 +158,7 @@ function Remove-DuplicateHistory {
         }
     }
 }
+
 
 function Handle-CtrlRightArrow {
     $hasPrediction = [Microsoft.PowerShell.PSConsoleReadLine]::GetPrediction -ne $null

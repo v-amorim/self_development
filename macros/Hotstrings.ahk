@@ -126,6 +126,7 @@ Return
 :*:>code::
     backticks_unicode := "{U+0060}{U+0060}{U+0060}"
     backticks_char := Chr(96) Chr(96) Chr(96)
+    originalClipboard := ClipboardAll
     Clipboard := ClipboardAll
     StringReplace, Clipboard, Clipboard, `r`n, `n, All ; Remove CRLF (Carriage Return + Line Feed)
 
@@ -150,16 +151,21 @@ Return
     Send, {Esc}
     Sleep, 250
     Send, {Right}
+    Clipboard := originalClipboard
 Return
 
 :*:>dcode::
-    backticks_char := Chr(96) Chr(96) Chr(96)
-    SendInput {Raw}<details>`n <summary></summary>`n
-    Send, {BackSpace}
-    Send, %backticks_char%
-    SendInput, `n`n
-    Send, %backticks_char%
-    SendInput, `n`n</details>
+    textBlock := "<details>`r`n <summary></summary>`r`n`r`n`r`n</details>"
+    originalClipboard := ClipboardAll
+    Clipboard := ClipboardAll
+    StringReplace, Clipboard, Clipboard, `r`n, `n, All ; Remove CRLF (Carriage Return + Line Feed)
+
+    LTrim(A_ThisHotkey, ":oc?*")
+    Sleep, 250
+    Clipboard := textBlock
+    Send, ^v
+    Sleep, 250
+    Clipboard := originalClipboard
 Return
 
 !c:: ; Alt + C [Surrounds the selected text with backticks]

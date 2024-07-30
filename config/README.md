@@ -84,7 +84,7 @@ Save it on `AppData\Roaming\WaleAudioControl\WaleGeneral.conf`
 
 [bash]: ./bash/README.md
 [mpv64]: ./mpv64/README.md
-[oh-my-posh]: ./oh-my-posh/README.md
+[oh-my-posh]: https://github.com/v-amorim/oh-my-posh
 [wterminal]: ./wterminal/README.md
 [yt-dlp]: ./yt-dlp/README.md
 [winutil_config]: ./winutil_config.json

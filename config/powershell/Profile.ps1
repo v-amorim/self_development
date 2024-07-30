@@ -2,6 +2,7 @@
 $escapeChar = "$([char]0x1b)"
 $historyPath = "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
 $latestPowershell = $PSVersionTable.PSVersion.Major -ge 7
+$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 $resetStyle = $PSStyle.Reset
 
 #--- JSON File Variables
@@ -155,11 +156,6 @@ function Remove-DuplicateHistory {
             Write-Error "History file does not exist at path: $historyFilePath"
         }
     }
-}
-
-Function IsAdmin {
-    $currentPrincipal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
-    $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
 function Handle-CtrlRightArrow {
@@ -543,7 +539,7 @@ Function sudo {
 
     $shell = if ($latestPowershell) { "pwsh" } else { "powershell.exe" }
 
-    if (IsAdmin) {
+    if ($isAdmin) {
         & $shell -NoExit -ExecutionPolicy Bypass -Command "$command"
     } else {
         Start-Process wt.exe -ArgumentList "new-tab $shell -NoExit -ExecutionPolicy Bypass -Command $command" -Verb RunAs

@@ -18,7 +18,7 @@ The Config folder contains a collection of scripts or configurations that I use 
 My Oh My Posh configuration:
 
 <p align="center">
-  <img alt="terminal" src="https://github.com/user-attachments/assets/417ed752-acec-4128-9be6-6c1b808e7dcf" width="100%"/>
+  <img alt="terminal" src="https://github.com/user-attachments/assets/a95d989b-da15-4496-90d7-1205a9eee3b0" width="100%"/>
 </p>
 
 My MPV configuration:

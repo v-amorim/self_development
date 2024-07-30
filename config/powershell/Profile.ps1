@@ -279,25 +279,25 @@ function Convert-HexToAnsiColor {
 } Set-Alias -Name HexToAnsi -Value Convert-HexToAnsiColor
 
 ##--- Color Palette
-function CCommand                { HexToAnsi "#FDB1A2" "" ("") $args }
-function CComment                { HexToAnsi "#8B949E" "" ("") $args }
+function CCommand                { HexToAnsi "#FFAFAF" "" ("") $args }
+function CComment                { HexToAnsi "#AEA4BF" "" ("") $args }
 function CContinuationPrompt     { HexToAnsi "#4C4C4C" "" ("") $args }
 function CDefault                { HexToAnsi "#F8EAF8" "" ("") $args }
 function CEmphasis               { HexToAnsi "#89DDFF" "" ("") $args }
 function CError                  { HexToAnsi "#E83974" "" ("") $args }
 function CInLinePrediction       { HexToAnsi "#4C4C4C" "" ("") $args }
-function CKeyword                { HexToAnsi "#F97583" "" ("bold") $args }
+function CKeyword                { HexToAnsi "#CA5F71" "" ("bold") $args }
 function CListPrediction         { HexToAnsi "#FFCB6B" "" ("") $args }
 function CListPredictionSelected { HexToAnsi "#B58EE8" "#4C4C4C" $args }
 function CListPredictionTooltip  { HexToAnsi "#7F7F7F" "" ("") $args }
-function CMember                 { HexToAnsi "#F69BDC" "" ("") $args }
+function CMember                 { HexToAnsi "#ACB9E6" "" ("") $args }
 function CNumber                 { HexToAnsi "#79B8FF" "" ("") $args }
-function COperator               { HexToAnsi "#F97583" "" ("bold") $args }
+function COperator               { HexToAnsi "#CA5F71" "" ("bold") $args }
 function CParameter              { HexToAnsi "#B58EE8" "" ("") $args }
 function CSelection              { HexToAnsi "#B58EE8" "#4C4C4C" ("") $args }
 function CString                 { HexToAnsi "#A5CFFF" "" ("") $args }
 function CType                   { HexToAnsi "#79C0FF" "" ("") $args }
-function CVariable               { HexToAnsi "#FF72B0" "" ("") $args }
+function CVariable               { HexToAnsi "#7386D0" "" ("") $args }
 
 function CCredits                { HexToAnsi "#FF72B0" "" ("bold", "blinking") $args }
 $Credits = CCredits $(Format-Hyperlink -Uri "https://github.com/v-amorim" -Label ([char]0xf09b)) # \uf09b is the GitHub icon
@@ -694,24 +694,24 @@ if ($latestPowershell) {
         ContinuationPrompt = '  '
         Colors             = @{
             Command                = "$escapeChar[38;5;217m"
-            Comment                = "$escapeChar[38;5;246m"
+            Comment                = "$escapeChar[38;5;146m"
             ContinuationPrompt     = "$escapeChar[38;5;239m"
             Default                = "$escapeChar[38;5;255m"
             Emphasis               = "$escapeChar[38;5;153m"
             Error                  = "$escapeChar[38;5;204m"
             InLinePrediction       = "$escapeChar[38;5;239m"
-            Keyword                = "$escapeChar[38;5;211m"
+            Keyword                = "$escapeChar[38;5;203;1m"
             ListPrediction         = "$escapeChar[38;5;222m"
-            ListPredictionSelected = "$escapeChar[38;5;183m$escapeChar[48;5;239m"
+            ListPredictionSelected = "$escapeChar[38;5;104;3m$escapeChar[48;5;239m"
             ListPredictionTooltip  = "$escapeChar[38;5;8m"
-            Member                 = "$escapeChar[38;5;218m"
-            Number                 = "$escapeChar[38;5;117m"
-            Operator               = "$escapeChar[38;5;211m"
+            Member                 = "$escapeChar[38;5;146m"
+            Number                 = "$escapeChar[38;5;75m"
+            Operator               = "$escapeChar[38;5;203;1m"
             Parameter              = "$escapeChar[38;5;183m"
-            Selection              = "$escapeChar[38;5;183m$escapeChar[48;5;239m"
+            Selection              = "$escapeChar[38;5;104;3m$escapeChar[48;5;239m"
             String                 = "$escapeChar[38;5;153m"
             Type                   = "$escapeChar[38;5;117m"
-            Variable               = "$escapeChar[38;5;211m"
+            Variable               = "$escapeChar[38;5;104m"
         }
         HistoryNoDuplicates = $True
         HistorySearchCursorMovesToEnd = $False

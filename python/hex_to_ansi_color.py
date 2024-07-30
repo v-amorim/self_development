@@ -24,11 +24,11 @@ class TruecolorConverter:
         num_colors_per_row = 16
         for color_id in range(256):
             ansi_code = f"\033[{('48' if background else '38')};5;{color_id}m"
-            output_format = f"ANSI {color_id:3}" if hex_format else repr(ansi_code)
-            # Ensure output is formatted correctly with color and ID
+            closest_color_hex = self.ansi_palette[color_id]
+            hex_color_str = f"#{closest_color_hex[0]:02x}{closest_color_hex[1]:02x}{closest_color_hex[2]:02x}"
+            output_format = f" {hex_color_str}" if hex_format else repr(ansi_code)
             print(f"{ansi_code} {output_format} {self.RESET_COLOR}", end=" ")
 
-            # Newline after every `num_colors_per_row` colors
             if (color_id + 1) % num_colors_per_row == 0:
                 print()
         print()
@@ -38,7 +38,6 @@ class TruecolorConverter:
         return repr(ansi_code).replace(r"'\x1b", "`e")[:-1]
 
     def get_color(self, hex_color: str) -> tuple[str, str]:
-        """Print and return the foreground and background ANSI escape codes along with their hex values."""
         fg_ansi_code = self.hex_to_ansi_color(hex_color, background=False)
         bg_ansi_code = self.hex_to_ansi_color(hex_color, background=True)
         return self.color_print_formatter(fg_ansi_code, hex_color, bg_ansi_code, " RGB ANSI Color         : ")

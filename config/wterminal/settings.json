@@ -63,11 +63,11 @@
                 "weight": "medium"
             },
             "intenseTextStyle": "all",
-            "opacity": 97,
+            "opacity": 99,
             "selectionBackground": "#4B94CB",
             "unfocusedAppearance":
             {
-                "opacity": 90
+                "opacity": 98
             },
             "useAcrylic": false,
             "useAtlasEngine": true
@@ -89,7 +89,7 @@
                 "name": "Command Prompt"
             },
             {
-                "background": "#190f13",
+                "background": "#190F13",
                 "bellStyle": "none",
                 "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
                 "hidden": false,

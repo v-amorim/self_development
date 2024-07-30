@@ -446,7 +446,16 @@ function hist         { code $historyPath }
 function ls           { Get-ChildItem $args }
 function mkdir        { New-Item -ItemType Directory $args[0] | Set-Location }
 function s            { Invoke-Item . }
-function uomp         { winget upgrade JanDeDobbeleer.OhMyPosh -s winget }
+function uomp {
+    $installerUrl = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/install-arm64.exe"
+    $installerPath = "$env:TEMP\install-arm64.exe"
+
+    Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath
+    Start-Process -FilePath $installerPath -ArgumentList "/verysilent" -Wait
+    Remove-Item $installerPath
+
+    oh-my-posh version
+}
 function update       { winget upgrade }
 function winutil      { iwr -useb https://christitus.com/win | iex }
 function wsls         { wsl --shutdown }

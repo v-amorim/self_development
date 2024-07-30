@@ -83,7 +83,7 @@ function Update-OhMyPoshTheme {
     $themeName = [regex]::Match($ohMyPoshGitPath, "/([^/]+)\.omp\.json$").Groups[1].Value
     $currentPoshThemePath = "$poshThemesPath\$themeName(current).omp.json"
     $tempDownloadPath = "$tempDir\$themeName-temp.omp.json"
-    $backupPath = "$poshThemesPath\$themeName-$(Get-Date -Format 'yyyyMMddHHmmss').omp.json"
+    $backupPath = "$poshThemesPath\$themeName($(Get-Date -Format 'yyyyMMddHHmmss')).omp.json"
     $isThemeUpdateNeeded = -not (Test-Path $currentPoshThemePath) -or (New-TimeSpan -Start (Get-Item $currentPoshThemePath).LastWriteTime).TotalHours -ge 1
 
     if ($isThemeUpdateNeeded) {

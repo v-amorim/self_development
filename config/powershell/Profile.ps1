@@ -448,8 +448,8 @@ function ls           { Get-ChildItem $args }
 function mkdir        { New-Item -ItemType Directory $args[0] | Set-Location }
 function s            { Invoke-Item . }
 function uomp {
-    $installerUrl = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/install-arm64.exe"
-    $installerPath = "$env:TEMP\install-arm64.exe"
+    $installerUrl = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/install-amd64.exe"
+    $installerPath = "$env:TEMP\install-amd64.exe"
 
     Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath
     Start-Process -FilePath $installerPath -ArgumentList "/verysilent" -Wait

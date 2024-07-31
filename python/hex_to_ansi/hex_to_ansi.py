@@ -1,3 +1,4 @@
+# Conversion logic adapted from https://www.hackitu.de/termcolor256/
 from __future__ import annotations
 
 import math

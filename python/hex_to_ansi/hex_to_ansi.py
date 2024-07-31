@@ -1,15 +1,10 @@
 # Conversion logic adapted from https://www.hackitu.de/termcolor256/
-from __future__ import annotations
-
 import math
 import sys
 
 from PyQt6 import uic
-from PyQt6.QtGui import QColor
-from PyQt6.QtGui import QPalette
-from PyQt6.QtWidgets import QApplication
-from PyQt6.QtWidgets import QColorDialog
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtGui import QColor, QPalette
+from PyQt6.QtWidgets import QApplication, QColorDialog, QWidget
 
 # Constants
 BRIGHTNESS_THRESHOLD = 255 / 2
@@ -78,7 +73,7 @@ def to_description(code, rgb_in, rgb_out):
 
 
 def convert(value):
-    rgb_in = [int(value[i: i + 2], 16) for i in range(1, 7, 2)]
+    rgb_in = [int(value[i : i + 2], 16) for i in range(1, 7, 2)]
     gray_code, gray_rgb = convert_gray(rgb_in)
     color_code, color_rgb = convert_rgb(rgb_in, round)
     color_code_floor, color_rgb_floor = convert_rgb(rgb_in, math.floor)
@@ -97,7 +92,7 @@ def convert(value):
 
 
 def is_bright(hex_color):
-    rgb = [int(hex_color[i: i + 2], 16) for i in range(1, 7, 2)]
+    rgb = [int(hex_color[i : i + 2], 16) for i in range(1, 7, 2)]
     brightness = 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]
     return brightness > BRIGHTNESS_THRESHOLD
 

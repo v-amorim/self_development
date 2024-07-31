@@ -1,12 +1,15 @@
 # Conversion logic adapted from https://www.hackitu.de/termcolor256/
 import math
 import sys
+from pathlib import Path
 
 from PyQt6 import uic
 from PyQt6.QtGui import QColor, QPalette
 from PyQt6.QtWidgets import QApplication, QColorDialog, QWidget
 
 # Constants
+CURRENT_DIR = Path(__file__).resolve().parent
+UI_COLOR_CONVERTER = CURRENT_DIR / "color_converter.ui"
 BRIGHTNESS_THRESHOLD = 255 / 2
 RGB_SCALE = 95
 RGB_SCALE_ADJUST = 55
@@ -17,6 +20,10 @@ RGB_SCALE_FACTOR = 40
 RGB_RED_FACTOR = 36
 RGB_GREEN_FACTOR = 6
 GRAY_THRESHOLD = 8
+FOREGROUND_CODE = 38
+BACKGROUND_CODE = 48
+ANSI_255_FORMAT = 2
+RGB_FORMAT = 5
 
 
 def to_hex(rgb):
@@ -60,9 +67,9 @@ def sqdist(a, b):
     return math.ceil(math.sqrt(((a[0] - b[0]) ** 2) + ((a[1] - b[1]) ** 2) + ((a[2] - b[2]) ** 2)))
 
 
-def to_description(code, rgb_in, rgb_out):
-    ansi255 = f"[38;5;{code!s}m"
-    ansirgb = f"[38;2;{rgb_out[0]};{rgb_out[1]};{rgb_out[2]}m"
+def to_description(code, rgb_in, rgb_out, color_type):
+    ansi255 = f"[{color_type};{ANSI_255_FORMAT};{code!s}m"
+    ansirgb = f"[{color_type};{RGB_FORMAT};{rgb_out[0]};{rgb_out[1]};{rgb_out[2]}m"
     return (
         f"Code: {code}<br>"
         f"Hex: {to_hex(rgb_out)}<br>"
@@ -72,7 +79,7 @@ def to_description(code, rgb_in, rgb_out):
     )
 
 
-def convert(value):
+def convert(value, color_type):
     rgb_in = [int(value[i : i + 2], 16) for i in range(1, 7, 2)]
     gray_code, gray_rgb = convert_gray(rgb_in)
     color_code, color_rgb = convert_rgb(rgb_in, round)
@@ -84,10 +91,10 @@ def convert(value):
         "out_color_preview": to_hex(color_rgb),
         "out_color_preview_floor": to_hex(color_rgb_floor),
         "out_color_preview_ceil": to_hex(color_rgb_ceil),
-        "gray_desc": to_description(gray_code, rgb_in, gray_rgb),
-        "color_desc": to_description(color_code, rgb_in, color_rgb),
-        "floor_desc": to_description(color_code_floor, rgb_in, color_rgb_floor),
-        "ceil_desc": to_description(color_code_ceil, rgb_in, color_rgb_ceil),
+        "gray_desc": to_description(gray_code, rgb_in, gray_rgb, color_type),
+        "color_desc": to_description(color_code, rgb_in, color_rgb, color_type),
+        "floor_desc": to_description(color_code_floor, rgb_in, color_rgb_floor, color_type),
+        "ceil_desc": to_description(color_code_ceil, rgb_in, color_rgb_ceil, color_type),
     }
 
 
@@ -100,9 +107,18 @@ def is_bright(hex_color):
 class ColorConverterApp(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi("color_converter.ui", self)
+        uic.loadUi(UI_COLOR_CONVERTER, self)
 
         self.color_picker_button.clicked.connect(self.show_color_dialog)
+        self.is_foreground.toggled.connect(self.update_color_type)
+        self.is_background.toggled.connect(self.update_color_type)
+
+        self.color_type = FOREGROUND_CODE
+
+    def update_color_type(self):
+        self.color_type = FOREGROUND_CODE if self.is_foreground.isChecked() else BACKGROUND_CODE
+        if hasattr(self, "current_color") and self.current_color:
+            self.update_colors(self.current_color)
 
     def set_color(self, label, hex_color):
         color = QColor(hex_color)
@@ -113,7 +129,7 @@ class ColorConverterApp(QWidget):
         label.setAutoFillBackground(True)
 
     def update_colors(self, hex_color):
-        result = convert(hex_color)
+        result = convert(hex_color, self.color_type)
 
         self.set_color(self.in_preview, result["in_preview"])
         self.set_color(self.out_gray_preview, result["out_gray_preview"])
@@ -130,8 +146,8 @@ class ColorConverterApp(QWidget):
     def show_color_dialog(self):
         color = QColorDialog.getColor()
         if color.isValid():
-            hex_color = color.name()
-            self.update_colors(hex_color)
+            self.current_color = color.name()
+            self.update_colors(self.current_color)
 
 
 if __name__ == "__main__":

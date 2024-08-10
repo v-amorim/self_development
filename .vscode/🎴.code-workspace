@@ -41,7 +41,7 @@
       "editor.defaultFormatter": "JohnnyMorganz.stylua"
     },
     "[markdown]": {
-      "editor.tabSize": 3
+      "editor.tabSize": 2
     },
     "[python]": {
       "editor.codeActionsOnSave": {

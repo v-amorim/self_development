@@ -220,7 +220,7 @@ Add a box with contents to markdown
 
 This is text in the `box`</td></table>
 
-<table><td align="center" width="0.1%">
+<table><td align="center" width="1000">
 
 This is text in the centered `box`</td></table>
 ```
@@ -229,7 +229,7 @@ This is text in the centered `box`</td></table>
 
 This is text in the `box`</td></table>
 
-<table><td align="center" width="0.1%">
+<table><td align="center" width="1000">
 
 This is text in the centered `box`</td></table>
 

@@ -4,28 +4,37 @@ This is my definitive Markdown cheatsheet. It includes all the Markdown syntax y
 
 ## Styling text [^formatting_github]
 
-| Style                  | Syntax <kbd>char`\|text`char</kbd>                                                                                                                          | Keyboard shortcut                             | Example                                                                                                                                                                                    | Output                                                                                                                                                                                         |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Heading                | <kbd>#`\|text`</kbd><br><kbd>##`\|text`</kbd><br><kbd>###`\|text`</kbd><br><kbd>####`\|text`</kbd><br><kbd>#####`\|text`</kbd><br><kbd>######`\|text`</kbd> | None                                          | <pre># A first-level heading<br>## A second-level heading<br>### A third-level heading<br>#### A fourth-level heading<br>##### A fifth-level heading<br>###### A sixth-level heading</pre> | <h1>A first-level heading</h1><h2>A second-level heading</h2><h3>A third-level heading</h3><h4>A fourth-level heading</h4><h5>A fifth-level heading</h5><h6>A sixth-level heading</h6>         |
-| Horizontal Rule        | <kbd>---</kbd> or <kbd>\*\*\*</kbd>                                                                                                                         | None                                          | <pre>---<br>Text between Horizontal Rules<br>---</pre>                                                                                                                                     | <hr>Text between Horizontal Rules<hr>                                                                                                                                                          |
-| Bold                   | <kbd>\*\*`\|text`\*\*</kbd> or <kbd>\_\_`\|text`\_\_</kbd>                                                                                                  | <kbd>Ctrl</kbd>+<kbd>B</kbd>                  | <pre>\*\*This is bold text\*\*</pre>                                                                                                                                                       | **This is bold text**                                                                                                                                                                          |
-| Italic                 | <kbd>\*`\|text`\*</kbd> or <kbd>\_`\|text`\_</kbd>                                                                                                          | <kbd>Ctrl</kbd>+<kbd>I</kbd>                  | <pre>\_This text is italicized\_</pre>                                                                                                                                                     | _This text is italicized_                                                                                                                                                                      |
-| Strikethrough          | <kbd>\~\~`\|text`\~\~</kbd>                                                                                                                                 | None                                          | <pre>\~\~This was mistaken text\~\~</pre>                                                                                                                                                  | ~~This was mistaken text~~                                                                                                                                                                     |
-| Quote                  | <kbd>>`\|quote`</kbd>                                                                                                                                       | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> | <pre>> Text that is a quote</pre>                                                                                                                                                          | <blockquote>Text that is a quote</blockquote>                                                                                                                                                  |
-| Inline code quote      | <kbd>\``\|code`\`</kbd>                                                                                                                                     | <kbd>Ctrl</kbd>+<kbd>E</kbd>                  | <pre>This has an \`inline quote code\` text</pre>                                                                                                                                          | This has an `inline quote code` text                                                                                                                                                           |
-| Inline math quote      | <kbd>\$`equation`\$</kbd>                                                                                                                                   | None                                          | <pre>\$\sqrt{3x-1}+(1+x)^2$</pre>                                                                                                                                                          | <math><mrow><msqrt><mrow><mn>3</mn><mi>x</mi><mo>-</mo><mn>1</mn></mrow></msqrt><mo>+</mo><msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math> |
-| Block code quote       | <kbd>\`\`\`<br>`\|multi-lined-code`<br>\`\`\`</kbd>                                                                                                         | <kbd>Ctrl</kbd>+<kbd>E</kbd>                  | <pre>This has a<br>\`\`\`<br>Block<br>quote<br>code<br>\`\`\`</pre>                                                                                                                        | This has a <pre>Block<br>quote<br>code</pre>                                                                                                                                                   |
-| Block math quote       | <kbd>\$\$<br>`\|equation`<br>\$\$</kbd> or <kbd>\`\`\`math<br>`\|equation`<br>\`\`\`</kbd>                                                                  | None                                          | <pre>\$\$<br>f(x) = x^2<br>\$\$</pre>                                                                                                                                                      | <math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></math>                                                                                  |
-| Bold and nested italic | <kbd>\*\*`\|bold`\_`\|italic`\_`\|bold`\*\*</kbd>                                                                                                           | None                                          | <pre>\*\*This text is \_extremely\_ important\*\*</pre>                                                                                                                                    | **This text is _extremely_ important**                                                                                                                                                         |
-| All bold and italic    | <kbd>\*\*\_`\|bold-italic`\_\*\*</kbd>                                                                                                                      | None                                          | <pre>\*\*\_All this text is important\_\*\*</pre>                                                                                                                                          | **_All this text is important_**                                                                                                                                                               |
-| Subscript              | <kbd>\<sub>`\|`\</sub></kbd>                                                                                                                                | None                                          | <pre>This is a \<sub>subscript\</sub> text</pre>                                                                                                                                           | This is a <sub>subscript</sub> text                                                                                                                                                            |
-| Superscript            | <kbd>\<sup>`\|`\</sup></kbd>                                                                                                                                | None                                          | <pre>This is a \<sup>superscript\</sup> text</pre>                                                                                                                                         | This is a <sup>superscript</sup> text                                                                                                                                                          |
-| Sub+Superscript        | <kbd>\<sup>\<sub>`\|`\</sub>\</sup></kbd>                                                                                                                   | None                                          | <pre>\<sup>\<sub>This is a very small text\</sub>\</sup></pre>                                                                                                                             | <sup><sub>This is a very small text</sub></sup>                                                                                                                                                |
-| Hidden Comment         | <kbd>\<!--`\|hidden comment`--></kbd>                                                                                                                       | None                                          | <pre>\<!--This is a hidden comment--></pre>                                                                                                                                                |                                                                                                                                                                                                |
-| Unordered List         | <kbd>- `\|item`</kbd><br><kbd>\* `\|item`</kbd><br><kbd>+ `\|item`</kbd>                                                                                    | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>8</kbd> | <pre>- Unordered List Item<br>\* Unordered List Item<br>+ Unordered List Item</pre>                                                                                                        | <ul><li>Unordered List Item</li><li>Unordered List Item</li><li>Unordered List Item</li></ul>                                                                                                  |
-| Ordered List           | <kbd>1. `\|item`</kbd>                                                                                                                                      | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>7</kbd> | <pre>1. Ordered List Item<br>1. Ordered List Item<br>1. Ordered List Item</pre>                                                                                                            | <ol><li>Ordered List Item</li><li>Ordered List Item</li><li>Ordered List Item</li></ol>                                                                                                        |
-| Task List              | <kbd>- \[ \] `\|item`</kbd>                                                                                                                                 | None                                          | <pre>- [ ] Task List Item<br>- [x] Task List Item</pre>                                                                                                                                    | <input type="checkbox"> Task List Item<br><input type="checkbox" checked> Task List Item                                                                                                       |
-| Nested List            | Combine any List syntax                                                                                                                                     | None                                          | <pre>1. First list item<br>&nbsp;&nbsp; - First nested list item<br>&nbsp;&nbsp;&nbsp;&nbsp; - Second nested list item</pre>                                                               | <ol><li>First list item<ul><li>First nested list item<ul><li>Second nested list item</li></ul></li></ul></li></ol>                                                                             |
+| Style                       | Syntax <kbd>char`\|text`char</kbd>                                                                                                                          | Keyboard shortcut                             | Example                                                                                                                                                                                    | Output                                                                                                                                                                                         |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Heading                     | <kbd>#`\|text`</kbd><br><kbd>##`\|text`</kbd><br><kbd>###`\|text`</kbd><br><kbd>####`\|text`</kbd><br><kbd>#####`\|text`</kbd><br><kbd>######`\|text`</kbd> | None                                          | <pre># A first-level heading<br>## A second-level heading<br>### A third-level heading<br>#### A fourth-level heading<br>##### A fifth-level heading<br>###### A sixth-level heading</pre> | <h1>A first-level heading</h1><h2>A second-level heading</h2><h3>A third-level heading</h3><h4>A fourth-level heading</h4><h5>A fifth-level heading</h5><h6>A sixth-level heading</h6>         |
+| Horizontal Rule             | <kbd>---</kbd> or <kbd>\*\*\*</kbd>                                                                                                                         | None                                          | <pre>---<br>Text between Horizontal Rules<br>---</pre>                                                                                                                                     | <hr>Text between Horizontal Rules<hr>                                                                                                                                                          |
+| Bold                        | <kbd>\*\*`\|text`\*\*</kbd> or <kbd>\_\_`\|text`\_\_</kbd>                                                                                                  | <kbd>Ctrl</kbd>+<kbd>B</kbd>                  | <pre>\*\*This is bold text\*\*</pre>                                                                                                                                                       | **This is bold text**                                                                                                                                                                          |
+| Italic                      | <kbd>\*`\|text`\*</kbd> or <kbd>\_`\|text`\_</kbd>                                                                                                          | <kbd>Ctrl</kbd>+<kbd>I</kbd>                  | <pre>\_This text is italicized\_</pre>                                                                                                                                                     | _This text is italicized_                                                                                                                                                                      |
+| Strikethrough               | <kbd>\~\~`\|text`\~\~</kbd>                                                                                                                                 | None                                          | <pre>\~\~This was mistaken text\~\~</pre>                                                                                                                                                  | ~~This was mistaken text~~                                                                                                                                                                     |
+| Quote                       | <kbd>>`\|quote`</kbd>                                                                                                                                       | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> | <pre>> Text that is a quote</pre>                                                                                                                                                          | <blockquote>Text that is a quote</blockquote>                                                                                                                                                  |
+| Inline code quote           | <kbd>\``\|code`\`</kbd>                                                                                                                                     | <kbd>Ctrl</kbd>+<kbd>E</kbd>                  | <pre>This has an \`inline quote code\` text</pre>                                                                                                                                          | This has an `inline quote code` text                                                                                                                                                           |
+| Inline math quote           | <kbd>\$`equation`\$</kbd>                                                                                                                                   | None                                          | <pre>\$\sqrt{3x-1}+(1+x)^2$</pre>                                                                                                                                                          | <math><mrow><msqrt><mrow><mn>3</mn><mi>x</mi><mo>-</mo><mn>1</mn></mrow></msqrt><mo>+</mo><msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math> |
+| Block code quote            | <kbd>\`\`\`<br>`\|multi-lined-code`<br>\`\`\`</kbd>                                                                                                         | <kbd>Ctrl</kbd>+<kbd>E</kbd>                  | <pre>This has a<br>\`\`\`<br>Block<br>quote<br>code<br>\`\`\`</pre>                                                                                                                        | This has a <pre>Block<br>quote<br>code</pre>                                                                                                                                                   |
+| Block math quote            | <kbd>\$\$<br>`\|equation`<br>\$\$</kbd> or <kbd>\`\`\`math<br>`\|equation`<br>\`\`\`</kbd>                                                                  | None                                          | <pre>\$\$<br>f(x) = x^2<br>\$\$</pre>                                                                                                                                                      | <math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></math>                                                                                  |
+| Bold and nested italic      | <kbd>\*\*`\|bold`\_`\|italic`\_`\|bold`\*\*</kbd>                                                                                                           | None                                          | <pre>\*\*This text is \_extremely\_ important\*\*</pre>                                                                                                                                    | **This text is _extremely_ important**                                                                                                                                                         |
+| All bold and italic         | <kbd>\*\*\_`\|bold-italic`\_\*\*</kbd>                                                                                                                      | None                                          | <pre>\*\*\_All this text is important\_\*\*</pre>                                                                                                                                          | **_All this text is important_**                                                                                                                                                               |
+| Subscript                   | <kbd>\<sub>`\|`\</sub></kbd>                                                                                                                                | None                                          | <pre>This is a \<sub>subscript\</sub> text</pre>                                                                                                                                           | This is a <sub>subscript</sub> text                                                                                                                                                            |
+| Superscript                 | <kbd>\<sup>`\|`\</sup></kbd>                                                                                                                                | None                                          | <pre>This is a \<sup>superscript\</sup> text</pre>                                                                                                                                         | This is a <sup>superscript</sup> text                                                                                                                                                          |
+| Sub+Superscript             | <kbd>\<sup>\<sub>`\|`\</sub>\</sup></kbd>                                                                                                                   | None                                          | <pre>\<sup>\<sub>This is a very small text\</sub>\</sup></pre>                                                                                                                             | <sup><sub>This is a very small text</sub></sup>                                                                                                                                                |
+| Hidden Comment              | <kbd>\<!--`\|hidden comment`--></kbd>                                                                                                                       | None                                          | <pre>\<!--This is a hidden comment--></pre>                                                                                                                                                |                                                                                                                                                                                                |
+| Unordered List              | <kbd>- `\|item`</kbd><br><kbd>\* `\|item`</kbd><br><kbd>+ `\|item`</kbd>                                                                                    | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>8</kbd> | <pre>- Unordered List Item<br>\* Unordered List Item<br>+ Unordered List Item</pre>                                                                                                        | <ul><li>Unordered List Item</li><li>Unordered List Item</li><li>Unordered List Item</li></ul>                                                                                                  |
+| Ordered List                | <kbd>1. `\|item`</kbd>                                                                                                                                      | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>7</kbd> | <pre>1. Ordered List Item<br>1. Ordered List Item<br>1. Ordered List Item</pre>                                                                                                            | <ol><li>Ordered List Item</li><li>Ordered List Item</li><li>Ordered List Item</li></ol>                                                                                                        |
+| Task List                   | <kbd>- \[ \] `\|item`</kbd>                                                                                                                                 | None                                          | <pre>- [ ] Task List Item<br>- [x] Task List Item</pre>                                                                                                                                    | <input type="checkbox"> Task List Item<br><input type="checkbox" checked> Task List Item                                                                                                       |
+| Nested List                 | Combine any List syntax                                                                                                                                     | None                                          | <pre>1. First list item<br>&nbsp;&nbsp; - First nested list item<br>&nbsp;&nbsp;&nbsp;&nbsp; - Second nested list item</pre>                                                               | <ol><li>First list item<ul><li>First nested list item<ul><li>Second nested list item</li></ul></li></ul></li></ol>                                                                             |
+| Inline Link                 | <kbd>\[text\]\(url "hover info"\)</kbd>                                                                                                                     | None                                          | <pre>\[GitHub Pages](https://pages.github.com/ "hover info")</pre>                                                                                                                         | [GitHub Pages](https://pages.github.com/ "hover info")                                                                                                                                         |
+| Inline Image Link           | <kbd>\!\[description](url "hover info")</kbd>                                                                                                               | None                                          | <pre>\!\[](https://picsum.photos/100/100)</pre>                                                                                                                                            | ![](https://picsum.photos/100/100 "hover info")                                                                                                                                                |
+| Reference Link              | <kbd>\[reference_name]: url "hover info"</kbd>                                                                                                              | None                                          | <pre>\[git_page]: https://pages.github.com/ "hover info"</pre>                                                                                                                             |                                                                                                                                                                                                |
+| Inline Link with Ref.       | <kbd>\[text]\[reference]</kbd>                                                                                                                              | None                                          | <pre>\[GitHub Pages]\[git_page]</pre>                                                                                                                                                      | [GitHub Pages][git_page]                                                                                                                                                                       |
+| Inline Image Link with Ref. | <kbd>\!\[description]\[reference]</kbd>                                                                                                                     | None                                          | <pre>\!\[]\[100x100]</pre>                                                                                                                                                                 | ![][100x100]                                                                                                                                                                                   |
+| Table                       | <kbd>\| Header 1 \| Header 2 \|<br>\| --- \| --- \|<br>\| Cell A1 \| Cell A2 \|<br>\| Cell B1 \| Cell B2 \|</kbd>                                           | None                                          | <pre>\| Header 1 \| Header 2 \|<br>\| --- \| --- \|<br>\| Cell A1 \| Cell A2 \|<br>\| Cell B1 \| Cell B2 \|</pre>                                                                          | <table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead><tbody><tr><td>Cell A1</td><td>Cell A2</td></tr><tr><td>Cell B1</td><td>Cell B2</td></tr></tbody></table>                     |
+| Footnote                    | <kbd>\[^footnote\]: `\|text-and-or-link`</kbd                                                                                                               | None                                          | <pre>\[^footnote\]This is a footnote</pre>                                                                                                                                                 | This has a footnote. [^footnote]                                                                                                                                                               |
+| Collapsible Section         | <kbd>\<details><br>\<summary>`\|summary`\</summary><br><br>`\|text`<br>\</details></kbd>                                                                    | None                                          | <pre>\<details><br>\<summary>Click to expand\</summary><br>This is hidden<br>\</details></pre>                                                                                             | <details><summary>Click to expand</summary>This is hidden</details>                                                                                                                            |
+| Text Box                    | <kbd>\<table><br>\<td\><br>`\|text`<br>\</td\>\</table></kbd>                                                                                               | None                                          | <pre>\<table><br>\<td\><br>This is text in the `box`<br>\</td\>\</table></pre>                                                                                                             | <table><td>This is text in the `box`</td></table>                                                                                                                                              |
 
 ## Alerts [^alerts]
 
@@ -61,7 +70,7 @@ This is my definitive Markdown cheatsheet. It includes all the Markdown syntax y
 > [!CAUTION]
 > Negative potential consequences of an action.
 
-## Color Preview
+## Color Preview [^git_colors]
 
 Only in issues, pull requests and discussions, you can call out colors within a sentence by using backticks. A supported color model within backticks will display a visualization of the color.
 
@@ -71,17 +80,7 @@ Only in issues, pull requests and discussions, you can call out colors within a 
 | RGB   | rgb(R,G,B) | <pre>rgb(9, 105, 218)</pre>   | <img src="https://docs.github.com/assets/cb-1962/mw-1440/images/help/writing/supported-color-models-rgb-rendered.webp"  height="30"> |
 | HSL   | hsl(H,S,L) | <pre>hsl(212, 92%, 45%)</pre> | <img src="https://docs.github.com/assets/cb-2066/mw-1440/images/help/writing/supported-color-models-hsl-rendered.webp"  height="30"> |
 
-## Links
-
-| Context                             | Input                               | Example                                                        | Output                                                 |
-| ----------------------------------- | ----------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------ |
-| Inline link                         | \[text]\(url "hover info")          | <pre>\[GitHub Pages](https://pages.github.com/)</pre>          | [GitHub Pages](https://pages.github.com/ "hover info") |
-| Inline image link                   | \!\[description](url "hover info")  | <pre>\!\[](https://picsum.photos/100/100)</pre>                | ![](https://picsum.photos/100/100 "hover info")        |
-| Reference link, on footer/elsewhere | \[reference_name]: url "hover info" | <pre>\[git_page]: https://pages.github.com/ "hover info"</pre> |                                                        |
-| Inline link with reference          | \[text]\[reference]                 | <pre>\[GitHub Pages]\[git_page]</pre>                          | [GitHub Pages][git_page]                               |
-| Inline image link with reference    | \!\[description]\[reference]        | <pre>\!\[]\[100x100]</pre>                                     | ![][100x100]                                           |
-
-### Relative Links
+## Relative Links
 
 Relative links and image paths help readers navigate your repository. A relative link points to another file relative to the current file's location. For example, a link in your root README to a file in `docs/CONTRIBUTING.md` would look like:
 
@@ -97,7 +96,7 @@ Examples of relative links:
 - In a .md file in another repository `/../../../../github/docs/blob/main/assets/images/electrocat.png`
 - In issues, pull requests and comments of another repository `../../../github/docs/blob/main/assets/images/electrocat.png?raw=true`
 
-### Link a Label [^labels]
+## Link a Label [^labels]
 
 You can reference labels in markdown using the following syntax:
 
@@ -105,7 +104,7 @@ You can reference labels in markdown using the following syntax:
 https://github.com/account/repo/labels/label-name
 ```
 
-### Light/Dark mode images
+## Light/Dark mode images
 
 Swap out images based on theme settings. [^dark_light_markdown]
 
@@ -125,7 +124,7 @@ You can now specify whether to display images for light or dark themes in Markdo
 </picture>
 ```
 
-### Footnotes [^footnotes]
+## Footnotes [^footnotes]
 
 You can add footnotes to your content by using this bracket syntax:
 
@@ -153,20 +152,6 @@ Can also reference to a link. [^link]
 ## Collapsible Sections
 
 Collapsing large blocks of text can make your markdown much easier to digest
-
-```markdown
-<details>
-<summary>Click to expand</summary>
-This is hidden
-</details>
-```
-
-<details>
-<summary>Click to expand</summary>
-This is hidden block
-</details>
-
-Collapsing large blocks of Markdown text
 
 ```markdown
 <details>
@@ -219,21 +204,95 @@ Add a box with contents to markdown
 <table><td>
 
 This is text in the `box`</td></table>
-
-<table><td align="center" width="1000">
-
-This is text in the centered `box`</td></table>
 ```
 
 <table><td>
 
 This is text in the `box`</td></table>
 
+```markdown
+<table><td align="center" width="1000">
+
+This is text in the centered `box`</td></table>
+```
+
 <table><td align="center" width="1000">
 
 This is text in the centered `box`</td></table>
 
-## Advanced Formatting tips [^advanced_md]
+## Advanced Table Tips [^advanced_tables]
+
+### Creating a Table
+
+Use pipes `|` and hyphens `-` to create tables. Hyphens define headers, and pipes separate columns. Ensure there's a blank line before the table for correct rendering.
+
+```markdown
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell A1  | Cell A2  |
+| Cell B1  | Cell B2  |
+```
+
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell A1  | Cell A2  |
+| Cell B1  | Cell B2  |
+
+### Formatting Table Content
+
+```markdown
+| Tool   | Purpose                          |
+| ------ | -------------------------------- |
+| `ls`   | Display _directory_ contents     |
+| `grep` | Search for **specific** patterns |
+```
+
+| Tool   | Purpose                          |
+| ------ | -------------------------------- |
+| `ls`   | Display _directory_ contents     |
+| `grep` | Search for **specific** patterns |
+
+### Aligning Text
+
+Align text left, center, or right using colons `:` in the header row.
+
+```markdown
+| Left Align | Center Align | Right Align |
+| :--------- | :----------: | ----------: |
+| Item A     |    Item B    |      Item C |
+| Item D     |    Item E    |      Item F |
+```
+
+| Left Align | Center Align | Right Align |
+| :--------- | :----------: | ----------: |
+| Item A     |    Item B    |      Item C |
+| Item D     |    Item E    |      Item F |
+
+### Images on tables
+
+```markdown
+|                  First Image                   |                  Second Image                   |
+| :--------------------------------------------: | :---------------------------------------------: |
+| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
+```
+
+|                  First Image                   |                  Second Image                   |
+| :--------------------------------------------: | :---------------------------------------------: |
+| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
+
+### Table within a Table [^git_achievements]
+
+```markdown
+|                         Image                          |                                                                                                                                                                                                                    Table Inside Table                                                                                                                                                                                                                     |
+| :----------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![Heart On Your Sleeve](https://picsum.photos/150/150) | <table> <thead> <tr> <th>Header</th> <th>Example</th> <th>Example</th> </tr> </thead> <tbody> <tr> <td align="center"><img src="https://picsum.photos/150/150" width="150px"></td> <td><img src="https://picsum.photos/100/150" width="100px" align="center"></td> <td><img src="https://picsum.photos/75/75" width="75px"></td> </tr> <tr> <td align="center">Info</td> <td align="center">(?)</td> <td align="center">Info</td> </tr> </tbody> </table> |
+```
+
+|                         Image                          |                                                                                                                                                                                                                    Table Inside Table                                                                                                                                                                                                                     |
+| :----------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![Heart On Your Sleeve](https://picsum.photos/150/150) | <table> <thead> <tr> <th>Header</th> <th>Example</th> <th>Example</th> </tr> </thead> <tbody> <tr> <td align="center"><img src="https://picsum.photos/150/150" width="150px"></td> <td><img src="https://picsum.photos/100/150" width="100px" align="center"></td> <td><img src="https://picsum.photos/75/75" width="75px"></td> </tr> <tr> <td align="center">Info</td> <td align="center">(?)</td> <td align="center">Info</td> </tr> </tbody> </table> |
+
+## Advanced Formatting Tips [^advanced_md]
 
 ### `left` alignment
 
@@ -334,20 +393,6 @@ We also have a property "vspace", which does what it sounds like, add vertical s
     <p>
     <img src="https://picsum.photos/500/100" >
 </p>
-
----
-
-### Images on tables
-
-```markdown
-|                  First Image                   |                  Second Image                   |
-| :--------------------------------------------: | :---------------------------------------------: |
-| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
-```
-
-|                  First Image                   |                  Second Image                   |
-| :--------------------------------------------: | :---------------------------------------------: |
-| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
 
 ## Diagrams [^diagrams]
 
@@ -1112,7 +1157,9 @@ endsolid
 <!-- URLS -->
 
 [^formatting_github]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/
+[^footnote]: This is a footnote
 [^alerts]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alertsbasic-writing-and-formatting-syntax
+[^git_colors]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#supported-color-models
 [^labels]: https://github.blog/changelog/2022-02-03-reference-labels-in-markdown/
 [^dark_light_markdown]: https://github.blog/changelog/2021-11-24-specify-theme-context-for-images-in-markdown/
 [^dark_light_html]: https://github.blog/changelog/2022-05-19-specify-theme-context-for-images-in-markdown-beta/
@@ -1124,6 +1171,8 @@ endsolid
 
 [^link]: Example with URL: https://github.com
 [^file_tree]: https://twitter.com/alexdotjs/status/1421015442286596100
+[^advanced_tables]: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables
+[^git_achievements]: https://github.com/drknzz/GitHub-Achievements
 [^advanced_md]: https://github.com/DavidWells/advanced-markdown
 [^diagrams]: https://github.blog/changelog/2022-03-17-mermaid-topojson-geojson-and-ascii-stl-diagrams-are-now-supported-in-markdown-and-as-files/
 

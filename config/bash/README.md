@@ -133,7 +133,25 @@ For using the Oh My Posh theme
    eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/oh-my-posh/main/themes/Moonlight.omp.json')"
    ```
 
+### Ble.sh
+
+For using the [ble.sh][blesh] autocomplete tool, run:
+
+```bash
+git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git
+make -C ble.sh install PREFIX=~/.local
+echo 'source ~/.local/share/blesh/ble.sh' >> ~/.bashrc
+```
+
+The last line is optional if you use the `.bashrc` file provided in this repository.
+
 ## Files
+
+### [.bash_aliases][bash_aliases]
+
+Useful aliases for the terminal.
+
+Append the contents of the `.bash_aliases` file to your `code ~/.bash_aliases` file.
 
 ### [.bashrc][bashrc]
 
@@ -141,11 +159,9 @@ Useful configurations for the terminal.
 
 Append the contents of the `.bashrc` file to your `code ~/.bashrc` file.
 
-### [.bash_aliases][bash_aliases]
+### [.blerc][blerc]
 
-Useful aliases for the terminal.
-
-Append the contents of the `.bash_aliases` file to your `code ~/.bash_aliases` file.
+[ble.sh][blesh] configuration file.
 
 ## Guides
 
@@ -175,5 +191,6 @@ Then copy the output and paste it in the GitHub settings.
 
 [bashrc]: ./.bashrc
 [bash_aliases]: ./.bash_aliases
-[inputrc]: ./.inputrc
+[blerc]: ./.blerc
 [oh_my_posh]: ../oh-my-posh/README.md
+[blesh]: https://github.com/akinomyoga/ble.sh

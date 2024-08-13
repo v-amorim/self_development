@@ -19,6 +19,9 @@ fi
 # Defines the oh-my-posh theme
 eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/v-amorim/oh-my-posh/main/themes/Moonlight.omp.json')"
 
+# General configuration
+cdpath=(/ $HOME) # Sets the search paths for the `cd` command, allowing shortcuts for changing directories
+
 # Pyenv configuration
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -38,3 +41,9 @@ if [ -f '/home/amorim/google-cloud-sdk/path.bash.inc' ]; then . '/home/amorim/go
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/amorim/google-cloud-sdk/completion.bash.inc' ]; then . '/home/amorim/google-cloud-sdk/completion.bash.inc'; fi
+
+# Custom prompt colors
+PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\$\[\033[0m\] '
+
+# BLESH configuration
+source ~/.local/share/blesh/ble.sh

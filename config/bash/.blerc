@@ -1,0 +1,4 @@
+# -*- mode: sh; mode: sh-bash -*-
+
+ble-face auto_complete='fg=239'
+ble-face -s region_match fg=153

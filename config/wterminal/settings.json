@@ -31,8 +31,13 @@
         {
             "command": "closePane",
             "keys": "ctrl+w"
+        },
+        {
+            "command": "toggleFocusMode",
+            "keys": "alt+f"
         }
     ],
+    "alwaysShowTabs": false,
     "centerOnLaunch": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
@@ -41,6 +46,7 @@
     "experimental.enableColorSelection": true,
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
+    "launchMode": "focus",
     "newTabMenu":
     [
         {
@@ -131,7 +137,10 @@
             "yellow": "#FFCB6B"
         }
     ],
+    "showTabsInTitlebar": true,
+    "showTerminalTitleInTitlebar": false,
     "snapToGridOnResize": true,
+    "tabWidthMode": "compact",
     "theme": "dark",
     "themes": [ ],
     "useAcrylicInTabRow": true,

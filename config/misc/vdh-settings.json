@@ -1,0 +1,17 @@
+{
+    "used_sidebar_button": true,
+    "download_directory": "S:\\Videos\\Downloaded",
+    "view_options": {
+        "all_tabs": false,
+        "hide_downloaded": true,
+        "low_quality": false,
+        "show_button_clean": true,
+        "show_button_clean_all": true,
+        "show_button_convert_local": false,
+        "sort_by_status": true,
+        "sort_reverse": false
+    },
+    "use_sidebar": true,
+    "open_count_store": 3,
+    "successfull_dl": 1
+}

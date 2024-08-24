@@ -1,4 +1,62 @@
 # -*- mode: sh; mode: sh-bash -*-
 
-ble-face auto_complete='fg=239'
-ble-face -s region_match fg=153
+# Configs
+bleopt exec_errexit_mark=           # Disable exit status mark
+bleopt info_display=bottom          # Display information at the bottom
+bleopt highlight_filename=          # Disable filename highlighting
+bleopt complete_auto_delay=250      # Delay for automatic completion
+
+# Color palette
+COMMAND_COLOR=217
+COMMENT_COLOR=146
+DEFAULT_TOKEN_COLOR=231
+EMPHASIS_COLOR=153
+ERROR_COLOR=204
+INLINE_PREDICTION_COLOR=239
+KEYWORD_COLOR=203
+NUMBER_COLOR=75
+PARAMETER_COLOR=183
+STRING_COLOR=153
+STRING_LIMITER_COLOR=218
+TYPE_COLOR=117
+VARIABLE_COLOR=104
+
+# Color scheme
+ble-face -s argument_option           fg=$PARAMETER_COLOR
+ble-face -s auto_complete             fg=$INLINE_PREDICTION_COLOR
+ble-face -s cmdinfo_cd_cdpath         fg=$VARIABLE_COLOR
+ble-face -s command_alias             fg=$EMPHASIS_COLOR
+ble-face -s command_builtin           fg=$DEFAULT_TOKEN_COLOR
+ble-face -s command_builtin_dot       fg=$DEFAULT_TOKEN_COLOR,bold
+ble-face -s command_file              fg=$DEFAULT_TOKEN_COLOR
+ble-face -s command_function          fg=$COMMAND_COLOR
+ble-face -s command_function          fg=$VARIABLE_COLOR
+ble-face -s command_keyword           fg=$KEYWORD_COLOR
+ble-face -s filename_directory        fg=$STRING_COLOR
+ble-face -s filename_directory_sticky fg=$TYPE_COLOR
+ble-face -s filename_executable       fg=$PARAMETER_COLOR
+ble-face -s filename_link             fg=$COMMENT_COLOR
+ble-face -s filename_other            fg=$DEFAULT_TOKEN_COLOR
+ble-face -s region_match              fg=$EMPHASIS_COLOR,underline
+ble-face -s syntax_command            fg=$COMMAND_COLOR
+ble-face -s syntax_comment            fg=$COMMENT_COLOR
+ble-face -s syntax_default            fg=$DEFAULT_TOKEN_COLOR
+ble-face -s syntax_delimiter          fg=$NUMBER_COLOR,bold
+ble-face -s syntax_error              fg=$DEFAULT_TOKEN_COLOR,bg=$ERROR_COLOR
+ble-face -s syntax_escape             fg=$STRING_LIMITER_COLOR
+ble-face -s syntax_expr               fg=$DEFAULT_TOKEN_COLOR
+ble-face -s syntax_function_name      fg=$VARIABLE_COLOR,bold
+ble-face -s syntax_param_expansion    fg=$PARAMETER_COLOR
+ble-face -s syntax_quotation          fg=$STRING_LIMITER_COLOR,bold
+ble-face -s syntax_quoted             fg=$STRING_COLOR
+ble-face -s syntax_tilde              fg=$TYPE_COLOR
+ble-face -s syntax_varname            fg=$VARIABLE_COLOR
+ble-face -s varname_array             fg=$VARIABLE_COLOR
+ble-face -s varname_empty             fg=$VARIABLE_COLOR
+ble-face -s varname_export            fg=$VARIABLE_COLOR
+ble-face -s varname_expr              fg=$VARIABLE_COLOR,bold
+ble-face -s varname_hash              fg=$VARIABLE_COLOR
+ble-face -s varname_number            fg=$NUMBER_COLOR
+ble-face -s varname_readonly          fg=$VARIABLE_COLOR
+ble-face -s varname_transform         fg=$VARIABLE_COLOR
+ble-face -s varname_unset             fg=$VARIABLE_COLOR

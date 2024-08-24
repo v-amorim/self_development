@@ -5,13 +5,13 @@ bind '"\e[1;5C":forward-word'               # [Alt+Left/Right] to move between w
 bind '"\e[1;5D":backward-word'              # [Alt+Left/Right] to move between words
 bind '"\e[3;3~":"\C-e\C-u"'                 # [Alt+Delete] to delete entire forward line
 bind '"\es":"\C-asudo \C-e"'                # [Alt+S] to add sudo to the beginning of the line
+bind '"\e\047":"\C-ucls\n"'                 # [Alt+'] to clear the console
 bind '"\e[3;2~":"\C-u"'                     # [Shift+Delete] to delete backward
 bind '"\M-l":alias-expand-line'             # [Alt+L] to expand aliases
 bind 'set colored-completion-prefix on'     # Colors the common prefix during autocompletion
 bind 'set colored-stats on'                 # Enables colored statistics in bash
 bind 'set completion-display-width 0'       # Adjusts the display width for completion; '0' uses the terminal width
 bind 'set completion-ignore-case on'        # Ignore case when completing
-bind 'set completion-query-items 100'       # Show all possible completions without asking
 bind 'set echo-control-characters off'      # Disables the display of control characters as ^X in the terminal
 bind 'set show-all-if-ambiguous on'         # Shows all possible completions if the input is ambiguous
 

@@ -26,18 +26,15 @@ A simple Hex Color to ANSI Code equivalent color, written in Python using PyQt6.
 
 ### Screenshots
 
-UI (initial state)
+GUI in its initial state
 
-![image](https://github.com/user-attachments/assets/6229f439-b567-4086-89b1-a995499d8b43)
+![image](https://github.com/user-attachments/assets/5a06f9d3-8d70-4ee4-ba37-1ae4fc7ee4f7)
 
 Color Picker
 
-![image](https://github.com/user-attachments/assets/a6434023-bcb4-48e9-9800-8a41b51adb49)
+![image](https://github.com/user-attachments/assets/146b9839-6f00-4ca1-9275-481b4cdfbd61)
 
-UI (with color selected, foreground)
+GUI with a color selected
 
-![image](https://github.com/user-attachments/assets/bd2a5de0-1307-4f64-b988-098c273bb392)
+![image](https://github.com/user-attachments/assets/86c36416-e416-469e-a86c-a7c0f771499d)
 
-UI (with color selected, background)
-
-![image](https://github.com/user-attachments/assets/1925173a-6942-4867-a97b-3ff66a4649e6)

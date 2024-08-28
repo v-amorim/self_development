@@ -85,8 +85,11 @@ def convert(value, color_type):
     color_code, color_rgb = convert_rgb(rgb_in, round)
     color_code_floor, color_rgb_floor = convert_rgb(rgb_in, math.floor)
     color_code_ceil, color_rgb_ceil = convert_rgb(rgb_in, math.ceil)
+    ansi_rgb = f"[{color_type};{RGB_FORMAT};{rgb_in[0]};{rgb_in[1]};{rgb_in[2]}m"
+
     return {
-        "in_preview": value,
+        "in_preview": f"{value}",
+        "in_ansi_rgb": ansi_rgb,
         "out_gray_preview": to_hex(gray_rgb),
         "out_color_preview": to_hex(color_rgb),
         "out_color_preview_floor": to_hex(color_rgb_floor),
@@ -137,7 +140,7 @@ class ColorConverterApp(QWidget):
         self.set_color(self.out_color_preview_floor, result["out_color_preview_floor"])
         self.set_color(self.out_color_preview_ceil, result["out_color_preview_ceil"])
 
-        self.in_preview.setText(result["in_preview"])
+        self.in_preview.setText(f"HEX: {result['in_preview']}\nRGB: {result['in_ansi_rgb']}")
         self.out_gray_preview.setText(result["gray_desc"])
         self.out_color_preview.setText(result["color_desc"])
         self.out_color_preview_floor.setText(result["floor_desc"])

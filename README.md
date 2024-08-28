@@ -11,6 +11,10 @@
 
 This repository contains a collection of scripts and macros that I have written/use for various purposes. The scripts are written in Python, Ruby, and AHK. The scripts are written for various applications such as InDesign, Excel, Word, and LaTeX. The repository also contains a collection of LaTeX templates that I have created for various purposes.
 
+## [Cheatsheets][cheatsheets]
+
+The Cheatsheets folder contains a collection of cheatsheets that I have created for various purposes. For now it only has a markdown cheatsheet.
+
 ## [Config][README_config]
 
 The Config folder contains a collection of scripts or configurations that I use or have written for various purposes. As an example: Oh My Posh terminal theme, MPV configuration
@@ -54,6 +58,7 @@ The LaTeX templates are written for various purposes such as creating documents,
 [README_self_development]: README.md
 [README_indesign_scripts]: indesign_scripts/README.md
 [README_macros]: macros/README.md
+[cheatsheets]: cheatsheets
 [README_config]: config/README.md
 [README_python]: python/README.md
 [README_ruby]: ruby/README.md

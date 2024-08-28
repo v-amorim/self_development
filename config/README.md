@@ -15,6 +15,10 @@ The Config folder contains a collection of scripts or configurations that I use 
 
 Contains my bash configurations, aliases and useful guides.
 
+### [misc][misc]
+
+Has some miscellaneous configurations files that I use.
+
 ### [mpv64][mpv64]
 
 Where I keep my MPV scripts and configurations. Also contains my SVP configurations.
@@ -83,6 +87,7 @@ Save it on `AppData\Roaming\WaleAudioControl\WaleGeneral.conf`
 <!-- URLS -->
 
 [bash]: ./bash/README.md
+[misc]: ./misc
 [mpv64]: ./mpv64/README.md
 [oh-my-posh]: https://github.com/v-amorim/oh-my-posh
 [wterminal]: ./wterminal/README.md

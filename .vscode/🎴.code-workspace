@@ -9,6 +9,10 @@
       "path": "../config"
     },
     {
+      "name": "Cheatsheets",
+      "path": "../cheatsheets"
+    },
+    {
       "name": "Indesign Scripts",
       "path": "../indesign_scripts"
     },

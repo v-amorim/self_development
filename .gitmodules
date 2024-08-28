@@ -4,3 +4,6 @@
 [submodule "config/oh-my-posh"]
 	path = config/oh-my-posh
 	url = https://github.com/v-amorim/oh-my-posh
+[submodule "python/hex_to_ansi"]
+	path = python/hex_to_ansi
+	url = https://github.com/v-amorim/hex_to_ansi

@@ -297,16 +297,23 @@
 
 #IfWinActive ahk_exe explorer.exe
     #x:: ; Win + X [Toggle file extensions]
+        ToggleExplorerSetting("HideFileExt", 1, 0)
+    Return
+
+    #h:: ; Win + H [Toggle hidden files]
+        ToggleExplorerSetting("Hidden", 2, 1)
+    Return
+
+    ToggleExplorerSetting(regValue, offValue, onValue) {
         explorerRegPath := "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-        explorerRegValue := "HideFileExt"
         explorerEhClass := "CabinetWClass"
 
-        RegRead, HiddenExt, %explorerRegPath%, %explorerRegValue% ; Read current setting
+        RegRead, currentValue, %explorerRegPath%, %regValue% ; Read current setting
 
-        If (HiddenExt = 1) { ; Extensions currently hidden
-            RegWrite, REG_DWORD, %explorerRegPath%, %explorerRegValue%, 0 ; Set to show extensions
-        } Else { ; Extensions currently shown
-            RegWrite, REG_DWORD, %explorerRegPath%, %explorerRegValue%, 1 ; Set to hide extensions
+        If (currentValue = offValue) {
+            RegWrite, REG_DWORD, %explorerRegPath%, %regValue%, %onValue% ; Toggle on
+        } Else {
+            RegWrite, REG_DWORD, %explorerRegPath%, %regValue%, %offValue% ; Toggle off
         }
 
         WinGetClass, eh_Class, A
@@ -314,7 +321,7 @@
             Send, {F5}
         Else
             PostMessage, 0x111, 28931, 0 , A
-    Return
+    }
 #IfWinActive
 
 ; Function to spam Left clicks

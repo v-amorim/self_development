@@ -17,8 +17,15 @@ local opt = {
 }
 read_options(opt)
 
+local chapterSkippingEnabled = true
+
+function toggleCheckChapter()
+	chapterSkippingEnabled = not chapterSkippingEnabled
+	mp.osd_message("Chapter skipping " .. (chapterSkippingEnabled and "enabled" or "disabled"))
+end
+
 function check_chapter(_, chapter)
-	if not chapter then
+	if not chapterSkippingEnabled or not chapter then
 		return
 	end
 	for _, p in pairs(opt.patterns) do
@@ -33,3 +40,4 @@ function check_chapter(_, chapter)
 end
 
 mp.observe_property("chapter-metadata/by-key/title", "string", check_chapter)
+mp.add_key_binding("F12", "chapter-skip", toggleCheckChapter)

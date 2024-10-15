@@ -240,7 +240,7 @@
     ^RButton::SpamClick("RButton") ; Ctrl + RButton [Spam Right Clicks]
 #IfWinActive
 
-#If (WinActive("ahk_exe opera.exe") || WinActive("ahk_exe chrome.exe"))
+#If (WinActive("ahk_exe opera.exe") || WinActive("ahk_exe chrome.exe") || WinActive("ahk_exe WindowsTerminal.exe"))
     SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
 
     $!WheelUp:: ; Ctrl + WheelUp [Cicle Up a tab]

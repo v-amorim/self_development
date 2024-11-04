@@ -40,4 +40,4 @@ function check_chapter(_, chapter)
 end
 
 mp.observe_property("chapter-metadata/by-key/title", "string", check_chapter)
-mp.add_key_binding("F12", "chapter-skip", toggleCheckChapter)
+mp.add_key_binding("", "chapter-skip", toggleCheckChapter)

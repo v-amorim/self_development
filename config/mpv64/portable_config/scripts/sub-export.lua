@@ -95,4 +95,4 @@ function process()
 	end
 end
 
-mp.add_key_binding("F11", "export-selected-subtitles", export_selected_subtitles)
+mp.add_key_binding("", "export-selected-subtitles", export_selected_subtitles)

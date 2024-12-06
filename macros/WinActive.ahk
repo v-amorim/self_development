@@ -26,6 +26,10 @@
     $!+WheelDown::SpamLeftClicks() ; Alt + Shift + WheelDown
 
     $!+WheelUp::SpamLeftClicks() ; Alt + Shift + WheelUp
+
+    $^Space:: ; Ctrl + Space
+        SendInput, ^{0}
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe Photoshop.exe
@@ -41,6 +45,10 @@
         SendInput, ^{0}
         Sleep, 333
         SendInput, ^{Tab}
+    Return
+
+    $^Space:: ; Ctrl + Space
+        SendInput, ^{0}
     Return
 
     $+WheelUp:: ; Shift + WheelUp

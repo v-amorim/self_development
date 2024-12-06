@@ -28,7 +28,9 @@ while True:
     threshold_frame = cv2.threshold(delta_frame, 30, 255, cv2.THRESH_BINARY)[1]
     threshold_frame = cv2.dilate(threshold_frame, None, iterations=2)
 
-    (cnts, _) = cv2.findContours(threshold_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    (cnts, _) = cv2.findContours(
+        threshold_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
 
     for contour in cnts:
         if cv2.contourArea(contour) < 20000:
@@ -42,7 +44,7 @@ while True:
     if status_list[-1] == 1 and status_list[-2] == 0:
         time_list.append(datetime.now())
         # Beep(440, 250)
-        pyautogui.hotkey('winleft', '2')
+        pyautogui.hotkey("winleft", "2")
     if status_list[-1] == 0 and status_list[-2] == 1:
         time_list.append(datetime.now())
         Beep(4400, 250)
@@ -50,11 +52,11 @@ while True:
     # cv2.imshow("Gray Frame", gray_frame)
     # cv2.imshow("Delta Frame", delta_frame)
     # cv2.imshow("Threshold Frame", threshold_frame)
-    cv2.imshow('Color Frame', frame)
+    cv2.imshow("Color Frame", frame)
 
     key = cv2.waitKey(1)
 
-    if key == ord('q'):
+    if key == ord("q"):
         if status == 1:
             time_list.append(datetime.now())
         break

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "dynamic": {
+      "class": "logger.DeepyFormatter",
+      "format": "%(asctime)s | %(funcName)s [L%(lineno)d] | %(levelname)-8s %(extra)s | %(message)s"
+    }
+  },
+  "handlers": {
+    "stdout": {
+      "class": "logging.StreamHandler",
+      "formatter": "dynamic",
+      "stream": "ext://sys.stdout"
+    }
+  },
+  "loggers": {
+    "root": {
+      "level": "DEBUG",
+      "handlers": [ "stdout" ]
+    },
+    "py4j": {
+      "level": "WARNING",
+      "handlers": [ "stdout" ]
+    }
+  }
+}

@@ -8,8 +8,11 @@
       "Edit the PowerShell profile file",
       "[code $PROFILE]" ],
     "alias_update": [
-      "Updates the PowerShell profile file",
+      "Reload the PowerShell profile file",
       "[. $PROFILE]" ],
+    "alias_save": [
+      "Update the PowerShell profile file with the local repository file",
+      "[]" ],
     "cls": [
       "Clear the console",
       "[cls]" ],
@@ -45,7 +48,7 @@
       "[]" ],
     "uomp": [
       "Update Oh My Posh",
-      "[winget upgrade JanDeDobbeleer.OhMyPosh -s winget]" ],
+      "[oh-my-posh upgrade]" ],
     "update": [
       "Update all installed packages",
       "[winget upgrade]" ],

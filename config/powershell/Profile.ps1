@@ -441,22 +441,26 @@ $(CCommand "alias_help") $(CParameter '-detail'): to get the detailed help for a
 #--- General Functions
 function alias_edit   { code $PROFILE }
 function alias_update { . $PROFILE }
+function alias_save   {
+    param (
+        [string]$SourcePath = "$env:USERPROFILE\Documents\GitHub\self_development\config\powershell\Profile.ps1",
+        [string[]]$DestinationPaths = @(
+            "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1",
+            "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+        )
+    )
+
+    foreach ($destination in $DestinationPaths) {
+        Copy-Item -Path $SourcePath -Destination $destination -Force
+    }
+}
 function cls          { Clear-Host }
 function credits      { Write-Host "Link to my GitHub: ${Credits}" }
 function hist         { code $historyPath }
 function ls           { Get-ChildItem $args }
 function mkdir        { New-Item -ItemType Directory $args[0] | Set-Location }
 function s            { Invoke-Item . }
-function uomp {
-    $installerUrl = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/install-amd64.exe"
-    $installerPath = "$env:TEMP\install-amd64.exe"
-
-    Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath
-    Start-Process -FilePath $installerPath -ArgumentList "/verysilent" -Wait
-    Remove-Item $installerPath
-
-    oh-my-posh version
-}
+function uomp         { oh-my-posh upgrade }
 function update       { winget upgrade }
 function winutil      { iwr -useb https://christitus.com/win | iex }
 function wsls         { wsl --shutdown }

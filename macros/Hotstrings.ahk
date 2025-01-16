@@ -172,18 +172,19 @@ Return
     backtick_char := Chr(96)
 
     ClipSaved := ClipboardAll
-    Clipboard :=
+    Clipboard := ""
     Send, ^c
     ClipWait, 1
 
     if (Clipboard != "")
     {
-        Clipboard := backtick_char . Clipboard . backtick_char
-        Sleep, 50
+        selected_text := Clipboard
+        Clipboard := backtick_char . selected_text . backtick_char
+        ClipWait, 1
         Send, ^v
     }
 
-    Sleep, 50
+    Sleep, 100
     Clipboard := ClipSaved
     ClipSaved := ""
 Return
@@ -198,12 +199,13 @@ Return
 
     if (Clipboard != "")
     {
-        Clipboard := backticks_char "`n" Clipboard "`n" backticks_char
-        Sleep, 50
+        selected_text := Clipboard
+        Clipboard := backticks_char "`n" selected_text "`n" backticks_char
+        ClipWait, 1
         Send, ^v
     }
 
-    Sleep, 50
+    Sleep, 100
     Clipboard := ClipSaved
     ClipSaved := ""
 Return

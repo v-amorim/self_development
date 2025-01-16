@@ -28,7 +28,7 @@
     $!+WheelUp::SpamLeftClicks() ; Alt + Shift + WheelUp
 
     $^Space:: ; Ctrl + Space
-        SendInput, ^{0}
+        SendInput, ^!{0}
     Return
 #IfWinActive
 

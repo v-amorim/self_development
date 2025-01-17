@@ -1,4 +1,4 @@
-local Elements = { _all = {} }
+local Elements = {_all = {}}
 
 ---@param element Element
 function Elements:add(element)
@@ -7,31 +7,23 @@ function Elements:add(element)
 		return
 	end
 
-	if self:has(element.id) then
-		Elements:remove(element.id)
-	end
+	if self:has(element.id) then Elements:remove(element.id) end
 
 	self._all[#self._all + 1] = element
 	self[element.id] = element
 
 	-- Sort by render order
-	table.sort(self._all, function(a, b)
-		return a.render_order < b.render_order
-	end)
+	table.sort(self._all, function(a, b) return a.render_order < b.render_order end)
 
 	request_render()
 end
 
 function Elements:remove(idOrElement)
-	if not idOrElement then
-		return
-	end
-	local id = type(idOrElement) == "table" and idOrElement.id or idOrElement
+	if not idOrElement then return end
+	local id = type(idOrElement) == 'table' and idOrElement.id or idOrElement
 	local element = Elements[id]
 	if element then
-		if not element.destroyed then
-			element:destroy()
-		end
+		if not element.destroyed then element:destroy() end
 		element.enabled = false
 		self._all = itable_delete_value(self._all, self[id])
 		self[id] = nil
@@ -71,12 +63,8 @@ function Elements:update_proximities()
 	end
 
 	-- Trigger `mouse_leave` and `mouse_enter` events
-	for _, element in ipairs(mouse_leave_elements) do
-		element:trigger("mouse_leave")
-	end
-	for _, element in ipairs(mouse_enter_elements) do
-		element:trigger("mouse_enter")
-	end
+	for _, element in ipairs(mouse_leave_elements) do element:trigger('mouse_leave') end
+	for _, element in ipairs(mouse_enter_elements) do element:trigger('mouse_enter') end
 end
 
 -- Toggles passed elements' min visibilities between 0 and 1.
@@ -92,9 +80,7 @@ function Elements:toggle(ids)
 	-- as that is using proximity as a tween starting point.
 	if not has_invisible then
 		for _, id in ipairs(ids) do
-			if Elements[id] then
-				Elements[id]:reset_proximity()
-			end
+			if Elements[id] then Elements[id]:reset_proximity() end
 		end
 	end
 end
@@ -107,7 +93,7 @@ function Elements:set_min_visibility(visibility, ids)
 		local element = Elements[id]
 		if element then
 			local from = math.max(0, element:get_visibility())
-			element:tween_property("min_visibility", from, visibility)
+			element:tween_property('min_visibility', from, visibility)
 		end
 	end
 end
@@ -115,24 +101,18 @@ end
 -- Flash passed elements.
 ---@param ids string[] IDs of elements to peek.
 function Elements:flash(ids)
-	local elements = itable_filter(self._all, function(element)
-		return itable_has(ids, element.id)
-	end)
-	for _, element in ipairs(elements) do
-		element:flash()
-	end
+	local elements = itable_filter(self._all, function(element) return itable_has(ids, element.id) end)
+	for _, element in ipairs(elements) do element:flash() end
 
 	-- Special case for 'progress' since it's a state of timeline, not an element
-	if itable_has(ids, "progress") and not itable_has(ids, "timeline") then
-		Elements:maybe("timeline", "flash_progress")
+	if itable_has(ids, 'progress') and not itable_has(ids, 'timeline') then
+		Elements:maybe('timeline', 'flash_progress')
 	end
 end
 
 ---@param name string Event name.
 function Elements:trigger(name, ...)
-	for _, element in self:ipairs() do
-		element:trigger(name, ...)
-	end
+	for _, element in self:ipairs() do element:trigger(name, ...) end
 end
 
 -- Trigger two events, `name` and `global_name`, depending on element-cursor proximity.
@@ -143,13 +123,9 @@ function Elements:proximity_trigger(name, ...)
 		local element = self._all[i]
 		if element.enabled then
 			if element.proximity_raw == 0 then
-				if element:trigger(name, ...) == "stop_propagation" then
-					break
-				end
+				if element:trigger(name, ...) == 'stop_propagation' then break end
 			end
-			if element:trigger("global_" .. name, ...) == "stop_propagation" then
-				break
-			end
+			if element:trigger('global_' .. name, ...) == 'stop_propagation' then break end
 		end
 	end
 end
@@ -159,9 +135,7 @@ end
 ---@param prop string
 ---@param fallback any
 function Elements:v(id, prop, fallback)
-	if self[id] and self[id].enabled and self[id][prop] ~= nil then
-		return self[id][prop]
-	end
+	if self[id] and self[id].enabled and self[id][prop] ~= nil then return self[id][prop] end
 	return fallback
 end
 
@@ -169,16 +143,10 @@ end
 ---@param id string
 ---@param method string
 function Elements:maybe(id, method, ...)
-	if self[id] then
-		return self[id]:maybe(method, ...)
-	end
+	if self[id] then return self[id]:maybe(method, ...) end
 end
 
-function Elements:has(id)
-	return self[id] ~= nil
-end
-function Elements:ipairs()
-	return ipairs(self._all)
-end
+function Elements:has(id) return self[id] ~= nil end
+function Elements:ipairs() return ipairs(self._all) end
 
 return Elements

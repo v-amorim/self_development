@@ -1,4 +1,4 @@
-local Element = require("elements/Element")
+local Element = require('elements/Element')
 
 ---@alias Dragging { start_time: number; start_x: number; distance: number; speed_distance: number; start_speed: number; }
 
@@ -6,11 +6,9 @@ local Element = require("elements/Element")
 local Speed = class(Element)
 
 ---@param props? ElementProps
-function Speed:new(props)
-	return Class.new(self, props) --[[@as Speed]]
-end
+function Speed:new(props) return Class.new(self, props) --[[@as Speed]] end
 function Speed:init(props)
-	Element.init(self, "speed", props)
+	Element.init(self, 'speed', props)
 
 	self.width = 0
 	self.height = 0
@@ -29,9 +27,7 @@ function Speed:on_coordinates()
 	self.notch_spacing = self.width / (self.notches + 1)
 	self.font_size = round(self.height * 0.48 * options.font_scale)
 end
-function Speed:on_options()
-	self:on_coordinates()
-end
+function Speed:on_options() self:on_coordinates() end
 
 function Speed:speed_step(speed, up)
 	if options.speed_step_is_factor then
@@ -61,9 +57,7 @@ function Speed:handle_cursor_down()
 end
 
 function Speed:on_global_mouse_move()
-	if not self.dragging then
-		return
-	end
+	if not self.dragging then return end
 
 	self.dragging.distance = cursor.x - self.dragging.start_x
 	self.dragging.speed_distance = (-self.dragging.distance / self.notch_spacing * self.notch_every)
@@ -88,7 +82,7 @@ function Speed:on_global_mouse_move()
 	end
 
 	if speed_new ~= speed_current then
-		mp.set_property_native("speed", speed_new)
+		mp.set_property_native('speed', speed_new)
 	end
 end
 
@@ -102,44 +96,28 @@ function Speed:on_global_mouse_leave()
 	request_render()
 end
 
-function Speed:handle_wheel_up()
-	mp.set_property_native("speed", self:speed_step(state.speed, true))
-end
-function Speed:handle_wheel_down()
-	mp.set_property_native("speed", self:speed_step(state.speed, false))
-end
+function Speed:handle_wheel_up() mp.set_property_native('speed', self:speed_step(state.speed, true)) end
+function Speed:handle_wheel_down() mp.set_property_native('speed', self:speed_step(state.speed, false)) end
 
 function Speed:render()
 	local visibility = self:get_visibility()
 	local opacity = self.dragging and 1 or visibility
 
-	if opacity <= 0 then
-		return
-	end
+	if opacity <= 0 then return end
 
-	cursor:zone("primary_down", self, function()
+	cursor:zone('primary_down', self, function()
 		self:handle_cursor_down()
-		cursor:once("primary_up", function()
-			self:handle_cursor_up()
-		end)
+		cursor:once('primary_up', function() self:handle_cursor_up() end)
 	end)
-	cursor:zone("secondary_click", self, function()
-		mp.set_property_native("speed", 1)
-	end)
-	cursor:zone("wheel_down", self, function()
-		self:handle_wheel_down()
-	end)
-	cursor:zone("wheel_up", self, function()
-		self:handle_wheel_up()
-	end)
+	cursor:zone('secondary_click', self, function() mp.set_property_native('speed', 1) end)
+	cursor:zone('wheel_down', self, function() self:handle_wheel_down() end)
+	cursor:zone('wheel_up', self, function() self:handle_wheel_up() end)
 
 	local ass = assdraw.ass_new()
 
 	-- Background
 	ass:rect(self.ax, self.ay, self.bx, self.by, {
-		color = bg,
-		radius = state.radius,
-		opacity = opacity * config.opacity.speed,
+		color = bg, radius = state.radius, opacity = opacity * config.opacity.speed,
 	})
 
 	-- Coordinates
@@ -188,7 +166,7 @@ function Speed:render()
 
 	-- Center guide
 	ass:new_event()
-	ass:append("{\\rDefault\\an7\\blur0\\bord1\\shad0\\1c&H" .. fg .. "\\3c&H" .. bg .. "}")
+	ass:append('{\\rDefault\\an7\\blur0\\bord1\\shad0\\1c&H' .. fg .. '\\3c&H' .. bg .. '}')
 	ass:opacity(opacity)
 	ass:pos(0, 0)
 	ass:draw_start()
@@ -198,7 +176,7 @@ function Speed:render()
 	ass:draw_stop()
 
 	-- Speed value
-	local speed_text = (round(state.speed * 100) / 100) .. "x"
+	local speed_text = (round(state.speed * 100) / 100) .. 'x'
 	ass:txt(half_x, ay + (notch_ay_big - ay) / 2, 5, speed_text, {
 		size = self.font_size,
 		color = bgt,

@@ -1,25 +1,28 @@
 --[[ Stateless utilities missing in lua standard library ]]
 
+---@alias Shortcut {id: string; key: string; modifiers?: string; alt: boolean; ctrl: boolean; shift: boolean}
+
 ---@param number number
-function round(number)
-	return math.floor(number + 0.5)
-end
+function round(number) return math.floor(number + 0.5) end
 
 ---@param min number
 ---@param value number
 ---@param max number
-function clamp(min, value, max)
-	return math.max(min, math.min(value, max))
-end
+function clamp(min, value, max) return math.max(min, math.min(value, max)) end
 
 ---@param rgba string `rrggbb` or `rrggbbaa` hex string.
 function serialize_rgba(rgba)
 	local a = rgba:sub(7, 8)
 	return {
 		color = rgba:sub(5, 6) .. rgba:sub(3, 4) .. rgba:sub(1, 2),
-		opacity = clamp(0, tonumber(#a == 2 and a or "ff", 16) / 255, 1),
+		opacity = clamp(0, tonumber(#a == 2 and a or 'ff', 16) / 255, 1),
 	}
 end
+
+-- Trim any white space from the start and end of the string.
+---@param str string
+---@return string
+function trim(str) return str:match('^%s*(.-)%s*$') end
 
 -- Trim any `char` from the end of the string.
 ---@param str string
@@ -41,7 +44,7 @@ end
 ---@return string[]
 function split(str, pattern)
 	local list = {}
-	local full_pattern = "(.-)" .. pattern
+	local full_pattern = '(.-)' .. pattern
 	local last_end = 1
 	local start_index, end_index, capture = str:find(full_pattern, 1)
 	while start_index do
@@ -60,14 +63,10 @@ end
 ---@param input string|string[]|nil
 ---@return string[]
 function comma_split(input)
-	if not input then
-		return {}
-	end
-	if type(input) == "table" then
-		return itable_map(input, tostring)
-	end
+	if not input then return {} end
+	if type(input) == 'table' then return itable_map(input, tostring) end
 	local str = tostring(input)
-	return str:match("^%s*$") and {} or split(str, " *, *")
+	return str:match('^%s*$') and {} or split(str, ' *, *')
 end
 
 -- Get index of the last appearance of `sub` in `str`.
@@ -78,24 +77,24 @@ function string_last_index_of(str, sub)
 	local sub_length = #sub
 	for i = #str, 1, -1 do
 		for j = 1, sub_length do
-			if str:byte(i + j - 1) ~= sub:byte(j) then
-				break
-			end
-			if j == sub_length then
-				return i
-			end
+			if str:byte(i + j - 1) ~= sub:byte(j) then break end
+			if j == sub_length then return i end
 		end
 	end
+end
+
+-- Escapes a string to be used in a matching expression.
+---@param value string
+function regexp_escape(value)
+	return string.gsub(value, '[%(%)%.%+%-%*%?%[%]%^%$%%]', '%%%1')
 end
 
 ---@param itable table
 ---@param value any
 ---@return integer|nil
 function itable_index_of(itable, value)
-	for index, item in ipairs(itable) do
-		if item == value then
-			return index
-		end
+	for index = 1, #itable do
+		if itable[index] == value then return index end
 	end
 end
 
@@ -126,9 +125,7 @@ end
 function itable_filter(itable, decider)
 	local filtered = {}
 	for index, value in ipairs(itable) do
-		if decider(value, index) then
-			filtered[#filtered + 1] = value
-		end
+		if decider(value, index) then filtered[#filtered + 1] = value end
 	end
 	return filtered
 end
@@ -137,9 +134,7 @@ end
 ---@param value any
 function itable_delete_value(itable, value)
 	for index = 1, #itable, 1 do
-		if itable[index] == value then
-			table.remove(itable, index)
-		end
+		if itable[index] == value then table.remove(itable, index) end
 	end
 	return itable
 end
@@ -161,12 +156,8 @@ function itable_slice(itable, start_pos, end_pos)
 	start_pos = start_pos and start_pos or 1
 	end_pos = end_pos and end_pos or #itable
 
-	if end_pos < 0 then
-		end_pos = #itable + end_pos + 1
-	end
-	if start_pos < 0 then
-		start_pos = #itable + start_pos + 1
-	end
+	if end_pos < 0 then end_pos = #itable + end_pos + 1 end
+	if start_pos < 0 then start_pos = #itable + start_pos + 1 end
 
 	local new_table = {}
 	for index, value in ipairs(itable) do
@@ -181,13 +172,9 @@ end
 ---@param ...T[]|nil
 ---@return T[]
 function itable_join(...)
-	local args, result = { ... }, {}
-	for i = 1, select("#", ...) do
-		if args[i] then
-			for _, value in ipairs(args[i]) do
-				result[#result + 1] = value
-			end
-		end
+	local args, result = {...}, {}
+	for i = 1, select('#', ...) do
+		if args[i] then for _, value in ipairs(args[i]) do result[#result + 1] = value end end
 	end
 	return result
 end
@@ -195,16 +182,12 @@ end
 ---@param target any[]
 ---@param source any[]
 function itable_append(target, source)
-	for _, value in ipairs(source) do
-		target[#target + 1] = value
-	end
+	for _, value in ipairs(source) do target[#target + 1] = value end
 	return target
 end
 
 function itable_clear(itable)
-	for i = #itable, 1, -1 do
-		itable[i] = nil
-	end
+	for i = #itable, 1, -1 do itable[i] = nil end
 end
 
 ---@generic T
@@ -212,9 +195,7 @@ end
 ---@return T[]
 function table_keys(input)
 	local keys = {}
-	for key, _ in pairs(input) do
-		keys[#keys + 1] = key
-	end
+	for key, _ in pairs(input) do keys[#keys + 1] = key end
 	return keys
 end
 
@@ -223,9 +204,7 @@ end
 ---@return T[]
 function table_values(input)
 	local values = {}
-	for _, value in pairs(input) do
-		values[#values + 1] = value
-	end
+	for _, value in pairs(input) do values[#values + 1] = value end
 	return values
 end
 
@@ -234,13 +213,9 @@ end
 ---@param ... T|nil
 ---@return T
 function table_assign(target, ...)
-	local args = { ... }
-	for i = 1, select("#", ...) do
-		if type(args[i]) == "table" then
-			for key, value in pairs(args[i]) do
-				target[key] = value
-			end
-		end
+	local args = {...}
+	for i = 1, select('#', ...) do
+		if type(args[i]) == 'table' then for key, value in pairs(args[i]) do target[key] = value end end
 	end
 	return target
 end
@@ -251,8 +226,19 @@ end
 ---@param props string[]
 ---@return T
 function table_assign_props(target, source, props)
-	for _, name in ipairs(props) do
-		target[name] = source[name]
+	for _, name in ipairs(props) do target[name] = source[name] end
+	return target
+end
+
+-- Assign props from `source` to `target` that are not in `props` set.
+---@generic T: table<any, any>
+---@param target T
+---@param source T
+---@param props table<string, boolean>
+---@return T
+function table_assign_exclude(target, source, props)
+	for key, value in pairs(source) do
+		if not props[key] then target[key] = value end
 	end
 	return target
 end
@@ -261,17 +247,13 @@ end
 ---@generic T: table<any, any>
 ---@param input T
 ---@return T
-function table_copy(input)
-	return table_assign({}, input)
-end
+function table_copy(input) return table_assign({}, input) end
 
 -- Converts itable values into `table<value, true>` map.
 ---@param values any[]
 function create_set(values)
 	local result = {}
-	for _, value in ipairs(values) do
-		result[value] = true
-	end
+	for _, value in ipairs(values) do result[value] = true end
 	return result
 end
 
@@ -280,49 +262,57 @@ end
 ---@param value_sanitizer? fun(value: string, key: string): T
 ---@return table<string, T>
 function serialize_key_value_list(input, value_sanitizer)
-	local result, sanitize = {}, value_sanitizer or function(value)
-		return value
-	end
+	local result, sanitize = {}, value_sanitizer or function(value) return value end
 	for _, key_value_pair in ipairs(comma_split(input)) do
-		local key, value = key_value_pair:match("^([%w_]+)=([%w%.]+)$")
-		if key and value then
-			result[key] = sanitize(value, key)
-		end
+		local key, value = key_value_pair:match('^([%w_]+)=([%w%.]+)$')
+		if key and value then result[key] = sanitize(value, key) end
 	end
 	return result
 end
 
+---@param key string
+---@param modifiers? string
+---@return Shortcut
+function create_shortcut(key, modifiers)
+	key = key:lower()
+
+	local id_parts, modifiers_set
+	if modifiers then
+		id_parts = split(modifiers:lower(), '+')
+		table.sort(id_parts, function(a, b) return a < b end)
+		modifiers_set = create_set(id_parts)
+		modifiers = table.concat(id_parts, '+')
+	else
+		id_parts, modifiers, modifiers_set = {}, nil, {}
+	end
+	id_parts[#id_parts + 1] = key
+
+	return table_assign({id = table.concat(id_parts, '+'), key = key, modifiers = modifiers}, modifiers_set)
+end
+
 --[[ EASING FUNCTIONS ]]
 
-function ease_out_quart(x)
-	return 1 - ((1 - x) ^ 4)
-end
-function ease_out_sext(x)
-	return 1 - ((1 - x) ^ 6)
-end
+function ease_out_quart(x) return 1 - ((1 - x) ^ 4) end
+function ease_out_sext(x) return 1 - ((1 - x) ^ 6) end
 
 --[[ CLASSES ]]
 
 ---@class Class
 Class = {}
 function Class:new(...)
-	local object = setmetatable({}, { __index = self })
+	local object = setmetatable({}, {__index = self})
 	object:init(...)
 	return object
 end
 function Class:init(...) end
 function Class:destroy() end
 
-function class(parent)
-	return setmetatable({}, { __index = parent or Class })
-end
+function class(parent) return setmetatable({}, {__index = parent or Class}) end
 
 ---@class CircularBuffer<T> : Class
 CircularBuffer = class()
 
-function CircularBuffer:new(max_size)
-	return Class.new(self, max_size) --[[@as CircularBuffer]]
-end
+function CircularBuffer:new(max_size) return Class.new(self, max_size) --[[@as CircularBuffer]] end
 function CircularBuffer:init(max_size)
 	self.max_size = max_size
 	self.pos = 0
@@ -339,9 +329,7 @@ function CircularBuffer:get(i)
 end
 
 local function iter(self, i)
-	if i == #self.data then
-		return nil
-	end
+	if i == #self.data then return nil end
 	i = i + 1
 	return i, self:get(i)
 end
@@ -351,9 +339,7 @@ function CircularBuffer:iter()
 end
 
 local function iter_rev(self, i)
-	if i == 1 then
-		return nil
-	end
+	if i == 1 then return nil end
 	i = i - 1
 	return i, self:get(i)
 end
@@ -367,9 +353,7 @@ function CircularBuffer:head()
 end
 
 function CircularBuffer:tail()
-	if #self.data < 1 then
-		return nil
-	end
+	if #self.data < 1 then return nil end
 	return self.data[self.pos % #self.data + 1]
 end
 

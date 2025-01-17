@@ -1,16 +1,11 @@
-require("lib/text")
+require('lib/text')
 
-local char_dir = mp.get_script_directory() .. "/char-conv/"
+local char_dir = mp.get_script_directory() .. '/char-conv/'
 local data = {}
 
 local languages = get_languages()
-for i = #languages, 1, -1 do
-	lang = languages[i]
-	if lang == "en" then
-		data = {}
-	else
-		table_assign(data, get_locale_from_json(char_dir .. lang:lower() .. ".json"))
-	end
+for _, lang in ipairs(languages) do
+	table_assign(data, get_locale_from_json(char_dir .. lang:lower() .. '.json'))
 end
 
 local romanization = {}
@@ -29,7 +24,7 @@ function need_romanization()
 end
 
 function char_conv(chars, use_ligature, has_separator)
-	local separator = has_separator or " "
+	local separator = has_separator or ' '
 	local length = 0
 	local char_conv, sp, cache = {}, {}, {}
 	local chars_length = utf8_length(chars)
@@ -44,9 +39,9 @@ function char_conv(chars, use_ligature, has_separator)
 		else
 			length = length + 1
 			if #char <= 2 then
-				if char ~= " " and length ~= chars_length then
+				if (char ~= ' ' and length ~= chars_length) then
 					cache[#cache + 1] = romanization[char] or char
-				elseif char == " " or length == chars_length then
+				elseif (char == ' ' or length == chars_length) then
 					if length == chars_length then
 						cache[#cache + 1] = romanization[char] or char
 					end

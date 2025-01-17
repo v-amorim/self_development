@@ -3,41 +3,41 @@
 
 ---@type CodePointRange[]
 local zero_width_blocks = {
-	{ 0x0000, 0x001F }, -- C0
-	{ 0x007F, 0x009F }, -- Delete + C1
-	{ 0x034F, 0x034F }, -- combining grapheme joiner
-	{ 0x061C, 0x061C }, -- Arabic Letter	Strong
-	{ 0x200B, 0x200F }, -- {zero-width space, zero-width non-joiner, zero-width joiner, left-to-right mark, right-to-left mark}
-	{ 0x2028, 0x202E }, -- {line separator, paragraph separator, Left-to-Right Embedding, Right-to-Left Embedding, Pop Directional Format, Left-to-Right Override, Right-to-Left Override}
-	{ 0x2060, 0x2060 }, -- word joiner
-	{ 0x2066, 0x2069 }, -- {Left-to-Right Isolate, Right-to-Left Isolate, First Strong Isolate, Pop Directional Isolate}
-	{ 0xFEFF, 0xFEFF }, -- zero-width non-breaking space
+	{0x0000,  0x001F}, -- C0
+	{0x007F,  0x009F}, -- Delete + C1
+	{0x034F,  0x034F}, -- combining grapheme joiner
+	{0x061C,  0x061C}, -- Arabic Letter	Strong
+	{0x200B,  0x200F}, -- {zero-width space, zero-width non-joiner, zero-width joiner, left-to-right mark, right-to-left mark}
+	{0x2028,  0x202E}, -- {line separator, paragraph separator, Left-to-Right Embedding, Right-to-Left Embedding, Pop Directional Format, Left-to-Right Override, Right-to-Left Override}
+	{0x2060,  0x2060}, -- word joiner
+	{0x2066,  0x2069}, -- {Left-to-Right Isolate, Right-to-Left Isolate, First Strong Isolate, Pop Directional Isolate}
+	{0xFEFF,  0xFEFF}, -- zero-width non-breaking space
 	-- Some other characters can also be combined https://en.wikipedia.org/wiki/Combining_character
-	{ 0x0300, 0x036F }, -- Combining Diacritical Marks	 0 BMP	Inherited
-	{ 0x1AB0, 0x1AFF }, -- Combining Diacritical Marks Extended	 0 BMP	Inherited
-	{ 0x1DC0, 0x1DFF }, -- Combining Diacritical Marks Supplement	 0 BMP	Inherited
-	{ 0x20D0, 0x20FF }, -- Combining Diacritical Marks for Symbols	 0 BMP	Inherited
-	{ 0xFE20, 0xFE2F }, -- Combining Half Marks	 0 BMP	Cyrillic (2 characters), Inherited (14 characters)
+	{0x0300,  0x036F}, -- Combining Diacritical Marks	 0 BMP	Inherited
+	{0x1AB0,  0x1AFF}, -- Combining Diacritical Marks Extended	 0 BMP	Inherited
+	{0x1DC0,  0x1DFF}, -- Combining Diacritical Marks Supplement	 0 BMP	Inherited
+	{0x20D0,  0x20FF}, -- Combining Diacritical Marks for Symbols	 0 BMP	Inherited
+	{0xFE20,  0xFE2F}, -- Combining Half Marks	 0 BMP	Cyrillic (2 characters), Inherited (14 characters)
 	-- Egyptian Hieroglyph Format Controls and Shorthand format Controls
-	{ 0x13430, 0x1345F }, -- Egyptian Hieroglyph Format Controls	 1 SMP	Egyptian Hieroglyphs
-	{ 0x1BCA0, 0x1BCAF }, -- Shorthand Format Controls	 1 SMP	Common
+	{0x13430, 0x1345F}, -- Egyptian Hieroglyph Format Controls	 1 SMP	Egyptian Hieroglyphs
+	{0x1BCA0, 0x1BCAF}, -- Shorthand Format Controls	 1 SMP	Common
 	-- not sure how to deal with those https://en.wikipedia.org/wiki/Spacing_Modifier_Letters
-	{ 0x02B0, 0x02FF }, -- Spacing Modifier Letters	 0 BMP	Bopomofo (2 characters), Latin (14 characters), Common (64 characters)
+	{0x02B0,  0x02FF}, -- Spacing Modifier Letters	 0 BMP	Bopomofo (2 characters), Latin (14 characters), Common (64 characters)
 }
 
 -- All characters have the same width as the first one
 ---@type CodePointRange[]
 local same_width_blocks = {
-	{ 0x3400, 0x4DBF }, -- CJK Unified Ideographs Extension A	 0 BMP	Han
-	{ 0x4E00, 0x9FFF }, -- CJK Unified Ideographs	 0 BMP	Han
-	{ 0x20000, 0x2A6DF }, -- CJK Unified Ideographs Extension B	 2 SIP	Han
-	{ 0x2A700, 0x2B73F }, -- CJK Unified Ideographs Extension C	 2 SIP	Han
-	{ 0x2B740, 0x2B81F }, -- CJK Unified Ideographs Extension D	 2 SIP	Han
-	{ 0x2B820, 0x2CEAF }, -- CJK Unified Ideographs Extension E	 2 SIP	Han
-	{ 0x2CEB0, 0x2EBEF }, -- CJK Unified Ideographs Extension F	 2 SIP	Han
-	{ 0x2F800, 0x2FA1F }, -- CJK Compatibility Ideographs Supplement	 2 SIP	Han
-	{ 0x30000, 0x3134F }, -- CJK Unified Ideographs Extension G	 3 TIP	Han
-	{ 0x31350, 0x323AF }, -- CJK Unified Ideographs Extension H	 3 TIP	Han
+	{0x3400,  0x4DBF}, -- CJK Unified Ideographs Extension A	 0 BMP	Han
+	{0x4E00,  0x9FFF}, -- CJK Unified Ideographs	 0 BMP	Han
+	{0x20000, 0x2A6DF}, -- CJK Unified Ideographs Extension B	 2 SIP	Han
+	{0x2A700, 0x2B73F}, -- CJK Unified Ideographs Extension C	 2 SIP	Han
+	{0x2B740, 0x2B81F}, -- CJK Unified Ideographs Extension D	 2 SIP	Han
+	{0x2B820, 0x2CEAF}, -- CJK Unified Ideographs Extension E	 2 SIP	Han
+	{0x2CEB0, 0x2EBEF}, -- CJK Unified Ideographs Extension F	 2 SIP	Han
+	{0x2F800, 0x2FA1F}, -- CJK Compatibility Ideographs Supplement	 2 SIP	Han
+	{0x30000, 0x3134F}, -- CJK Unified Ideographs Extension G	 3 TIP	Han
+	{0x31350, 0x323AF}, -- CJK Unified Ideographs Extension H	 3 TIP	Han
 }
 
 local width_length_ratio = 0.5
@@ -73,9 +73,7 @@ function utf8_iter(str)
 	local byte_start = 1
 	return function()
 		local start = byte_start
-		if #str < start then
-			return nil
-		end
+		if #str < start then return nil end
 		local byte_count = utf8_char_bytes(str, start)
 		byte_start = start + byte_count
 		return start, str:sub(start, start + byte_count - 1)
@@ -150,20 +148,16 @@ end
 ---@param width integer
 ---@param height integer
 local function update_osd_resolution(width, height)
-	if width > 0 and height > 0 then
-		osd_width, osd_height = width, height
-	end
+	if width > 0 and height > 0 then osd_width, osd_height = width, height end
 end
 
-mp.observe_property("osd-dimensions", "native", function(_, dim)
-	if dim then
-		update_osd_resolution(dim.w, dim.h)
-	end
+mp.observe_property('osd-dimensions', 'native', function(_, dim)
+	if dim then update_osd_resolution(dim.w, dim.h) end
 end)
 
 local measure_bounds
 do
-	local text_osd = mp.create_osd_overlay("ass-events")
+	local text_osd = mp.create_osd_overlay('ass-events')
 	text_osd.compute_bounds, text_osd.hidden = true, true
 
 	---@param ass_text string
@@ -180,7 +174,7 @@ end
 local normalized_text_width
 do
 	---@type {wrap: integer; bold: boolean; italic: boolean, rotate: number; size: number}
-	local bounds_opts = { wrap = 2, bold = false, italic = false, rotate = 0, size = 0 }
+	local bounds_opts = {wrap = 2, bold = false, italic = false, rotate = 0, size = 0}
 
 	---Measure text width and normalize to a font size of 1
 	---text has to be ass safe
@@ -203,7 +197,7 @@ do
 			ass:txt(0, 0, horizontal and 7 or 1, text, bounds_opts)
 			_, _, x1, y1 = measure_bounds(ass.text)
 			repetitions_left = repetitions_left - 1
-		-- make sure nothing got clipped
+			-- make sure nothing got clipped
 		until (x1 and x1 < osd_width and y1 < osd_height) or repetitions_left == 0
 		local width = (repetitions_left == 0 and not x1) and 0 or (horizontal and x1 or y1)
 		return width / size, horizontal and osd_width or osd_height
@@ -224,13 +218,9 @@ end
 ---@param text string
 ---@return number
 local function text_length(text)
-	if not text or text == "" then
-		return 0
-	end
+	if not text or text == '' then return 0 end
 	local text_length = 0
-	for _, char in utf8_iter(tostring(text)) do
-		text_length = text_length + char_length(char)
-	end
+	for _, char in utf8_iter(tostring(text)) do text_length = text_length + char_length(char) end
 	return text_length
 end
 
@@ -280,14 +270,12 @@ do
 		---@type {[string]: {[1]: number, [2]: integer}}
 		local char_widths = get_cache_stage(char_width_cache, bold)
 		local width_px = char_widths[char]
-		if width_px and no_remeasure_required(width_px[2]) then
-			return width_px[1], width_px[2]
-		end
+		if width_px and no_remeasure_required(width_px[2]) then return width_px[1], width_px[2] end
 
 		local unicode = utf8_to_unicode(char, 1)
 		for _, block in ipairs(zero_width_blocks) do
 			if unicode >= block[1] and unicode <= block[2] then
-				char_widths[char] = { 0, math.huge }
+				char_widths[char] = {0, math.huge}
 				return 0, math.huge
 			end
 		end
@@ -305,17 +293,15 @@ do
 			end
 		end
 
-		if not measured_char then
-			measured_char = char
-		end
+		if not measured_char then measured_char = char end
 		-- half as many repetitions for wide characters
 		local char_count = 10 / char_length(char)
 		local max_size, horizontal = fit_on_screen(measured_char:rep(char_count))
 		local size = math.min(max_size * 0.9, 50)
 		char_count = math.min(math.floor(char_count * max_size / size * 0.8), 100)
-		local enclosing_char, enclosing_width, next_char_count = "|", 0, char_count
+		local enclosing_char, enclosing_width, next_char_count = '|', 0, char_count
 		if measured_char == enclosing_char then
-			enclosing_char = ""
+			enclosing_char = ''
 		else
 			enclosing_width = 2 * character_width(enclosing_char, bold)
 		end
@@ -330,10 +316,8 @@ do
 		until width_ratio < 0.05 or width_ratio > 0.5 or char_count == next_char_count
 		width = width / char_count
 
-		width_px = { width, px }
-		if char ~= measured_char then
-			char_widths[measured_char] = width_px
-		end
+		width_px = {width, px}
+		if char ~= measured_char then char_widths[measured_char] = width_px end
 		char_widths[char] = width_px
 		return width, px
 	end
@@ -346,18 +330,14 @@ end
 local function character_based_width(text, bold)
 	local max_width = 0
 	local min_px = math.huge
-	for line in tostring(text):gmatch("([^\n]*)\n?") do
+	for line in tostring(text):gmatch('([^\n]*)\n?') do
 		local total_width = 0
 		for _, char in utf8_iter(line) do
 			local width, px = character_width(char, bold)
 			total_width = total_width + width
-			if px < min_px then
-				min_px = px
-			end
+			if px < min_px then min_px = px end
 		end
-		if total_width > max_width then
-			max_width = total_width
-		end
+		if total_width > max_width then max_width = total_width end
 	end
 	return max_width, min_px
 end
@@ -397,34 +377,28 @@ do
 	---@return number
 	---@param opts {size: number; bold?: boolean; italic?: boolean}
 	function text_width(text, opts)
-		if not text or text == "" then
-			return 0
-		end
+		if not text or text == '' then return 0 end
 
 		---@type boolean, boolean
 		local bold, italic = opts.bold or options.font_bold, opts.italic or false
 
-		if config.refine.text_width then
+		if not config.refine.text_width then
 			---@type {[string|number]: {[1]: number, [2]: integer}}
 			local text_width = get_cache_stage(width_cache, bold)
 			local width_px = text_width[text]
-			if width_px and no_remeasure_required(width_px[2]) then
-				return normalized_to_real(width_px[1], opts)
-			end
+			if width_px and no_remeasure_required(width_px[2]) then return normalized_to_real(width_px[1], opts) end
 
 			local width, px = character_based_width(text, bold)
-			width_cache[bold][text] = { width, px }
+			width_cache[bold][text] = {width, px}
 			return normalized_to_real(width, opts)
 		else
 			---@type {[string|number]: {[1]: number, [2]: integer}}
 			local text_width = get_cache_stage(get_cache_stage(width_cache, bold), italic)
 			local width_px = text_width[text]
-			if width_px and no_remeasure_required(width_px[2]) then
-				return width_px[1] * opts.size
-			end
+			if width_px and no_remeasure_required(width_px[2]) then return width_px[1] * opts.size end
 
 			local width, px = whole_text_width(text, bold, italic)
-			width_cache[bold][italic][text] = { width, px }
+			width_cache[bold][italic][text] = {width, px}
 			return width * opts.size
 		end
 	end
@@ -443,7 +417,7 @@ do
 	function timestamp_zero_rep(timestamp)
 		local substitute = cache[#timestamp]
 		if not substitute then
-			substitute = timestamp:gsub("%d", "0")
+			substitute = timestamp:gsub('%d', '0')
 			cache[#timestamp] = substitute
 		end
 		return substitute
@@ -459,8 +433,8 @@ do
 end
 
 do
-	local wrap_at_chars = { " ", "　", "-", "–" }
-	local remove_when_wrap = { " ", "　" }
+	local wrap_at_chars = {' ', '　', '-', '–'}
+	local remove_when_wrap = {' ', '　'}
 
 	---Wrap the text at the closest opportunity to target_line_length
 	---@param text string
@@ -472,7 +446,7 @@ do
 		local bold, scale_factor, scale_offset = opts.bold or false, opts_factor_offset(opts)
 		local wrap_at_chars, remove_when_wrap = wrap_at_chars, remove_when_wrap
 		local lines = {}
-		for _, text_line in ipairs(split(text, "\n")) do
+		for _, text_line in ipairs(split(text, '\n')) do
 			local line_width = scale_offset
 			local line_start = 1
 			local before_end = nil
@@ -492,7 +466,8 @@ do
 						before_line_start = char_end + 1
 						before_removed_width = remove and char_width or 0
 					else
-						if (target_line_width - before_width) < (line_width_after_remove - target_line_width) then
+						if (target_line_width - before_width) <
+							(line_width_after_remove - target_line_width) then
 							lines[#lines + 1] = text_line:sub(line_start, before_end)
 							line_start = before_line_start
 							line_width = line_width - before_width - before_removed_width + scale_offset
@@ -508,50 +483,18 @@ do
 			end
 			if #text_line >= line_start then
 				lines[#lines + 1] = text_line:sub(line_start)
-			elseif text_line == "" then
-				lines[#lines + 1] = ""
+			elseif text_line == '' then
+				lines[#lines + 1] = ''
 			end
 		end
-		return table.concat(lines, "\n"), #lines
+		return table.concat(lines, '\n'), #lines
 	end
 end
 
 do
 	local word_separators = create_set({
-		" ",
-		"　",
-		"\t",
-		"-",
-		"–",
-		"_",
-		",",
-		".",
-		"+",
-		"&",
-		"(",
-		")",
-		"[",
-		"]",
-		"{",
-		"}",
-		"<",
-		">",
-		"/",
-		"\\",
-		"（",
-		"）",
-		"【",
-		"】",
-		"；",
-		"：",
-		"《",
-		"》",
-		"“",
-		"”",
-		"‘",
-		"’",
-		"？",
-		"！",
+		' ', '　', '\t', '-', '–', '_', ',', '.', '+', '&', '(', ')', '[', ']', '{', '}', '<', '>', '/', '\\',
+		'（', '）', '【', '】', '；', '：', '《', '》', '“', '”', '‘', '’', '？', '！',
 	})
 
 	---Get the first character of each word

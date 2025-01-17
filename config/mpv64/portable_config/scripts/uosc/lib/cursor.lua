@@ -1,10 +1,13 @@
+---@alias CursorEventHandler fun(shortcut: Shortcut)
+
 local cursor = {
 	x = math.huge,
 	y = math.huge,
 	hidden = true,
+	distance = 0, -- Distance traveled during current move. Reset by `cursor.distance_reset_timer`.
 	hover_raw = false,
 	-- Event handlers that are only fired on zones defined during render loop.
-	---@type {event: string, hitbox: Hitbox; handler: fun(...)}[]
+	---@type {event: string, hitbox: Hitbox; handler: CursorEventHandler}[]
 	zones = {},
 	handlers = {
 		primary_down = {},
@@ -27,48 +30,52 @@ local cursor = {
 	},
 	is_dragging_prevented = false,
 	event_forward_map = {
-		primary_down = "MBTN_LEFT",
-		primary_up = "MBTN_LEFT",
-		secondary_down = "MBTN_RIGHT",
-		secondary_up = "MBTN_RIGHT",
-		wheel_down = "WHEEL_DOWN",
-		wheel_up = "WHEEL_UP",
+		primary_down = 'MBTN_LEFT',
+		primary_up = 'MBTN_LEFT',
+		secondary_down = 'MBTN_RIGHT',
+		secondary_up = 'MBTN_RIGHT',
+		wheel_down = 'WHEEL_DOWN',
+		wheel_up = 'WHEEL_UP',
 	},
 	event_binding_map = {
-		primary_down = "mbtn_left",
-		primary_up = "mbtn_left",
-		primary_click = "mbtn_left",
-		secondary_down = "mbtn_right",
-		secondary_up = "mbtn_right",
-		secondary_click = "mbtn_right",
-		wheel_down = "wheel",
-		wheel_up = "wheel",
+		primary_down = 'mbtn_left',
+		primary_up = 'mbtn_left',
+		primary_click = 'mbtn_left',
+		secondary_down = 'mbtn_right',
+		secondary_up = 'mbtn_right',
+		secondary_click = 'mbtn_right',
+		wheel_down = 'wheel',
+		wheel_up = 'wheel',
 	},
-	window_dragging_blockers = create_set({ "primary_click", "primary_down" }),
+	window_dragging_blockers = create_set({'primary_click', 'primary_down'}),
 	event_propagation_blockers = {
-		primary_down = "primary_click",
-		primary_click = "primary_down",
-		secondary_down = "secondary_click",
-		secondary_click = "secondary_down",
+		primary_down = 'primary_click',
+		primary_click = 'primary_down',
+		secondary_down = 'secondary_click',
+		secondary_click = 'secondary_down',
 	},
 	event_parent_map = {
-		primary_down = { is_start = true, trigger_event = "primary_click" },
-		primary_up = { is_end = true, start_event = "primary_down", trigger_event = "primary_click" },
-		secondary_down = { is_start = true, trigger_event = "secondary_click" },
-		secondary_up = { is_end = true, start_event = "secondary_down", trigger_event = "secondary_click" },
+		primary_down = {is_start = true, trigger_event = 'primary_click'},
+		primary_up = {is_end = true, start_event = 'primary_down', trigger_event = 'primary_click'},
+		secondary_down = {is_start = true, trigger_event = 'secondary_click'},
+		secondary_up = {is_end = true, start_event = 'secondary_down', trigger_event = 'secondary_click'},
 	},
 	-- Holds positions of last events.
 	---@type {[string]: {x: number, y: number, time: number}}
 	last_event = {},
 }
 
-cursor.autohide_timer = mp.add_timeout(1, function()
-	cursor:autohide()
-end)
+cursor.autohide_timer = mp.add_timeout(1, function() cursor:autohide() end)
 cursor.autohide_timer:kill()
-mp.observe_property("cursor-autohide", "number", function(_, val)
+mp.observe_property('cursor-autohide', 'number', function(_, val)
 	cursor.autohide_timer.timeout = (val or 1000) / 1000
 end)
+
+cursor.distance_reset_timer = mp.add_timeout(0.2, function()
+	cursor.distance = 0
+	request_render()
+end)
+cursor.distance_reset_timer:kill()
 
 -- Called at the beginning of each render
 function cursor:clear_zones()
@@ -84,9 +91,7 @@ end
 ---@param event string
 function cursor:find_zone(event)
 	-- Premature optimization to ignore a high frequency event that is not needed as a zone atm.
-	if event == "move" then
-		return
-	end
+	if event == 'move' then return end
 
 	for i = #self.zones, 1, -1 do
 		local zone = self.zones[i]
@@ -109,23 +114,22 @@ end
 -- - `move` event zones are ignored due to it being a high frequency event that is currently not needed as a zone.
 ---@param event string
 ---@param hitbox Hitbox
----@param callback fun(...)
+---@param callback CursorEventHandler
 function cursor:zone(event, hitbox, callback)
-	self.zones[#self.zones + 1] = { event = event, hitbox = hitbox, handler = callback }
+	self.zones[#self.zones + 1] = {event = event, hitbox = hitbox, handler = callback}
 end
 
 -- Binds a permanent cursor event handler active until manually unbound using `cursor:off()`.
 -- `_click` events are not available as permanent global events, only as zones.
 ---@param event string
+---@param callback CursorEventHandler
 ---@return fun() disposer Unbinds the event.
 function cursor:on(event, callback)
 	if self.handlers[event] and not itable_index_of(self.handlers[event], callback) then
 		self.handlers[event][#self.handlers[event] + 1] = callback
 		self:decide_keybinds()
 	end
-	return function()
-		self:off(event, callback)
-	end
+	return function() self:off(event, callback) end
 end
 
 -- Unbinds a cursor event handler.
@@ -152,7 +156,8 @@ end
 
 -- Trigger the event.
 ---@param event string
-function cursor:trigger(event, ...)
+---@param shortcut? Shortcut
+function cursor:trigger(event, shortcut)
 	local forward = true
 
 	-- Call raw event handlers.
@@ -160,12 +165,8 @@ function cursor:trigger(event, ...)
 	local callbacks = self.handlers[event]
 	if zone or #callbacks > 0 then
 		forward = false
-		if zone then
-			zone.handler(...)
-		end
-		for _, callback in ipairs(callbacks) do
-			callback(...)
-		end
+		if zone and shortcut then zone.handler(shortcut) end
+		for _, callback in ipairs(callbacks) do callback(shortcut) end
 	end
 
 	-- Call compound/parent (click) event handlers if both start and end events are within `parent_zone.hitbox`.
@@ -176,8 +177,8 @@ function cursor:trigger(event, ...)
 			forward = false -- Canceled here so we don't forward down events if they can lead to a click.
 			if parent.is_end then
 				local last_start_event = self.last_event[parent.start_event]
-				if last_start_event and point_collides_with(last_start_event, parent_zone.hitbox) then
-					parent_zone.handler(...)
+				if last_start_event and point_collides_with(last_start_event, parent_zone.hitbox) and shortcut then
+					parent_zone.handler(create_shortcut('primary_click', shortcut.modifiers))
 				end
 			end
 		end
@@ -189,16 +190,16 @@ function cursor:trigger(event, ...)
 		if forward_name then
 			-- Forward events if there was no handler.
 			local active = find_active_keybindings(forward_name)
-			if active then
-				local is_wheel = event:find("wheel", 1, true)
-				local is_up = event:sub(-3) == "_up"
+			if active and active.cmd then
+				local is_wheel = event:find('wheel', 1, true)
+				local is_up = event:sub(-3) == '_up'
 				if active.owner then
 					-- Binding belongs to other script, so make it look like regular key event.
 					-- Mouse bindings are simple, other keys would require repeat and pressed handling,
 					-- which can't be done with mp.set_key_bindings(), but is possible with mp.add_key_binding().
-					local state = is_wheel and "pm" or is_up and "um" or "dm"
-					local name = active.cmd:sub(active.cmd:find("/") + 1, -1)
-					mp.commandv("script-message-to", active.owner, "key-binding", name, state, forward_name)
+					local state = is_wheel and 'pm' or is_up and 'um' or 'dm'
+					local name = active.cmd:sub(active.cmd:find('/') + 1, -1)
+					mp.commandv('script-message-to', active.owner, 'key-binding', name, state, forward_name)
 				elseif is_wheel or is_up then
 					-- input.conf binding, react to button release for mouse buttons
 					mp.command(active.cmd)
@@ -218,7 +219,7 @@ end
 
 -- Enables or disables keybinding groups based on what event listeners are bound.
 function cursor:decide_keybinds()
-	local new_levels = { mbtn_left = 0, mbtn_right = 0, wheel = 0 }
+	local new_levels = {mbtn_left = 0, mbtn_right = 0, wheel = 0}
 	self.is_dragging_prevented = false
 
 	-- Check global events.
@@ -247,8 +248,8 @@ function cursor:decide_keybinds()
 
 	for name, level in pairs(new_levels) do
 		if level ~= self.binding_levels[name] then
-			local flags = level == 1 and "allow-vo-dragging+allow-hide-cursor" or ""
-			mp[(level == 0 and "disable" or "enable") .. "_key_bindings"](name, flags)
+			local flags = level == 1 and 'allow-vo-dragging+allow-hide-cursor' or ''
+			mp[(level == 0 and 'disable' or 'enable') .. '_key_bindings'](name, flags)
 			self.binding_levels[name] = level
 			self:queue_autohide()
 		end
@@ -265,7 +266,7 @@ function cursor:_find_history_sample()
 	return self.history:tail()
 end
 
--- Returns a table with current velocities in in pixels per second.
+-- Returns the current velocity vector in pixels per second.
 ---@return Point
 function cursor:get_velocity()
 	local snap = self:_find_history_sample()
@@ -273,10 +274,10 @@ function cursor:get_velocity()
 		local x, y, time = self.x - snap.x, self.y - snap.y, mp.get_time()
 		local time_diff = time - snap.time
 		if time_diff > 0.001 then
-			return { x = x / time_diff, y = y / time_diff }
+			return {x = x / time_diff, y = y / time_diff}
 		end
 	end
-	return { x = 0, y = 0 }
+	return {x = 0, y = 0}
 end
 
 ---@param x integer
@@ -309,7 +310,7 @@ function cursor:move(x, y)
 				if element then
 					local visibility = element:get_visibility()
 					if visibility > 0 then
-						element:tween_property("forced_visibility", visibility, 0, function()
+						element:tween_property('forced_visibility', visibility, 0, function()
 							element.forced_visibility = nil
 						end)
 					end
@@ -317,47 +318,50 @@ function cursor:move(x, y)
 			end
 
 			Elements:update_proximities()
-			Elements:trigger("global_mouse_leave")
+			Elements:trigger('global_mouse_leave')
 		else
 			if self.hidden then
 				-- Cancel potential fadeouts
 				for _, id in ipairs(config.cursor_leave_fadeout_elements) do
-					if Elements[id] then
-						Elements[id]:tween_stop()
-					end
+					if Elements[id] then Elements[id]:tween_stop() end
 				end
 
 				self.hidden = false
-				Elements:trigger("global_mouse_enter")
+				Elements:trigger('global_mouse_enter')
+			end
+
+			-- Update current move travel distance
+			-- `mp.get_time() - last.time < 0.5` check is there to ignore first event after long inactivity to
+			-- filter out big jumps due to window being repositioned/rescaled (e.g. opening a different file).
+			local last = self.last_event.move
+			if last and last.x < math.huge and last.y < math.huge and mp.get_time() - last.time < 0.5 then
+				self.distance = self.distance + get_point_to_point_proximity(cursor, last)
+				cursor.distance_reset_timer:kill()
+				cursor.distance_reset_timer:resume()
 			end
 
 			Elements:update_proximities()
 			-- Update history
-			self.history:insert({ x = self.x, y = self.y, time = mp.get_time() })
+			self.history:insert({x = self.x, y = self.y, time = mp.get_time()})
 		end
 
-		Elements:proximity_trigger("mouse_move")
+		Elements:proximity_trigger('mouse_move')
 		self:queue_autohide()
 	end
 
-	self:trigger("move")
+	self:trigger('move')
 
 	request_render()
 end
 
-function cursor:leave()
-	self:move(math.huge, math.huge)
-end
+function cursor:leave() self:move(math.huge, math.huge) end
 
 function cursor:is_autohide_allowed()
-	return options.autohide
-		and (not self.autohide_fs_only or state.fullscreen)
+	return options.autohide and (not self.autohide_fs_only or state.fullscreen)
 		and not self.is_dragging_prevented
 		and not Menu:is_open()
 end
-mp.observe_property("cursor-autohide-fs-only", "bool", function(_, val)
-	cursor.autohide_fs_only = val
-end)
+mp.observe_property('cursor-autohide-fs-only', 'bool', function(_, val) cursor.autohide_fs_only = val end)
 
 -- Cursor auto-hiding after period of inactivity.
 function cursor:autohide()
@@ -379,25 +383,24 @@ end
 ---@param rect Rect
 function cursor:direction_to_rectangle_distance(rect)
 	local prev = self:_find_history_sample()
-	if not prev then
-		return false
-	end
+	if not prev then return false end
 	local end_x, end_y = self.x + (self.x - prev.x) * 1e10, self.y + (self.y - prev.y) * 1e10
 	return get_ray_to_rectangle_distance(self.x, self.y, end_x, end_y, rect)
 end
 
-function cursor:create_handler(event, cb)
-	return function(...)
-		call_maybe(cb, ...)
-		self:trigger(event, ...)
+---@param event string
+---@param shortcut Shortcut
+---@param cb? fun(shortcut: Shortcut)
+function cursor:create_handler(event, shortcut, cb)
+	return function()
+		if cb then cb(shortcut) end
+		self:trigger(event, shortcut)
 	end
 end
 
 -- Movement
 function handle_mouse_pos(_, mouse)
-	if not mouse then
-		return
-	end
+	if not mouse then return end
 	if cursor.hover_raw and not mouse.hover then
 		cursor:leave()
 	else
@@ -405,27 +408,36 @@ function handle_mouse_pos(_, mouse)
 	end
 	cursor.hover_raw = mouse.hover
 end
-mp.observe_property("mouse-pos", "native", handle_mouse_pos)
+mp.observe_property('mouse-pos', 'native', handle_mouse_pos)
 
 -- Key binding groups
+local modifiers = {nil, 'alt', 'alt+ctrl', 'alt+shift', 'alt+ctrl+shift', 'ctrl', 'ctrl+shift', 'shift'}
+local primary_bindings = {}
+for i = 1, #modifiers do
+	local mods = modifiers[i]
+	local mp_name = (mods and mods .. '+' or '') .. 'mbtn_left'
+	primary_bindings[#primary_bindings + 1] = {
+		mp_name,
+		cursor:create_handler('primary_up', create_shortcut('primary_up', mods)),
+		cursor:create_handler('primary_down', create_shortcut('primary_down', mods), function(...)
+			handle_mouse_pos(nil, mp.get_property_native('mouse-pos'))
+		end),
+	}
+end
+mp.set_key_bindings(primary_bindings, 'mbtn_left', 'force')
+mp.set_key_bindings({
+	{'mbtn_left_dbl', 'ignore'},
+}, 'mbtn_left_dbl', 'force')
 mp.set_key_bindings({
 	{
-		"mbtn_left",
-		cursor:create_handler("primary_up"),
-		cursor:create_handler("primary_down", function(...)
-			handle_mouse_pos(nil, mp.get_property_native("mouse-pos"))
-		end),
+		'mbtn_right',
+		cursor:create_handler('secondary_up', create_shortcut('secondary_up')),
+		cursor:create_handler('secondary_down', create_shortcut('secondary_down')),
 	},
-}, "mbtn_left", "force")
+}, 'mbtn_right', 'force')
 mp.set_key_bindings({
-	{ "mbtn_left_dbl", "ignore" },
-}, "mbtn_left_dbl", "force")
-mp.set_key_bindings({
-	{ "mbtn_right", cursor:create_handler("secondary_up"), cursor:create_handler("secondary_down") },
-}, "mbtn_right", "force")
-mp.set_key_bindings({
-	{ "wheel_up", cursor:create_handler("wheel_up") },
-	{ "wheel_down", cursor:create_handler("wheel_down") },
-}, "wheel", "force")
+	{'wheel_up', cursor:create_handler('wheel_up', create_shortcut('wheel_up'))},
+	{'wheel_down', cursor:create_handler('wheel_down', create_shortcut('wheel_down'))},
+}, 'wheel', 'force')
 
 return cursor

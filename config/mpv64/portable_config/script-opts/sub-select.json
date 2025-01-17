@@ -2,12 +2,12 @@
   {
     "alang": [ "jpn", "jap", "ja" ],
     "slang": "eng?",
-    "blacklist": [ "sign", "song", "forced" ]
+    "blacklist": [ "sign", "song", "forced", "s&s" ]
   },
   {
     "alang": [ "jpn", "jap", "ja" ],
     "slang": "eng?",
-    "blacklist": [ "sign", "song" ]
+    "blacklist": [ "sign", "song", "s&s" ]
   },
   {
     "alang": [ "eng?", "und" ],
@@ -38,5 +38,10 @@
   {
     "alang": "no",
     "slang": "no"
+  },
+  {
+    "alang": [ "chi", "zho", "zh" ],
+    "slang": [ "eng?", "und" ],
+    "blacklist": [ "sign", "song", "forced", "s&s" ]
   }
 ]

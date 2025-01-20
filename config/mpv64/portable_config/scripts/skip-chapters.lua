@@ -6,11 +6,13 @@ local opt = {
 		"[Oo]pening$",
 		"^[Oo]pening:",
 		"[Oo]pening [Cc]redits",
+		"[Ii]ntro",
 		-- Ending variants
 		"ED",
 		"[Ee]nding$",
 		"^[Ee]nding:",
 		"[Ee]nding [Cc]redits",
+		"[Cc]redits",
 		-- Extra variants
 		-- "[Pp]review$",
 	},

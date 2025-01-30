@@ -119,15 +119,14 @@ function removeLineBreaks(sel) {
 
 function removeEmptyLinesFromMasterFrame() {
     // remove lines with only '\r' from master_frame
-    var paragraphs = master_frame.paragraphs;
+    var story = master_frame.parentStory;
+    var paragraphs = story.paragraphs;
+
     for (var i = paragraphs.length - 1; i >= 0; i--) {
-        var paragraph = paragraphs[i];
-        if (paragraph.contents == "\r") {
-            paragraph.remove();
+        if (paragraphs[i].contents == "\r") {
+            paragraphs[i].remove();
         }
     }
 }
-
-
 
 init();

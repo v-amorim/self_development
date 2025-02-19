@@ -169,11 +169,23 @@ function init() {
 function selectionChanged() {
     if (pauseState) return;
 
+    // Check if master_frame is still valid
+    if (!master_frame.isValid) {
+        alert("The master text frame has been removed. Closing Pasting Buddy.");
+        dialog.close();
+        return;
+    }
+
     var sel = doc.selection[0];
 
     if (sel instanceof InsertionPoint) sel = sel.parent.textContainers[0];
     if (sel instanceof TextFrame || sel instanceof Story) {
         if (sel.contents == '' && master_frame.contents != '') {
+            // Ensure master_frame still has paragraphs
+            if (master_frame.paragraphs.length === 0) {
+                alert("No text left in master frame!");
+                return;
+            }
             app.select(master_frame.paragraphs[0], SelectionOptions.REPLACE_WITH);
             var nextText = master_frame.paragraphs[1] ? master_frame.paragraphs[1].contents : "";
             nextPasteTextEdit.text = nextText;
@@ -199,7 +211,8 @@ function selectionChanged() {
 
 // Remove Line Breaks
 function removeLineBreaks(sel) {
-    app.findGrepPreferences.findWhat = "\$";
+    // remove '\r' at the end
+    app.findGrepPreferences.findWhat = "\r$";
     app.changeGrepPreferences.changeTo = "";
     sel.changeGrep();
     sel.parentStory.changeGrep();
@@ -212,34 +225,24 @@ function convertToUnicodeEscape(str) {
     });
 }
 
-// GREP Replace Function (Applies to master_frame)
+// GREP Replace Function (Applies to the entire story of the master frame)
 function applyGrepReplaceToMasterFrame(find, replace) {
-    if (master_frame instanceof TextFrame || master_frame instanceof Story) {
+    if (master_frame instanceof TextFrame) {
+        var story = master_frame.parentStory; // Get the entire story
+
         // Convert accented characters in the "find" pattern to Unicode escape sequences
         var unicodeFind = convertToUnicodeEscape(find);
         app.findGrepPreferences.findWhat = unicodeFind;
         app.changeGrepPreferences.changeTo = replace;
-        master_frame.changeGrep();
-        app.findGrepPreferences = NothingEnum.nothing; // Reset preferences
-        app.changeGrepPreferences = NothingEnum.nothing; // Reset preferences
-    } else {
-        alert("Master frame is not a valid text frame or story.");
-    }
-}
 
-// Remove Empty Lines from Master Frame
-function removeEmptyLinesFromMasterFrame() {
-    if (master_frame instanceof TextFrame || master_frame instanceof Story) {
-        var story = master_frame.parentStory;
-        var paragraphs = story.paragraphs;
+        // Apply GREP replacement to the entire story
+        story.changeGrep();
 
-        for (var i = paragraphs.length - 1; i >= 0; i--) {
-            if (paragraphs[i].contents == "\r") {
-                paragraphs[i].remove();
-            }
-        }
+        // Reset preferences
+        app.findGrepPreferences = NothingEnum.nothing;
+        app.changeGrepPreferences = NothingEnum.nothing;
     } else {
-        alert("Master frame is not a valid text frame or story.");
+        alert("Master frame is not a valid text frame.");
     }
 }
 

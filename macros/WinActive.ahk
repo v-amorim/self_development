@@ -296,6 +296,18 @@
         BlockInput, Off
     Return
 
+    $+!WheelUp:: ; Shift + Alt + WheelUp [Cicle Up a tab]
+        BlockInput, On
+        SendInput, {LAlt down}{Right}{LAlt up}
+        BlockInput, Off
+    Return
+
+    $+!WheelDown:: ; Shift + Alt + WheelDown [Cicle Down a tab]
+        BlockInput, On
+        SendInput, {LAlt down}{Left}{LAlt up}
+        BlockInput, Off
+    Return
+
     ~$Alt:: ; Disable Alt
         BlockInput, On
         KeyWait, Alt

@@ -115,7 +115,7 @@ var grepRules = [{
     },
     {
         name: "Pagina(s)",
-        find: ".*P[AÁ]GINA[S]?\\s*\\d{1,2}\\r",
+        find: ".*P[AÁ]G(INA)?[S]?\\s*\\d{1,2}\\r",
         replace: ""
     },
     {
@@ -126,7 +126,7 @@ var grepRules = [{
 ];
 
 var columns = 2;
-var buttonWidth = 120;
+var buttonWidth = 150;
 var buttonHeight = 25;
 var gridGroup = grepContent.add("group");
 gridGroup.orientation = "column";

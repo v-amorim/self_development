@@ -91,7 +91,6 @@ grepContent.alignChildren = ["center", "top"];
 grepContent.spacing = 10;
 grepContent.margins = 15;
 
-
 // GREP Replace Rules Grid
 var grepRules = [{
         name: "Double Spaces",
@@ -148,6 +147,29 @@ for (var i = 0; i < grepRules.length; i += columns) {
         };
     }
 }
+
+// Tab 3: Utils
+var utilsTab = tabbedPanel.add("tab", undefined, "Utils");
+utilsTab.alignment = ["fill", "fill"];
+
+var utilsContent = utilsTab.add("group");
+utilsContent.orientation = "column";
+utilsContent.alignChildren = ["center", "top"];
+utilsContent.spacing = 10;
+utilsContent.margins = 15;
+
+// Move emptyTextButton to Utils tab
+var emptyTextButton = utilsContent.add("button", undefined, "Empty text frames");
+emptyTextButton.onClick = function() {
+    findEmptyTextFrames();
+};
+
+// Move RainbowLayersButton to Utils tab
+var RainbowLayersButton = utilsContent.add("button", undefined, "Rainbow Layers");
+RainbowLayersButton.minimumSize.width = 150;
+RainbowLayersButton.onClick = function() {
+    assignLayerColors();
+};
 
 // Document and Master Frame
 var doc = app.activeDocument;
@@ -244,6 +266,62 @@ function applyGrepReplaceToMasterFrame(find, replace) {
     } else {
         alert("Master frame is not a valid text frame.");
     }
+}
+
+// https://github.com/saraoswald/Manga-Scripts
+function assignLayerColors() {
+    var layers = app.activeDocument.layers;
+
+    function getRGB(i, len) {
+        var place = i > 0 ? i / (len - 1) : i;
+        return [red(place) * 250, green(place) * 250, blue(place) * 250];
+    }
+
+    function curve(x, xOffset) {
+        return -16 * Math.pow(x - xOffset, 2) + 1;
+    }
+
+    function red(x) {
+        if (x < 0.25) return 1;
+        if (x >= 0.25 && x <= 0.5) return curve(x, 0.25);
+        if (x >= 0.75) return curve(x, 1);
+        return 0;
+    }
+
+    function green(x) {
+        if (x <= 0.25) return curve(x, 0.25);
+        if (x >= 0.25 && x <= 0.5) return 1;
+        if (x >= 0.5 && x <= 0.75) return curve(x, 0.5);
+        return 0;
+    }
+
+    function blue(x) {
+        if (x >= 0.5 && x <= 0.75) return curve(x, 0.75);
+        if (x > 0.75) return 1;
+        return 0;
+    }
+
+    for (var i = 0; i < layers.length; i++) {
+        layers[i].layerColor = getRGB(i, layers.length);
+    }
+}
+
+// https://github.com/papatangosierra/Manga-Scripts-for-Indesign
+function findEmptyTextFrames() {
+    var doc = app.activeDocument;
+    for (var i = 0; i < doc.pages.length; i++) {
+        var page = doc.pages[i];
+        for (var j = 0; j < page.textFrames.length; j++) {
+            var frame = page.textFrames[j];
+            if (frame.contents === '' && !frame.overflows) {
+                app.selection = frame;
+                alert('Empty text frame found on page ' + page.name + '.');
+                return true;
+            }
+        }
+    }
+    alert('No empty text frames found.');
+    return false;
 }
 
 // Start the script

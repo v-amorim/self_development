@@ -192,8 +192,14 @@ function handleSelectionChange() {
                 alert("No text left in master frame!");
                 return;
             }
+
             app.select(masterTextFrame.paragraphs[0], SelectionOptions.REPLACE_WITH);
-            var nextText = masterTextFrame.paragraphs[1] ? masterTextFrame.paragraphs[1].contents : "";
+            var nextText = "";
+            if (masterTextFrame.paragraphs.length > 1) {
+                nextText = masterTextFrame.paragraphs[1].contents;
+            } else if (masterTextFrame.paragraphs.length === 1) {
+                nextText = masterTextFrame.paragraphs[0].contents;
+            }
             nextPasteTextEdit.text = nextText;
             app.cut();
             app.selection = null;

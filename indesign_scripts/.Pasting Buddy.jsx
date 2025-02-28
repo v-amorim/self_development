@@ -169,6 +169,13 @@ rainbowLayersButton.onClick = function() {
     assignLayerColors();
 };
 
+// Add the new "Document Setup" button
+var docSetupButton = utilsContent.add("button", undefined, "Document Setup");
+docSetupButton.minimumSize.width = 150;
+docSetupButton.onClick = function() {
+    setupDocument();
+};
+
 // Document and Master Frame
 var activeDocument = app.activeDocument;
 var masterTextFrame = app.selection[0];
@@ -309,6 +316,23 @@ function findEmptyTextFrames() {
     }
     alert('No empty text frames found.');
     return false;
+}
+
+// Document Setup Function
+function setupDocument() {
+    // Set the measurement units to millimeters
+    app.scriptPreferences.measurementUnit = MeasurementUnits.MILLIMETERS;
+
+    // Set the page width and height
+    var pageWidth = 170;
+    var pageHeight = 260;
+    activeDocument.documentPreferences.pageWidth = pageWidth;
+    activeDocument.documentPreferences.pageHeight = pageHeight;
+
+    // Set vertical justification to Center for all new text frames
+    var textFramePrefs = activeDocument.textFramePreferences;
+    textFramePrefs.verticalJustification = VerticalJustification.CENTER_ALIGN;
+    alert("Document set to " + pageWidth + "mm x " + pageHeight + "mm" + "\n" + "Set Alignment to Center.");
 }
 
 // Initialization

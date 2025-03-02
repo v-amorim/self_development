@@ -114,12 +114,12 @@ var grepRules = [{
     },
     {
         name: "Pagina(s)",
-        find: ".*P[AÁ]G(INA)?[S]?\\s*\\d{1,2}\\r",
+        find: ".*P[AÁ]G(INA)?[S]?\\s*\\d{1,3}\\r",
         replace: ""
     },
     {
         name: "Numbering",
-        find: "^\\d{1,2}-",
+        find: "^\\d{1,3}-",
         replace: ""
     }
 ];
@@ -179,6 +179,69 @@ docSetupButton.onClick = function() {
 // Document and Master Frame
 var activeDocument = app.activeDocument;
 var masterTextFrame = app.selection[0];
+
+// Function to create an empty text frame on the first page with top alignment
+function createEmptyTextFrame() {
+    var page = activeDocument.pages[0];
+    var margin = 10; // Margin from the edge of the page
+    var frameWidth = 70;
+    var frameHeight = 170;
+
+    // Create a new text frame
+    var textFrame = page.textFrames.add({
+        geometricBounds: [margin, margin, margin + frameHeight, margin + frameWidth],
+        fillColor: "Yellow"
+    });
+
+    // Ensure the text frame is selected
+    app.selection = textFrame;
+
+    // Set vertical justification to top alignment
+    textFrame.textFramePreferences.verticalJustification = VerticalJustification.TOP_ALIGN;
+
+    // Ensure the text frame is not linked to any other frame
+    textFrame.previousTextFrame = null;
+    textFrame.nextTextFrame = null;
+
+    return textFrame;
+}
+
+// Function to prompt the user to select a .txt or .docx file and place it in the text frame
+function placeTextFile(textFrame) {
+    // Prompt the user to select a file
+    var file = File.openDialog("Select a .txt or .docx file to place in the text frame", "*.txt;*.docx", false);
+
+    if (file != null) {
+        // Place the file into the text frame
+        textFrame.place(file);
+        alert("File placed successfully!");
+    } else {
+        alert("No file selected. The text frame will remain empty.");
+    }
+}
+
+// Initialization
+function initializeScript() {
+    if (app.selection.length === 0 || !(app.selection[0] instanceof TextFrame || app.selection[0] instanceof Story)) {
+        // If no text frame is selected, create a new one
+        masterTextFrame = createEmptyTextFrame();
+        alert("No text frame selected. Created a new text frame on the first page with top alignment.");
+
+        // Ask the user to select a .txt or .docx file and place it in the text frame
+        placeTextFile(masterTextFrame);
+    } else {
+        masterTextFrame = app.selection[0];
+    }
+
+    if (masterTextFrame instanceof TextFrame || masterTextFrame instanceof Story) {
+        pasteBuddyDialog.show();
+        app.selection = null;
+        activeDocument.addEventListener('afterSelectionChanged', handleSelectionChange);
+    } else {
+        alert("Select a text frame before running!");
+        exit();
+    }
+}
 
 // Selection Changed Event Handler
 function handleSelectionChange() {
@@ -333,18 +396,6 @@ function setupDocument() {
     var textFramePrefs = activeDocument.textFramePreferences;
     textFramePrefs.verticalJustification = VerticalJustification.CENTER_ALIGN;
     alert("Document set to " + pageWidth + "mm x " + pageHeight + "mm" + "\n" + "Set Alignment to Center.");
-}
-
-// Initialization
-function initializeScript() {
-    if (masterTextFrame instanceof TextFrame || masterTextFrame instanceof Story) {
-        pasteBuddyDialog.show();
-        app.selection = null;
-        activeDocument.addEventListener('afterSelectionChanged', handleSelectionChange);
-    } else {
-        alert("Select a text frame before running!");
-        exit();
-    }
 }
 
 // Start the script

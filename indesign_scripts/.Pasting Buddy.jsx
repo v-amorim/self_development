@@ -159,6 +159,7 @@ utilsContent.spacing = 10;
 utilsContent.margins = 15;
 
 var emptyTextButton = utilsContent.add("button", undefined, "Empty text frames");
+emptyTextButton.minimumSize.width = 150;
 emptyTextButton.onClick = function() {
     findEmptyTextFrames();
 };

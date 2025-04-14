@@ -183,6 +183,16 @@ Collapsing large blocks of text can make your markdown much easier to digest
 
 ![][python_badge] ![][autohotkey_badge] ![][ruby_badge]
 
+## Highlighting diff changes
+
+<pre>```diff<br>def calculator_sum(a, b):<br>-  return a - b<br>+  return a + b<br>```</pre>
+
+```diff
+def calculator_sum(a, b):
+-  return a - b
++  return a + b
+```
+
 ## Nice looking file tree [^file_tree]
 
 Using the `graphql` syntax in block quotes will nicely highlight file trees like below:

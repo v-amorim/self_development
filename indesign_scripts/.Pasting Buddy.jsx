@@ -170,12 +170,21 @@ rainbowLayersButton.onClick = function() {
     assignLayerColors();
 };
 
-// Add the new "Document Setup" button
 var docSetupButton = utilsContent.add("button", undefined, "Document Setup");
 docSetupButton.minimumSize.width = 150;
 docSetupButton.onClick = function() {
     setupDocument();
 };
+
+var isTransparencyApplied = false;
+var transparencyButton = utilsContent.add("button", undefined, "Transparency (100%)");
+transparencyButton.minimumSize.width = 150;
+transparencyButton.onClick = function() {
+    isTransparencyApplied = !isTransparencyApplied;
+    applyTransparencyToAllObjects(isTransparencyApplied);
+    this.text = isTransparencyApplied ? "Transparency (50%)" : "Transparency (100%)";
+};
+
 
 // Document and Master Frame
 var activeDocument = app.activeDocument;
@@ -397,6 +406,37 @@ function setupDocument() {
     var textFramePrefs = activeDocument.textFramePreferences;
     textFramePrefs.verticalJustification = VerticalJustification.CENTER_ALIGN;
     alert("Document set to " + pageWidth + "mm x " + pageHeight + "mm" + "\n" + "Set Alignment to Center.");
+}
+
+// Function to apply or remove transparency based on the toggle state
+// https://www.reddit.com/r/indesign/comments/1g804g8/comment/lt07rbb
+function applyTransparencyToAllObjects(applyTransparency) {
+    var doc = app.activeDocument;
+    var layers = doc.layers;
+    var mainTextFrameLayer = masterTextFrame.itemLayer;
+
+    for (var i = 0; i < layers.length; i++) {
+        var layer = layers[i];
+        if (layer === mainTextFrameLayer) continue;
+        var pageItems = layer.allPageItems;
+
+        for (var j = 0; j < pageItems.length; j++) {
+            var obj = pageItems[j];
+
+            if (
+                obj instanceof Rectangle ||
+                obj instanceof Oval ||
+                obj instanceof Polygon ||
+                obj instanceof GraphicLine ||
+                obj instanceof TextFrame
+            ) {
+                obj.transparencySettings.blendingSettings.opacity = applyTransparency ? 50 : 100;
+            }
+        }
+    }
+
+    // Alert the user about the current state
+    alert(applyTransparency ? "50% transparency applied to all objects." : "Transparency removed (100% opacity restored).");
 }
 
 // Start the script

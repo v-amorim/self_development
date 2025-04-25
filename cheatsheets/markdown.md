@@ -2,7 +2,7 @@
 
 This is my definitive Markdown cheatsheet. It includes all the Markdown syntax you need to know to create beautiful and professional-looking documents.
 
-## Styling text [^formatting_github]
+## Compilation [^formatting_github]
 
 | Style                       | Syntax <kbd>char`\|text`char</kbd>                                                                                                                          | Keyboard shortcut                             | Example                                                                                                                                                                                    | Output                                                                                                                                                                                         |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -11,17 +11,17 @@ This is my definitive Markdown cheatsheet. It includes all the Markdown syntax y
 | Bold                        | <kbd>\*\*`\|text`\*\*</kbd> or <kbd>\_\_`\|text`\_\_</kbd>                                                                                                  | <kbd>Ctrl</kbd>+<kbd>B</kbd>                  | <pre>\*\*This is bold text\*\*</pre>                                                                                                                                                       | **This is bold text**                                                                                                                                                                          |
 | Italic                      | <kbd>\*`\|text`\*</kbd> or <kbd>\_`\|text`\_</kbd>                                                                                                          | <kbd>Ctrl</kbd>+<kbd>I</kbd>                  | <pre>\_This text is italicized\_</pre>                                                                                                                                                     | _This text is italicized_                                                                                                                                                                      |
 | Strikethrough               | <kbd>\~\~`\|text`\~\~</kbd>                                                                                                                                 | None                                          | <pre>\~\~This was mistaken text\~\~</pre>                                                                                                                                                  | ~~This was mistaken text~~                                                                                                                                                                     |
+| Bold and nested italic      | <kbd>\*\*`\|bold`\_`\|italic`\_`\|bold`\*\*</kbd>                                                                                                           | None                                          | <pre>\*\*This text is \_extremely\_ important\*\*</pre>                                                                                                                                    | **This text is _extremely_ important**                                                                                                                                                         |
+| Bold+Italic                 | <kbd>\*\*\_`\|bold-italic`\_\*\*</kbd>                                                                                                                      | None                                          | <pre>\*\*\_All this text is important\_\*\*</pre>                                                                                                                                          | **_All this text is important_**                                                                                                                                                               |
+| Subscript                   | <kbd>\<sub>`\|text`\</sub></kbd>                                                                                                                            | None                                          | <pre>This is a \<sub>subscript\</sub> text</pre>                                                                                                                                           | This is a <sub>subscript</sub> text                                                                                                                                                            |
+| Superscript                 | <kbd>\<sup>`\|text`\</sup></kbd>                                                                                                                            | None                                          | <pre>This is a \<sup>superscript\</sup> text</pre>                                                                                                                                         | This is a <sup>superscript</sup> text                                                                                                                                                          |
+| Sub+Superscript             | <kbd>\<sup>\<sub>`\|text`\</sub>\</sup></kbd>                                                                                                               | None                                          | <pre>\<sup>\<sub>This is a very small text\</sub>\</sup></pre>                                                                                                                             | <sup><sub>This is a very small text</sub></sup>                                                                                                                                                |
 | Quote                       | <kbd>>`\|quote`</kbd>                                                                                                                                       | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> | <pre>> Text that is a quote</pre>                                                                                                                                                          | <blockquote>Text that is a quote</blockquote>                                                                                                                                                  |
+| Nested Quote                | <kbd>>`\|quote`<br>>>`\|quote`</kbd>                                                                                                                        | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> | <pre>> Main quote<br>>> Nested quote</pre>                                                                                                                                                 | <blockquote>Main quote<blockquote>Nested quote</blockquote></blockquote>                                                                                                                       |
 | Inline code quote           | <kbd>\``\|code`\`</kbd>                                                                                                                                     | <kbd>Ctrl</kbd>+<kbd>E</kbd>                  | <pre>This has an \`inline quote code\` text</pre>                                                                                                                                          | This has an `inline quote code` text                                                                                                                                                           |
 | Inline math quote           | <kbd>\$ `equation` \$</kbd>                                                                                                                                 | None                                          | <pre>\$\sqrt{3x-1}+(1+x)^2$</pre>                                                                                                                                                          | <math><mrow><msqrt><mrow><mn>3</mn><mi>x</mi><mo>-</mo><mn>1</mn></mrow></msqrt><mo>+</mo><msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math> |
 | Block code quote            | <kbd>\`\`\`<br>`\|multi-lined-code`<br>\`\`\`</kbd>                                                                                                         | <kbd>Ctrl</kbd>+<kbd>E</kbd>                  | <pre>This has a<br>\`\`\`<br>Block<br>quote<br>code<br>\`\`\`</pre>                                                                                                                        | This has a <pre>Block<br>quote<br>code</pre>                                                                                                                                                   |
 | Block math quote            | <kbd>\$\$<br>`\|equation`<br>\$\$</kbd> or <kbd>\`\`\`math<br>`\|equation`<br>\`\`\`</kbd>                                                                  | None                                          | <pre>\$\$<br>f(x) = x^2<br>\$\$</pre>                                                                                                                                                      | <math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></math>                                                                                  |
-| Bold and nested italic      | <kbd>\*\*`\|bold`\_`\|italic`\_`\|bold`\*\*</kbd>                                                                                                           | None                                          | <pre>\*\*This text is \_extremely\_ important\*\*</pre>                                                                                                                                    | **This text is _extremely_ important**                                                                                                                                                         |
-| All bold and italic         | <kbd>\*\*\_`\|bold-italic`\_\*\*</kbd>                                                                                                                      | None                                          | <pre>\*\*\_All this text is important\_\*\*</pre>                                                                                                                                          | **_All this text is important_**                                                                                                                                                               |
-| Subscript                   | <kbd>\<sub>`\|text`\</sub></kbd>                                                                                                                            | None                                          | <pre>This is a \<sub>subscript\</sub> text</pre>                                                                                                                                           | This is a <sub>subscript</sub> text                                                                                                                                                            |
-| Superscript                 | <kbd>\<sup>`\|text`\</sup></kbd>                                                                                                                            | None                                          | <pre>This is a \<sup>superscript\</sup> text</pre>                                                                                                                                         | This is a <sup>superscript</sup> text                                                                                                                                                          |
-| Sub+Superscript             | <kbd>\<sup>\<sub>`\|text`\</sub>\</sup></kbd>                                                                                                               | None                                          | <pre>\<sup>\<sub>This is a very small text\</sub>\</sup></pre>                                                                                                                             | <sup><sub>This is a very small text</sub></sup>                                                                                                                                                |
-| Hidden Comment              | <kbd>\<!--`\|hidden comment`--></kbd>                                                                                                                       | None                                          | <pre>\<!--This is a hidden comment--></pre>                                                                                                                                                |                                                                                                                                                                                                |
 | Unordered List              | <kbd>- `\|item`</kbd><br><kbd>\* `\|item`</kbd><br><kbd>+ `\|item`</kbd>                                                                                    | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>8</kbd> | <pre>- Unordered List Item<br>\* Unordered List Item<br>+ Unordered List Item</pre>                                                                                                        | <ul><li>Unordered List Item</li><li>Unordered List Item</li><li>Unordered List Item</li></ul>                                                                                                  |
 | Ordered List                | <kbd>1. `\|item`</kbd>                                                                                                                                      | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>7</kbd> | <pre>1. Ordered List Item<br>1. Ordered List Item<br>1. Ordered List Item</pre>                                                                                                            | <ol><li>Ordered List Item</li><li>Ordered List Item</li><li>Ordered List Item</li></ol>                                                                                                        |
 | Task List                   | <kbd>- \[ \] `\|item`</kbd>                                                                                                                                 | None                                          | <pre>- [ ] Task List Item<br>- [x] Task List Item</pre>                                                                                                                                    | <input type="checkbox"> Task List Item<br><input type="checkbox" checked> Task List Item                                                                                                       |
@@ -32,55 +32,107 @@ This is my definitive Markdown cheatsheet. It includes all the Markdown syntax y
 | Inline Link with Ref.       | <kbd>\[`\|text`]\[`ref_tag`]</kbd>                                                                                                                          | None                                          | <pre>\[GitHub Pages]\[git_page]</pre>                                                                                                                                                      | [GitHub Pages][git_page]                                                                                                                                                                       |
 | Inline Image Link with Ref. | <kbd>\!\[`alt-text`]\[`ref_tag`]</kbd>                                                                                                                      | None                                          | <pre>\!\[]\[100x100]</pre>                                                                                                                                                                 | ![][100x100]                                                                                                                                                                                   |
 | Table                       | <kbd>\| Header 1 \| Header 2 \|<br>\| --- \| --- \|<br>\| Cell A1 \| Cell A2 \|<br>\| Cell B1 \| Cell B2 \|</kbd>                                           | None                                          | <pre>\| Header 1 \| Header 2 \|<br>\| --- \| --- \|<br>\| Cell A1 \| Cell A2 \|<br>\| Cell B1 \| Cell B2 \|</pre>                                                                          | <table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead><tbody><tr><td>Cell A1</td><td>Cell A2</td></tr><tr><td>Cell B1</td><td>Cell B2</td></tr></tbody></table>                     |
-| Footnote                    | <kbd>\[^footnote\]: `\|text-and-or-link`</kbd                                                                                                               | None                                          | <pre>\[^footnote\]This is a footnote</pre>                                                                                                                                                 | This has a footnote. [^footnote]                                                                                                                                                               |
+| Footnote                    | <kbd>\[^footnote\]: `\|text-and-or-link`</kbd>                                                                                                              | None                                          | <pre>\[^footnote\]This is a footnote</pre>                                                                                                                                                 | This has a footnote. [^footnote]                                                                                                                                                               |
 | Collapsible Section         | <kbd>\<details><br>\<summary>`\|summary`\</summary><br><br>`\|text`<br>\</details></kbd>                                                                    | None                                          | <pre>\<details><br>\<summary>Click to expand\</summary><br>This is hidden<br>\</details></pre>                                                                                             | <details><summary>Click to expand</summary>This is hidden</details>                                                                                                                            |
+| Emoji[^github_emoji]        | <kbd>:`\|emoji`:</kbd>                                                                                                                                      | None                                          | <pre>`:rocket:`</pre>                                                                                                                                                                      | :rocket:                                                                                                                                                                                       |
+| Escaping Characters         | <kbd>\\`\|char`</kbd>                                                                                                                                       | None                                          | <pre>Not \\\*\\\*bold\\\*\\\*</pre>                                                                                                                                                        | Not \*\*bold\*\*                                                                                                                                                                               |
+| Hidden Comment              | <kbd>\<!--`\|hidden comment`--></kbd>                                                                                                                       | None                                          | <pre>\<!--This is a hidden comment--></pre>                                                                                                                                                |                                                                                                                                                                                                |
+| Keyboard Inputs             | <kbd>\<kbd>`\|key`\</kbd></kbd>                                                                                                                             | None                                          | <pre>Use \<kbd>Ctrl\</kbd> + \<kbd>Z\</kbd> to undo</pre>                                                                                                                                  | Use <kbd>Ctrl</kbd> + <kbd>Z</kbd> to undo                                                                                                                                                     |
 | Text Box                    | <kbd>\<table><br>\<td\><br>`\|text`<br>\</td\>\</table></kbd>                                                                                               | None                                          | <pre>\<table><br>\<td\><br>This is text in the `box`<br>\</td\>\</table></pre>                                                                                                             | <table><td>This is text in the `box`</td></table>                                                                                                                                              |
 
-## Alerts [^alerts]
+---
 
-```markdown
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
+## 1. Text Formatting
 
-> [!TIP]
-> Optional information to help a user be more successful.
+| Style                  | Syntax <kbd>char`\|text`char</kbd>                         | Example                                                        | Output                                          |
+| ---------------------- | ---------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------- |
+| Bold                   | <kbd>\*\*`\|text`\*\*</kbd> or <kbd>\_\_`\|text`\_\_</kbd> | <pre>\*\*This is bold text\*\*</pre>                           | **This is bold text**                           |
+| Italic                 | <kbd>\*`\|text`\*</kbd> or <kbd>\_`\|text`\_</kbd>         | <pre>\_This text is italicized\_</pre>                         | _This text is italicized_                       |
+| Bold and nested italic | <kbd>\*\*`\|bold`\_`\|italic`\_`\|bold`\*\*</kbd>          | <pre>\*\*This text is \_extremely\_ important\*\*</pre>        | **This text is _extremely_ important**          |
+| Bold+Italic            | <kbd>\*\*\_`\|bold-italic`\_\*\*</kbd>                     | <pre>\*\*\_All this text is important\_\*\*</pre>              | **_All this text is important_**                |
+| Strikethrough          | <kbd>\~\~`\|text`\~\~</kbd>                                | <pre>\~\~This was mistaken text\~\~</pre>                      | ~~This was mistaken text~~                      |
+| Subscript              | <kbd>\<sub>`\|text`\</sub></kbd>                           | <pre>This is a \<sub>subscript\</sub> text</pre>               | This is a <sub>subscript</sub> text             |
+| Superscript            | <kbd>\<sup>`\|text`\</sup></kbd>                           | <pre>This is a \<sup>superscript\</sup> text</pre>             | This is a <sup>superscript</sup> text           |
+| Sub+Superscript        | <kbd>\<sup>\<sub>`\|text`\</sub>\</sup></kbd>              | <pre>\<sup>\<sub>This is a very small text\</sub>\</sup></pre> | <sup><sub>This is a very small text</sub></sup> |
 
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
+---
 
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
+## 2. Headings & Dividers
 
-> [!CAUTION]
-> Negative potential consequences of an action.
+| Style           | Syntax <kbd>char`\|text`char</kbd>                                                                                                                          | Example                                                                                                                                                                                    | Output                                                                                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Heading         | <kbd>#`\|text`</kbd><br><kbd>##`\|text`</kbd><br><kbd>###`\|text`</kbd><br><kbd>####`\|text`</kbd><br><kbd>#####`\|text`</kbd><br><kbd>######`\|text`</kbd> | <pre># A first-level heading<br>## A second-level heading<br>### A third-level heading<br>#### A fourth-level heading<br>##### A fifth-level heading<br>###### A sixth-level heading</pre> | <h1>A first-level heading</h1><h2>A second-level heading</h2><h3>A third-level heading</h3><h4>A fourth-level heading</h4><h5>A fifth-level heading</h5><h6>A sixth-level heading</h6> |
+| Horizontal Rule | <kbd>---</kbd> or <kbd>\*\*\*</kbd>                                                                                                                         | <pre>---<br>Text between Horizontal Rules<br>\*\*\*</pre>                                                                                                                                  | <hr>Text between Horizontal Rules<hr>                                                                                                                                                  |
+
+---
+
+## 3. Quotes and Code
+
+| Style             | Syntax <kbd>char`\|text`char</kbd>                                                         | Example                                                             | Output                                                                                                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Quote             | <kbd>>`\|quote`</kbd>                                                                      | <pre>> Text that is a quote</pre>                                   | <blockquote>Text that is a quote</blockquote>                                                                                                                                                  |
+| Nested Quote      | <kbd>>`\|quote`<br>>>`\|quote`</kbd>                                                       | <pre>> Main quote<br>>> Nested quote</pre>                          | <blockquote>Main quote<blockquote>Nested quote</blockquote></blockquote>                                                                                                                       |
+| Inline code quote | <kbd>\``\|code`\`</kbd>                                                                    | <pre>This has an \`inline quote code\` text</pre>                   | This has an `inline quote code` text                                                                                                                                                           |
+| Inline math quote | <kbd>\$ `equation` \$</kbd>                                                                | <pre>\$\sqrt{3x-1}+(1+x)^2$</pre>                                   | <math><mrow><msqrt><mrow><mn>3</mn><mi>x</mi><mo>-</mo><mn>1</mn></mrow></msqrt><mo>+</mo><msup><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>)</mo></mrow><mn>2</mn></msup></mrow></math> |
+| Block code quote  | <kbd>\`\`\`<br>`\|multi-lined-code`<br>\`\`\`</kbd>                                        | <pre>This has a<br>\`\`\`<br>Block<br>quote<br>code<br>\`\`\`</pre> | This has a <pre>Block<br>quote<br>code</pre>                                                                                                                                                   |
+| Block math quote  | <kbd>\$\$<br>`\|equation`<br>\$\$</kbd> or <kbd>\`\`\`math<br>`\|equation`<br>\`\`\`</kbd> | <pre>\$\$<br>f(x) = x^2<br>\$\$</pre>                               | <math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></math>                                                                                  |
+
+---
+
+### Diff Syntax
+
+Using the `diff` syntax in block quotes will highlight additions and deletions:
+
+<pre>```diff<br>def calculator_sum(a, b):<br>-  return a - b<br>+  return a + b<br>```</pre>
+
+```diff
+def calculator_sum(a, b):
+-  return a - b
++  return a + b
 ```
 
-> [!NOTE]
-> Highlights information that users should take into account, even when skimming.
+---
 
-> [!TIP]
-> Optional information to help a user be more successful.
+### File Trees
 
-> [!IMPORTANT]
-> Crucial information necessary for users to succeed.
+Using the `graphql` syntax in block quotes will nicely highlight file trees like below:
 
-> [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
+```graphql
+./root/*
+  ├─ assets/*   # Fonts, icons, images, etc.
+  ├─ code/*     # Where the code lives
+  │  ├─ main.py # The main file
+  │  └─ Other files…
+  └─ utils/*    # Utility functions
+```
 
-> [!CAUTION]
-> Negative potential consequences of an action.
+---
 
-## Color Preview [^git_colors]
+## 4. Lists
 
-Only in issues, pull requests and discussions, you can call out colors within a sentence by using backticks. A supported color model within backticks will display a visualization of the color.
+| Style          | Syntax <kbd>char`\|text`char</kbd>                                       | Example                                                                                                                      | Output                                                                                                             |
+| -------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Unordered List | <kbd>- `\|item`</kbd><br><kbd>\* `\|item`</kbd><br><kbd>+ `\|item`</kbd> | <pre>- Unordered List Item<br>\* Unordered List Item<br>+ Unordered List Item</pre>                                          | <ul><li>Unordered List Item</li><li>Unordered List Item</li><li>Unordered List Item</li></ul>                      |
+| Ordered List   | <kbd>1. `\|item`</kbd>                                                   | <pre>1. Ordered List Item<br>1. Ordered List Item<br>1. Ordered List Item</pre>                                              | <ol><li>Ordered List Item</li><li>Ordered List Item</li><li>Ordered List Item</li></ol>                            |
+| Task List      | <kbd>- \[ \] `\|item`</kbd>                                              | <pre>- [ ] Task List Item<br>- [x] Task List Item</pre>                                                                      | <input type="checkbox"> Task List Item<br><input type="checkbox" checked> Task List Item                           |
+| Nested List    | Combine any List syntax                                                  | <pre>1. First list item<br>&nbsp;&nbsp; - First nested list item<br>&nbsp;&nbsp;&nbsp;&nbsp; - Second nested list item</pre> | <ol><li>First list item<ul><li>First nested list item<ul><li>Second nested list item</li></ul></li></ul></li></ol> |
 
-| Color | Syntax     | Example                       | Output                                                                                                                               |
-| ----- | ---------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| HEX   | #RRGGBB    | <pre>#0969DA</pre>            | <img src="https://docs.github.com/assets/cb-1558/mw-1440/images/help/writing/supported-color-models-hex-rendered.webp" height="30">  |
-| RGB   | rgb(R,G,B) | <pre>rgb(9, 105, 218)</pre>   | <img src="https://docs.github.com/assets/cb-1962/mw-1440/images/help/writing/supported-color-models-rgb-rendered.webp"  height="30"> |
-| HSL   | hsl(H,S,L) | <pre>hsl(212, 92%, 45%)</pre> | <img src="https://docs.github.com/assets/cb-2066/mw-1440/images/help/writing/supported-color-models-hsl-rendered.webp"  height="30"> |
+---
 
-## Relative Links
+## 5. Links and Media
+
+### Links
+
+| Style                 | Syntax <kbd>char`\|text`char</kbd>             | Example                                                            | Output                                                 |
+| --------------------- | ---------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------ |
+| Inline Link           | <kbd>\[`\|text`\]\(`\|url` "`\|hover`"\)</kbd> | <pre>\[GitHub Pages](https://pages.github.com/ "hover info")</pre> | [GitHub Pages](https://pages.github.com/ "hover info") |
+| Reference Link        | <kbd>\[`ref_tag`]: `\|url` "`\|hover`"</kbd>   | <pre>\[git_page]: https://pages.github.com/ "hover info"</pre>     |                                                        |
+| Inline Link with Ref. | <kbd>\[`\|text`]\[`ref_tag`]</kbd>             | <pre>\[GitHub Pages]\[git_page]</pre>                              | [GitHub Pages][git_page]                               |
+| Footnote              | <kbd>\[^footnote\]: `\|text-and-or-link`</kbd> | <pre>\[^footnote\]This is a footnote</pre>                         | This has a footnote. [^footnote]                       |
+
+---
+
+### Relative Links [^relative_links]
 
 Relative links and image paths help readers navigate your repository. A relative link points to another file relative to the current file's location. For example, a link in your root README to a file in `docs/CONTRIBUTING.md` would look like:
 
@@ -96,35 +148,19 @@ Examples of relative links:
 - In a .md file in another repository `/../../../../github/docs/blob/main/assets/images/electrocat.png`
 - In issues, pull requests and comments of another repository `../../../github/docs/blob/main/assets/images/electrocat.png?raw=true`
 
-## Link a Label [^labels]
+---
 
-You can reference labels in markdown using the following syntax:
+### Link a Github Label [^labels]
+
+You can reference Github labels in markdown using the following syntax:
 
 ```markdown
 https://github.com/account/repo/labels/label-name
 ```
 
-## Light/Dark mode images
+---
 
-Swap out images based on theme settings. [^dark_light_markdown]
-
-Add: `#gh-dark-mode-only` or `#gh-light-mode-only` to the end of the image path to specify which theme the image should be displayed in.
-
-```markdown
-![Logo](./dark.png#gh-dark-mode-only)
-![Logo](./light.png#gh-light-mode-only)
-```
-
-You can now specify whether to display images for light or dark themes in Markdown, using the HTML `<picture>` element in combination with the `prefers-color-scheme` media feature. [^dark_light_html]
-
-```markdown
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png">
-  <img alt="Shows an illustrated sun in light color mode and a moon with stars in dark color mode." src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
-</picture>
-```
-
-## Footnotes [^footnotes]
+### Footnotes [^footnotes]
 
 You can add footnotes to your content by using this bracket syntax:
 
@@ -149,162 +185,44 @@ A footnote can also have multiple[^multi_line] lines.
 
 Can also reference to a link. [^link]
 
-## Collapsible Sections
+---
 
-Collapsing large blocks of text can make your markdown much easier to digest
+## 6. Images
 
-```markdown
-<details>
-<summary>To make sure markdown is rendered correctly in the collapsed section...</summary>
+| Style                       | Syntax <kbd>char`\|text`char</kbd>              | Example                                         | Output                                          |
+| --------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Inline Image Link           | <kbd>\!\[`alt-text`](`\|url` "`\|hover`")</kbd> | <pre>\!\[](https://picsum.photos/100/100)</pre> | ![](https://picsum.photos/100/100 "hover info") |
+| Inline Image Link with Ref. | <kbd>\!\[`alt-text`]\[`ref_tag`]</kbd>          | <pre>\!\[]\[100x100]</pre>                      | ![][100x100]                                    |
 
-1.  Put an **empty line** after the `<summary>` block.
-2.  _Insert your markdown syntax_
-3.  Put an **empty line** before the `</details>` tag
+---
 
-</details>
-```
+### Light/Dark mode images
 
-<details>
-<summary>To make sure markdown is rendered correctly in the collapsed section...</summary>
+Swap out images based on theme settings. [^dark_light_markdown]
 
-1.  Put an **empty line** after the `<summary>` block.
-2.  _Insert your markdown syntax_
-3.  Put an **empty line** before the `</details>` tag
-
-</details>
-
-## Badges
+Add: `#gh-dark-mode-only` or `#gh-light-mode-only` to the end of the image path to specify which theme the image should be displayed in.
 
 ```markdown
-[python_badge]: https://img.shields.io/badge/Python-informational?logo=python&style=flat&logoColor=79dafa&labelColor=282a36&color=ff6e96
-[autohotkey_badge]: https://img.shields.io/badge/Auto_Hotkey-informational?logo=autohotkey&style=flat&logoColor=79dafa&labelColor=282a36&color=ff6e96
-[ruby_badge]: https://img.shields.io/badge/Ruby-informational?logo=ruby&style=flat&logoColor=79dafa&labelColor=282a36&color=5e4053
+![Logo](./dark.png#gh-dark-mode-only)
+![Logo](./light.png#gh-light-mode-only)
 ```
 
-![][python_badge] ![][autohotkey_badge] ![][ruby_badge]
-
-## Highlighting diff changes
-
-<pre>```diff<br>def calculator_sum(a, b):<br>-  return a - b<br>+  return a + b<br>```</pre>
-
-```diff
-def calculator_sum(a, b):
--  return a - b
-+  return a + b
-```
-
-## Nice looking file tree [^file_tree]
-
-Using the `graphql` syntax in block quotes will nicely highlight file trees like below:
-
-```graphql
-./root/*
-  ├─ assets/*   # Fonts, icons, images, etc.
-  ├─ code/*     # Where the code lives
-  │  ├─ main.py # The main file
-  │  └─ Other files…
-  └─ utils/*    # Utility functions
-```
-
-## Text box
-
-Add a box with contents to markdown
+You can now specify whether to display images for light or dark themes in Markdown, using the HTML `<picture>` element in combination with the `prefers-color-scheme` media feature. [^dark_light_html]
 
 ```markdown
-<table><td>
-
-This is text in the `box`</td></table>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png">
+  <img alt="Shows an illustrated sun in light color mode and a moon with stars in dark color mode." src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
+</picture>
 ```
 
-<table><td>
+| Light                                                                                                                                                                                                                                                                                                            | Dark                                                                                                                                                                                                                                                                                                            |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <picture> <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png"> <img width="100" src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png"> </picture> | <picture> <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png"> <img width="100" src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png"> </picture> |
 
-This is text in the `box`</td></table>
+---
 
-```markdown
-<table><td align="center" width="1000">
-
-This is text in the centered `box`</td></table>
-```
-
-<table><td align="center" width="1000">
-
-This is text in the centered `box`</td></table>
-
-## Advanced Table Tips [^advanced_tables]
-
-### Creating a Table
-
-Use pipes `|` and hyphens `-` to create tables. Hyphens define headers, and pipes separate columns. Ensure there's a blank line before the table for correct rendering.
-
-```markdown
-| Header 1 | Header 2 |
-| -------- | -------- |
-| Cell A1  | Cell A2  |
-| Cell B1  | Cell B2  |
-```
-
-| Header 1 | Header 2 |
-| -------- | -------- |
-| Cell A1  | Cell A2  |
-| Cell B1  | Cell B2  |
-
-### Formatting Table Content
-
-```markdown
-| Tool   | Purpose                          |
-| ------ | -------------------------------- |
-| `ls`   | Display _directory_ contents     |
-| `grep` | Search for **specific** patterns |
-```
-
-| Tool   | Purpose                          |
-| ------ | -------------------------------- |
-| `ls`   | Display _directory_ contents     |
-| `grep` | Search for **specific** patterns |
-
-### Aligning Text
-
-Align text left, center, or right using colons `:` in the header row.
-
-```markdown
-| Left Align | Center Align | Right Align |
-| :--------- | :----------: | ----------: |
-| Item A     |    Item B    |      Item C |
-| Item D     |    Item E    |      Item F |
-```
-
-| Left Align | Center Align | Right Align |
-| :--------- | :----------: | ----------: |
-| Item A     |    Item B    |      Item C |
-| Item D     |    Item E    |      Item F |
-
-### Images on tables
-
-```markdown
-|                  First Image                   |                  Second Image                   |
-| :--------------------------------------------: | :---------------------------------------------: |
-| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
-```
-
-|                  First Image                   |                  Second Image                   |
-| :--------------------------------------------: | :---------------------------------------------: |
-| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
-
-### Table within a Table [^git_achievements]
-
-```markdown
-|                         Image                          |                                                                                                                                                                                                                    Table Inside Table                                                                                                                                                                                                                     |
-| :----------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| ![Heart On Your Sleeve](https://picsum.photos/150/150) | <table> <thead> <tr> <th>Header</th> <th>Example</th> <th>Example</th> </tr> </thead> <tbody> <tr> <td align="center"><img src="https://picsum.photos/150/150" width="150px"></td> <td><img src="https://picsum.photos/100/150" width="100px" align="center"></td> <td><img src="https://picsum.photos/75/75" width="75px"></td> </tr> <tr> <td align="center">Info</td> <td align="center">(?)</td> <td align="center">Info</td> </tr> </tbody> </table> |
-```
-
-|                         Image                          |                                                                                                                                                                                                                    Table Inside Table                                                                                                                                                                                                                     |
-| :----------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| ![Heart On Your Sleeve](https://picsum.photos/150/150) | <table> <thead> <tr> <th>Header</th> <th>Example</th> <th>Example</th> </tr> </thead> <tbody> <tr> <td align="center"><img src="https://picsum.photos/150/150" width="150px"></td> <td><img src="https://picsum.photos/100/150" width="100px" align="center"></td> <td><img src="https://picsum.photos/75/75" width="75px"></td> </tr> <tr> <td align="center">Info</td> <td align="center">(?)</td> <td align="center">Info</td> </tr> </tbody> </table> |
-
-## Advanced Formatting Tips [^advanced_md]
-
-### `left` alignment
+### `left` alignment [^advanced_md]
 
 <img align="left" width="100" height="100" src="https://picsum.photos/100/100">
 
@@ -404,7 +322,267 @@ We also have a property "vspace", which does what it sounds like, add vertical s
     <img src="https://picsum.photos/500/100" >
 </p>
 
-## Diagrams [^diagrams]
+---
+
+## 7. Tables [^advanced_tables]
+
+| Style | Syntax <kbd>char`\|text`char</kbd>                                                                                              | Example                                                                                                                         | Output                                                                                                                                                                     |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Table | <kbd>\| Header 1 \| Header 2 \|<br>\| -------- \| -------- \|<br>\| Cell A01 \| Cell A02 \|<br>\| Cell B01 \| Cell B02 \|</kbd> | <pre>\| Header 1 \| Header 2 \|<br>\| -------- \| -------- \|<br>\| Cell A01 \| Cell A02 \|<br>\| Cell B01 \| Cell B02 \|</pre> | <table><thead><tr><th>Header 1</th><th>Header 2</th></tr></thead><tbody><tr><td>Cell A1</td><td>Cell A2</td></tr><tr><td>Cell B1</td><td>Cell B2</td></tr></tbody></table> |
+
+### Syntax
+
+Use pipes `|` and hyphens `-` to create tables. Hyphens define headers, and pipes separate columns. Ensure there's a blank line before the table for correct rendering.
+
+```markdown
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell A1  | Cell A2  |
+| Cell B1  | Cell B2  |
+```
+
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell A1  | Cell A2  |
+| Cell B1  | Cell B2  |
+
+### Styling
+
+```markdown
+| Tool   | Purpose                          |
+| ------ | -------------------------------- |
+| `ls`   | Display _directory_ contents     |
+| `grep` | Search for **specific** patterns |
+```
+
+| Tool   | Purpose                          |
+| ------ | -------------------------------- |
+| `ls`   | Display _directory_ contents     |
+| `grep` | Search for **specific** patterns |
+
+### Alignment
+
+Align text left, center, or right using colons `:` in the separator row.
+
+```markdown
+| Left Align | Center Align | Right Align |
+| :--------- | :----------: | ----------: |
+| Item A     |    Item B    |      Item C |
+| Item D     |    Item E    |      Item F |
+```
+
+| Left Align | Center Align | Right Align |
+| :--------- | :----------: | ----------: |
+| Item A     |    Item B    |      Item C |
+| Item D     |    Item E    |      Item F |
+
+### Images
+
+```markdown
+|                  First Image                   |                  Second Image                   |
+| :--------------------------------------------: | :---------------------------------------------: |
+| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
+```
+
+|                  First Image                   |                  Second Image                   |
+| :--------------------------------------------: | :---------------------------------------------: |
+| ![First Image](https://picsum.photos/1260/750) | ![Second Image](https://picsum.photos/1260/750) |
+
+### Table within a Table [^git_achievements]
+
+```markdown
+|                         Image                          |                                                                                                                                                                                                                    Table Inside Table                                                                                                                                                                                                                     |
+| :----------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![Heart On Your Sleeve](https://picsum.photos/150/150) | <table> <thead> <tr> <th>Header</th> <th>Example</th> <th>Example</th> </tr> </thead> <tbody> <tr> <td align="center"><img src="https://picsum.photos/150/150" width="150px"></td> <td><img src="https://picsum.photos/100/150" width="100px" align="center"></td> <td><img src="https://picsum.photos/75/75" width="75px"></td> </tr> <tr> <td align="center">Info</td> <td align="center">(?)</td> <td align="center">Info</td> </tr> </tbody> </table> |
+```
+
+|                         Image                          |                                                                                                                                                                                                                    Table Inside Table                                                                                                                                                                                                                     |
+| :----------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![Heart On Your Sleeve](https://picsum.photos/150/150) | <table> <thead> <tr> <th>Header</th> <th>Example</th> <th>Example</th> </tr> </thead> <tbody> <tr> <td align="center"><img src="https://picsum.photos/150/150" width="150px"></td> <td><img src="https://picsum.photos/100/150" width="100px" align="center"></td> <td><img src="https://picsum.photos/75/75" width="75px"></td> </tr> <tr> <td align="center">Info</td> <td align="center">(?)</td> <td align="center">Info</td> </tr> </tbody> </table> |
+
+---
+
+## 8. Extended Styling
+
+| Style                | Syntax <kbd>char`\|text`char</kbd>                            | Example                                                                        | Output                                            |
+| -------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------- |
+| Emoji[^github_emoji] | <kbd>:`\|emoji`:</kbd>                                        | <pre>`:rocket:`</pre>                                                          | :rocket:                                          |
+| Escaping Characters  | <kbd>\\`\|char`</kbd>                                         | <pre>Not \\\*\\\*bold\\\*\\\*</pre>                                            | Not \*\*bold\*\*                                  |
+| Hidden Comment       | <kbd>\<!--`\|hidden comment`--></kbd>                         | <pre>\<!--This is a hidden comment--></pre>                                    |                                                   |
+| Keyboard Inputs      | <kbd>\<kbd>`\|key`\</kbd></kbd>                               | <pre>Use \<kbd>Ctrl\</kbd> + \<kbd>Z\</kbd> to undo</pre>                      | Use <kbd>Ctrl</kbd> + <kbd>Z</kbd> to undo        |
+| Text Box             | <kbd>\<table><br>\<td\><br>`\|text`<br>\</td\>\</table></kbd> | <pre>\<table><br>\<td\><br>This is text in the `box`<br>\</td\>\</table></pre> | <table><td>This is text in the `box`</td></table> |
+
+### Styling Text
+
+You can use css to style text in markdown using the following syntax, `x` being a tag.:
+
+```markdown
+This has <x style="color:red">red text</x> in it.
+```
+
+This has <x style="color:red">red text</x> in it.
+
+---
+
+### Font Size
+
+You can use HTML's `<font>` tag with the `size="±n"` attribute to make text appear larger.
+
+```markdown
+| Size |            Text             |
+| :--: | :-------------------------: |
+|  -2  | <font size="-2">Text</font> |
+|  -1  | <font size="-1">Text</font> |
+|  1   | <font size="+1">Text</font> |
+|  2   | <font size="+2">Text</font> |
+|  3   | <font size="+3">Text</font> |
+|  4   | <font size="+4">Text</font> |
+```
+
+| Size |            Text             |
+| :--: | :-------------------------: |
+|  -2  | <font size="-2">Text</font> |
+|  -1  | <font size="-1">Text</font> |
+|  1   | <font size="+1">Text</font> |
+|  2   | <font size="+2">Text</font> |
+|  3   | <font size="+3">Text</font> |
+|  4   | <font size="+4">Text</font> |
+
+---
+
+### Text over Text (Ruby Text)
+
+This technique is handy for displaying the phonetic transcription, like IPA, right above the word it describes.
+
+```markdown
+<ruby>markdown<rt>/ˈmɑːrk.daʊn/</rt></ruby>
+```
+
+<font size="+4">
+  <ruby>markdown<rt>/ˈmɑːrk.daʊn/</rt></ruby>
+</font>
+
+---
+
+### Collapsible Sections
+
+Collapsing large blocks of text can make your markdown much easier to digest
+
+```markdown
+<details>
+<summary>To make sure markdown is rendered correctly in the collapsed section...</summary>
+
+1.  Put an **empty line** after the `<summary>` block.
+2.  _Insert your markdown syntax_
+3.  Put an **empty line** before the `</details>` tag
+
+</details>
+```
+
+<details>
+<summary>To make sure markdown is rendered correctly in the collapsed section...</summary>
+
+1.  Put an **empty line** after the `<summary>` block.
+2.  _Insert your markdown syntax_
+3.  Put an **empty line** before the `</details>` tag
+
+</details>
+
+---
+
+### Text Box
+
+Add a box with contents to markdown
+
+```markdown
+<table><td>
+
+This is text in the `box`</td></table>
+```
+
+<table><td>
+
+This is text in the `box`</td></table>
+
+```markdown
+<table><td align="center" width="1000">
+
+This is text in the centered `box`</td></table>
+```
+
+<table><td align="center" width="1000">
+
+This is text in the centered `box`</td></table>
+
+---
+
+### Alerts [^alerts]
+
+```markdown
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+```
+
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+
+### Badges
+
+Using https://shields.io/badges, you can create your own badges, customizing the color, icon, label, and style.
+
+The URL is structured is as follows:
+
+`[badge_name]: https://img.shields.io/badge/[label]-[informational]?logo=[logo]&style=[style]&logoColor=[logoColor]&labelColor=[labelColor]&color=[color]`
+
+```markdown
+[python_badge]: https://img.shields.io/badge/Python-informational?logo=python&style=flat&logoColor=79dafa&labelColor=282a36&color=ff6e96
+[autohotkey_badge]: https://img.shields.io/badge/Auto_Hotkey-informational?logo=autohotkey&style=flat-square&logoColor=79dafa&labelColor=282a36&color=ff6e96
+[ruby_badge]: https://img.shields.io/badge/Ruby-informational?logo=ruby&style=plastic&logoColor=79dafa&labelColor=282a36&color=5e4053
+[markdown_badge]: https://img.shields.io/badge/Markdown-informational?logo=markdown&style=for-the-badge&logoColor=79dafa&labelColor=282a36&color=5e4053
+[vscodium_badge]: https://img.shields.io/badge/VSCodium-informational?logo=vscodium&style=social&logoColor=79dafa&labelColor=282a36&color=5e4053
+```
+
+![][badge_python] ![][badge_autohotkey] ![][badge_ruby] ![][badge_markdown] ![][badge_vscodium]
+
+---
+
+### Color Preview [^git_colors]
+
+Only in issues, pull requests and discussions, you can call out colors within a sentence by using backticks. A supported color model within backticks will display a visualization of the color.
+
+| Color | Syntax     | Example                       | Output                                                                                                                               |
+| ----- | ---------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| HEX   | #RRGGBB    | <pre>#0969DA</pre>            | <img src="https://docs.github.com/assets/cb-1558/mw-1440/images/help/writing/supported-color-models-hex-rendered.webp" height="30">  |
+| RGB   | rgb(R,G,B) | <pre>rgb(9, 105, 218)</pre>   | <img src="https://docs.github.com/assets/cb-1962/mw-1440/images/help/writing/supported-color-models-rgb-rendered.webp"  height="30"> |
+| HSL   | hsl(H,S,L) | <pre>hsl(212, 92%, 45%)</pre> | <img src="https://docs.github.com/assets/cb-2066/mw-1440/images/help/writing/supported-color-models-hsl-rendered.webp"  height="30"> |
+
+---
+
+## 9. Diagrams and Visualization [^diagrams]
 
 GitHub now supports the following diagram types:
 
@@ -415,11 +593,8 @@ GitHub now supports the following diagram types:
 | topoJSON     | `.topojson`, `.json` |
 | STL          | `.stl`               |
 
-<details>
- <summary>Mermaid</summary><br>
-
-<details>
- <summary>Examples</summary>
+<h3><details>
+ <summary>Mermaid Diagrams</summary><br>
 
 ```mermaid
 graph TD;
@@ -432,6 +607,22 @@ graph TD;
 ---
 
 ```mermaid
+flowchart TB
+    c1-->a2
+    subgraph one
+    a1-->a2
+    end
+    subgraph two
+    b1-->b2
+    end
+    subgraph three
+    c1-->c2
+    end
+```
+
+---
+
+```mermaid
 sequenceDiagram
     Alice->>+John: Hello John, how are you?
     Alice->>+John: John, can you hear me?
@@ -439,544 +630,33 @@ sequenceDiagram
     John-->>-Alice: I feel great!
 ```
 
-</details>
-
-<details>
- <summary>Basics</summary>
+---
 
 ```mermaid
-flowchart LR
-    id
+gantt
+  title Project Timeline
+  dateFormat YYYY-MM-DD
+  section Phase 1
+  Task A :a1, 2023-01-01, 30d
+  Task B :after a1, 20d
 ```
 
 ---
 
 ```mermaid
-flowchart LR
-    id1[This is the text in the box]
-```
-
----
-
-```mermaid
-flowchart LR
-    id["This ❤ Unicode"]
-```
-
----
-
-```mermaid
-%%{init: {"flowchart": {"htmlLabels": false}} }%%
-flowchart LR
-    markdown["`This **is** _Markdown_`"]
-    newLines["`Line 1
-               Line 2
-               Line 3`"]
-    markdown --> newLines
-
-```
-
----
-
-```mermaid
-flowchart LR
-    id1[This is the text in the box]
+pie
+  title Pie Chart
+  "Slice 1": 30
+  "Slice 2": 70
 ```
 
 </details>
-
-<details>
- <summary>Direction</summary>
-
-Possible FlowChart orientations are:
-
-TB - Top to bottom<br>
-TD - Top-down/ same as top to bottom<br>
-BT - Bottom to top<br>
-RL - Right to left<br>
-LR - Left to right
-
-```mermaid
-flowchart TB
-    Start --> Stop
-```
+</h3>
 
 ---
 
-```mermaid
-flowchart TD
-    Start --> Stop
-```
-
----
-
-```mermaid
-flowchart BT
-    Start --> Stop
-```
-
----
-
-```mermaid
-flowchart RL
-    Start --> Stop
-```
-
----
-
-```mermaid
-flowchart LR
-    Start --> Stop
-```
-
-</details>
-
-<details>
- <summary>Node shapes</summary>
-
-A node with round edges
-
-```mermaid
-flowchart LR
-    id1(This is the text in the box)
-```
-
----
-
-A stadium-shaped node
-
-```mermaid
-flowchart LR
-    id1([This is the text in the box])
-```
-
----
-
-A node in a subroutine shape
-
-```mermaid
-flowchart LR
-id1[[This is the text in the box]]
-```
-
----
-
-A node in a cylindrical shape
-
-```mermaid
-flowchart LR
-id1[(Database)]
-```
-
----
-
-A node in the form of a circle
-
-```mermaid
-flowchart LR
-id1((This is the text in the circle))
-```
-
----
-
-A node in an asymmetric shape
-
-```mermaid
-flowchart LR
-id1>This is the text in the box]
-```
-
----
-
-A node (rhombus)
-
-```mermaid
-flowchart LR
-id1{This is the text in the box}
-```
-
----
-
-A hexagon node
-
-```mermaid
-flowchart LR
-id1{{This is the text in the box}}
-```
-
----
-
-Parallelogram
-
-```mermaid
-flowchart TD
-id1[/This is the text in the box/]
-```
-
----
-
-Parallelogram alt
-
-```mermaid
-flowchart TD
-id1[\This is the text in the box\]
-```
-
----
-
-Trapezoid
-
-```mermaid
-flowchart TD
-A[/Christmas\]
-```
-
----
-
-Trapezoid alt
-
-```mermaid
-flowchart TD
-B[\Go shopping/]
-```
-
----
-
-Double circle
-
-```mermaid
-flowchart TD
-id1(((This is the text in the circle)))
-```
-
-</details>
-
-<details>
- <summary>Links between nodes</summary>
-
-A link with arrow head
-
-```mermaid
-flowchart LR
-    A-->B
-```
-
----
-
-An open link
-
-```mermaid
-flowchart LR
-    A --- B
-```
-
----
-
-Text on links
-
-```mermaid
-flowchart LR
-    A-- This is the text! ---B
-```
-
-or
-
-```mermaid
-flowchart LR
-    A---|This is the text|B
-```
-
----
-
-A link with arrow head and text
-
-```mermaid
-flowchart LR
-    A-->|text|B
-```
-
-or
-
-```mermaid
-flowchart LR
-    A-- text -->B
-```
-
----
-
-Dotted link
-
-```mermaid
-flowchart LR
-   A-.->B;
-```
-
----
-
-Dotted link with text
-
-```mermaid
-flowchart LR
-   A-. text .-> B
-```
-
----
-
-Thick link
-
-```mermaid
-flowchart LR
-   A ==> B
-```
-
----
-
-Thick link with text
-
-```mermaid
-flowchart LR
-   A == text ==> B
-```
-
----
-
-An invisible link
-This can be a useful tool in some instances where you want to alter the default positioning of a node.
-
-```mermaid
-flowchart LR
-    A ~~~ B
-```
-
----
-
-Chaining of links
-
-```mermaid
-flowchart LR
-   A -- text --> B -- text2 --> C
-```
-
-It is also possible to declare multiple nodes links in the same line as per below:
-
-```mermaid
-flowchart LR
-   a --> b & c--> d
-```
-
-You can then describe dependencies in a very expressive way. Like the one-liner below:
-
-```mermaid
-flowchart TB
-    A & B--> C & D
-```
-
-If you describe the same diagram using the basic syntax, it will take four lines. A word of warning, one could go overboard with this making the flowchart harder to read in markdown form. The Swedish word lagom comes to mind. It means, not too much and not too little. This goes for expressive syntaxes as well.
-
-```mermaid
-flowchart TB
-    A --> C
-    A --> D
-    B --> C
-    B --> D
-```
-
-</details>
-
-<details>
- <summary>Arrow Types</summary>
-
-Triangle edge
-
-```mermaid
-flowchart LR
-   A --> B
-```
-
----
-
-Circle edge
-
-```mermaid
-flowchart LR
-    A --o B
-```
-
----
-
-Cross edge
-
-```mermaid
-flowchart LR
-    A --x B
-```
-
----
-
-Multi Directional edges
-
-```mermaid
-flowchart LR
-    A o--o B
-    B <--> C
-    C x--x D
-
-```
-
-</details>
-
-<details>
- <summary>Link Lenght</summary>
-
-Add more dashes to increase the length of the link
-
-```mermaid
-flowchart TD
-    A[Start] --> B{Is it?}
-    B -->|Yes| C[OK]
-    C --> D[Rethink]
-    D --> B
-    B ---->|No| E[End]
-```
-
-Here are how you should add dashes to increase the length of the link:
-
-| Length            | 1    | 2     | 3      |
-| ----------------- | ---- | ----- | ------ |
-| Normal            | ---  | ----  | -----  |
-| Normal with arrow | -->  | --->  | ---->  |
-| Thick             | ===  | ====  | =====  |
-| Thick with arrow  | ==>  | ===>  | ====>  |
-| Dotted            | -.-  | -..-  | -...-  |
-| Dotted with arrow | -.-> | -..-> | -...-> |
-
-</details>
-
-<details>
- <summary>Subgraphs</summary>
-
-```
-subgraph title
-graph definition
-end
-```
-
-An example below:
-
-```mermaid
-flowchart TB
-    c1-->a2
-    subgraph one
-    a1-->a2
-    end
-    subgraph two
-    b1-->b2
-    end
-    subgraph three
-    c1-->c2
-    end
-```
-
-You can also set an explicit id for the subgraph.
-
-```mermaid
-flowchart TB
-    c1-->a2
-    subgraph ide1 [one]
-    a1-->a2
-    end
-```
-
-With the graphtype flowchart it is also possible to set edges to and from subgraphs as in the flowchart below.
-
-```mermaid
-flowchart TB
-    c1-->a2
-    subgraph one
-    a1-->a2
-    end
-    subgraph two
-    b1-->b2
-    end
-    subgraph three
-    c1-->c2
-    end
-    one --> two
-    three --> two
-    two --> c2
-```
-
-With the graphtype flowcharts you can use the direction statement to set the direction which the subgraph will render like in this example.
-
-- If any of a subgraph's nodes are linked to the outside, subgraph direction will be ignored. Instead the subgraph will inherit the direction of the parent graph
-
-```mermaid
-flowchart LR
-  subgraph TOP
-    direction TB
-    subgraph B1
-        direction RL
-        i1 -->f1
-    end
-    subgraph B2
-        direction BT
-        i2 -->f2
-    end
-  end
-  A --> TOP --> B
-  B1 --> B2
-```
-
-</details>
-
-<details>
- <summary>Formatting</summary>
-
-Markdown Strings
-
-The "Markdown Strings" feature enhances flowcharts and mind maps by offering a more versatile string type, which supports text formatting options such as bold and italics, and automatically wraps text within labels.
-
-Formatting:
-
-For bold text, use double asterisks (\*_) before and after the text.<br>
-For italics, use single asterisks (_) before and after the text.<br>
-With traditional strings, you needed to add <br> tags for text to wrap in nodes. However, markdown strings automatically wrap text when it becomes too long and allows you to start a new line by simply using a newline character instead of a <br> tag.<br>
-This feature is applicable to node labels, edge labels, and subgraph labels.
-
-```mermaid
-%%{init: {"flowchart": {"htmlLabels": false}} }%%
-flowchart LR
-subgraph "One"
-  a("`The **cat**
-  in the hat`") -- "edge label" --> b{{"`The **dog** in the hog`"}}
-end
-subgraph "`**Two**`"
-  c("`The **cat**
-  in the hat`") -- "`Bold **edge label**`" --> d("The dog in the hog")
-end
-```
-
----
-
-Interaction
-
-It is possible to bind a click event to a node, the click can lead to either a javascript callback or to a link which will be opened in a new browser tab.
-
-```mermaid
-flowchart LR
-    A-->B
-    B-->C
-    C-->D
-    click A callback "Tooltip for a callback"
-    click B "https://www.github.com" "This is a tooltip for a link"
-    click D href "https://www.github.com" "This is a tooltip for a link"
-```
-
-</details>
-</details>
-
-<details>
- <summary>GeoJSON</summary>
+<h3><details>
+ <summary>GeoJSON</summary><br>
 
 ```geojson
 {
@@ -1021,9 +701,12 @@ flowchart LR
 ```
 
 </details>
+</h3>
 
-<details>
- <summary>TopoJSON</summary>
+---
+
+<h3><details>
+ <summary>TopoJSON</summary><br>
 
 ```topojson
 {
@@ -1125,9 +808,12 @@ flowchart LR
 ```
 
 </details>
+</h3>
 
-<details>
- <summary>STL</summary>
+---
+
+<h3><details>
+ <summary>STL</summary><br>
 
 ```stl
 solid cube_corner
@@ -1163,31 +849,37 @@ endsolid
 ```
 
 </details>
+</h3>
 
-<!-- URLS -->
+<!-- Footnotes -->
 
-[^formatting_github]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/
-[^footnote]: This is a footnote
+[^advanced_md]: https://github.com/DavidWells/advanced-markdown
+[^advanced_tables]: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables
 [^alerts]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alertsbasic-writing-and-formatting-syntax
-[^git_colors]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#supported-color-models
-[^labels]: https://github.blog/changelog/2022-02-03-reference-labels-in-markdown/
-[^dark_light_markdown]: https://github.blog/changelog/2021-11-24-specify-theme-context-for-images-in-markdown/
 [^dark_light_html]: https://github.blog/changelog/2022-05-19-specify-theme-context-for-images-in-markdown-beta/
+[^dark_light_markdown]: https://github.blog/changelog/2021-11-24-specify-theme-context-for-images-in-markdown/
+[^diagrams]: https://github.blog/changelog/2022-03-17-mermaid-topojson-geojson-and-ascii-stl-diagrams-are-now-supported-in-markdown-and-as-files/
+[^file_tree]: https://twitter.com/alexdotjs/status/1421015442286596100
 [^footnotes]: https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/
+[^formatting_github]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/
+[^git_achievements]: https://github.com/drknzz/GitHub-Achievements
+[^git_colors]: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#supported-color-models
+[^github_emoji]: https://github.com/ikatyang/emoji-cheat-sheet
+[^labels]: https://github.blog/changelog/2022-02-03-reference-labels-in-markdown/
+[^relative_links]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes#relative-links-and-image-paths-in-readme-files
+[^footnote]: This is a footnote
+[^link]: Example with URL: https://github.com
 [^one_line]: My reference.
 [^multi_line]:
     To add line breaks within a footnote, prefix new lines with 2 spaces.<br>
     This is a second line.
 
-[^link]: Example with URL: https://github.com
-[^file_tree]: https://twitter.com/alexdotjs/status/1421015442286596100
-[^advanced_tables]: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables
-[^git_achievements]: https://github.com/drknzz/GitHub-Achievements
-[^advanced_md]: https://github.com/DavidWells/advanced-markdown
-[^diagrams]: https://github.blog/changelog/2022-03-17-mermaid-topojson-geojson-and-ascii-stl-diagrams-are-now-supported-in-markdown-and-as-files/
+<!-- URLS -->
 
-[git_page]: https://pages.github.com/ "hover info"
 [100x100]: https://picsum.photos/100/100 "hover info"
-[python_badge]: https://img.shields.io/badge/Python-informational?logo=python&style=flat&logoColor=79dafa&labelColor=282a36&color=ff6e96
-[autohotkey_badge]: https://img.shields.io/badge/Auto_Hotkey-informational?logo=autohotkey&style=flat&logoColor=79dafa&labelColor=282a36&color=ff6e96
-[ruby_badge]: https://img.shields.io/badge/Ruby-informational?logo=ruby&style=flat&logoColor=79dafa&labelColor=282a36&color=5e4053
+[badge_autohotkey]: https://img.shields.io/badge/Auto_Hotkey-informational?logo=autohotkey&style=flat-square&logoColor=79dafa&labelColor=282a36&color=ff6e96
+[badge_markdown]: https://img.shields.io/badge/Markdown-informational?logo=markdown&style=for-the-badge&logoColor=79dafa&labelColor=282a36&color=5e4053
+[badge_python]: https://img.shields.io/badge/Python-informational?logo=python&style=flat&logoColor=79dafa&labelColor=282a36&color=ff6e96
+[badge_ruby]: https://img.shields.io/badge/Ruby-informational?logo=ruby&style=plastic&logoColor=79dafa&labelColor=282a36&color=5e4053
+[badge_vscodium]: https://img.shields.io/badge/VSCodium-informational?logo=vscodium&style=social&logoColor=79dafa&labelColor=282a36&color=5e4053
+[git_page]: https://pages.github.com/ "hover info"

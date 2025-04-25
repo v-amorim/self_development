@@ -145,6 +145,28 @@ echo 'source ~/.local/share/blesh/ble.sh' >> ~/.bashrc
 
 The last line is optional if you use the `.bashrc` file provided in this repository.
 
+### History deduplicator
+
+1. Copy the contents of the `.cleanup_bash_history.sh` file to your `code ~/.cleanup_bash_history.sh` file.
+2. Make it executable with `chmod +x ~/.cleanup_bash_history.sh`
+3. Configure the crontab to run the script every hour.
+
+```bash
+crontab -e
+```
+
+Paste the following line in the editor:
+
+```bash
+0 * * * * ~/.cleanup_bash_history.sh
+```
+
+Or add to .bash_logout
+
+```bash
+[ -f ~/.cleanup_bash_history.sh ] && ~/.cleanup_bash_history.sh
+```
+
 ## Files
 
 ### [.bash_aliases][bash_aliases]

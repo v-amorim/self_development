@@ -17,11 +17,9 @@ bind 'set show-all-if-ambiguous on'         # Shows all possible completions if 
 
 
 #--- Bash History config, credits to: https://unix.stackexchange.com/a/419779
-shopt -s histappend                         # append to the history file, don't overwrite it
-export HISTCONTROL=ignoreboth:erasedups     # do not store duplicates in history
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r"              # reload and cleanup history after each command
-tac "$HISTFILE" | awk '!x[$0]++' > /tmp/tmpfile && tac /tmp/tmpfile > "$HISTFILE"   # remove duplicates from history
-rm /tmp/tmpfile
+shopt -s histappend
+export HISTCONTROL=ignoreboth:erasedups  # Basic deduplication
+export PROMPT_COMMAND="history -a; history -n"  # Append new commands & reload
 
 
 #--- General aliases
@@ -85,6 +83,8 @@ alias pci='pre-commit install'              ; alias h_pci='echo "Install pre-com
 alias ptc='python -m piptools compile'      ; alias h_ptc='echo "Run pip-compile on requirements.in [python -m piptools compile]"'
 alias pts='python -m piptools sync'         ; alias h_pts='echo "Run pip-sync on requirements.txt [python -m piptools sync]"'
 
+#--- History aliases
+alias clear_hist='~/.cleanup_bash_history.sh'   ; alias h_clear_hist='echo "Clear the Bash history [~/.cleanup_bash_history.sh]"'
 
 #--- Multi-line Functions
 function fwhich() {

@@ -37,7 +37,8 @@ function Validate-Url {
     try {
         $response = Invoke-WebRequest -Uri $url -Method Head -ErrorAction Stop
         return $response.StatusCode -eq 200
-    } catch {
+    }
+    catch {
         return $false
     }
 }
@@ -90,7 +91,8 @@ function Update-OhMyPoshTheme {
     if ($isThemeUpdateNeeded) {
         try {
             Invoke-WebRequest -Uri $ohMyPoshGitPath -OutFile $tempDownloadPath -ErrorAction Stop
-        } catch {
+        }
+        catch {
             $ohMyPoshGitPath = Load-UrlFromFile -filePath $poshPreviousThemeUrlFilePath
             if ($ohMyPoshGitPath) {
                 Invoke-WebRequest -Uri $ohMyPoshGitPath -OutFile $tempDownloadPath -ErrorAction Stop
@@ -106,7 +108,8 @@ function Update-OhMyPoshTheme {
                 Rename-Item -Path $currentPoshThemePath -NewName $backupPath
                 Copy-Item -Path $tempDownloadPath -Destination $currentPoshThemePath -Force
             }
-        } else {
+        }
+        else {
             Copy-Item -Path $tempDownloadPath -Destination $currentPoshThemePath -Force
         }
 
@@ -151,10 +154,12 @@ function Remove-DuplicateHistory {
 
                 New-Item -Path $markerFilePath -ItemType File -Force | Out-Null
                 (Get-Item $markerFilePath).LastWriteTime = Get-Date
-            } catch {
+            }
+            catch {
                 Write-Error "Failed to process the history file. Error details: $_"
             }
-        } else {
+        }
+        else {
             Write-Error "History file does not exist at path: $historyFilePath"
         }
     }
@@ -162,29 +167,31 @@ function Remove-DuplicateHistory {
 
 
 function Handle-CtrlRightArrow {
-    $hasPrediction = [Microsoft.PowerShell.PSConsoleReadLine]::GetPrediction -ne $null
+    $hasPrediction = $null -ne [Microsoft.PowerShell.PSConsoleReadLine]::GetPrediction
 
     if ($hasPrediction) {
         [Microsoft.PowerShell.PSConsoleReadLine]::AcceptNextSuggestionWord()
-    } else {
+    }
+    else {
         [Microsoft.PowerShell.PSConsoleReadLine]::ForwardWord()
     }
 }
 
-function Format-Hyperlink { # Credits: https://stackoverflow.com/a/78366066/7977183
+function Format-Hyperlink {
+    # Credits: https://stackoverflow.com/a/78366066/7977183
     param(
         [Parameter(ValueFromPipeline = $true, Position = 0)]
         [ValidateNotNullOrEmpty()]
         [Uri] $Uri,
 
-        [Parameter(Mandatory=$false, Position = 1)]
+        [Parameter(Mandatory = $false, Position = 1)]
         [string] $Label
     )
 
     if (-not $latestPowershell -and -not ($IsWindows -and $Env:WT_SESSION)) {
         # Fallback for Windows users not inside Windows Terminal
         if ($Label) {
-        return "$Label ($Uri)"
+            return "$Label ($Uri)"
         }
         return "$Uri"
     }
@@ -227,13 +234,13 @@ function Convert-HexToAnsiColor {
 
     # Modifier codes
     $modifierMapping = @{
-        "bold"         = 1
-        "dim"          = 2
-        "italic"       = 3
-        "underline"    = 4
-        "blinking"     = 5
-        "inverse"      = 7
-        "invisible"    = 8
+        "bold"          = 1
+        "dim"           = 2
+        "italic"        = 3
+        "underline"     = 4
+        "blinking"      = 5
+        "inverse"       = 7
+        "invisible"     = 8
         "strikethrough" = 9
     }
 
@@ -270,7 +277,8 @@ function Convert-HexToAnsiColor {
         Print "Modifiers : ${Modifiers}"
         Print "Ansi Code : ${RawCombinedCode}"
         Print "Combined  : ${CombinedCode}Sample Text with effects${resetStyle}"
-    } elseif ($DisplayText){
+    }
+    elseif ($DisplayText) {
         Return "${CombinedCode}${DisplayText}${resetStyle}"
     }
     else {
@@ -279,45 +287,45 @@ function Convert-HexToAnsiColor {
 } Set-Alias -Name HexToAnsi -Value Convert-HexToAnsiColor
 
 ##--- Color Palette
-function CCommand                { HexToAnsi "#FFAFAF" "" ("") $args }
-function CComment                { HexToAnsi "#AEA4BF" "" ("") $args }
-function CContinuationPrompt     { HexToAnsi "#4C4C4C" "" ("") $args }
-function CDefault                { HexToAnsi "#F8EAF8" "" ("") $args }
-function CEmphasis               { HexToAnsi "#89DDFF" "" ("") $args }
-function CError                  { HexToAnsi "#E83974" "" ("") $args }
-function CInLinePrediction       { HexToAnsi "#4C4C4C" "" ("") $args }
-function CKeyword                { HexToAnsi "#CA5F71" "" ("bold") $args }
-function CListPrediction         { HexToAnsi "#FFCB6B" "" ("") $args }
+function CCommand { HexToAnsi "#FFAFAF" "" ("") $args }
+function CComment { HexToAnsi "#AEA4BF" "" ("") $args }
+function CContinuationPrompt { HexToAnsi "#4C4C4C" "" ("") $args }
+function CDefault { HexToAnsi "#F8EAF8" "" ("") $args }
+function CEmphasis { HexToAnsi "#89DDFF" "" ("") $args }
+function CError { HexToAnsi "#E83974" "" ("") $args }
+function CInLinePrediction { HexToAnsi "#4C4C4C" "" ("") $args }
+function CKeyword { HexToAnsi "#CA5F71" "" ("bold") $args }
+function CListPrediction { HexToAnsi "#FFCB6B" "" ("") $args }
 function CListPredictionSelected { HexToAnsi "#B58EE8" "#4C4C4C" $args }
-function CListPredictionTooltip  { HexToAnsi "#7F7F7F" "" ("") $args }
-function CMember                 { HexToAnsi "#ACB9E6" "" ("") $args }
-function CNumber                 { HexToAnsi "#79B8FF" "" ("") $args }
-function COperator               { HexToAnsi "#CA5F71" "" ("bold") $args }
-function CParameter              { HexToAnsi "#B58EE8" "" ("") $args }
-function CSelection              { HexToAnsi "#B58EE8" "#4C4C4C" ("") $args }
-function CString                 { HexToAnsi "#A5CFFF" "" ("") $args }
-function CType                   { HexToAnsi "#79C0FF" "" ("") $args }
-function CVariable               { HexToAnsi "#7386D0" "" ("") $args }
+function CListPredictionTooltip { HexToAnsi "#7F7F7F" "" ("") $args }
+function CMember { HexToAnsi "#ACB9E6" "" ("") $args }
+function CNumber { HexToAnsi "#79B8FF" "" ("") $args }
+function COperator { HexToAnsi "#CA5F71" "" ("bold") $args }
+function CParameter { HexToAnsi "#B58EE8" "" ("") $args }
+function CSelection { HexToAnsi "#B58EE8" "#4C4C4C" ("") $args }
+function CString { HexToAnsi "#A5CFFF" "" ("") $args }
+function CType { HexToAnsi "#79C0FF" "" ("") $args }
+function CVariable { HexToAnsi "#7386D0" "" ("") $args }
 
-function CCredits                { HexToAnsi "#FF72B0" "" ("bold", "blinking") $args }
+function CCredits { HexToAnsi "#FF72B0" "" ("bold", "blinking") $args }
 $Credits = CCredits $(Format-Hyperlink -Uri "https://github.com/v-amorim" -Label ([char]0xf09b)) # \uf09b is the GitHub icon
 
 
 #--- Example Functions
 function HexToAnsiExample {
-    function ExampleFg   { HexToAnsi $ExampleFgHex "" ("") $args }
-    function ExampleBg   { HexToAnsi "" $ExampleBgHex $args }
-    $ExampleModifiers       = @("italic", "blinking")
-    $ExampleCombinedCode    = HexToAnsi $ExampleFgHex $ExampleBgHex $ExampleModifiers
+    function ExampleFg { HexToAnsi $ExampleFgHex "" ("") $args }
+    function ExampleBg { HexToAnsi "" $ExampleBgHex $args }
+    $ExampleModifiers = @("italic", "blinking")
+    $ExampleCombinedCode = HexToAnsi $ExampleFgHex $ExampleBgHex $ExampleModifiers
     $ExampleRawCombinedCode = "``e[38;2;181;142;232;3;5m``e[48;2;76;76;76m"
 
-    function CBold          { HexToAnsi $ExampleFgHex "" ("bold") $args }
-    function CDim           { HexToAnsi $ExampleFgHex "" ("dim") $args }
-    function CItalic        { HexToAnsi $ExampleFgHex "" ("italic") $args }
-    function CUnderline     { HexToAnsi $ExampleFgHex "" ("underline") $args }
-    function CBlinking      { HexToAnsi $ExampleFgHex "" ("blinking") $args }
-    function CInverse       { HexToAnsi $ExampleFgHex "" ("inverse") $args }
-    function CInvisible     { HexToAnsi $ExampleFgHex "" ("invisible") $args }
+    function CBold { HexToAnsi $ExampleFgHex "" ("bold") $args }
+    function CDim { HexToAnsi $ExampleFgHex "" ("dim") $args }
+    function CItalic { HexToAnsi $ExampleFgHex "" ("italic") $args }
+    function CUnderline { HexToAnsi $ExampleFgHex "" ("underline") $args }
+    function CBlinking { HexToAnsi $ExampleFgHex "" ("blinking") $args }
+    function CInverse { HexToAnsi $ExampleFgHex "" ("inverse") $args }
+    function CInvisible { HexToAnsi $ExampleFgHex "" ("invisible") $args }
     function CStrikethrough { HexToAnsi $ExampleFgHex "" ("strikethrough") $args }
 
     @"
@@ -415,7 +423,8 @@ ${Credits} PowerShell Profile - Help [List]
 
 "@
         Get-FunctionsList
-    } elseif ($args -eq "-detail") {
+    }
+    elseif ($args -eq "-detail") {
         @"
 ======================================
 ${Credits} PowerShell Profile - Help [Detail]
@@ -423,7 +432,8 @@ ${Credits} PowerShell Profile - Help [Detail]
 
 "@
         Get-FunctionsDetails
-    } else {
+    }
+    else {
         @"
 ======================================
 ${Credits} PowerShell Profile - Help
@@ -439,9 +449,9 @@ $(CCommand "alias_help") $(CParameter '-detail'): to get the detailed help for a
 
 
 #--- General Functions
-function alias_edit   { code $PROFILE }
+function alias_edit { code $PROFILE }
 function alias_update { . $PROFILE }
-function alias_save   {
+function alias_save {
     param (
         [string]$SourcePath = "$env:USERPROFILE\Documents\GitHub\self_development\config\powershell\Profile.ps1",
         [string[]]$DestinationPaths = @(
@@ -454,27 +464,27 @@ function alias_save   {
         Copy-Item -Path $SourcePath -Destination $destination -Force
     }
 }
-function cls          { Clear-Host }
-function credits      { Write-Host "Link to my GitHub: ${Credits}" }
-function hist         { code $historyPath }
-function ls           { Get-ChildItem $args }
-function mkdir        { New-Item -ItemType Directory $args[0] | Set-Location }
-function s            { Invoke-Item . }
-function uomp         { oh-my-posh upgrade }
-function update       { winget upgrade }
-function winutil      { iwr -useb https://christitus.com/win | iex }
-function wsls         { wsl --shutdown }
-function y            { yt-dlp $args }
-function ys           { yt-dlp --sponsorblock-mark all,-filler $args }
+function cls { Clear-Host }
+function credits { Write-Host "Link to my GitHub: ${Credits}" }
+function hist { code $historyPath }
+function ls { Get-ChildItem $args }
+function mkdir { New-Item -ItemType Directory $args[0] | Set-Location }
+function s { Invoke-Item . }
+function uomp { oh-my-posh upgrade }
+function update { winget upgrade }
+function winutil { Invoke-WebRequest -useb https://christitus.com/win | Invoke-Expression }
+function wsls { wsl --shutdown }
+function y { yt-dlp $args }
+function ys { yt-dlp --sponsorblock-mark all, -filler $args }
 
 
 #--- Directory Navigation Functions
-function ..           { Set-Location .. }
-function ...          { Set-Location ..\.. }
-function ....         { Set-Location ..\..\.. }
-function .....        { Set-Location ..\..\..\.. }
-function home         { Set-Location $userPath }
-function github       { Set-Location "$userPath\Documents\GitHub" }
+function .. { Set-Location .. }
+function ... { Set-Location ..\.. }
+function .... { Set-Location ..\..\.. }
+function ..... { Set-Location ..\..\..\.. }
+function home { Set-Location $userPath }
+function github { Set-Location "$userPath\Documents\GitHub" }
 function dir {
     $TerminalIconsUnloaded = -not (Get-Module -Name Terminal-Icons)
     if ($TerminalIconsUnloaded) {
@@ -486,38 +496,39 @@ function dir {
 }
 
 #--- Python Functions
-function p            { python $args }
-function pf           { python -m pip freeze }
-function pm           { python -m $args }
-function pp           { python -m pip install $args }
-function ppu          { python -m pip install -U $args }
-function pv           { python -V }
+function p { python $args }
+function pf { python -m pip freeze }
+function pm { python -m $args }
+function pp { python -m pip install $args }
+function ppu { python -m pip install -U $args }
+function pv { python -V }
 
 #--- Pyenv Functions
-function pe           { pyenv $args }
-function pev          { pyenv versions }
-function pes          { pyenv shell $args }
-function peu          { pyenv update }
+function pe { pyenv $args }
+function pev { pyenv versions }
+function pes { pyenv shell $args }
+function peu { pyenv update }
 
 ##--- Poetry Functions
-function poi          { poetry install }
-function por          { poetry run $args }
-function pos          { poetry shell }
+function poi { poetry install }
+function por { poetry run $args }
+function pos { poetry shell }
 
 ##--- Pre-commit Functions
-function pc           { pre-commit $* }
-function pcall        { pre-commit run --all-files }
-function pci          { pre-commit install }
+function pc { pre-commit $* }
+function pcall { pre-commit run --all-files }
+function pci { pre-commit install }
 
 ##--- Pip-tools Functions
-function ptc          { python -m piptools compile }
-function pts          { python -m piptools sync }
+function ptc { python -m piptools compile }
+function pts { python -m piptools sync }
 
 ##--- Virtual Environment Functions
 function a {
     try {
         & .venv\Scripts\activate.ps1
-    } catch {
+    }
+    catch {
         Write-Error "Failed to activate the virtual environment. Ensure the path is correct, contains a virtual env.`nError details: $_"
     }
 }
@@ -525,7 +536,8 @@ function a {
 function d {
     try {
         deactivate
-    } catch {
+    }
+    catch {
         Write-Error "Failed to deactivate the virtual environment. Ensure that there is an active virtual environment."
     }
 }
@@ -543,7 +555,8 @@ function add_to_path {
         $newPath = "$currentPath;$directory"
         [System.Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
         Write-Host "Added $directory to PATH."
-    } else {
+    }
+    else {
         Write-Host "$directory is already in PATH."
     }
 }
@@ -557,18 +570,19 @@ Function sudo {
 
     if ($isAdmin) {
         & $shell -NoExit -ExecutionPolicy Bypass -Command "$command"
-    } else {
+    }
+    else {
         Start-Process wt.exe -ArgumentList "new-tab $shell -NoExit -ExecutionPolicy Bypass -Command $command" -Verb RunAs
     }
 }
 
 
 ##--- Functions adapted/retrieved from: https://github.com/ChrisTitusTech/powershell-profile
-function getip    { (Invoke-WebRequest http://ifconfig.me/ip).Content }
-function sysinfo  { Get-ComputerInfo }
+function getip { (Invoke-WebRequest http://ifconfig.me/ip).Content }
+function sysinfo { Get-ComputerInfo }
 function flushdns {
-	Clear-DnsClientCache
-	Write-Host "DNS has been flushed"
+    Clear-DnsClientCache
+    Write-Host "DNS has been flushed"
 }
 
 function which($name) {
@@ -578,8 +592,9 @@ function which($name) {
 function uptime {
     if ($latestPowershell) {
         net statistics workstation | Select-String "since" | ForEach-Object { $_.ToString().Replace('Statistics since ', '') }
-    } else {
-        Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
+    }
+    else {
+        Get-WmiObject win32_operatingsystem | Select-Object @{Name = 'LastBootUpTime'; Expression = { $_.ConverttoDateTime($_.lastbootuptime) } } | Format-Table -HideTableHeaders
     }
 }
 
@@ -621,10 +636,10 @@ function rpw {
 
 #--- Credits to: https://github.com/gangstanthony/PowerShell/blob/master/Fix-Spaces.ps1
 # EXAMPLE:
-$a = @(
-'System File Checker Utility (Scan On Every Boot) = sfc /scanboot'
-'System File Checker Utility (Return Scan Setting To Default) = sfc /revert'
-)
+# $a = @(
+# 'System File Checker Utility (Scan On Every Boot) = sfc /scanboot'
+# 'System File Checker Utility (Return Scan Setting To Default) = sfc /revert'
+# )
 #
 # PS C:\> Fix-Spaces '=' $a
 # System File Checker Utility (Scan On Every Boot)             = sfc /scanboot
@@ -637,24 +652,107 @@ function Fix-Spaces {
     )
 
     $len = 0
-    $array | % {
+    $array | ForEach-Object {
         if ($_.contains($delim) -and $_.indexof($delim) -gt $len) {
             $len = $_.indexof($delim)
         }
     }
 
-    $array | % {
+    $array | ForEach-Object {
         if ($_.Contains($delim)) {
             $front = $_.substring(0, $_.indexof($delim))
-            $back  = $_.substring($_.indexof($delim) + $delim.Length)
+            $back = $_.substring($_.indexof($delim) + $delim.Length)
             if ($front.length -lt $len) {
                 $spaces = $len - $front.Length - 1
-                0..$spaces | % {$front += ' '}
+                0..$spaces | ForEach-Object { $front += ' ' }
             }
             $front + $delim + $back
-        } else {
+        }
+        else {
             $_
         }
+    }
+}
+
+#--- Credits to: https://gist.github.com/pishangujeniya/0474e7aaaeec9c005171440df53a6226
+function Get-LogonEvents {
+    param (
+        [Parameter(Mandatory = $false)]
+        [string]$StartDate = (Get-Date).AddDays(-1).ToString("dd-MM-yy"),
+
+        [Parameter(Mandatory = $false)]
+        [string]$EndDate = (Get-Date).ToString("dd-MM-yy")
+    )
+
+    # Convert string dates to DateTime objects
+    try {
+        $parsedStartDate = [datetime]::ParseExact($StartDate, "dd-MM-yy", $null)
+        $parsedEndDate = [datetime]::ParseExact($EndDate, "dd-MM-yy", $null).AddDays(1) # Include full end date
+    }
+    catch {
+        Write-Error "Invalid date format. Please use DD-MM-YY format (e.g., '15-06-23')"
+        return
+    }
+
+    # Calculate the time difference
+    $timeDifference = $parsedEndDate - $parsedStartDate
+    $isMoreThanTwoDays = $timeDifference.TotalDays -gt 2
+
+    # Get security events between the specified dates
+    $logonEvents = Get-EventLog -LogName Security -After $parsedStartDate -Before $parsedEndDate |
+    Where-Object { $_.EventID -eq 4624 -and ($_.ReplacementStrings[8] -eq 2 -or $_.ReplacementStrings[8] -eq 10) }
+
+    # Hash table to group events by time
+    $groupedEvents = @{}
+
+    foreach ($event in $logonEvents) {
+        $timeKey = $event.TimeGenerated.ToString("yyyyMMddHHmmss")
+        $logonType = $event.ReplacementStrings[8]
+
+        # Initialize group if it doesn't exist
+        if (-not $groupedEvents.ContainsKey($timeKey)) {
+            $groupedEvents[$timeKey] = [PSCustomObject]@{
+                Type        = [System.Collections.Generic.HashSet[string]]::new()
+                Date        = $event.TimeGenerated
+                Status      = [System.Collections.Generic.HashSet[string]]::new()
+                User        = [System.Collections.Generic.HashSet[string]]::new()
+                Workstation = [System.Collections.Generic.HashSet[string]]::new()
+                IPAddress   = [System.Collections.Generic.HashSet[string]]::new()
+            }
+        }
+
+        # Process both logon types in single block
+        $typeName = if ($logonType -eq 2) { "Local Logon" } else { "Remote Logon" }
+        $ipAddress = if ($logonType -eq 10) { $event.ReplacementStrings[18] } else { "N/A" }
+
+        [void]$groupedEvents[$timeKey].Type.Add($typeName)
+        [void]$groupedEvents[$timeKey].Status.Add("Success")
+        [void]$groupedEvents[$timeKey].User.Add($event.ReplacementStrings[5])
+        [void]$groupedEvents[$timeKey].Workstation.Add($event.ReplacementStrings[11])
+        [void]$groupedEvents[$timeKey].IPAddress.Add($ipAddress)
+    }
+
+    # Process grouped events, sort by date (newest first), and output
+    $output = $groupedEvents.Values | Sort-Object { $_.Date } -Descending | ForEach-Object {
+        # Only output if we have values
+        if ($_.User.Count -gt 0) {
+            [PSCustomObject]@{
+                Type        = ($_.Type -join ", ")
+                Date        = $_.Date
+                Status      = ($_.Status -join ", ")
+                User        = ($_.User -join ", ")
+                Workstation = ($_.Workstation -join ", ")
+                IPAddress   = ($_.IPAddress -join ", ")
+            }
+        }
+    }
+
+    # Automatically apply Format-Table -AutoSize if the date range is more than 2 days
+    if ($isMoreThanTwoDays -and $output) {
+        $output | Format-Table -AutoSize
+    }
+    else {
+        $output
     }
 }
 
@@ -662,8 +760,8 @@ function Fix-Spaces {
 #--- [PSReadLine] Configuration
 if ($latestPowershell) {
     $PSROptions = @{
-        ContinuationPrompt = '  '
-        Colors             = @{
+        ContinuationPrompt            = '  '
+        Colors                        = @{
             Command                = CCommand
             Comment                = CComment
             ContinuationPrompt     = CContinuationPrompt
@@ -684,19 +782,20 @@ if ($latestPowershell) {
             Type                   = CType
             Variable               = CVariable
         }
-        HistoryNoDuplicates = $True
+        HistoryNoDuplicates           = $True
         HistorySearchCursorMovesToEnd = $False
-        PredictionSource = "HistoryAndPlugin"
+        PredictionSource              = "HistoryAndPlugin"
     }
     Set-PSReadLineOption @PSROptions
 
     # Remove existing alias for dir if it exists
     Remove-Alias dir -ErrorAction SilentlyContinue
 
-} else {
+}
+else {
     $PSROptions = @{
-        ContinuationPrompt = '  '
-        Colors             = @{
+        ContinuationPrompt            = '  '
+        Colors                        = @{
             Command                = "$escapeChar[38;5;217m"
             Comment                = "$escapeChar[38;5;146m"
             ContinuationPrompt     = "$escapeChar[38;5;239m"
@@ -717,7 +816,7 @@ if ($latestPowershell) {
             Type                   = "$escapeChar[38;5;117m"
             Variable               = "$escapeChar[38;5;104m"
         }
-        HistoryNoDuplicates = $True
+        HistoryNoDuplicates           = $True
         HistorySearchCursorMovesToEnd = $False
     }
     Set-PSReadLineOption @PSROptions

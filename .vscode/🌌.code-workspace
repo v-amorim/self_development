@@ -102,7 +102,6 @@
     "notebook.formatOnSave.enabled": true,
     "notebook.lineNumbers": "on",
     "ruff.fixAll": true,
-    "ruff.format.args": [ "--line-length=120" ],
     "ruff.lineLength": 120,
     "ruff.organizeImports": true,
     "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",

@@ -34,6 +34,10 @@
 
 #IfWinActive ahk_exe Photoshop.exe
     $XButton1:: ; XButton1
+        SendInput, +{F10}
+    Return
+
+    !XButton1:: ; Alt + XButton1
         SendInput, {F10}
     Return
 
@@ -171,14 +175,14 @@
     Return
 #IfWinActive
 
-; #IfWinActive ahk_exe League of Legends.exe
-;     $+c:: ; Toggle C (to show range indicators)
-;         If GetKeyState("c")
-;             Send {c Up}
-;         Else
-;             Send {c Down}
-;     Return
-; #IfWinActive
+#IfWinActive ahk_exe League of Legends.exe
+    $+c:: ; Toggle C (to show range indicators)
+        If GetKeyState("c")
+            Send {c Up}
+        Else
+            Send {c Down}
+    Return
+#IfWinActive
 
 #IfWinActive ahk_exe Diablo III64.exe
     $^!LButton::EnterClick() ; Ctrl+Alt+LButton hotkey
@@ -251,13 +255,13 @@
 #If (WinActive("ahk_exe opera.exe") || WinActive("ahk_exe chrome.exe") || WinActive("ahk_exe WindowsTerminal.exe"))
     SetKeyDelay, 50 ; Set a delay of 50 milliseconds between each keystroke
 
-    $!WheelUp:: ; Ctrl + WheelUp [Cicle Up a tab]
+    $!WheelUp:: ; Alt + WheelUp [Cicle Up a tab]
         BlockInput, On
         SendInput, {LControl down}{LShift down}{Tab}{LControl up}{LShift up}
         BlockInput, Off
     Return
 
-    $!WheelDown:: ; Ctrl + WheelDown [Cicle Down a tab]
+    $!WheelDown:: ; Alt + WheelDown [Cicle Down a tab]
         BlockInput, On
         SendInput, {LControl down}{Tab}{LControl up}
         BlockInput, Off

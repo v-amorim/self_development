@@ -56,6 +56,10 @@ Return
     BlockInput Off
 Return
 
+$^!#WheelUp:: ; Ctrl + Alt + Windows + WheelUp [Go to next desktop]
+    Send, ^#{Right}
+Return
+
 #WheelDown:: ; Windows + WheelDown [Volume Down -2]
     BlockInput On
     SendInput, {Volume_Down}
@@ -87,6 +91,10 @@ Return
 
     WinSet, Transparent, %newTransparency%, A
     BlockInput Off
+Return
+
+$^!#WheelDown:: ; Ctrl + Alt + Windows + WheelDown [Go to previous desktop]
+    Send, ^#{Left}
 Return
 
 #Pause:: ; Windows + Pause [Volume Mute]

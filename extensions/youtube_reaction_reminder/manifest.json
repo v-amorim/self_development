@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Engagement Reminder",
+  "version": "1.0",
+  "description": "Highlights like/dislike buttons after watching 80% of a video",
+  "permissions": [ "scripting", "activeTab" ],
+  "content_scripts": [
+    {
+      "matches": [ "*://www.youtube.com/watch*" ],
+      "js": [ "content.js" ],
+      "css": [ "styles.css" ],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": [ "*://www.youtube.com/*" ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "styles.css" ],
+      "matches": [ "*://www.youtube.com/*" ]
+    }
+  ]
+}
